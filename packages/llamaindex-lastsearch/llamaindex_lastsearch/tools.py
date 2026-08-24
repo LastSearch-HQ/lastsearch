@@ -1,4 +1,4 @@
-"""BrowseAI Dev tools for LlamaIndex agents."""
+"""LastSearch tools for LlamaIndex agents."""
 
 from __future__ import annotations
 
@@ -6,14 +6,14 @@ from typing import Any
 
 from llama_index.core.tools import FunctionTool
 
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
-def _get_client(api_key: str, base_url: str = "https://browseai.dev/api") -> BrowseAIDev:
-    return BrowseAIDev(api_key=api_key, base_url=base_url)
+def _get_client(api_key: str, base_url: str = "https://lastsearch.dev/api") -> LastSearch:
+    return LastSearch(api_key=api_key, base_url=base_url)
 
 
-def BrowseAIDevSearchTool(api_key: str, base_url: str = "https://browseai.dev/api") -> FunctionTool:
+def LastSearchSearchTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
     """Create a LlamaIndex tool for web search."""
     client = _get_client(api_key, base_url)
 
@@ -27,13 +27,13 @@ def BrowseAIDevSearchTool(api_key: str, base_url: str = "https://browseai.dev/ap
                 lines.append(f"   {r.snippet}")
         return "\n".join(lines) if lines else "No results found."
 
-    return FunctionTool.from_defaults(fn=search, name="browseaidev_search")
+    return FunctionTool.from_defaults(fn=search, name="lastsearch_search")
 
 
-def BrowseAIDevAnswerTool(api_key: str, base_url: str = "https://browseai.dev/api") -> FunctionTool:
+def LastSearchAnswerTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
     """Create a LlamaIndex tool for verified research with citations and confidence scores.
 
-    This is the primary BrowseAI Dev tool. It searches the web, verifies claims
+    This is the primary LastSearch tool. It searches the web, verifies claims
     using multi-signal evidence matching, detects contradictions, and returns
     an answer with per-claim confidence scores.
     """
@@ -63,10 +63,10 @@ def BrowseAIDevAnswerTool(api_key: str, base_url: str = "https://browseai.dev/ap
 
         return "\n".join(parts)
 
-    return FunctionTool.from_defaults(fn=answer, name="browseaidev_answer")
+    return FunctionTool.from_defaults(fn=answer, name="lastsearch_answer")
 
 
-def BrowseAIDevExtractTool(api_key: str, base_url: str = "https://browseai.dev/api") -> FunctionTool:
+def LastSearchExtractTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
     """Create a LlamaIndex tool for extracting structured claims from a URL."""
     client = _get_client(api_key, base_url)
 
@@ -87,10 +87,10 @@ def BrowseAIDevExtractTool(api_key: str, base_url: str = "https://browseai.dev/a
 
         return "\n".join(parts)
 
-    return FunctionTool.from_defaults(fn=extract, name="browseaidev_extract")
+    return FunctionTool.from_defaults(fn=extract, name="lastsearch_extract")
 
 
-def BrowseAIDevCompareTool(api_key: str, base_url: str = "https://browseai.dev/api") -> FunctionTool:
+def LastSearchCompareTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
     """Create a LlamaIndex tool for comparing raw LLM vs verified answers."""
     client = _get_client(api_key, base_url)
 
@@ -109,10 +109,10 @@ def BrowseAIDevCompareTool(api_key: str, base_url: str = "https://browseai.dev/a
 
         return "\n".join(parts)
 
-    return FunctionTool.from_defaults(fn=compare, name="browseaidev_compare")
+    return FunctionTool.from_defaults(fn=compare, name="lastsearch_compare")
 
 
-def BrowseAIDevClarityTool(api_key: str, base_url: str = "https://browseai.dev/api") -> FunctionTool:
+def LastSearchClarityTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
     """Create a LlamaIndex tool for Clarity anti-hallucination answer engine.
 
     Three modes: (1) mode='prompt': returns only enhanced system + user prompts
@@ -156,4 +156,4 @@ def BrowseAIDevClarityTool(api_key: str, base_url: str = "https://browseai.dev/a
 
         return "\n".join(parts)
 
-    return FunctionTool.from_defaults(fn=clarity, name="browseaidev_clarity")
+    return FunctionTool.from_defaults(fn=clarity, name="lastsearch_clarity")

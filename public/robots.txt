@@ -34,8 +34,8 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://browseai.dev/sitemap.xml
+Sitemap: https://lastsearch.dev/sitemap.xml
 
 # AI-readable documentation
-# llms.txt: https://browseai.dev/llms.txt
-# llms-full.txt: https://browseai.dev/llms-full.txt
+# llms.txt: https://lastsearch.dev/llms.txt
+# llms-full.txt: https://lastsearch.dev/llms-full.txt

@@ -1,22 +1,22 @@
 """
-Contradiction Detector — BrowseAI Example
+Contradiction Detector — LastSearch Example
 
 Research a controversial topic and surface contradictions found
 across different sources. Uses thorough mode for deeper verification.
 
 Usage:
-    pip install browseaidev
+    pip install lastsearch
     python contradiction-detector.py "Is coffee good for your health?"
 """
 
 import os
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def detect_contradictions(query: str):
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     print(f"\nSearching for contradictions: {query}\n")
 

@@ -1,28 +1,28 @@
 """
-LlamaIndex Research Agent — BrowseAI Dev Example
+LlamaIndex Research Agent — LastSearch Example
 
-A ReAct agent using LlamaIndex + BrowseAI Dev for evidence-backed research.
+A ReAct agent using LlamaIndex + LastSearch for evidence-backed research.
 
 Usage:
-    pip install llamaindex-browseaidev llama-index-llms-openai llama-index-core
+    pip install llamaindex-lastsearch llama-index-llms-openai llama-index-core
     python llamaindex-agent.py
 """
 
 from llama_index.core.agent import ReActAgent
 from llama_index.llms.openai import OpenAI
-from llamaindex_browseaidev import (
-    BrowseAIDevSearchTool,
-    BrowseAIDevAnswerTool,
-    BrowseAIDevExtractTool,
-    BrowseAIDevCompareTool,
+from llamaindex_lastsearch import (
+    LastSearchSearchTool,
+    LastSearchAnswerTool,
+    LastSearchExtractTool,
+    LastSearchCompareTool,
 )
 
-# BrowseAI Dev tools — agent gets evidence-backed research
+# LastSearch tools — agent gets evidence-backed research
 tools = [
-    BrowseAIDevSearchTool(api_key="bai_xxx"),      # Web search
-    BrowseAIDevAnswerTool(api_key="bai_xxx"),       # Full research pipeline (verified)
-    BrowseAIDevExtractTool(api_key="bai_xxx"),      # Page extraction
-    BrowseAIDevCompareTool(api_key="bai_xxx"),      # Raw LLM vs verified comparison
+    LastSearchSearchTool(api_key="ls_xxx"),      # Web search
+    LastSearchAnswerTool(api_key="ls_xxx"),       # Full research pipeline (verified)
+    LastSearchExtractTool(api_key="ls_xxx"),      # Page extraction
+    LastSearchCompareTool(api_key="ls_xxx"),      # Raw LLM vs verified comparison
 ]
 
 # Standard LlamaIndex agent setup

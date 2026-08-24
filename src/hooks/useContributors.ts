@@ -7,7 +7,7 @@ export interface Contributor {
   contributions: number;
 }
 
-const CACHE_KEY = "browseaidev_contributors";
+const CACHE_KEY = "lastsearch_contributors";
 const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
 
 export function useContributors() {
@@ -29,7 +29,7 @@ export function useContributors() {
       }
     }
 
-    fetch("https://api.github.com/repos/BrowseAI-HQ/BrowseAI-Dev/contributors?per_page=50")
+    fetch("https://api.github.com/repos/lastsearch-hq/lastsearch/contributors?per_page=50")
       .then((r) => {
         if (!r.ok) throw new Error("GitHub API error");
         return r.json();

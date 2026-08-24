@@ -2,7 +2,7 @@
 
 Usage:
     pip install -r requirements.txt
-    BROWSEAI_API_KEY=bai_xxx python app.py
+    LASTSEARCH_API_KEY=ls_xxx python app.py
 
 Then open http://localhost:8000
 """
@@ -13,7 +13,7 @@ import uuid
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 app = FastAPI(title="Is This True?")
 templates = Jinja2Templates(directory=os.path.join(os.path.dirname(__file__), "templates"))
@@ -21,11 +21,11 @@ templates = Jinja2Templates(directory=os.path.join(os.path.dirname(__file__), "t
 # In-memory result store (swap for Redis/DB in production)
 results_store: dict[str, dict] = {}
 
-API_KEY = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
+API_KEY = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
 
 
-def get_client() -> BrowseAIDev:
-    return BrowseAIDev(api_key=API_KEY)
+def get_client() -> LastSearch:
+    return LastSearch(api_key=API_KEY)
 
 
 @app.get("/", response_class=HTMLResponse)

@@ -1,2 +1,2 @@
-browseaidev>=0.2.0
+lastsearch>=0.2.0
 rich>=13.0.0

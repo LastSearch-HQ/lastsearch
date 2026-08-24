@@ -1,36 +1,36 @@
-# langchain-browseaidev
+# langchain-lastsearch
 
-LangChain integration for [BrowseAI Dev](https://browseai.dev) — verified web search with citations and confidence scores for AI agents.
+LangChain integration for [LastSearch](https://lastsearch.dev) — verified web search with citations and confidence scores for AI agents.
 
-**Unlike raw search APIs, BrowseAI Dev fact-checks results before returning them.** Every answer includes per-claim verification, cross-source consensus, contradiction detection, and evidence-based confidence scores.
+**Unlike raw search APIs, LastSearch fact-checks results before returning them.** Every answer includes per-claim verification, cross-source consensus, contradiction detection, and evidence-based confidence scores.
 
 ## Installation
 
 ```bash
-pip install langchain-browseaidev
+pip install langchain-lastsearch
 ```
 
 ## Quick Start
 
 ```python
-from langchain_browseaidev import BrowseAIDevAnswerTool
+from langchain_lastsearch import LastSearchAnswerTool
 
 # Verified search with citations and confidence
-tool = BrowseAIDevAnswerTool(api_key="bai_xxx")
+tool = LastSearchAnswerTool(api_key="ls_xxx")
 result = tool.invoke({"query": "What is quantum computing?"})
 print(result)
 ```
 
 ## Available Tools
 
-### `BrowseAIDevAnswerTool` — Verified Research (recommended)
+### `LastSearchAnswerTool` — Verified Research (recommended)
 
 The primary tool. Searches the web, extracts claims, verifies them using multi-signal evidence matching, detects contradictions, and returns an answer with confidence scores.
 
 ```python
-from langchain_browseaidev import BrowseAIDevAnswerTool
+from langchain_lastsearch import LastSearchAnswerTool
 
-tool = BrowseAIDevAnswerTool(api_key="bai_xxx")
+tool = LastSearchAnswerTool(api_key="ls_xxx")
 
 # Fast mode (default)
 result = tool.invoke({"query": "Is nuclear energy safe?"})
@@ -42,55 +42,55 @@ result = tool.invoke({"query": "Health effects of intermittent fasting", "depth"
 result = tool.invoke({"query": "Compare CRISPR vs base editing approaches", "depth": "deep"})
 ```
 
-### `BrowseAIDevSearchTool` — Web Search
+### `LastSearchSearchTool` — Web Search
 
 Basic web search returning ranked results with URLs, titles, and snippets.
 
 ```python
-from langchain_browseaidev import BrowseAIDevSearchTool
+from langchain_lastsearch import LastSearchSearchTool
 
-tool = BrowseAIDevSearchTool(api_key="bai_xxx")
+tool = LastSearchSearchTool(api_key="ls_xxx")
 result = tool.invoke({"query": "AI safety regulations 2024", "limit": 5})
 ```
 
-### `BrowseAIDevExtractTool` — Page Extraction
+### `LastSearchExtractTool` — Page Extraction
 
 Extract structured claims and knowledge from a specific URL.
 
 ```python
-from langchain_browseaidev import BrowseAIDevExtractTool
+from langchain_lastsearch import LastSearchExtractTool
 
-tool = BrowseAIDevExtractTool(api_key="bai_xxx")
+tool = LastSearchExtractTool(api_key="ls_xxx")
 result = tool.invoke({"url": "https://arxiv.org/abs/2303.08774", "query": "What are GPT-4's capabilities?"})
 ```
 
-### `BrowseAIDevCompareTool` — Raw vs Verified
+### `LastSearchCompareTool` — Raw vs Verified
 
 Compare a raw LLM answer against an evidence-backed verified answer. Shows where LLMs hallucinate.
 
 ```python
-from langchain_browseaidev import BrowseAIDevCompareTool
+from langchain_lastsearch import LastSearchCompareTool
 
-tool = BrowseAIDevCompareTool(api_key="bai_xxx")
+tool = LastSearchCompareTool(api_key="ls_xxx")
 result = tool.invoke({"query": "Is remote work more productive?"})
 ```
 
 ## Use with LangChain Agents
 
 ```python
-from langchain_browseaidev import BrowseAIDevAnswerTool, BrowseAIDevSearchTool
+from langchain_lastsearch import LastSearchAnswerTool, LastSearchSearchTool
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate
 
 llm = ChatOpenAI(model="gpt-4o")
 tools = [
-    BrowseAIDevAnswerTool(api_key="bai_xxx"),
-    BrowseAIDevSearchTool(api_key="bai_xxx"),
+    LastSearchAnswerTool(api_key="ls_xxx"),
+    LastSearchSearchTool(api_key="ls_xxx"),
 ]
 
 prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a research assistant. Use browseaidev_answer for fact-checked answers with citations."),
+    ("system", "You are a research assistant. Use lastsearch_answer for fact-checked answers with citations."),
     ("human", "{input}"),
     ("placeholder", "{agent_scratchpad}"),
 ])
@@ -102,9 +102,9 @@ result = executor.invoke({"input": "What are the latest findings on mRNA vaccine
 print(result["output"])
 ```
 
-## Why BrowseAI Dev over Tavily/Exa?
+## Why LastSearch over Tavily/Exa?
 
-| Feature | BrowseAI Dev | Tavily | Exa |
+| Feature | LastSearch | Tavily | Exa |
 |---|---|---|---|
 | Claim verification | Yes | No | No |
 | Evidence-based confidence scores | Yes | No | No |
@@ -116,20 +116,20 @@ print(result["output"])
 
 ## Get an API Key
 
-1. Go to [browseai.dev](https://browseai.dev)
+1. Go to [lastsearch.dev](https://lastsearch.dev)
 2. Sign in with GitHub
-3. Your `bai_xxx` key is on the dashboard
+3. Your `ls_xxx` key is on the dashboard
 
-Your `bai_xxx` key is on the dashboard.
+Your `ls_xxx` key is on the dashboard.
 
 ## Links
 
-- [Website](https://browseai.dev)
-- [Documentation](https://browseai.dev/docs)
-- [GitHub](https://github.com/BrowseAI-HQ/BrowseAI-Dev)
+- [Website](https://lastsearch.dev)
+- [Documentation](https://lastsearch.dev/docs)
+- [GitHub](https://github.com/lastsearch-hq/lastsearch)
 - [Discord](https://discord.gg/ubAuT4YQsT)
-- [Python SDK](https://pypi.org/project/browseaidev/)
-- [MCP Server](https://www.npmjs.com/package/browseai-dev)
+- [Python SDK](https://pypi.org/project/lastsearch/)
+- [MCP Server](https://www.npmjs.com/package/lastsearch)
 
 ## License
 

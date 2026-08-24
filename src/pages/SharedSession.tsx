@@ -30,7 +30,7 @@ const SharedSession = () => {
     getSharedSession(shareId)
       .then((data) => {
         setSessionData(data);
-        document.title = `BrowseAI Dev: ${data.session.name}`;
+        document.title = `LastSearch: ${data.session.name}`;
       })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
@@ -74,8 +74,8 @@ const SharedSession = () => {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="font-semibold text-sm">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="font-semibold text-sm">LastSearch</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -126,7 +126,7 @@ const SharedSession = () => {
                 <span>{sessionData.session.queryCount} queries</span>
               </div>
               <p className="text-xs text-muted-foreground max-w-md mx-auto">
-                This research session was built with BrowseAI Dev — evidence-backed research with verified claims and confidence scores.
+                This research session was built with LastSearch — evidence-backed research with verified claims and confidence scores.
               </p>
 
               {/* Fork button — always visible, triggers login if needed */}

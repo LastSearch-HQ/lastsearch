@@ -325,7 +325,7 @@ const Playground = () => {
     <>
     <SEO
       title="Playground — Try Evidence-Backed AI Search"
-      description="Try BrowseAI Dev live. Search any topic and get evidence-backed answers with confidence scores, verified claims, and source citations."
+      description="Try LastSearch live. Search any topic and get evidence-backed answers with confidence scores, verified claims, and source citations."
       canonical="/playground"
     />
     <div className="min-h-screen">
@@ -336,8 +336,8 @@ const Playground = () => {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="font-semibold text-sm">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="font-semibold text-sm">LastSearch</span>
           </div>
         </div>
         <div className="relative z-10 flex items-center gap-2">
@@ -397,7 +397,7 @@ const Playground = () => {
                     <p className="text-xs text-muted-foreground/60 mt-1 font-mono truncate">"{scenario.query}"</p>
                   </div>
                   <a
-                    href={`https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/${scenario.tutorial}`}
+                    href={`https://github.com/lastsearch-hq/lastsearch/tree/main/examples/${scenario.tutorial}`}
                     target="_blank"
                     rel="noopener"
                     onClick={(e) => e.stopPropagation()}

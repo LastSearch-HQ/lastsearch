@@ -13,8 +13,8 @@ const NotFound = () => {
     <div className="min-h-screen bg-muted">
       <nav className="flex items-center gap-4 px-4 sm:px-8 py-5 border-b border-border">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-          <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-          <span className="font-semibold text-sm">BrowseAI Dev</span>
+          <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+          <span className="font-semibold text-sm">LastSearch</span>
         </div>
       </nav>
       <div className="flex min-h-[80vh] items-center justify-center">

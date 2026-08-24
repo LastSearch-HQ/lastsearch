@@ -2,7 +2,7 @@
 
 An AI coding agent that researches before writing code — so it never recommends deprecated libraries or hallucinated APIs.
 
-Instead of generating code from stale training data, this agent uses BrowseAI to search the web, verify that recommended packages actually exist on PyPI, check for deprecation notices, and only then generates code using verified libraries.
+Instead of generating code from stale training data, this agent uses LastSearch to search the web, verify that recommended packages actually exist on PyPI, check for deprecation notices, and only then generates code using verified libraries.
 
 ## How it works
 
@@ -40,7 +40,7 @@ Traditional coding agents generate code from LLM training data, which leads to:
 - Calling APIs that were removed in newer versions
 - Missing better alternatives released after the training cutoff
 
-With BrowseAI, every `import` in the generated code maps to a real, maintained package.
+With LastSearch, every `import` in the generated code maps to a real, maintained package.
 
 ## Setup
 
@@ -51,7 +51,7 @@ pip install -r requirements.txt
 Set your API key:
 
 ```bash
-export BROWSEAI_API_KEY=bai_xxx
+export LASTSEARCH_API_KEY=ls_xxx
 ```
 
 Or the script will prompt you for it.
@@ -73,7 +73,7 @@ python agent.py
 
 ### Chain multiple tasks in one session
 
-The agent uses BrowseAI sessions, so knowledge accumulates. After the first task completes, you can enter another task that builds on what the agent already learned:
+The agent uses LastSearch sessions, so knowledge accumulates. After the first task completes, you can enter another task that builds on what the agent already learned:
 
 ```bash
 python agent.py "Build a WebSocket server in Python"
@@ -163,11 +163,11 @@ if __name__ == "__main__":
 - Most downloaded async WebSocket library for Python (consensus: high, 5 sources)
 - Standards-compliant RFC 6455 implementation (consensus: medium, 3 sources)
 
-**Comparison — Without vs With BrowseAI:**
+**Comparison — Without vs With LastSearch:**
 
 ```
 ┌─────────────────────────┐  ┌─────────────────────────┐
-│ Without BrowseAI        │  │ With BrowseAI           │
+│ Without LastSearch        │  │ With LastSearch           │
 │                         │  │                         │
 │ 1. Agent receives task  │  │ 1. Agent receives task  │
 │ 2. LLM generates code   │  │ 2. Researches libraries │
@@ -184,7 +184,7 @@ if __name__ == "__main__":
 
 ## Sessions: Knowledge that persists
 
-The agent creates a BrowseAI session called `coding-agent`. Each research query adds verified claims to the session's knowledge graph. When you ask a follow-up task, the session recalls relevant prior knowledge automatically.
+The agent creates a LastSearch session called `coding-agent`. Each research query adds verified claims to the session's knowledge graph. When you ask a follow-up task, the session recalls relevant prior knowledge automatically.
 
 This means:
 - The agent doesn't re-research libraries it already verified
@@ -205,9 +205,9 @@ python agent.py "Create a real-time chat application"
 ## Requirements
 
 - Python 3.10+
-- A [BrowseAI API key](https://browseai.dev) (`bai_xxx` prefix)
-- Dependencies: `browseaidev`, `rich`
+- A [LastSearch API key](https://lastsearch.dev) (`ls_xxx` prefix)
+- Dependencies: `lastsearch`, `rich`
 
 ## License
 
-Apache 2.0 — part of the [BrowseAI Dev](https://github.com/BrowseAI-HQ/BrowseAI-Dev) project.
+Apache 2.0 — part of the [LastSearch](https://github.com/lastsearch-hq/lastsearch) project.

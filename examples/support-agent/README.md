@@ -1,6 +1,6 @@
 # Customer Support Agent
 
-A terminal-based customer support agent powered by [BrowseAI Dev](https://browseai.dev). This is what enterprise agents look like -- they don't guess, they verify. BrowseAI Dev gives your support agent a confidence score so it knows when to answer and when to escalate.
+A terminal-based customer support agent powered by [LastSearch](https://lastsearch.dev). This is what enterprise agents look like -- they don't guess, they verify. LastSearch gives your support agent a confidence score so it knows when to answer and when to escalate.
 
 ## How It Works
 
@@ -16,7 +16,7 @@ Customer asks a question
     miss |
          v
 +-------------------+
-| BrowseAI research |  depth="thorough"
+| LastSearch research |  depth="thorough"
 |                   |
 | 1. Search         |  Find relevant sources
 | 2. Verify         |  Extract and verify claims against sources
@@ -38,13 +38,13 @@ Customer asks a question
   for future questions
 ```
 
-The agent uses BrowseAI's session API to accumulate knowledge over time. Repeated questions get instant, verified responses from the knowledge base instead of re-searching.
+The agent uses LastSearch's session API to accumulate knowledge over time. Repeated questions get instant, verified responses from the knowledge base instead of re-searching.
 
 ## Setup
 
-### 1. Get a BrowseAI API Key
+### 1. Get a LastSearch API Key
 
-Sign up at [browseai.dev](https://browseai.dev) and get your API key (starts with `bai_`).
+Sign up at [lastsearch.dev](https://lastsearch.dev) and get your API key (starts with `ls_`).
 
 ### 2. Install and Run
 
@@ -56,7 +56,7 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 
 pip install -r requirements.txt
 
-export BROWSEAI_API_KEY="bai_your_key_here"
+export LASTSEARCH_API_KEY="ls_your_key_here"
 
 python agent.py
 ```
@@ -64,7 +64,7 @@ python agent.py
 Or create a `.env` file:
 
 ```env
-BROWSEAI_API_KEY=bai_your_key_here
+LASTSEARCH_API_KEY=ls_your_key_here
 ```
 
 ### 3. Point at Your Company Docs (Optional)
@@ -75,7 +75,7 @@ Use the `--knowledge-base` flag to prioritize a specific domain in searches:
 python agent.py --knowledge-base https://docs.yourcompany.com
 ```
 
-This appends `site:docs.yourcompany.com` to queries so BrowseAI prioritizes your documentation while still cross-referencing against the broader web.
+This appends `site:docs.yourcompany.com` to queries so LastSearch prioritizes your documentation while still cross-referencing against the broader web.
 
 ## Usage
 
@@ -152,7 +152,7 @@ Customer > Can I use your API for healthcare data under HIPAA?
 
 The agent is a single `agent.py` file:
 
-- **`SupportAgent`** wraps the BrowseAI Python SDK. It manages a local answer cache and a BrowseAI research session for cross-query knowledge accumulation.
+- **`SupportAgent`** wraps the LastSearch Python SDK. It manages a local answer cache and a LastSearch research session for cross-query knowledge accumulation.
 - **`CachedAnswer`** stores previously verified answers. When a similar question comes in, the cache serves it instantly without re-searching.
 - **`AgentStats`** tracks how many questions were auto-answered vs flagged vs escalated, giving you a dashboard of agent reliability.
 - **`rich`** provides the terminal UI: colored confidence indicators, panels, spinners during research, and formatted tables for stats.
@@ -171,4 +171,4 @@ The confidence score is not LLM self-assessment. It is an evidence-based algorit
 
 ## License
 
-Apache 2.0 -- same as the parent BrowseAI Dev project.
+Apache 2.0 -- same as the parent LastSearch project.

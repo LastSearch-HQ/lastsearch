@@ -4,7 +4,7 @@ An AI-powered research agent that builds comprehensive interview briefs for podc
 
 ## How it works
 
-The agent runs five parallel research passes through BrowseAI:
+The agent runs five parallel research passes through LastSearch:
 
 1. **Guest Background** — Who they are, career, expertise
 2. **Guest on Topic** — Their public views and notable statements
@@ -12,7 +12,7 @@ The agent runs five parallel research passes through BrowseAI:
 4. **Controversies** — Debates and contested claims
 5. **Misconceptions** — Common myths and misunderstandings
 
-All research happens inside a BrowseAI **session**, so every fact is stored and can be recalled later (even mid-interview).
+All research happens inside a LastSearch **session**, so every fact is stored and can be recalled later (even mid-interview).
 
 The output is a markdown brief with:
 - Guest bio with verified facts
@@ -29,7 +29,7 @@ The output is a markdown brief with:
 pip install -r requirements.txt
 
 # Set your API key
-export BROWSEAI_API_KEY="bai_xxx"
+export LASTSEARCH_API_KEY="ls_xxx"
 
 # Run it
 python prep.py "Elon Musk" "Mars colonization"
@@ -110,10 +110,10 @@ This queries the session's stored knowledge without making new web searches — 
 
 ```python
 import asyncio
-from browseaidev import AsyncBrowseAIDev
+from lastsearch import AsyncLastSearch
 
 async def quick_prep():
-    async with AsyncBrowseAIDev(api_key="bai_xxx") as client:
+    async with AsyncLastSearch(api_key="ls_xxx") as client:
         session = await client.session("interview-prep")
 
         # Research in parallel
@@ -160,4 +160,4 @@ The exported brief is a standard markdown file with these sections:
 ## Requirements
 
 - Python 3.10+
-- BrowseAI API key ([get one here](https://browseai.dev))
+- LastSearch API key ([get one here](https://lastsearch.dev))

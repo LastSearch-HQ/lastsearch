@@ -1,26 +1,26 @@
 """
-Enterprise Search — BrowseAI Example
+Enterprise Search — LastSearch Example
 
-Use BrowseAI Dev with your own data sources (Elasticsearch, Confluence,
+Use LastSearch with your own data sources (Elasticsearch, Confluence,
 or any custom endpoint) instead of — or alongside — public web search.
 
 Supports zero data retention mode for compliance-sensitive environments.
 
 Usage:
-    pip install browseaidev
-    BROWSEAI_API_KEY=bai_xxx python enterprise-search.py
+    pip install lastsearch
+    LASTSEARCH_API_KEY=ls_xxx python enterprise-search.py
 """
 
 import os
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def main():
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     # ── Elasticsearch ──
-    # Point BrowseAI at your Elasticsearch cluster
+    # Point LastSearch at your Elasticsearch cluster
     result = client.ask(
         "What is our refund policy?",
         search_provider={

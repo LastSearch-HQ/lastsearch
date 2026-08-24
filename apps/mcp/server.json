@@ -1,30 +1,30 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.BrowseAI-HQ/browseai-dev",
+  "name": "io.github.lastsearch-hq/lastsearch",
   "description": "Evidence-backed web research for AI agents with citations and confidence scores.",
-  "title": "BrowseAI Dev",
-  "websiteUrl": "https://browseai.dev",
+  "title": "LastSearch",
+  "websiteUrl": "https://lastsearch.dev",
   "repository": {
-    "url": "https://github.com/BrowseAI-HQ/BrowseAI-Dev",
+    "url": "https://github.com/lastsearch-hq/lastsearch",
     "source": "github",
     "id": "1172211006",
     "subfolder": "apps/mcp"
   },
-  "version": "0.3.0",
+  "version": "1.0.0",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "browseai-dev",
-      "version": "0.3.0",
+      "identifier": "lastsearch",
+      "version": "1.0.0",
       "runtimeHint": "npx",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
-          "name": "BROWSE_API_KEY",
-          "description": "BrowseAI Dev API key (get one at https://browseai.dev/dashboard). Required for all API access.",
+          "name": "LASTSEARCH_API_KEY",
+          "description": "LastSearch API key (get one at https://lastsearch.dev/dashboard). Required for all API access.",
           "isRequired": true,
           "isSecret": true
         }

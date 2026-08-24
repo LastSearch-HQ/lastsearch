@@ -1,10 +1,10 @@
-"""LangChain tool integrations for BrowseAI Dev.
+"""LangChain tool integrations for LastSearch.
 
 Usage::
 
-    from browseaidev.integrations.langchain import BrowseAIDevSearchTool, BrowseAIDevAskTool
+    from lastsearch.integrations.langchain import LastSearchSearchTool, LastSearchAskTool
 
-    tools = [BrowseAIDevSearchTool(api_key="bai_xxx"), BrowseAIDevAskTool(api_key="bai_xxx")]
+    tools = [LastSearchSearchTool(api_key="ls_xxx"), LastSearchAskTool(api_key="ls_xxx")]
     agent = initialize_agent(tools, llm)
 """
 
@@ -15,21 +15,21 @@ from typing import Any
 from langchain_core.tools import BaseTool
 from pydantic import Field
 
-from ..client import BrowseAIDev
+from ..client import LastSearch
 
 
-class BrowseAIDevSearchTool(BaseTool):
-    """Search the web via BrowseAI Dev. Returns ranked results with URLs and snippets."""
+class LastSearchSearchTool(BaseTool):
+    """Search the web via LastSearch. Returns ranked results with URLs and snippets."""
 
-    name: str = "browseaidev_search"
+    name: str = "lastsearch_search"
     description: str = (
         "Search the web for information on a topic. Returns a list of relevant URLs, "
         "titles, snippets, and relevance scores. Use this for broad web searches."
     )
     client: Any = Field(exclude=True)
 
-    def __init__(self, api_key: str | None = None, *, client: BrowseAIDev | None = None, **kwargs: Any):
-        cli = client or BrowseAIDev(api_key=api_key)
+    def __init__(self, api_key: str | None = None, *, client: LastSearch | None = None, **kwargs: Any):
+        cli = client or LastSearch(api_key=api_key)
         super().__init__(client=cli, **kwargs)
 
     def _run(self, query: str) -> str:
@@ -40,19 +40,19 @@ class BrowseAIDevSearchTool(BaseTool):
         return "\n".join(lines) if lines else "No results found."
 
 
-class BrowseAIDevAskTool(BaseTool):
-    """Full research pipeline via BrowseAI Dev. Returns answer with citations and confidence."""
+class LastSearchAskTool(BaseTool):
+    """Full research pipeline via LastSearch. Returns answer with citations and confidence."""
 
-    name: str = "browseaidev_ask"
+    name: str = "lastsearch_ask"
     description: str = (
-        "Research a question using BrowseAI Dev's evidence-backed pipeline. "
+        "Research a question using LastSearch's evidence-backed pipeline. "
         "Searches the web, extracts claims from sources, and returns a cited answer "
         "with confidence score. Use this for questions requiring reliable, sourced answers."
     )
     client: Any = Field(exclude=True)
 
-    def __init__(self, api_key: str | None = None, *, client: BrowseAIDev | None = None, **kwargs: Any):
-        cli = client or BrowseAIDev(api_key=api_key)
+    def __init__(self, api_key: str | None = None, *, client: LastSearch | None = None, **kwargs: Any):
+        cli = client or LastSearch(api_key=api_key)
         super().__init__(client=cli, **kwargs)
 
     def _run(self, query: str) -> str:
@@ -65,10 +65,10 @@ class BrowseAIDevAskTool(BaseTool):
         )
 
 
-class BrowseAIDevExtractTool(BaseTool):
-    """Extract structured knowledge from a specific URL via BrowseAI Dev."""
+class LastSearchExtractTool(BaseTool):
+    """Extract structured knowledge from a specific URL via LastSearch."""
 
-    name: str = "browseaidev_extract"
+    name: str = "lastsearch_extract"
     description: str = (
         "Extract structured knowledge (claims, sources, confidence) from a specific URL. "
         "Optionally provide a query to focus the extraction. "
@@ -76,8 +76,8 @@ class BrowseAIDevExtractTool(BaseTool):
     )
     client: Any = Field(exclude=True)
 
-    def __init__(self, api_key: str | None = None, *, client: BrowseAIDev | None = None, **kwargs: Any):
-        cli = client or BrowseAIDev(api_key=api_key)
+    def __init__(self, api_key: str | None = None, *, client: LastSearch | None = None, **kwargs: Any):
+        cli = client or LastSearch(api_key=api_key)
         super().__init__(client=cli, **kwargs)
 
     def _run(self, input_str: str) -> str:

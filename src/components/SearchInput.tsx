@@ -6,7 +6,7 @@ const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 // ── Recent queries (localStorage) ──
 
-const RECENT_KEY = "browseai_recent_queries";
+const RECENT_KEY = "lastsearch_recent_queries";
 const MAX_RECENT = 8;
 
 function getRecentQueries(): string[] {

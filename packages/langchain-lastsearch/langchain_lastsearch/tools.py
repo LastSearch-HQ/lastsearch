@@ -1,4 +1,4 @@
-"""BrowseAI Dev tools for LangChain agents."""
+"""LastSearch tools for LangChain agents."""
 
 from __future__ import annotations
 
@@ -9,32 +9,32 @@ from langchain_core.tools import BaseTool
 from pydantic import BaseModel, Field, model_validator
 
 
-class _BrowseAIDevBase(BaseTool):
-    """Base class for BrowseAI Dev tools."""
+class _LastSearchBase(BaseTool):
+    """Base class for LastSearch tools."""
 
-    api_key: str = Field(default="", description="BrowseAI Dev API key (bai_xxx)")
-    base_url: str = Field(default="https://browseai.dev/api", description="API base URL")
+    api_key: str = Field(default="", description="LastSearch API key (ls_xxx)")
+    base_url: str = Field(default="https://lastsearch.dev/api", description="API base URL")
 
     _client: Any = None
 
     @model_validator(mode="after")
-    def _validate_api_key(self) -> "_BrowseAIDevBase":
+    def _validate_api_key(self) -> "_LastSearchBase":
         if not self.api_key:
             raise ValueError(
-                "api_key is required. Sign in and get your free API key at https://browseai.dev"
+                "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
             )
-        if not self.api_key.startswith("bai_"):
+        if not self.api_key.startswith("ls_"):
             raise ValueError(
-                "Invalid API key format — must start with 'bai_'. "
-                "Sign in and get your free API key at https://browseai.dev"
+                "Invalid API key format — must start with 'ls_'. "
+                "Sign in and get your free API key at https://lastsearch.dev"
             )
         return self
 
     def _get_client(self) -> Any:
         if self._client is None:
-            from browseaidev import BrowseAIDev
+            from lastsearch import LastSearch
 
-            self._client = BrowseAIDev(api_key=self.api_key, base_url=self.base_url)
+            self._client = LastSearch(api_key=self.api_key, base_url=self.base_url)
         return self._client
 
 
@@ -46,15 +46,15 @@ class SearchInput(BaseModel):
     limit: int = Field(default=5, description="Maximum number of results to return")
 
 
-class BrowseAIDevSearchTool(_BrowseAIDevBase):
+class LastSearchSearchTool(_LastSearchBase):
     """Search the web and return ranked results with URLs, titles, and snippets.
 
     Use this when you need to find web pages about a topic but don't need
     verified answers. For fact-checked answers with confidence scores,
-    use BrowseAIDevAnswerTool instead.
+    use LastSearchAnswerTool instead.
     """
 
-    name: str = "browseaidev_search"
+    name: str = "lastsearch_search"
     description: str = (
         "Search the web for information. Returns ranked results with URLs, "
         "titles, and snippets. Use this for broad web search."
@@ -88,10 +88,10 @@ class AnswerInput(BaseModel):
     )
 
 
-class BrowseAIDevAnswerTool(_BrowseAIDevBase):
+class LastSearchAnswerTool(_LastSearchBase):
     """Research a question with evidence-backed verification, citations, and confidence scores.
 
-    This is the primary BrowseAI Dev tool. It searches the web, extracts claims,
+    This is the primary LastSearch tool. It searches the web, extracts claims,
     verifies them against sources using multi-signal evidence matching, detects
     contradictions, and returns an answer with per-claim confidence scores.
 
@@ -100,7 +100,7 @@ class BrowseAIDevAnswerTool(_BrowseAIDevBase):
     the answer is.
     """
 
-    name: str = "browseaidev_answer"
+    name: str = "lastsearch_answer"
     description: str = (
         "Research a question with verified, evidence-backed answers. Returns an answer "
         "with citations, per-claim verification, confidence score (0-100%), and "
@@ -148,7 +148,7 @@ class ExtractInput(BaseModel):
     query: Optional[str] = Field(default=None, description="Optional focus query to guide extraction")
 
 
-class BrowseAIDevExtractTool(_BrowseAIDevBase):
+class LastSearchExtractTool(_LastSearchBase):
     """Extract structured claims and knowledge from a specific web page.
 
     Use this when you have a URL and want to extract verified facts, claims,
@@ -156,7 +156,7 @@ class BrowseAIDevExtractTool(_BrowseAIDevBase):
     extraction on specific aspects of the page.
     """
 
-    name: str = "browseaidev_extract"
+    name: str = "lastsearch_extract"
     description: str = (
         "Extract structured knowledge and verified claims from a URL. "
         "Optionally provide a query to focus extraction. Returns claims "
@@ -194,7 +194,7 @@ class CompareInput(BaseModel):
     query: str = Field(description="The question to compare raw LLM vs verified answers for")
 
 
-class BrowseAIDevCompareTool(_BrowseAIDevBase):
+class LastSearchCompareTool(_LastSearchBase):
     """Compare a raw LLM answer against an evidence-backed verified answer.
 
     Use this to demonstrate the difference between an unverified LLM response
@@ -202,7 +202,7 @@ class BrowseAIDevCompareTool(_BrowseAIDevBase):
     showing where LLMs get things wrong.
     """
 
-    name: str = "browseaidev_compare"
+    name: str = "lastsearch_compare"
     description: str = (
         "Compare a raw LLM answer vs an evidence-backed verified answer for the "
         "same question. Shows where LLMs hallucinate and how verification improves "
@@ -247,7 +247,7 @@ class ClarityInput(BaseModel):
     verify: bool = Field(default=False, description="Deprecated: use mode='verified' instead")
 
 
-class BrowseAIDevClarityTool(_BrowseAIDevBase):
+class LastSearchClarityTool(_LastSearchBase):
     """Clarity — anti-hallucination answer engine.
 
     Three modes: (1) mode='prompt': returns only enhanced system + user prompts
@@ -258,7 +258,7 @@ class BrowseAIDevClarityTool(_BrowseAIDevBase):
     both — keeps source-backed claims, drops fabricated ones.
     """
 
-    name: str = "browseaidev_clarity"
+    name: str = "lastsearch_clarity"
     description: str = (
         "Clarity — anti-hallucination answer engine. Three modes: "
         "mode='prompt' returns enhanced prompts only (no LLM call). "

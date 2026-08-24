@@ -8,11 +8,11 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in BrowseAI Dev, please report it responsibly.
+If you discover a security vulnerability in LastSearch, please report it responsibly.
 
 **Do NOT open a public GitHub issue for security vulnerabilities.**
 
-Instead, please email security concerns or report via [GitHub Security Advisories](https://github.com/BrowseAI-HQ/BrowseAI-Dev/security/advisories/new).
+Instead, please email security concerns or report via [GitHub Security Advisories](https://github.com/lastsearch-hq/lastsearch/security/advisories/new).
 
 ### What to include
 
@@ -38,8 +38,8 @@ Instead, please email security concerns or report via [GitHub Security Advisorie
 
 ## BAI Key Security
 
-All API access requires a BrowseAI Dev API key (`bai_xxx` prefix). Your BAI key:
+All API access requires a LastSearch API key (`ls_xxx` prefix). Your BAI key:
 - Should be kept secret and never committed to source control
 - Is stored encrypted with AES-256-GCM if saved server-side
-- Can be rotated at any time from the dashboard at [browseai.dev/dashboard](https://browseai.dev/dashboard)
-- Should be set via the `BROWSE_API_KEY` environment variable for MCP and SDK usage
+- Can be rotated at any time from the dashboard at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard)
+- Should be set via the `LASTSEARCH_API_KEY` environment variable for MCP and SDK usage

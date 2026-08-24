@@ -12,8 +12,8 @@ const Terms = () => {
           <ArrowLeft className="w-4 h-4" />
         </Button>
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-          <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-          <span className="font-semibold text-sm">BrowseAI Dev</span>
+          <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+          <span className="font-semibold text-sm">LastSearch</span>
         </div>
       </nav>
 
@@ -27,14 +27,14 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">1. Acceptance of Terms</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              By using BrowseAI Dev ("the Service"), including the website at browseai.dev, the REST API, MCP server, and Python SDK, you agree to these terms. If you don't agree, don't use the Service.
+              By using LastSearch ("the Service"), including the website at lastsearch.dev, the REST API, MCP server, and Python SDK, you agree to these terms. If you don't agree, don't use the Service.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">2. What the Service Does</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              BrowseAI Dev provides AI-powered research infrastructure: web search with evidence extraction, structured citations, and confidence scoring. Results are generated from real-time web searches and LLM processing. We do not guarantee the accuracy, completeness, or timeliness of any results.
+              LastSearch provides AI-powered research infrastructure: web search with evidence extraction, structured citations, and confidence scoring. Results are generated from real-time web searches and LLM processing. We do not guarantee the accuracy, completeness, or timeliness of any results.
             </p>
           </section>
 
@@ -48,8 +48,8 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">4. API Keys & Usage</h2>
             <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-              <li>All API access requires a BrowseAI Dev API key (bai_xxx). Free keys include 100 premium queries/day.</li>
-              <li>BrowseAI Dev API keys (bai_xxx) are personal and should not be shared publicly.</li>
+              <li>All API access requires a LastSearch API key (ls_xxx). Free keys include 100 premium queries/day.</li>
+              <li>LastSearch API keys (ls_xxx) are personal and should not be shared publicly.</li>
               <li>Demo access is limited to 1 query per hour per IP address.</li>
               <li>We reserve the right to revoke API keys that are abused or used in violation of these terms.</li>
             </ul>
@@ -70,7 +70,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">6. Open Source License</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              BrowseAI Dev uses an open-core model. SDKs, MCP server, integrations, and frontend are licensed under Apache 2.0. The verification engine is a hosted service — free to use via API, source is not publicly available. These Terms of Service apply specifically to the hosted service at browseai.dev.
+              LastSearch uses an open-core model. SDKs, MCP server, integrations, and frontend are licensed under Apache 2.0. The verification engine is a hosted service — free to use via API, source is not publicly available. These Terms of Service apply specifically to the hosted service at lastsearch.dev.
             </p>
           </section>
 
@@ -105,19 +105,19 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">9. Third-Party Services</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              The Service relies on third-party APIs including Tavily (web search) and OpenRouter (LLM processing). Your use of these services through BrowseAI Dev is also subject to their respective terms. We are not responsible for the availability or performance of third-party services.
+              The Service relies on third-party APIs including Tavily (web search) and OpenRouter (LLM processing). Your use of these services through LastSearch is also subject to their respective terms. We are not responsible for the availability or performance of third-party services.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">10. Not Professional Advice</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">BrowseAI Dev does not provide financial, investment, medical, legal, tax, or any other form of professional advice.</strong> All
+              <strong className="text-foreground">LastSearch does not provide financial, investment, medical, legal, tax, or any other form of professional advice.</strong> All
               information returned by the Service — including answers, citations, confidence scores, claim verifications, and source analyses — is
               generated by automated AI systems and is provided for informational and research purposes only.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              You should not rely on BrowseAI Dev outputs to make financial or investment decisions, medical or health decisions, legal decisions,
+              You should not rely on LastSearch outputs to make financial or investment decisions, medical or health decisions, legal decisions,
               or any other decisions where inaccurate information could result in harm, loss, or liability. Always consult qualified professionals
               and verify information from authoritative primary sources before taking action based on AI-generated research.
             </p>
@@ -142,7 +142,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">12. Limitation of Liability</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              To the maximum extent permitted by applicable law, BrowseAI Dev, its creators, contributors, and affiliates shall not be liable for any
+              To the maximum extent permitted by applicable law, LastSearch, its creators, contributors, and affiliates shall not be liable for any
               direct, indirect, incidental, special, consequential, or punitive damages — including but not limited to loss of profits, data, business
               opportunities, or goodwill — arising from or related to your use of, or reliance on, the Service or any information provided by the Service.
             </p>
@@ -156,7 +156,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">13. Indemnification</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              You agree to indemnify, defend, and hold harmless BrowseAI Dev, its creators, contributors, and affiliates from any claims, damages,
+              You agree to indemnify, defend, and hold harmless LastSearch, its creators, contributors, and affiliates from any claims, damages,
               losses, liabilities, costs, or expenses (including reasonable legal fees) arising from: (a) your use of the Service, (b) any action
               taken based on information provided by the Service, (c) your violation of these Terms, or (d) your violation of any applicable law or
               third-party rights.

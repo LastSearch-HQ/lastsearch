@@ -39,7 +39,7 @@ const CONTRIBUTION_AREAS = [
   {
     icon: Code2,
     title: "Python SDK & Integrations",
-    desc: "The browseaidev Python package, LangChain tools, and CrewAI integration.",
+    desc: "The lastsearch Python package, LangChain tools, and CrewAI integration.",
     examples: ["Async improvements", "New framework integrations", "SDK documentation"],
   },
   {
@@ -142,7 +142,7 @@ const Developers = () => {
     <>
     <SEO
       title="Developers — Contribute to Open Source AI Research Infra"
-      description="Contribute to BrowseAI Dev. Open source research infrastructure for AI agents. See the roadmap, contribution areas, and how to get started."
+      description="Contribute to LastSearch. Open source research infrastructure for AI agents. See the roadmap, contribution areas, and how to get started."
       canonical="/developers"
     />
     <div className="min-h-screen">
@@ -153,8 +153,8 @@ const Developers = () => {
         className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-5 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
       >
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-          <img src="/logo.svg" alt="BrowseAI Dev" className="w-5 h-5" />
-          <span className="font-semibold text-sm tracking-tight">BrowseAI Dev</span>
+          <img src="/logo.svg" alt="LastSearch" className="w-5 h-5" />
+          <span className="font-semibold text-sm tracking-tight">LastSearch</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" onClick={() => navigate("/")}>
@@ -174,7 +174,7 @@ const Developers = () => {
             <span className="hidden sm:inline">Recipes</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
-            <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
               <Github className="w-4 h-4 sm:hidden" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
@@ -200,12 +200,12 @@ const Developers = () => {
             <span className="text-gradient text-shimmer">for AI agents</span>
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            BrowseAI Dev is Grounded Intelligence — an open-source research engine that gives AI agents the ability to search the web,
+            LastSearch is Grounded Intelligence — an open-source research engine that gives AI agents the ability to search the web,
             extract evidence, and produce cited answers. No hallucinations. Just facts.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button className="gap-2" asChild>
-              <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener">
+              <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
                 <GitBranch className="w-3.5 h-3.5" />
                 View on GitHub
               </a>
@@ -352,7 +352,7 @@ const Developers = () => {
             </div>
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p className="text-lg">
-                I built BrowseAI Dev because I was tired of AI making things up.
+                I built LastSearch because I was tired of AI making things up.
               </p>
               <p>
                 As a developer using AI assistants daily, I kept running into the same problem: the AI would confidently
@@ -373,10 +373,10 @@ const Developers = () => {
                 is real or hallucinated, you end up manually verifying everything anyway. That defeats the purpose.
               </p>
               <p>
-                BrowseAI Dev takes a different approach: <span className="text-foreground font-medium">every answer goes through a verification pipeline</span>.
+                LastSearch takes a different approach: <span className="text-foreground font-medium">every answer goes through a verification pipeline</span>.
                 It searches the real web, fetches real pages, extracts real quotes, and links every claim back to its source.
                 If it can't find evidence, it says so. Now when I tell my AI agents to research something,
-                they can use BrowseAI Dev to actually verify their findings against real sources before writing a single line of code.
+                they can use LastSearch to actually verify their findings against real sources before writing a single line of code.
               </p>
               <p>
                 Our MCP server, Python SDK, and integrations are open source. The verification engine is hosted as a service.
@@ -425,7 +425,7 @@ const Developers = () => {
                 </p>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary">
                   <Terminal className="w-4 h-4 text-accent" />
-                  <code className="text-sm font-mono">npx browseai-dev setup</code>
+                  <code className="text-sm font-mono">npx lastsearch setup</code>
                 </div>
               </div>
 
@@ -440,11 +440,11 @@ const Developers = () => {
                 </p>
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary mb-3">
                   <Terminal className="w-4 h-4 text-accent" />
-                  <code className="text-sm font-mono">pip install browseaidev</code>
+                  <code className="text-sm font-mono">pip install lastsearch</code>
                 </div>
-                <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`from browseaidev import BrowseAIDev
+                <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 result = client.ask("What causes aurora borealis?")
 print(result.answer, result.confidence)`}</pre>
               </div>
@@ -457,9 +457,9 @@ print(result.answer, result.confidence)`}</pre>
                 <p className="text-sm text-muted-foreground mb-3">
                   Use the REST API from any HTTP client. Get a free API key to start.
                 </p>
-                <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`curl -X POST https://browseai.dev/api/browse/answer \\
+                <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`curl -X POST https://lastsearch.dev/api/browse/answer \\
   -H "Content-Type: application/json" \\
-  -H "X-API-Key: bai_your_key" \\
+  -H "X-API-Key: ls_your_key" \\
   -d '{"query": "What causes aurora borealis?", "depth": "deep"}'
 
 # depth: "fast" (default) | "thorough" | "deep"`}</pre>
@@ -471,17 +471,17 @@ print(result.answer, result.confidence)`}</pre>
                   <span className="font-semibold">Clarity — Anti-Hallucination Answer Engine</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Send any prompt through <code className="text-xs bg-secondary px-1 py-0.5 rounded">browse_clarity</code> — it auto-detects intent, identifies hallucination risks, and applies anti-hallucination grounding techniques (CoVe, citation-verify, quote extraction). Three modes: <strong>Prompt</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "prompt"</code>) returns enhanced prompts only — use when your own LLM should answer. <strong>Answer</strong> (default) gives a fast LLM-only answer with reduced hallucinations. <strong>Verified</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "verified"</code>) also runs the web pipeline and fuses the best of both into one source-backed answer. Works with any agent.
+                  Send any prompt through <code className="text-xs bg-secondary px-1 py-0.5 rounded">clarity</code> — it auto-detects intent, identifies hallucination risks, and applies anti-hallucination grounding techniques (CoVe, citation-verify, quote extraction). Three modes: <strong>Prompt</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "prompt"</code>) returns enhanced prompts only — use when your own LLM should answer. <strong>Answer</strong> (default) gives a fast LLM-only answer with reduced hallucinations. <strong>Verified</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "verified"</code>) also runs the web pipeline and fuses the best of both into one source-backed answer. Works with any agent.
                 </p>
                 <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`# MCP — prompt mode (get enhanced prompts for your own LLM)
-browse_clarity({ prompt: "What are the side effects of metformin?", mode: "prompt" })
+clarity({ prompt: "What are the side effects of metformin?", mode: "prompt" })
 # Returns: systemPrompt, userPrompt, techniques, risks (no LLM call)
 
 # MCP — answer mode (LLM answers with anti-hallucination, default)
-browse_clarity({ prompt: "What are the side effects of metformin?" })
+clarity({ prompt: "What are the side effects of metformin?" })
 
 # MCP — verified mode (LLM + web sources fused)
-browse_clarity({ prompt: "What are the side effects of metformin?", mode: "verified" })
+clarity({ prompt: "What are the side effects of metformin?", mode: "verified" })
 
 # Python — all three modes
 prompts = client.clarity("...", mode="prompt")   # Enhanced prompts only
@@ -489,8 +489,8 @@ answer  = client.clarity("...", mode="answer")   # LLM answer
 verified = client.clarity("...", mode="verified") # LLM + web fusion
 
 # REST API
-curl -X POST https://browseai.dev/api/browse/clarity \\
-  -H "X-API-Key: bai_xxx" -H "Content-Type: application/json" \\
+curl -X POST https://lastsearch.dev/api/browse/clarity \\
+  -H "X-API-Key: ls_xxx" -H "Content-Type: application/json" \\
   -d '{"prompt": "Is coffee good for you?", "mode": "verified"}'`}</pre>
               </div>
             </div>
@@ -531,7 +531,7 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
             </div>
             <h3 className="text-2xl md:text-3xl font-bold mb-4">Build something real</h3>
             <p className="text-muted-foreground mb-8 max-w-2xl">
-              Full project tutorials with working code. Each one shows a different way to use BrowseAI Dev.
+              Full project tutorials with working code. Each one shows a different way to use LastSearch.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -540,55 +540,55 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
                   title: "Coding Agent",
                   desc: "Researches before writing code. Never recommends deprecated libraries.",
                   tags: ["Python SDK", "Thorough Mode", "Code Research"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/coding-agent",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/coding-agent",
                 },
                 {
                   title: "Support Agent",
                   desc: "Verifies answers before responding. Escalates when confidence is low.",
                   tags: ["Fast Mode", "Confidence", "Escalation"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/support-agent",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/support-agent",
                 },
                 {
                   title: "Content Agent",
                   desc: "Writes blog posts where every stat has a citation and confidence score.",
                   tags: ["Thorough Mode", "Citations", "Writing"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/content-agent",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/content-agent",
                 },
                 {
                   title: "Fact-Checker Bot",
                   desc: "Discord bot that verifies any claim with !verify and shows evidence vs hallucination with !compare.",
                   tags: ["Discord", "Thorough Mode", "Compare"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/fact-checker-bot",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/fact-checker-bot",
                 },
                 {
                   title: "Is This True?",
                   desc: "Minimal web app — paste any sentence, get a confidence score, sources, and contradictions. One input, one answer.",
                   tags: ["FastAPI", "Web App", "Shareable"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/is-this-true",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/is-this-true",
                 },
                 {
                   title: "Debate Settler",
                   desc: "Two claims go in, evidence decides the winner. Side-by-side comparison with scoring breakdown.",
                   tags: ["CLI", "Thorough Mode", "Contradictions"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/debate-settler",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/debate-settler",
                 },
                 {
                   title: "Docs Verifier",
                   desc: "Verify every factual claim in your README or docs. Flags outdated stats and wrong assertions. CI-friendly.",
                   tags: ["CI/CD", "Extract", "Automation"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/docs-verifier",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/docs-verifier",
                 },
                 {
                   title: "Podcast Prep",
                   desc: "Research brief builder — give it a guest and topic, get verified facts, contradictions, and suggested questions.",
                   tags: ["Sessions", "Recall", "Async"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/podcast-prep",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/podcast-prep",
                 },
                 {
                   title: "More Coming Soon",
                   desc: "Competitive intel agent, Wikipedia trust scorer, newsletter writer with citations, and more.",
                   tags: ["Contribute", "Ideas Welcome"],
-                  link: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples",
+                  link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples",
                 },
               ].map((tutorial, i) => (
                 <motion.a
@@ -694,7 +694,7 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
             </div>
             <h3 className="text-2xl md:text-3xl font-bold mb-4">Help us build this</h3>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              BrowseAI Dev is built by developers, for developers. Here's where you can make an impact.
+              LastSearch is built by developers, for developers. Here's where you can make an impact.
             </p>
           </motion.div>
 
@@ -756,28 +756,28 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
             </div>
             <h3 className="text-2xl md:text-3xl font-bold mb-4">Teach your agents to research</h3>
             <p className="text-muted-foreground mb-8">
-              Pre-built skills that teach AI coding agents when and how to use BrowseAI Dev. Works with Claude Code, Codex, Gemini CLI, Cursor, and more.
+              Pre-built skills that teach AI coding agents when and how to use LastSearch. Works with Claude Code, Codex, Gemini CLI, Cursor, and more.
             </p>
 
             <div className="px-4 py-3 rounded-lg bg-secondary mb-8">
-              <code className="text-sm font-mono text-muted-foreground">npx skills add BrowseAI-HQ/browseAIDev_Skills</code>
+              <code className="text-sm font-mono text-muted-foreground">npx skills add lastsearch-hq/lastsearch-skills</code>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               {[
-                { name: "browse-research", desc: "Evidence-backed answers with citations and confidence scores" },
-                { name: "browse-fact-check", desc: "Compare raw LLM vs evidence-backed, verify claims" },
-                { name: "browse-extract", desc: "Structured claim extraction from any URL" },
-                { name: "browse-sessions", desc: "Multi-query research with persistent knowledge" },
-                { name: "browse-deep-dive", desc: "Multi-step agentic research with reasoning chains and gap analysis" },
-                { name: "browse-compare-claims", desc: "Settle factual disputes — evidence vs raw LLM side-by-side" },
-                { name: "browse-monitor", desc: "Track evolving topics over time, diff against prior knowledge" },
-                { name: "browse-cite", desc: "Generate formatted citations (APA/MLA) with authority scores" },
-                { name: "browse-clarity", desc: "Clarity — anti-hallucination answer engine with optional web verification" },
+                { name: "research", desc: "Evidence-backed answers with citations and confidence scores" },
+                { name: "fact-check", desc: "Compare raw LLM vs evidence-backed, verify claims" },
+                { name: "extract", desc: "Structured claim extraction from any URL" },
+                { name: "sessions", desc: "Multi-query research with persistent knowledge" },
+                { name: "deep-dive", desc: "Multi-step agentic research with reasoning chains and gap analysis" },
+                { name: "compare-claims", desc: "Settle factual disputes — evidence vs raw LLM side-by-side" },
+                { name: "monitor", desc: "Track evolving topics over time, diff against prior knowledge" },
+                { name: "cite", desc: "Generate formatted citations (APA/MLA) with authority scores" },
+                { name: "clarity", desc: "Clarity — anti-hallucination answer engine with optional web verification" },
               ].map((skill) => (
                 <a
                   key={skill.name}
-                  href={`https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/${skill.name}`}
+                  href={`https://github.com/lastsearch-hq/lastsearch-skills/tree/main/${skill.name}`}
                   target="_blank"
                   rel="noopener"
                   className="p-4 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
@@ -789,7 +789,7 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
             </div>
 
             <a
-              href="https://github.com/BrowseAI-HQ/browseAIDev_Skills"
+              href="https://github.com/lastsearch-hq/lastsearch-skills"
               target="_blank"
               rel="noopener"
               className="text-sm text-accent hover:underline"
@@ -813,7 +813,7 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
             <div className="space-y-4">
               {[
                 { step: "1", cmd: "# Fork on GitHub, then:", label: "Fork the repo", isNote: true },
-                { step: "2", cmd: "git clone https://github.com/YOUR_USERNAME/BrowseAI-Dev.git && cd BrowseAI-Dev", label: "Clone your fork" },
+                { step: "2", cmd: "git clone https://github.com/YOUR_USERNAME/lastsearch.git && cd lastsearch", label: "Clone your fork" },
                 { step: "3", cmd: "pnpm install && cp .env.example .env", label: "Install & configure" },
                 { step: "4", cmd: "git checkout -b feat/your-feature", label: "Create a branch" },
                 { step: "5", cmd: "pnpm dev", label: "Start development" },
@@ -870,13 +870,13 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button className="gap-2" asChild>
-                <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
                   <Github className="w-3.5 h-3.5" />
                   Start Contributing
                 </a>
               </Button>
               <Button variant="outline" className="gap-2" asChild>
-                <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">
                   <BookOpen className="w-3.5 h-3.5" />
                   Read the Guide
                   <ExternalLink className="w-3 h-3" />
@@ -891,11 +891,11 @@ curl -X POST https://browseai.dev/api/browse/clarity \\
       <footer className="py-12 px-6 border-t border-border">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="text-sm font-semibold">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="text-sm font-semibold">LastSearch</span>
           </div>
           <div className="flex items-center gap-6 text-xs text-muted-foreground">
-            <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
             <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
             <button onClick={() => navigate("/")} className="hover:text-foreground transition-colors">Home</button>
             <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>

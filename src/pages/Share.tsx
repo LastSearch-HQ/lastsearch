@@ -29,7 +29,7 @@ const Share = () => {
       .then((d) => {
         if (d.success) {
           setData(d.result);
-          document.title = `BrowseAI Dev: ${d.result.query}`;
+          document.title = `LastSearch: ${d.result.query}`;
         } else {
           setError(d.error || "Result not found");
         }
@@ -46,8 +46,8 @@ const Share = () => {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="font-semibold text-sm">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="font-semibold text-sm">LastSearch</span>
           </div>
         </div>
         <div className="flex items-center gap-2">

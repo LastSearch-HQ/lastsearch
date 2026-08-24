@@ -145,7 +145,7 @@ export async function streamAnswer(
     throw new Error("Stream ended without result");
   }
 
-  (window as any).posthog?.capture("browse_query", {
+  (window as any).posthog?.capture("query", {
     tool: "/browse/answer/stream",
   });
 

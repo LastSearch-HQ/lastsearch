@@ -1,29 +1,29 @@
-"""Basic tests for BrowseAI Dev client."""
+"""Basic tests for LastSearch client."""
 
 import pytest
 
-from browseaidev import BrowseAIDev, AsyncBrowseAIDev, BrowseAIDevError
-from browseaidev.models import BrowseResult, SearchResult, PageResult, CompareResult
+from lastsearch import LastSearch, AsyncLastSearch, LastSearchError
+from lastsearch.models import BrowseResult, SearchResult, PageResult, CompareResult
 
 
 def test_client_requires_api_key():
     with pytest.raises(TypeError):
-        BrowseAIDev()
+        LastSearch()
 
 
 def test_async_client_requires_api_key():
     with pytest.raises(TypeError):
-        AsyncBrowseAIDev()
+        AsyncLastSearch()
 
 
 def test_client_accepts_api_key():
-    client = BrowseAIDev(api_key="bai_test")
-    assert client._headers["X-API-Key"] == "bai_test"
+    client = LastSearch(api_key="ls_test")
+    assert client._headers["X-API-Key"] == "ls_test"
     client.close()
 
 
 def test_client_context_manager():
-    with BrowseAIDev(api_key="bai_test") as client:
+    with LastSearch(api_key="ls_test") as client:
         assert client is not None
 
 

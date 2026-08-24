@@ -1,12 +1,12 @@
-# Contributing to BrowseAI Dev
+# Contributing to LastSearch
 
-Thanks for your interest in contributing! BrowseAI Dev is reliable research infrastructure for AI agents.
+Thanks for your interest in contributing! LastSearch is reliable research infrastructure for AI agents.
 
 ## Quick Setup
 
 ```bash
-git clone https://github.com/BrowseAI-HQ/BrowseAI-Dev.git
-cd BrowseAI-Dev
+git clone https://github.com/lastsearch-hq/lastsearch.git
+cd lastsearch
 pnpm install
 cp .env.example .env
 # Add your own API keys to .env
@@ -14,12 +14,12 @@ pnpm dev
 ```
 
 ### Required API Keys
-- **BrowseAI Dev API key**: https://browseai.dev/dashboard
+- **LastSearch API key**: https://lastsearch.dev/dashboard
 
 ## Project Structure
 
 ```
-BrowseAI-Dev/
+lastsearch/
   src/                    # Frontend (React + Vite + shadcn/ui)
     components/           # UI components
     pages/                # Route pages
@@ -29,10 +29,10 @@ BrowseAI-Dev/
       src/routes/         # API endpoints
       src/services/       # Business logic
       src/config/         # Environment config
-    mcp/                  # MCP server (npm: browseai-dev)
+    mcp/                  # MCP server (npm: lastsearch)
   packages/
     shared/               # Shared types, schemas, constants
-    python-sdk/           # Python SDK (PyPI: browseaidev)
+    python-sdk/           # Python SDK (PyPI: lastsearch)
   supabase/
     migrations/           # Database migrations (timestamp format)
     functions/            # Supabase Edge Functions
@@ -51,8 +51,8 @@ BrowseAI-Dev/
 | `pnpm test` | Run tests |
 | `pnpm lint` | Lint with ESLint |
 | `pnpm build:all` | Build everything |
-| `pnpm --filter @browse/api exec tsc --noEmit` | Type check API |
-| `pnpm --filter browseai-dev exec tsc --noEmit` | Type check MCP |
+| `pnpm --filter @lastsearch/api exec tsc --noEmit` | Type check API |
+| `pnpm --filter lastsearch exec tsc --noEmit` | Type check MCP |
 
 ## Contribution Rules
 
@@ -70,9 +70,9 @@ BrowseAI-Dev/
    ```bash
    pnpm lint
    pnpm test
-   pnpm --filter @browse/shared build
-   pnpm --filter @browse/api exec tsc --noEmit
-   pnpm --filter browseai-dev exec tsc --noEmit
+   pnpm --filter @lastsearch/shared build
+   pnpm --filter @lastsearch/api exec tsc --noEmit
+   pnpm --filter lastsearch exec tsc --noEmit
    ```
 5. Write a clear PR description — what changed and why
 6. Wait for maintainer review — changes may be requested
@@ -111,14 +111,14 @@ BrowseAI-Dev/
 
 ### MCP Server
 - Tool implementations in `apps/mcp/src/`
-- Published to npm as `browseai-dev`
+- Published to npm as `lastsearch`
 - Works with Claude Desktop, Cursor, Windsurf
 
 ### Python SDK
-- Client and models in `packages/python-sdk/browseaidev/`
-- LangChain integration in `packages/python-sdk/browseaidev/integrations/langchain.py`
-- CrewAI integration in `packages/python-sdk/browseaidev/integrations/crewai.py`
-- Published to PyPI as `browseaidev`
+- Client and models in `packages/python-sdk/lastsearch/`
+- LangChain integration in `packages/python-sdk/lastsearch/integrations/langchain.py`
+- CrewAI integration in `packages/python-sdk/lastsearch/integrations/crewai.py`
+- Published to PyPI as `lastsearch`
 
 ### Research & Prompts
 - Improve LLM prompts for better extraction
@@ -130,7 +130,7 @@ BrowseAI-Dev/
 1. Add Zod schema in `packages/shared/src/schemas.ts`
 2. Add TypeScript type in `packages/shared/src/types.ts`
 3. Export from `packages/shared/src/index.ts`
-4. Build shared: `pnpm --filter @browse/shared build`
+4. Build shared: `pnpm --filter @lastsearch/shared build`
 5. Add service logic in `apps/api/src/services/`
 6. Register route in `apps/api/src/routes/browse.ts`
 7. Add frontend API call in `src/lib/api/browse.ts`
@@ -139,7 +139,7 @@ BrowseAI-Dev/
 
 1. Open `apps/mcp/src/index.ts`
 2. Add a new `server.tool(...)` call following existing patterns
-3. Test: `BROWSE_API_KEY=bai_xxx pnpm dev:mcp`
+3. Test: `LASTSEARCH_API_KEY=ls_xxx pnpm dev:mcp`
 
 ## CI/CD Pipeline
 
@@ -153,11 +153,11 @@ On merge to `main`:
 - **Vercel** auto-deploys frontend + API
 - **Supabase migrations** run via GitHub Actions (if migration files changed)
 - **Supabase Edge Functions** deploy via GitHub Actions (if function files changed)
-- **npm publish** triggers for browseai-dev MCP package (if `apps/mcp/` changed and version bumped)
+- **npm publish** triggers for lastsearch MCP package (if `apps/mcp/` changed and version bumped)
 
 ## Publishing the MCP Package (Maintainers Only)
 
-The `browseai-dev` npm package lives in `apps/mcp/`. Publishing is automated via CI when the version in `apps/mcp/package.json` is bumped and changes merge to `main`.
+The `lastsearch` npm package lives in `apps/mcp/`. Publishing is automated via CI when the version in `apps/mcp/package.json` is bumped and changes merge to `main`.
 
 To publish manually:
 
@@ -178,7 +178,7 @@ npm publish --access public
 |--------|---------|
 | `SUPABASE_ACCESS_TOKEN` | Supabase CLI auth for migrations/functions |
 | `SUPABASE_PROJECT_REF` | Supabase project identifier |
-| `NPM_TOKEN` | npm publish auth for browseai-dev package |
+| `NPM_TOKEN` | npm publish auth for lastsearch package |
 
 Contributors don't need these — CI handles everything on merge.
 

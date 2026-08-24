@@ -1,21 +1,21 @@
 """
-Code Research Agent — BrowseAI Example
+Code Research Agent — LastSearch Example
 
 An agent that researches libraries, frameworks, and technical topics
 before writing code. Perfect for AI coding assistants that need
 to verify docs and APIs before generating code.
 
 Usage:
-    pip install browseaidev
+    pip install lastsearch
     python code-research-agent.py "best Python async HTTP libraries"
 """
 
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def code_research(query: str):
-    client = BrowseAIDev(api_key="bai_xxx")
+    client = LastSearch(api_key="ls_xxx")
 
     print(f"\n--- Code Research Agent ---")
     print(f"Query: {query}\n")

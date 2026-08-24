@@ -107,7 +107,7 @@ async function apiCall<T>(
   if (!res.ok || !data.success) {
     throw new Error(data.error || `API call failed: ${res.status}`);
   }
-  (window as any).posthog?.capture("browse_query", {
+  (window as any).posthog?.capture("query", {
     tool: path,
   });
   return data.result;
@@ -134,7 +134,7 @@ export async function browseKnowledge(
   if (!res.ok || !data.success) {
     throw new Error(data.error || `API call failed: ${res.status}`);
   }
-  (window as any).posthog?.capture("browse_query", { tool: "/browse/answer" });
+  (window as any).posthog?.capture("query", { tool: "/browse/answer" });
   return { ...data.result, ...(data.quota && { quota: data.quota }) };
 }
 

@@ -1,21 +1,21 @@
 """
-Research Session Agent — BrowseAI Example
+Research Session Agent — LastSearch Example
 
 Build persistent knowledge across multiple queries. Each question
 recalls prior findings and stores new verified claims — giving your
 agent memory that compounds over time.
 
 Usage:
-    pip install browseaidev
+    pip install lastsearch
     python research-session.py "quantum computing"
 """
 
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def research_session(topic: str):
-    client = BrowseAIDev(api_key="bai_xxx")
+    client = LastSearch(api_key="ls_xxx")
 
     # Create a named session
     session = client.session(f"{topic}-research")

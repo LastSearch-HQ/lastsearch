@@ -1,14 +1,14 @@
-# BrowseAI Dev — Full Documentation
+# LastSearch — Full Documentation
 
 > Research infrastructure for AI agents. Real-time web search with evidence-backed citations and confidence scores.
 
-## What Is BrowseAI Dev?
+## What Is LastSearch?
 
-BrowseAI Dev is open-source research infrastructure that gives AI agents real-time web search with evidence-backed citations. It returns structured JSON (claims, sources, confidence, contradictions) that agents can programmatically evaluate — not a chat response.
+LastSearch is open-source research infrastructure that gives AI agents real-time web search with evidence-backed citations. It returns structured JSON (claims, sources, confidence, contradictions) that agents can programmatically evaluate — not a chat response.
 
-Available as MCP server (npm: browseai-dev, renamed from browse-ai — old name still works), REST API, and Python SDK (PyPI: browseaidev, renamed from browseai — old name still works). Apache 2.0 licensed.
+Available as MCP server (npm: lastsearch, renamed from lastsearch — old name still works), REST API, and Python SDK (PyPI: lastsearch, renamed from lastsearch — old name still works). Apache 2.0 licensed.
 
-## Why Use BrowseAI Dev?
+## Why Use LastSearch?
 
 1. **Structured output**: Every response includes extracted claims with source citations, verification scores, consensus levels, and contradiction flags
 2. **Evidence-based confidence**: Multi-factor algorithm computed from real signals, not LLM self-assessment
@@ -22,9 +22,9 @@ Available as MCP server (npm: browseai-dev, renamed from browse-ai — old name 
 ```json
 {
   "mcpServers": {
-    "browseai-dev": {
+    "lastsearch": {
       "command": "npx",
-      "args": ["-y", "browseai-dev"]
+      "args": ["-y", "lastsearch"]
     }
   }
 }
@@ -32,19 +32,19 @@ Available as MCP server (npm: browseai-dev, renamed from browse-ai — old name 
 
 ### Python SDK
 ```bash
-pip install browseaidev
+pip install lastsearch
 ```
 
 ### Framework Integrations
 ```bash
-pip install langchain-browseaidev   # LangChain tools
-pip install crewai-browseaidev      # CrewAI tools
-pip install llamaindex-browseaidev  # LlamaIndex tools
+pip install langchain-lastsearch   # LangChain tools
+pip install crewai-lastsearch      # CrewAI tools
+pip install llamaindex-lastsearch  # LlamaIndex tools
 ```
 
 ### REST API
 ```bash
-curl -X POST https://browseai.dev/api/browse/answer \
+curl -X POST https://lastsearch.dev/api/browse/answer \
   -H "Content-Type: application/json" \
   -d '{"query": "How do mRNA vaccines work?"}'
 ```
@@ -202,26 +202,26 @@ Dynamic scores improve over time from real verification data.
 
 | Tool | Description |
 |------|-------------|
-| browse_search | Search the web for information |
-| browse_open | Fetch and parse a web page |
-| browse_extract | Extract structured claims from a URL |
-| browse_answer | Full pipeline: search + extract + cite |
-| browse_compare | Compare raw LLM vs evidence-backed |
-| browse_session_create | Create a research session |
-| browse_session_ask | Research within a session |
-| browse_session_recall | Query session knowledge |
-| browse_session_share | Share a session publicly |
-| browse_session_knowledge | Export session claims |
-| browse_session_fork | Fork a shared session |
-| browse_clarity | Anti-hallucination answer engine — fast LLM answer (default) or verified mode with web-source fusion |
-| browse_feedback | Submit result feedback |
+| search | Search the web for information |
+| open | Fetch and parse a web page |
+| extract | Extract structured claims from a URL |
+| answer | Full pipeline: search + extract + cite |
+| compare | Compare raw LLM vs evidence-backed |
+| session_create | Create a research session |
+| session_ask | Research within a session |
+| session_recall | Query session knowledge |
+| session_share | Share a session publicly |
+| session_knowledge | Export session claims |
+| session_fork | Fork a shared session |
+| clarity | Anti-hallucination answer engine — fast LLM answer (default) or verified mode with web-source fusion |
+| feedback | Submit result feedback |
 
 ## Python SDK
 
 ```python
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
-client = BrowseAIDev()
+client = LastSearch()
 
 # Simple answer
 result = client.answer("How does CRISPR work?")
@@ -252,38 +252,38 @@ print(verified.sources)       # Web sources used for verification
 client.feedback(result_id="abc123", rating="good")
 
 # Async
-from browseaidev import AsyncBrowseAIDev
-async_client = AsyncBrowseAIDev()
+from lastsearch import AsyncLastSearch
+async_client = AsyncLastSearch()
 result = await async_client.answer("query")
 ```
 
 ## Authentication
 
 Two options:
-1. **BrowseAI Dev API Key**: Get a `bai_xxx` key from the dashboard — usage tracked per key
+1. **LastSearch API Key**: Get a `ls_xxx` key from the dashboard — usage tracked per key
 2. **Demo mode**: No auth needed — 1 query/hour per IP
 
 ## Self-Hosting
 
 Licensed under Apache 2.0. Clone the repo and deploy:
 ```bash
-git clone https://github.com/BrowseAI-HQ/BrowseAI-Dev.git
-cd BrowseAI-Dev
+git clone https://github.com/lastsearch-hq/lastsearch.git
+cd lastsearch
 pnpm install
 pnpm dev
 ```
 
-Required env vars: `BROWSE_API_KEY` (BrowseAI Dev API key).
+Required env vars: `LASTSEARCH_API_KEY` (LastSearch API key).
 Optional: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (persistence).
 
 ## Links
 
-- Website: https://browseai.dev
-- Documentation: https://browseai.dev/docs
-- Playground: https://browseai.dev/playground
-- GitHub: https://github.com/BrowseAI-HQ/BrowseAI-Dev
-- npm: https://www.npmjs.com/package/browseai-dev (renamed from browse-ai, old name still works)
-- PyPI: https://pypi.org/project/browseaidev/ (renamed from browseai, old name still works)
-- Agent Skills: https://github.com/BrowseAI-HQ/browseAIDev_Skills
+- Website: https://lastsearch.dev
+- Documentation: https://lastsearch.dev/docs
+- Playground: https://lastsearch.dev/playground
+- GitHub: https://github.com/lastsearch-hq/lastsearch
+- npm: https://www.npmjs.com/package/lastsearch (renamed from lastsearch, old name still works)
+- PyPI: https://pypi.org/project/lastsearch/ (renamed from lastsearch, old name still works)
+- Agent Skills: https://github.com/lastsearch-hq/lastsearch-skills
 - Discord: https://discord.gg/ubAuT4YQsT
 - License: Apache 2.0

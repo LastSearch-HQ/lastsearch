@@ -1,9 +1,9 @@
-"""BrowseAI Dev — Reliable research infrastructure for AI agents."""
+"""LastSearch — Reliable research infrastructure for AI agents."""
 
-from .client import DISCLAIMER, AsyncBrowseAIDev, BrowseAIDev
+from .client import DISCLAIMER, AsyncLastSearch, LastSearch
 from .exceptions import (
     AuthenticationError,
-    BrowseAIDevError,
+    LastSearchError,
     InsufficientCreditsError,
     RateLimitError,
     ServerError,
@@ -31,9 +31,9 @@ from .models import (
 )
 
 __all__ = [
-    "BrowseAIDev",
-    "AsyncBrowseAIDev",
-    "BrowseAIDevError",
+    "LastSearch",
+    "AsyncLastSearch",
+    "LastSearchError",
     "AuthenticationError",
     "RateLimitError",
     "InsufficientCreditsError",
@@ -60,4 +60,4 @@ __all__ = [
     "DISCLAIMER",
 ]
 
-__version__ = "0.4.0"
+__version__ = "1.0.0"

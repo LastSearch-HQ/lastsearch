@@ -1,30 +1,30 @@
 """
-Financial Agent — BrowseAI Dev Example
+Financial Agent — LastSearch Example
 
 Verifies financial data and market claims with evidence-backed citations.
 Uses thorough mode to cross-check revenue figures, delivery numbers, and
 market data against multiple financial sources.
 
 Usage:
-    pip install browseaidev
-    BROWSEAI_API_KEY=bai_xxx python agent.py
-    BROWSEAI_API_KEY=bai_xxx python agent.py "Tesla revenue and delivery numbers 2025"
+    pip install lastsearch
+    LASTSEARCH_API_KEY=ls_xxx python agent.py
+    LASTSEARCH_API_KEY=ls_xxx python agent.py "Tesla revenue and delivery numbers 2025"
 """
 
 import os
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def verify_financial_data(query: str):
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     print(f"\nFinancial Research: {query}\n")
     print("Running thorough verification (cross-checking financial sources)...\n")
 
     # Thorough mode cross-checks financial figures across multiple sources.
-    # Financial data is time-sensitive — BrowseAI's real-time search ensures
+    # Financial data is time-sensitive — LastSearch's real-time search ensures
     # you get the latest numbers, not stale training data.
     result = client.ask(query, depth="thorough")
 

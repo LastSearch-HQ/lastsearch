@@ -57,8 +57,8 @@ const Compare = () => {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="font-semibold text-sm">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="font-semibold text-sm">LastSearch</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -155,7 +155,7 @@ const Compare = () => {
               <span className="text-muted-foreground font-mono text-xs">vs</span>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                <span>BrowseAI Dev: <strong className="text-foreground">{result.evidence_backed.sources} sources, {result.evidence_backed.claims} claims</strong></span>
+                <span>LastSearch: <strong className="text-foreground">{result.evidence_backed.sources} sources, {result.evidence_backed.claims} claims</strong></span>
               </div>
             </motion.div>
 
@@ -195,7 +195,7 @@ const Compare = () => {
               >
                 <div className="flex items-center gap-2">
                   <Shield className="w-5 h-5 text-emerald-400" />
-                  <h2 className="text-sm font-semibold uppercase tracking-wider text-emerald-400">BrowseAI Dev</h2>
+                  <h2 className="text-sm font-semibold uppercase tracking-wider text-emerald-400">LastSearch</h2>
                   <Badge className="ml-auto bg-emerald-400/15 text-emerald-400 border-emerald-400/30 text-xs">
                     {Math.round(result.evidence_backed.confidence * 100)}% confidence
                   </Badge>

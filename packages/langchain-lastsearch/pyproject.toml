@@ -3,15 +3,15 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "langchain-browseaidev"
-version = "0.1.3"
-description = "LangChain integration for BrowseAI Dev — research infrastructure with Grounded Intelligence for AI agents"
+name = "langchain-lastsearch"
+version = "1.0.0"
+description = "LangChain integration for LastSearch — research infrastructure with Grounded Intelligence for AI agents"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.10"
-authors = [{ name = "BrowseAI Dev" }]
+authors = [{ name = "LastSearch" }]
 keywords = [
-    "langchain", "langchain-tools", "browseaidev", "browseai-dev",
+    "langchain", "langchain-tools", "lastsearch", "lastsearch",
     "ai-agent", "web-search", "fact-checking", "citations",
     "confidence-scoring", "mcp", "rag", "hallucination-prevention",
     "verified-search", "evidence-based", "crewai", "autogen",
@@ -30,11 +30,11 @@ classifiers = [
 ]
 dependencies = [
     "langchain-core>=0.2.0",
-    "browseaidev>=0.1.7",
+    "lastsearch>=0.1.7",
 ]
 
 [project.urls]
-Homepage = "https://browseai.dev"
-Documentation = "https://browseai.dev/docs"
-Repository = "https://github.com/BrowseAI-HQ/BrowseAI-Dev"
+Homepage = "https://lastsearch.dev"
+Documentation = "https://lastsearch.dev/docs"
+Repository = "https://github.com/lastsearch-hq/lastsearch"
 Discord = "https://discord.gg/ubAuT4YQsT"

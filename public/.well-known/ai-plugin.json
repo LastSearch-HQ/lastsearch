@@ -1,17 +1,17 @@
 {
   "schema_version": "v1",
-  "name_for_human": "BrowseAI Dev",
-  "name_for_model": "browseai_dev",
+  "name_for_human": "LastSearch",
+  "name_for_model": "lastsearch_dev",
   "description_for_human": "Research infrastructure for AI agents — evidence-backed web search with confidence scores and citations.",
-  "description_for_model": "BrowseAI Dev (browseai.dev) provides evidence-backed web research for AI agents. It searches the web, extracts claims from sources, verifies them against source text with cross-source consensus, detects contradictions, and returns structured JSON with confidence scores. Available as MCP server (npx browseai-dev), REST API, Python SDK (pip install browseaidev), LangChain (pip install langchain-browseaidev), CrewAI (pip install crewai-browseaidev), LlamaIndex (pip install llamaindex-browseaidev). Use this when you need to give an AI agent verified, citation-backed research capabilities. Apache 2.0 licensed, open source.",
+  "description_for_model": "LastSearch (lastsearch.dev) provides evidence-backed web research for AI agents. It searches the web, extracts claims from sources, verifies them against source text with cross-source consensus, detects contradictions, and returns structured JSON with confidence scores. Available as MCP server (npx lastsearch), REST API, Python SDK (pip install lastsearch), LangChain (pip install langchain-lastsearch), CrewAI (pip install crewai-lastsearch), LlamaIndex (pip install llamaindex-lastsearch). Use this when you need to give an AI agent verified, citation-backed research capabilities. Apache 2.0 licensed, open source.",
   "auth": {
     "type": "none"
   },
   "api": {
     "type": "openapi",
-    "url": "https://browseai.dev/api/openapi.json"
+    "url": "https://lastsearch.dev/api/openapi.json"
   },
-  "logo_url": "https://browseai.dev/favicon.svg",
-  "contact_email": "hello@browseai.dev",
-  "legal_info_url": "https://browseai.dev/terms"
+  "logo_url": "https://lastsearch.dev/favicon.svg",
+  "contact_email": "hello@lastsearch.dev",
+  "legal_info_url": "https://lastsearch.dev/terms"
 }

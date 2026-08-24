@@ -5,14 +5,14 @@ on:
   push:
     branches: [main]
     paths:
-      - 'packages/crewai-browseaidev/**'
-      - 'packages/langchain-browseaidev/**'
-      - 'packages/llamaindex-browseaidev/**'
+      - 'packages/crewai-lastsearch/**'
+      - 'packages/langchain-lastsearch/**'
+      - 'packages/llamaindex-lastsearch/**'
       - '!packages/**/README.md'
 
 jobs:
   publish-crewai:
-    name: Publish crewai-browseaidev
+    name: Publish crewai-lastsearch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,10 +23,10 @@ jobs:
         run: pip install build twine
       - name: Check version
         id: version
-        working-directory: packages/crewai-browseaidev
+        working-directory: packages/crewai-lastsearch
         run: |
           CURRENT=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
-          PUBLISHED=$(python -c "import urllib.request, json; data=json.loads(urllib.request.urlopen('https://pypi.org/pypi/crewai-browseaidev/json').read()); print(data['info']['version'])" 2>/dev/null || echo "0.0.0")
+          PUBLISHED=$(python -c "import urllib.request, json; data=json.loads(urllib.request.urlopen('https://pypi.org/pypi/crewai-lastsearch/json').read()); print(data['info']['version'])" 2>/dev/null || echo "0.0.0")
           if [ "$CURRENT" = "$PUBLISHED" ]; then
             echo "skip=true" >> $GITHUB_OUTPUT
           else
@@ -35,14 +35,14 @@ jobs:
           fi
       - name: Build & Publish
         if: steps.version.outputs.skip != 'true'
-        working-directory: packages/crewai-browseaidev
+        working-directory: packages/crewai-lastsearch
         run: python -m build && twine upload dist/*
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
 
   publish-langchain:
-    name: Publish langchain-browseaidev
+    name: Publish langchain-lastsearch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,10 +53,10 @@ jobs:
         run: pip install build twine
       - name: Check version
         id: version
-        working-directory: packages/langchain-browseaidev
+        working-directory: packages/langchain-lastsearch
         run: |
           CURRENT=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
-          PUBLISHED=$(python -c "import urllib.request, json; data=json.loads(urllib.request.urlopen('https://pypi.org/pypi/langchain-browseaidev/json').read()); print(data['info']['version'])" 2>/dev/null || echo "0.0.0")
+          PUBLISHED=$(python -c "import urllib.request, json; data=json.loads(urllib.request.urlopen('https://pypi.org/pypi/langchain-lastsearch/json').read()); print(data['info']['version'])" 2>/dev/null || echo "0.0.0")
           if [ "$CURRENT" = "$PUBLISHED" ]; then
             echo "skip=true" >> $GITHUB_OUTPUT
           else
@@ -65,14 +65,14 @@ jobs:
           fi
       - name: Build & Publish
         if: steps.version.outputs.skip != 'true'
-        working-directory: packages/langchain-browseaidev
+        working-directory: packages/langchain-lastsearch
         run: python -m build && twine upload dist/*
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
 
   publish-llamaindex:
-    name: Publish llamaindex-browseaidev
+    name: Publish llamaindex-lastsearch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -83,10 +83,10 @@ jobs:
         run: pip install build twine
       - name: Check version
         id: version
-        working-directory: packages/llamaindex-browseaidev
+        working-directory: packages/llamaindex-lastsearch
         run: |
           CURRENT=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
-          PUBLISHED=$(python -c "import urllib.request, json; data=json.loads(urllib.request.urlopen('https://pypi.org/pypi/llamaindex-browseaidev/json').read()); print(data['info']['version'])" 2>/dev/null || echo "0.0.0")
+          PUBLISHED=$(python -c "import urllib.request, json; data=json.loads(urllib.request.urlopen('https://pypi.org/pypi/llamaindex-lastsearch/json').read()); print(data['info']['version'])" 2>/dev/null || echo "0.0.0")
           if [ "$CURRENT" = "$PUBLISHED" ]; then
             echo "skip=true" >> $GITHUB_OUTPUT
           else
@@ -95,7 +95,7 @@ jobs:
           fi
       - name: Build & Publish
         if: steps.version.outputs.skip != 'true'
-        working-directory: packages/llamaindex-browseaidev
+        working-directory: packages/llamaindex-lastsearch
         run: python -m build && twine upload dist/*
         env:
           TWINE_USERNAME: __token__

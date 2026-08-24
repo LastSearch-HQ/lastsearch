@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-AVeriTeC Benchmark Runner for BrowseAI Dev
+AVeriTeC Benchmark Runner for LastSearch
 
-Evaluates BrowseAI Dev's verification pipeline against the AVeriTeC dataset.
+Evaluates LastSearch's verification pipeline against the AVeriTeC dataset.
 Calls the local API for each claim and maps results to AVeriTeC's label format.
 
 Usage:
@@ -28,8 +28,8 @@ from tqdm import tqdm
 
 
 # --- Config ---
-API_BASE = os.environ.get("BROWSE_API_URL", "http://localhost:3001")
-API_KEY = os.environ.get("BROWSE_API_KEY", "")
+API_BASE = os.environ.get("LASTSEARCH_API_URL", "http://localhost:3001")
+API_KEY = os.environ.get("LASTSEARCH_API_KEY", "")
 RESULTS_DIR = Path(__file__).parent / "results"
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -39,7 +39,7 @@ CONFIDENCE_LOW = 0.35
 
 
 def map_to_averitec_label(result: dict) -> str:
-    """Map BrowseAI Dev result to AVeriTeC's 4-label schema."""
+    """Map LastSearch result to AVeriTeC's 4-label schema."""
     confidence = result.get("confidence", 0)
     claims = result.get("claims", [])
     contradictions = result.get("contradictions", [])
@@ -74,7 +74,7 @@ def map_to_averitec_label(result: dict) -> str:
 
 
 def build_evidence(result: dict, claim_text: str) -> list[dict]:
-    """Map BrowseAI Dev sources to AVeriTeC evidence format."""
+    """Map LastSearch sources to AVeriTeC evidence format."""
     evidence = []
     sources = result.get("sources", [])
 
@@ -98,8 +98,8 @@ def build_evidence(result: dict, claim_text: str) -> list[dict]:
     return evidence
 
 
-def query_browseai(claim: str, depth: str = "fast", retries: int = 2) -> dict | None:
-    """Query BrowseAI Dev API for a claim."""
+def query_lastsearch(claim: str, depth: str = "fast", retries: int = 2) -> dict | None:
+    """Query LastSearch API for a claim."""
     headers = {"Content-Type": "application/json"}
     if API_KEY:
         headers["Authorization"] = f"Bearer {API_KEY}"
@@ -149,7 +149,7 @@ def run_benchmark(split: str, limit: int | None, depth: str, concurrency: int):
 
     def process_claim(idx, item):
         claim_text = item["claim"]
-        result = query_browseai(claim_text, depth=depth)
+        result = query_lastsearch(claim_text, depth=depth)
 
         if result is None:
             return idx, None
@@ -260,13 +260,13 @@ def evaluate(predictions: list[dict]):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AVeriTeC Benchmark Runner for BrowseAI Dev")
+    parser = argparse.ArgumentParser(description="AVeriTeC Benchmark Runner for LastSearch")
     parser.add_argument("--split", default="dev", choices=["train", "dev", "test"],
                         help="Dataset split to evaluate (default: dev)")
     parser.add_argument("--limit", type=int, default=None,
                         help="Limit number of claims to process")
     parser.add_argument("--depth", default="fast", choices=["fast", "thorough"],
-                        help="BrowseAI Dev depth mode (default: fast)")
+                        help="LastSearch depth mode (default: fast)")
     parser.add_argument("--concurrency", type=int, default=3,
                         help="Number of concurrent API requests (default: 3)")
     parser.add_argument("--evaluate-only", type=str, default=None,

@@ -1,4 +1,4 @@
-"""BrowseAI Dev CLI — quick setup and testing."""
+"""LastSearch CLI — quick setup and testing."""
 
 from __future__ import annotations
 
@@ -8,20 +8,20 @@ import sys
 
 
 def cmd_setup(args: argparse.Namespace) -> None:
-    """Interactive setup — store API keys in ~/.browseaidev.json."""
+    """Interactive setup — store API keys in ~/.lastsearch.json."""
     import os
 
-    config_path = os.path.expanduser("~/.browseaidev.json")
+    config_path = os.path.expanduser("~/.lastsearch.json")
 
     print()
-    print("  browseaidev setup")
+    print("  lastsearch setup")
     print("  =================")
-    print("  Configure the BrowseAI Dev Python SDK\n")
+    print("  Configure the LastSearch Python SDK\n")
 
-    api_key = input("  BrowseAI Dev API key (get a free one at https://browseai.dev/dashboard): ").strip()
+    api_key = input("  LastSearch API key (get a free one at https://lastsearch.dev/dashboard): ").strip()
 
     if not api_key:
-        print("\n  API key is required. Sign up at https://browseai.dev to get a free key.\n")
+        print("\n  API key is required. Sign up at https://lastsearch.dev to get a free key.\n")
         sys.exit(1)
 
     config: dict[str, str] = {"api_key": api_key}
@@ -35,23 +35,23 @@ def cmd_setup(args: argparse.Namespace) -> None:
 
   Quick start:
 
-    from browseaidev import BrowseAIDev
+    from lastsearch import LastSearch
 
-    client = BrowseAIDev.from_config()
+    client = LastSearch.from_config()
     result = client.ask("What is quantum computing?")
     print(result.answer)
 
   Or test it now:
 
-    browseaidev ask "What is quantum computing?"
+    lastsearch ask "What is quantum computing?"
 """)
 
 
 def cmd_ask(args: argparse.Namespace) -> None:
     """Run a query via the CLI."""
-    from .client import BrowseAIDev
+    from .client import LastSearch
 
-    client = BrowseAIDev.from_config()
+    client = LastSearch.from_config()
     result = client.ask(args.query)
 
     print(f"\n  Answer (confidence: {result.confidence:.0%}):\n")
@@ -73,9 +73,9 @@ def cmd_ask(args: argparse.Namespace) -> None:
 
 def cmd_search(args: argparse.Namespace) -> None:
     """Search the web via the CLI."""
-    from .client import BrowseAIDev
+    from .client import LastSearch
 
-    client = BrowseAIDev.from_config()
+    client = LastSearch.from_config()
     results = client.search(args.query, limit=args.limit)
 
     print(f"\n  Results ({len(results)}):\n")
@@ -90,13 +90,13 @@ def cmd_search(args: argparse.Namespace) -> None:
 
 def cmd_version(args: argparse.Namespace) -> None:
     from . import __version__
-    print(f"browseaidev {__version__}")
+    print(f"lastsearch {__version__}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="browseaidev",
-        description="BrowseAI Dev — Reliable research infrastructure for AI agents",
+        prog="lastsearch",
+        description="LastSearch — Reliable research infrastructure for AI agents",
     )
     sub = parser.add_subparsers(dest="command")
 

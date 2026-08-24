@@ -1,6 +1,6 @@
 # Healthcare Agent
 
-A medical research agent that verifies health claims using evidence-backed search with contradiction detection. Built on [BrowseAI Dev](https://browseai.dev).
+A medical research agent that verifies health claims using evidence-backed search with contradiction detection. Built on [LastSearch](https://lastsearch.dev).
 
 ## What it does
 
@@ -13,8 +13,8 @@ A medical research agent that verifies health claims using evidence-backed searc
 ## How to run
 
 ```bash
-pip install browseaidev
-export BROWSEAI_API_KEY=bai_xxx
+pip install lastsearch
+export LASTSEARCH_API_KEY=ls_xxx
 python agent.py
 ```
 
@@ -42,4 +42,4 @@ python agent.py "Safety of mRNA vaccines during pregnancy"
 
 ## License
 
-Apache 2.0 — part of the [BrowseAI Dev](https://github.com/BrowseAI-HQ/BrowseAI-Dev) project.
+Apache 2.0 — part of the [LastSearch](https://github.com/lastsearch-hq/lastsearch) project.

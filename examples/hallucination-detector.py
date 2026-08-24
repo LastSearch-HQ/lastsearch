@@ -1,20 +1,20 @@
 """
-Hallucination Detector — BrowseAI Dev Example
+Hallucination Detector — LastSearch Example
 
 Compare what a raw LLM says vs what evidence-backed research says.
 See the difference between hallucinated answers and verified ones.
 
 Usage:
-    pip install browseaidev
+    pip install lastsearch
     python hallucination-detector.py "Did India win the 2026 T20 World Cup?"
 """
 
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def detect_hallucination(query: str):
-    client = BrowseAIDev(api_key="bai_xxx")
+    client = LastSearch(api_key="ls_xxx")
 
     print(f"\n--- Hallucination Detector ---")
     print(f"Query: {query}\n")

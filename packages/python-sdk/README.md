@@ -1,19 +1,19 @@
-# browseaidev
+# lastsearch
 
-**Reliable research infrastructure for AI agents.** Python SDK for [BrowseAI Dev](https://browseai.dev) — the research layer for LangChain, CrewAI, and custom agent pipelines.
+**Reliable research infrastructure for AI agents.** Python SDK for [LastSearch](https://lastsearch.dev) — the research layer for LangChain, CrewAI, and custom agent pipelines.
 
 ## Install
 
 ```bash
-pip install browseaidev
+pip install lastsearch
 ```
 
 ## Quick Start
 
 ```python
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 
 # Research with citations
 result = client.ask("What is quantum computing?")
@@ -68,9 +68,9 @@ client.feedback(result_id=result.share_id, rating="good")
 ## Async
 
 ```python
-from browseaidev import AsyncBrowseAIDev
+from lastsearch import AsyncLastSearch
 
-async with AsyncBrowseAIDev(api_key="bai_xxx") as client:
+async with AsyncLastSearch(api_key="ls_xxx") as client:
     result = await client.ask("What is quantum computing?")
     # Thorough mode works with async too
     thorough = await client.ask("What is quantum computing?", depth="thorough")
@@ -85,9 +85,9 @@ For real-time progress events, use the streaming endpoint directly:
 ```python
 import httpx
 
-with httpx.stream("POST", "https://browseai.dev/api/browse/answer/stream",
+with httpx.stream("POST", "https://lastsearch.dev/api/browse/answer/stream",
     json={"query": "What is quantum computing?"},
-    headers={"X-API-Key": "bai_xxx"}
+    headers={"X-API-Key": "ls_xxx"}
 ) as response:
     for line in response.iter_lines():
         if line.startswith("data: "):
@@ -100,12 +100,12 @@ Events: `trace` (progress), `sources` (discovered early), `token` (streamed answ
 
 Persistent research sessions that accumulate knowledge across multiple queries. Later queries recall prior knowledge — faster, cheaper, more coherent.
 
-> **Sessions require a BrowseAI Dev API key** (`api_key="bai_xxx"`) for identity and ownership. Get a free API key at [browseai.dev/dashboard](https://browseai.dev/dashboard).
+> **Sessions require a LastSearch API key** (`api_key="ls_xxx"`) for identity and ownership. Get a free API key at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard).
 
 ```python
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 
 # Create a session
 session = client.session("wasm-research")
@@ -134,7 +134,7 @@ session = client.get_session("session-id-here")
 
 # Share with other agents
 share = session.share()
-print(share.url)  # https://browseai.dev/session/share/abc123def456
+print(share.url)  # https://lastsearch.dev/session/share/abc123def456
 
 # Another agent forks and continues the research
 forked = client.fork_session(share.share_id)
@@ -143,7 +143,7 @@ forked = client.fork_session(share.share_id)
 Async sessions work the same way:
 
 ```python
-async with AsyncBrowseAIDev(api_key="bai_xxx") as client:
+async with AsyncLastSearch(api_key="ls_xxx") as client:
     session = await client.session("my-project")
     r1 = await session.ask("What is WASM?")
     r2 = await session.ask("WASM vs JS?")
@@ -155,7 +155,7 @@ async with AsyncBrowseAIDev(api_key="bai_xxx") as client:
 
 ## Premium Features (with API Key)
 
-Users with a BrowseAI Dev API key (`bai_xxx`) get enhanced verification:
+Users with a LastSearch API key (`ls_xxx`) get enhanced verification:
 - **Semantic re-ranking** — search results re-scored by semantic query-document relevance
 - **Semantic reranking** — evidence matched by meaning, not just keywords
 - **Multi-provider search** — parallel search across multiple sources for broader coverage
@@ -166,7 +166,7 @@ Users with a BrowseAI Dev API key (`bai_xxx`) get enhanced verification:
 
 Free BAI key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough) — still works, just basic matching. Quota resets every 24 hours. Check `client.last_quota` after any API call for current usage.
 
-Sign in at [browseai.dev](https://browseai.dev) for a free BAI key to unlock premium features.
+Sign in at [lastsearch.dev](https://lastsearch.dev) for a free BAI key to unlock premium features.
 
 ## Contradictions
 
@@ -186,7 +186,7 @@ if result.contradictions:
 Use your own data sources instead of — or alongside — public web search. Supports `elasticsearch`, `confluence`, and `custom` endpoints with optional `data_retention="none"` for compliance.
 
 ```python
-from browseaidev.models import SearchProviderConfig
+from lastsearch.models import SearchProviderConfig
 
 # Using the typed model (snake_case fields)
 provider = SearchProviderConfig(
@@ -227,35 +227,35 @@ result = client.ask("Patient protocols", search_provider=SearchProviderConfig(
 ### LangChain
 
 ```bash
-pip install langchain-browseaidev
+pip install langchain-lastsearch
 ```
 
 ```python
-from langchain_browseaidev import BrowseAIDevAnswerTool, BrowseAIDevSearchTool
+from langchain_lastsearch import LastSearchAnswerTool, LastSearchSearchTool
 
-tools = [BrowseAIDevAnswerTool(api_key="bai_xxx")]
+tools = [LastSearchAnswerTool(api_key="ls_xxx")]
 ```
 
 ### CrewAI
 
 ```bash
-pip install crewai-browseaidev
+pip install crewai-lastsearch
 ```
 
 ```python
-from crewai_browseaidev import BrowseAIDevAnswerTool
+from crewai_lastsearch import LastSearchAnswerTool
 
-researcher = Agent(tools=[BrowseAIDevAnswerTool(api_key="bai_xxx")])
+researcher = Agent(tools=[LastSearchAnswerTool(api_key="ls_xxx")])
 ```
 
 ### LlamaIndex
 
 ```bash
-pip install llamaindex-browseaidev
+pip install llamaindex-lastsearch
 ```
 
 ```python
-from llamaindex_browseaidev import BrowseAIDevAnswerTool
+from llamaindex_lastsearch import LastSearchAnswerTool
 
-answer_tool = BrowseAIDevAnswerTool(api_key="bai_xxx")
+answer_tool = LastSearchAnswerTool(api_key="ls_xxx")
 ```

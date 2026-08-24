@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BrowseLogo } from "@/components/BrowseLogo";
 
-const GITHUB_EXAMPLES = "https://github.com/BrowseAI-HQ/BrowseAI-Dev/blob/main/examples";
+const GITHUB_EXAMPLES = "https://github.com/lastsearch-hq/lastsearch/blob/main/examples";
 
 const RECIPES = [
   {
@@ -41,27 +41,27 @@ const RECIPES = [
   },
   {
     title: "LangChain Agent",
-    desc: "Drop BrowseAI Dev tools into any LangChain agent. Search, ask, and extract with evidence.",
+    desc: "Drop LastSearch tools into any LangChain agent. Search, ask, and extract with evidence.",
     file: "langchain-agent.py",
-    cmd: "pip install langchain-browseaidev && python examples/langchain-agent.py",
+    cmd: "pip install langchain-lastsearch && python examples/langchain-agent.py",
     tags: ["LangChain", "Agent Framework", "Tools"],
     icon: Layers,
     github: `${GITHUB_EXAMPLES}/langchain-agent.py`,
   },
   {
     title: "CrewAI Research Team",
-    desc: "Multi-agent team: one agent researches with BrowseAI Dev, another analyzes and writes a report.",
+    desc: "Multi-agent team: one agent researches with LastSearch, another analyzes and writes a report.",
     file: "crewai-research-team.py",
-    cmd: "pip install crewai-browseaidev && python examples/crewai-research-team.py",
+    cmd: "pip install crewai-lastsearch && python examples/crewai-research-team.py",
     tags: ["CrewAI", "Multi-Agent", "Reports"],
     icon: Brain,
     github: `${GITHUB_EXAMPLES}/crewai-research-team.py`,
   },
   {
     title: "LlamaIndex Agent",
-    desc: "ReAct agent using LlamaIndex + BrowseAI Dev. Search, verify, extract, and compare — all as LlamaIndex FunctionTools.",
+    desc: "ReAct agent using LlamaIndex + LastSearch. Search, verify, extract, and compare — all as LlamaIndex FunctionTools.",
     file: "llamaindex-agent.py",
-    cmd: "pip install llamaindex-browseaidev && python examples/llamaindex-agent.py",
+    cmd: "pip install llamaindex-lastsearch && python examples/llamaindex-agent.py",
     tags: ["LlamaIndex", "ReAct Agent", "Tools"],
     icon: Layers,
     github: `${GITHUB_EXAMPLES}/llamaindex-agent.py`,
@@ -105,11 +105,11 @@ const RECIPES = [
   {
     title: "MCP Server for AI Assistants",
     desc: "Give Claude Desktop, Cursor, or Windsurf 13 research tools. Search, open, extract, answer, compare, feedback, and session memory — all via MCP.",
-    file: "npx browseai-dev",
-    cmd: "npx browseai-dev setup",
+    file: "npx lastsearch",
+    cmd: "npx lastsearch setup",
     tags: ["MCP", "Claude Desktop", "Cursor", "npm"],
     icon: Terminal,
-    github: "https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/apps/mcp",
+    github: "https://github.com/lastsearch-hq/lastsearch/tree/main/apps/mcp",
   },
 ];
 
@@ -120,7 +120,7 @@ const Recipes = () => {
     <>
     <SEO
       title="Agent Recipes — Code Examples for AI Research Agents"
-      description="Ready-to-use code recipes for building AI research agents with BrowseAI Dev. Research agents, fact-checkers, competitive analysis, and more."
+      description="Ready-to-use code recipes for building AI research agents with LastSearch. Research agents, fact-checkers, competitive analysis, and more."
       canonical="/recipes"
     />
     <div className="min-h-screen">
@@ -131,8 +131,8 @@ const Recipes = () => {
         className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-5 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
       >
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-          <img src="/logo.svg" alt="BrowseAI Dev" className="w-5 h-5" />
-          <span className="font-semibold text-sm tracking-tight">BrowseAI Dev</span>
+          <img src="/logo.svg" alt="LastSearch" className="w-5 h-5" />
+          <span className="font-semibold text-sm tracking-tight">LastSearch</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" onClick={() => navigate("/")}>
@@ -152,7 +152,7 @@ const Recipes = () => {
             <span className="hidden sm:inline">Recipes</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
-            <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
               <Github className="w-4 h-4 sm:hidden" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
@@ -178,18 +178,18 @@ const Recipes = () => {
             <span className="text-gradient text-shimmer">agent examples</span>
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Clone, install, and run. Each recipe shows a different way to use BrowseAI Dev
+            Clone, install, and run. Each recipe shows a different way to use LastSearch
             as the research layer in your agent pipeline.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
             <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary border border-border/50 terminal-card flex-1 w-full sm:w-auto">
               <Terminal className="w-4 h-4 text-accent shrink-0 animate-float" />
-              <code className="text-sm font-mono">pip install browseaidev</code>
+              <code className="text-sm font-mono">pip install lastsearch</code>
             </div>
             <span className="text-xs text-muted-foreground">or</span>
             <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary border border-border/50 terminal-card flex-1 w-full sm:w-auto">
               <Terminal className="w-4 h-4 text-accent shrink-0 animate-float" />
-              <code className="text-sm font-mono">npx browseai-dev setup</code>
+              <code className="text-sm font-mono">npx lastsearch setup</code>
             </div>
           </div>
         </motion.div>
@@ -206,7 +206,7 @@ const Recipes = () => {
           >
             <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-card border border-border hover:border-accent/20 transition-all duration-300 font-medium text-foreground text-xs sm:text-sm">Agent</span>
             <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 shrink-0 text-accent" />
-            <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 font-medium text-accent gradient-border glow-pulse text-xs sm:text-sm">BrowseAI Dev</span>
+            <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 font-medium text-accent gradient-border glow-pulse text-xs sm:text-sm">LastSearch</span>
             <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 shrink-0 text-accent" />
             <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-card border border-border hover:border-accent/20 transition-all duration-300 font-medium text-foreground text-xs sm:text-sm">Internet</span>
             <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 shrink-0 text-accent" />
@@ -277,7 +277,7 @@ const Recipes = () => {
                 Have an idea for a recipe? Open a PR or share it on Discord.
               </p>
               <Button variant="outline" size="sm" className="gap-1.5 mt-1" asChild>
-                <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
                   Contribute <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </Button>
@@ -301,8 +301,8 @@ const Recipes = () => {
             <p className="text-sm font-medium text-foreground mb-4">Python SDK</p>
             <div className="space-y-4 mb-8">
               {[
-                { step: "1", label: "Clone the repo", cmd: "git clone https://github.com/BrowseAI-HQ/BrowseAI-Dev.git && cd BrowseAI-Dev" },
-                { step: "2", label: "Install the SDK", cmd: "pip install browseaidev" },
+                { step: "1", label: "Clone the repo", cmd: "git clone https://github.com/lastsearch-hq/lastsearch.git && cd lastsearch" },
+                { step: "2", label: "Install the SDK", cmd: "pip install lastsearch" },
                 { step: "3", label: "Run a recipe", cmd: 'python examples/research-agent.py "your question here"' },
               ].map((item, i) => (
                 <motion.div
@@ -336,7 +336,7 @@ const Recipes = () => {
                 <div className="flex-1">
                   <span className="text-sm font-medium block mb-1">Run setup</span>
                   <div className="px-4 py-2.5 rounded-lg bg-secondary terminal-card overflow-x-auto">
-                    <code className="text-xs font-mono text-muted-foreground whitespace-nowrap">npx browseai-dev setup</code>
+                    <code className="text-xs font-mono text-muted-foreground whitespace-nowrap">npx lastsearch setup</code>
                   </div>
                 </div>
               </motion.div>
@@ -345,8 +345,8 @@ const Recipes = () => {
             <div className="mt-6 space-y-3">
               <div className="p-4 rounded-xl bg-accent/5 border border-accent/20 gradient-border card-lift hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
                 <p className="text-sm text-muted-foreground">
-                  <span className="text-foreground font-medium">Option 1 — BrowseAI Dev API key:</span>{" "}
-                  Log in at <a href="https://browseai.dev" className="text-accent hover:underline">browseai.dev</a>, get a <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">bai_xxx</code> key,
+                  <span className="text-foreground font-medium">Option 1 — LastSearch API key:</span>{" "}
+                  Log in at <a href="https://lastsearch.dev" className="text-accent hover:underline">lastsearch.dev</a>, get a <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">ls_xxx</code> key,
                   and use it everywhere. One key, all tools, no setup.
                 </p>
               </div>
@@ -367,11 +367,11 @@ const Recipes = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-6">
             <h2 className="text-2xl sm:text-3xl font-bold text-shimmer">Build your own agent recipe</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              BrowseAI Dev gives your agents reliable web research. Build something cool and share it with the community.
+              LastSearch gives your agents reliable web research. Build something cool and share it with the community.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button className="gap-2" asChild>
-                <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch/tree/main/examples" target="_blank" rel="noopener">
                   <Code2 className="w-3.5 h-3.5" />
                   View on GitHub
                   <ExternalLink className="w-3 h-3" />
@@ -390,11 +390,11 @@ const Recipes = () => {
       <footer className="py-12 px-6 border-t border-border">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="text-sm font-semibold">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="text-sm font-semibold">LastSearch</span>
           </div>
           <div className="flex items-center justify-center gap-4 sm:gap-6 text-xs text-muted-foreground flex-wrap">
-            <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
             <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
             <button onClick={() => navigate("/")} className="hover:text-foreground transition-colors">Home</button>
             <button onClick={() => navigate("/developers")} className="hover:text-foreground transition-colors">Developers</button>

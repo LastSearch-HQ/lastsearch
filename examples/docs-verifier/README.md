@@ -1,12 +1,12 @@
 # Docs Verifier
 
-Crawl your README or documentation, extract every factual claim, and verify each one against live web sources using BrowseAI. Flags outdated or contradicted statements.
+Crawl your README or documentation, extract every factual claim, and verify each one against live web sources using LastSearch. Flags outdated or contradicted statements.
 
 ## What it does
 
-1. **Fetches** a document from a URL (using BrowseAI's `open()`) or reads a local file
+1. **Fetches** a document from a URL (using LastSearch's `open()`) or reads a local file
 2. **Extracts** factual claims -- sentences containing numbers, dates, comparisons, version references, capability assertions, etc.
-3. **Verifies** each claim through BrowseAI's `ask()` research pipeline with evidence-backed confidence scores
+3. **Verifies** each claim through LastSearch's `ask()` research pipeline with evidence-backed confidence scores
 4. **Reports** results as a terminal table (via `rich`) and optionally as a markdown file
 
 Claims are flagged when:
@@ -23,7 +23,7 @@ pip install -r requirements.txt
 Set your API key:
 
 ```bash
-export BROWSEAI_API_KEY="bai_xxx"
+export LASTSEARCH_API_KEY="ls_xxx"
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ export BROWSEAI_API_KEY="bai_xxx"
 ### Verify a remote README
 
 ```bash
-python verify_docs.py https://raw.githubusercontent.com/BrowseAI-HQ/BrowseAI-Dev/main/README.md
+python verify_docs.py https://raw.githubusercontent.com/lastsearch-hq/lastsearch/main/README.md
 ```
 
 ### Verify a local file
@@ -71,7 +71,7 @@ python verify_docs.py ../../README.md --confidence-threshold 0.70
 ## Example output
 
 ```
-╭─ BrowseAI Docs Verifier ──────────────────────────╮
+╭─ LastSearch Docs Verifier ──────────────────────────╮
 │ Extracts factual claims from documentation and     │
 │ verifies each one.                                 │
 ╰────────────────────────────────────────────────────╯
@@ -91,7 +91,7 @@ Errors          1
 ┌────┬────────┬────────────┬──────────────────────────┬──────────────────────┐
 │ #  │ Status │ Confidence │ Claim                    │ Notes                │
 ├────┼────────┼────────────┼──────────────────────────┼──────────────────────┤
-│ 1  │ OK     │ 87%        │ BrowseAI uses a 7-fac... │ 4 source(s)          │
+│ 1  │ OK     │ 87%        │ LastSearch uses a 7-fac... │ 4 source(s)          │
 │ 2  │ OK     │ 72%        │ The verification pipe... │ 3 source(s)          │
 │ 3  │ FLAG   │ 38%        │ Supports 10,000+ doma... │ Low confidence (38%) │
 │ 4  │ OK     │ 91%        │ Licensed under Apache 2.0│ 5 source(s)          │
@@ -103,7 +103,7 @@ Flagged Claims (need attention):
   Claim: Supports 10,000+ domains in the authority database
   Reason: Low confidence (38%)
   Finding: The documentation claims 10,000+ domains but current data shows...
-  Source: BrowseAI Documentation (https://browseai.dev/developers)
+  Source: LastSearch Documentation (https://lastsearch.dev/developers)
 ```
 
 ## How claim extraction works
@@ -141,7 +141,7 @@ jobs:
       - run: pip install -r examples/docs-verifier/requirements.txt
       - run: python examples/docs-verifier/verify_docs.py README.md
         env:
-          BROWSEAI_API_KEY: ${{ secrets.BROWSEAI_API_KEY }}
+          LASTSEARCH_API_KEY: ${{ secrets.LASTSEARCH_API_KEY }}
 ```
 
 ## Architecture
@@ -151,7 +151,7 @@ source (URL or file)
        │
        ▼
   ┌─────────────┐
-  │ Fetch / Read │  ← BrowseAI open() for URLs, pathlib for local files
+  │ Fetch / Read │  ← LastSearch open() for URLs, pathlib for local files
   └──────┬──────┘
          ▼
   ┌─────────────┐
@@ -160,7 +160,7 @@ source (URL or file)
   └──────┬──────┘
          ▼
   ┌─────────────┐
-  │   Verify     │  ← BrowseAI ask() per claim (fast or thorough mode)
+  │   Verify     │  ← LastSearch ask() per claim (fast or thorough mode)
   │  Each Claim  │
   └──────┬──────┘
          ▼

@@ -1,5 +1,5 @@
 """
-Fact-Checker Bot — A Discord bot powered by BrowseAI.
+Fact-Checker Bot — A Discord bot powered by LastSearch.
 
 Verifies claims with evidence-backed research, shows confidence scores,
 sources, and contradictions.
@@ -13,7 +13,7 @@ Commands:
 import os
 
 import discord
-from browseaidev import AsyncBrowseAIDev
+from lastsearch import AsyncLastSearch
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -22,7 +22,7 @@ load_dotenv()
 
 DISCORD_TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 
-BROWSEAI_API_KEY = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
+LASTSEARCH_API_KEY = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
 
 # ── Discord client setup ──────────────────────────────────────────────────────
 
@@ -30,7 +30,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = discord.Client(intents=intents)
 
-browse = AsyncBrowseAIDev(api_key=BROWSEAI_API_KEY, timeout=120.0)
+browse = AsyncLastSearch(api_key=LASTSEARCH_API_KEY, timeout=120.0)
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -66,7 +66,7 @@ def truncate(text: str, limit: int = 1024) -> str:
 # ── Verify command ─────────────────────────────────────────────────────────────
 
 async def handle_verify(message: discord.Message, claim: str) -> None:
-    """Verify a claim using BrowseAI thorough mode and return a formatted embed."""
+    """Verify a claim using LastSearch thorough mode and return a formatted embed."""
     async with message.channel.typing():
         try:
             result = await browse.ask(claim, depth="thorough")
@@ -134,9 +134,9 @@ async def handle_verify(message: discord.Message, claim: str) -> None:
         )
 
     # Footer with share link
-    footer_text = "Powered by BrowseAI | browseai.dev"
+    footer_text = "Powered by LastSearch | lastsearch.dev"
     if result.share_id:
-        footer_text += f" | Share: browseai.dev/share/{result.share_id}"
+        footer_text += f" | Share: lastsearch.dev/share/{result.share_id}"
     embed.set_footer(text=footer_text)
 
     await message.reply(embed=embed)
@@ -197,7 +197,7 @@ async def handle_compare(message: discord.Message, claim: str) -> None:
             inline=False,
         )
 
-    embed.set_footer(text="Powered by BrowseAI | browseai.dev")
+    embed.set_footer(text="Powered by LastSearch | lastsearch.dev")
     await message.reply(embed=embed)
 
 

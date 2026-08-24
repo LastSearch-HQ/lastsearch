@@ -1,12 +1,12 @@
 """
-Streaming Research Agent — BrowseAI Example
+Streaming Research Agent — LastSearch Example
 
 Real-time progress tracking via Server-Sent Events (SSE).
 Shows pipeline steps, discovered sources, and answer tokens
 as they arrive — ideal for building responsive UIs.
 
 Usage:
-    pip install browseaidev httpx
+    pip install lastsearch httpx
     python streaming-agent.py "What are the latest breakthroughs in fusion energy?"
 """
 
@@ -15,7 +15,7 @@ import sys
 import httpx
 
 
-API_URL = "https://browseai.dev/api/browse/answer/stream"
+API_URL = "https://lastsearch.dev/api/browse/answer/stream"
 
 
 def stream_research(query: str, depth: str = "fast"):
@@ -25,7 +25,7 @@ def stream_research(query: str, depth: str = "fast"):
 
     headers = {
         "Content-Type": "application/json",
-        "X-API-Key": "bai_xxx",
+        "X-API-Key": "ls_xxx",
     }
 
     answer_tokens = []

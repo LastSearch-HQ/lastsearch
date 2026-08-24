@@ -1,4 +1,4 @@
-"""BrowseAI Dev Python client — sync and async."""
+"""LastSearch Python client — sync and async."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import httpx
 
 from .exceptions import (
     AuthenticationError,
-    BrowseAIDevError,
+    LastSearchError,
     InsufficientCreditsError,
     RateLimitError,
     ServerError,
@@ -30,15 +30,18 @@ from .models import (
     SessionAskResult,
 )
 
-DEFAULT_BASE_URL = "https://browseai.dev/api"
-DEFAULT_TIMEOUT = 60.0
+DEFAULT_BASE_URL = "https://lastsearch.dev/api"
+# Must exceed the engine's 120s function budget (deep mode can run close to it),
+# plus network margin — otherwise valid deep/thorough queries raise a false client
+# timeout while the engine actually succeeds and caches the result.
+DEFAULT_TIMEOUT = 150.0
 
 DISCLAIMER = (
     "AI-generated research for informational purposes only. "
     "Not financial, medical, legal, or professional advice. "
     "Confidence scores are algorithmic estimates, not guarantees of accuracy. "
     "Verify critical information from authoritative primary sources before acting. "
-    "See https://browseai.dev/terms"
+    "See https://lastsearch.dev/terms"
 )
 
 
@@ -67,17 +70,17 @@ def _handle_error(response: httpx.Response) -> None:
         raise ValidationError(message, status)
     if status >= 500:
         raise ServerError(message, status)
-    raise BrowseAIDevError(message, status)
+    raise LastSearchError(message, status)
 
 
-class BrowseAIDev:
-    """Synchronous BrowseAI Dev client.
+class LastSearch:
+    """Synchronous LastSearch client.
 
     Usage::
 
-        from browseaidev import BrowseAIDev
+        from lastsearch import LastSearch
 
-        client = BrowseAIDev(api_key="bai_xxx")
+        client = LastSearch(api_key="ls_xxx")
         result = client.ask("What is quantum computing?")
         print(result.answer)
     """
@@ -91,12 +94,12 @@ class BrowseAIDev:
     ):
         if not api_key:
             raise ValueError(
-                "api_key is required. Sign in and get your free API key at https://browseai.dev"
+                "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
             )
-        if not api_key.startswith("bai_"):
+        if not api_key.startswith("ls_"):
             raise ValueError(
-                "Invalid API key format — must start with 'bai_'. "
-                "Sign in and get your free API key at https://browseai.dev"
+                "Invalid API key format — must start with 'ls_'. "
+                "Sign in and get your free API key at https://lastsearch.dev"
             )
 
         self._headers = _build_headers(api_key)
@@ -108,19 +111,19 @@ class BrowseAIDev:
         )
 
     @classmethod
-    def from_config(cls, config_path: str | None = None, **kwargs: Any) -> "BrowseAIDev":
-        """Create a client from ~/.browseaidev.json (written by ``browseaidev setup``)."""
-        path = config_path or os.path.expanduser("~/.browseaidev.json")
+    def from_config(cls, config_path: str | None = None, **kwargs: Any) -> "LastSearch":
+        """Create a client from ~/.lastsearch.json (written by ``lastsearch setup``)."""
+        path = config_path or os.path.expanduser("~/.lastsearch.json")
         if not os.path.exists(path):
             raise FileNotFoundError(
-                f"No config found at {path}. Run 'browseaidev setup' first."
+                f"No config found at {path}. Run 'lastsearch setup' first."
             )
         with open(path) as f:
             config = json.load(f)
         api_key = config.get("api_key")
         if not api_key:
             raise ValueError(
-                "No api_key in config. Run 'browseaidev setup' to configure your BAI key."
+                "No api_key in config. Run 'lastsearch setup' to configure your BAI key."
             )
         return cls(api_key=api_key, **kwargs)
 
@@ -139,7 +142,7 @@ class BrowseAIDev:
         _handle_error(response)
         data = response.json()
         if not data.get("success"):
-            raise BrowseAIDevError(data.get("error", "Unknown error"))
+            raise LastSearchError(data.get("error", "Unknown error"))
         if "quota" in data:
             self._last_quota = PremiumQuota(**data["quota"])
         return data["result"]
@@ -149,7 +152,7 @@ class BrowseAIDev:
         _handle_error(response)
         data = response.json()
         if not data.get("success"):
-            raise BrowseAIDevError(data.get("error", "Unknown error"))
+            raise LastSearchError(data.get("error", "Unknown error"))
         return data["result"]
 
     def search(self, query: str, *, limit: int = 5) -> list[SearchResult]:
@@ -347,7 +350,7 @@ class BrowseAIDev:
 class SessionClient:
     """Stateful research session. Created via ``client.session("name")``."""
 
-    def __init__(self, client: BrowseAIDev, session: Session):
+    def __init__(self, client: LastSearch, session: Session):
         self._client = client
         self.session = session
 
@@ -380,7 +383,7 @@ class SessionClient:
         share_id = data.get("shareId", "")
         return {
             "share_id": share_id,
-            "url": f"https://browseai.dev/session/share/{share_id}",
+            "url": f"https://lastsearch.dev/session/share/{share_id}",
         }
 
     def delete(self) -> None:
@@ -389,19 +392,19 @@ class SessionClient:
         _handle_error(response)
         data = response.json()
         if not data.get("success"):
-            raise BrowseAIDevError(data.get("error", "Unknown error"))
+            raise LastSearchError(data.get("error", "Unknown error"))
 
 
-class AsyncBrowseAIDev:
-    """Async BrowseAI Dev client.
+class AsyncLastSearch:
+    """Async LastSearch client.
 
     Usage::
 
         import asyncio
-        from browseaidev import AsyncBrowseAIDev
+        from lastsearch import AsyncLastSearch
 
         async def main():
-            async with AsyncBrowseAIDev(api_key="bai_xxx") as client:
+            async with AsyncLastSearch(api_key="ls_xxx") as client:
                 result = await client.ask("What is quantum computing?")
                 print(result.answer)
 
@@ -417,12 +420,12 @@ class AsyncBrowseAIDev:
     ):
         if not api_key:
             raise ValueError(
-                "api_key is required. Sign in and get your free API key at https://browseai.dev"
+                "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
             )
-        if not api_key.startswith("bai_"):
+        if not api_key.startswith("ls_"):
             raise ValueError(
-                "Invalid API key format — must start with 'bai_'. "
-                "Sign in and get your free API key at https://browseai.dev"
+                "Invalid API key format — must start with 'ls_'. "
+                "Sign in and get your free API key at https://lastsearch.dev"
             )
 
         self._headers = _build_headers(api_key)
@@ -434,19 +437,19 @@ class AsyncBrowseAIDev:
         )
 
     @classmethod
-    def from_config(cls, config_path: str | None = None, **kwargs: Any) -> "AsyncBrowseAIDev":
-        """Create an async client from ~/.browseaidev.json (written by ``browseaidev setup``)."""
-        path = config_path or os.path.expanduser("~/.browseaidev.json")
+    def from_config(cls, config_path: str | None = None, **kwargs: Any) -> "AsyncLastSearch":
+        """Create an async client from ~/.lastsearch.json (written by ``lastsearch setup``)."""
+        path = config_path or os.path.expanduser("~/.lastsearch.json")
         if not os.path.exists(path):
             raise FileNotFoundError(
-                f"No config found at {path}. Run 'browseaidev setup' first."
+                f"No config found at {path}. Run 'lastsearch setup' first."
             )
         with open(path) as f:
             config = json.load(f)
         api_key = config.get("api_key")
         if not api_key:
             raise ValueError(
-                "No api_key in config. Run 'browseaidev setup' to configure your BAI key."
+                "No api_key in config. Run 'lastsearch setup' to configure your BAI key."
             )
         return cls(api_key=api_key, **kwargs)
 
@@ -465,7 +468,7 @@ class AsyncBrowseAIDev:
         _handle_error(response)
         data = response.json()
         if not data.get("success"):
-            raise BrowseAIDevError(data.get("error", "Unknown error"))
+            raise LastSearchError(data.get("error", "Unknown error"))
         if "quota" in data:
             self._last_quota = PremiumQuota(**data["quota"])
         return data["result"]
@@ -475,7 +478,7 @@ class AsyncBrowseAIDev:
         _handle_error(response)
         data = response.json()
         if not data.get("success"):
-            raise BrowseAIDevError(data.get("error", "Unknown error"))
+            raise LastSearchError(data.get("error", "Unknown error"))
         return data["result"]
 
     async def search(self, query: str, *, limit: int = 5) -> list[SearchResult]:
@@ -617,7 +620,7 @@ class AsyncBrowseAIDev:
 class AsyncSessionClient:
     """Async stateful research session."""
 
-    def __init__(self, client: AsyncBrowseAIDev, session: Session):
+    def __init__(self, client: AsyncLastSearch, session: Session):
         self._client = client
         self.session = session
 
@@ -650,7 +653,7 @@ class AsyncSessionClient:
         share_id = data.get("shareId", "")
         return {
             "share_id": share_id,
-            "url": f"https://browseai.dev/session/share/{share_id}",
+            "url": f"https://lastsearch.dev/session/share/{share_id}",
         }
 
     async def delete(self) -> None:
@@ -659,4 +662,4 @@ class AsyncSessionClient:
         _handle_error(response)
         data = response.json()
         if not data.get("success"):
-            raise BrowseAIDevError(data.get("error", "Unknown error"))
+            raise LastSearchError(data.get("error", "Unknown error"))

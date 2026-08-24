@@ -1,11 +1,11 @@
 # Debate Settler
 
-Settle arguments with evidence, not opinions. Two people submit opposing claims, BrowseAI researches both using thorough mode, and declares a winner based on evidence strength.
+Settle arguments with evidence, not opinions. Two people submit opposing claims, LastSearch researches both using thorough mode, and declares a winner based on evidence strength.
 
 ## How it works
 
 1. You enter two opposing claims (Side A and Side B)
-2. BrowseAI researches both using `depth="thorough"` — this triggers automatic query rephrasing and retry when initial confidence is low
+2. LastSearch researches both using `depth="thorough"` — this triggers automatic query rephrasing and retry when initial confidence is low
 3. For each side, the tool evaluates:
    - **Confidence score** — evidence-based algorithm (not LLM self-assessment)
    - **Source count** — How many sources back the claim
@@ -24,7 +24,7 @@ pip install -r requirements.txt
 Set your API key:
 
 ```bash
-export BROWSEAI_API_KEY=bai_xxx
+export LASTSEARCH_API_KEY=ls_xxx
 ```
 
 Or the script will prompt you for it.
@@ -103,7 +103,7 @@ The composite score (0-100) breaks down as:
 
 | Factor | Max points | How it's calculated |
 |--------|-----------|---------------------|
-| Confidence | 40 | BrowseAI's evidence-based confidence score |
+| Confidence | 40 | LastSearch's evidence-based confidence score |
 | Sources | 20 | Number of sources (capped at 10) |
 | Verification rate | 20 | Ratio of verified to total claims |
 | Domain diversity | 15 | Unique domains (capped at 8) |
@@ -116,7 +116,7 @@ A base of 5 points is added before the contradiction penalty, so a side with no 
 ```
 ╭─────────────────────────────────────────────╮
 │          DEBATE SETTLER                     │
-│   Powered by BrowseAI — Evidence-backed     │
+│   Powered by LastSearch — Evidence-backed     │
 ╰─────────────────────────────────────────────╯
 
 ───────────── Researching Both Sides ─────────────
@@ -165,9 +165,9 @@ Researching Side B: Coffee is bad for health
 ## Requirements
 
 - Python 3.10+
-- A [BrowseAI API key](https://browseai.dev) (`bai_xxx` prefix)
-- Dependencies: `browseaidev`, `rich`
+- A [LastSearch API key](https://lastsearch.dev) (`ls_xxx` prefix)
+- Dependencies: `lastsearch`, `rich`
 
 ## License
 
-Apache 2.0 — part of the [BrowseAI Dev](https://github.com/BrowseAI-HQ/BrowseAI-Dev) project.
+Apache 2.0 — part of the [LastSearch](https://github.com/lastsearch-hq/lastsearch) project.

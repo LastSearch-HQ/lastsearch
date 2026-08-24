@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Docs Verifier — Crawl documentation, extract factual claims, verify each one.
 
-Uses BrowseAI to fetch remote docs and verify claims against live web sources.
+Uses LastSearch to fetch remote docs and verify claims against live web sources.
 Flags outdated or contradicted statements with confidence scores.
 
 Usage:
     # Verify a remote README
-    python verify_docs.py https://github.com/BrowseAI-HQ/BrowseAI-Dev/blob/main/README.md
+    python verify_docs.py https://github.com/lastsearch-hq/lastsearch/blob/main/README.md
 
     # Verify a local markdown file
     python verify_docs.py ./README.md
@@ -28,7 +28,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urlparse
 
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 from rich.console import Console
 from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
@@ -158,8 +158,8 @@ class VerificationReport:
 CONFIDENCE_THRESHOLD = 0.50
 
 
-def verify_claim(client: BrowseAIDev, claim: str, depth: str = "fast") -> ClaimResult:
-    """Verify a single claim using BrowseAI's ask() endpoint."""
+def verify_claim(client: LastSearch, claim: str, depth: str = "fast") -> ClaimResult:
+    """Verify a single claim using LastSearch's ask() endpoint."""
     result = ClaimResult(claim=claim)
 
     query = f'Is the following statement accurate and up-to-date? "{claim}"'
@@ -196,7 +196,7 @@ def verify_claim(client: BrowseAIDev, claim: str, depth: str = "fast") -> ClaimR
     return result
 
 
-def fetch_document(client: BrowseAIDev, source: str) -> str:
+def fetch_document(client: LastSearch, source: str) -> str:
     """Fetch document content from a URL or local file path."""
     parsed = urlparse(source)
 
@@ -218,7 +218,7 @@ def fetch_document(client: BrowseAIDev, source: str) -> str:
 
 
 def run_verification(
-    client: BrowseAIDev,
+    client: LastSearch,
     source: str,
     depth: str = "fast",
     max_claims: int | None = None,
@@ -422,11 +422,11 @@ def export_markdown(report: VerificationReport, output_path: str) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Verify factual claims in documentation using BrowseAI.",
+        description="Verify factual claims in documentation using LastSearch.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python verify_docs.py https://raw.githubusercontent.com/BrowseAI-HQ/BrowseAI-Dev/main/README.md
+  python verify_docs.py https://raw.githubusercontent.com/lastsearch-hq/lastsearch/main/README.md
   python verify_docs.py ./README.md --depth thorough
   python verify_docs.py ./docs/api.md --output report.md --max-claims 10
         """,
@@ -435,7 +435,7 @@ Examples:
     parser.add_argument(
         "--api-key",
         default=None,
-        help="BrowseAI API key (or set BROWSEAI_API_KEY env var)",
+        help="LastSearch API key (or set LASTSEARCH_API_KEY env var)",
     )
     parser.add_argument(
         "--depth",
@@ -469,18 +469,18 @@ Examples:
 
     # Resolve API key
     import os
-    api_key = args.api_key or os.environ.get("BROWSEAI_API_KEY")
+    api_key = args.api_key or os.environ.get("LASTSEARCH_API_KEY")
     if not api_key:
-        console.print("[red]Error: Provide --api-key or set BROWSEAI_API_KEY env var[/red]")
+        console.print("[red]Error: Provide --api-key or set LASTSEARCH_API_KEY env var[/red]")
         sys.exit(1)
 
     console.print(Panel(
-        "[bold blue]BrowseAI Docs Verifier[/bold blue]\n"
+        "[bold blue]LastSearch Docs Verifier[/bold blue]\n"
         "Extracts factual claims from documentation and verifies each one.",
         border_style="blue",
     ))
 
-    client = BrowseAIDev(api_key=api_key)
+    client = LastSearch(api_key=api_key)
 
     report = run_verification(
         client=client,

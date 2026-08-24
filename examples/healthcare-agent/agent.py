@@ -1,24 +1,24 @@
 """
-Healthcare Agent — BrowseAI Dev Example
+Healthcare Agent — LastSearch Example
 
 Verifies medical claims using evidence-backed research with contradiction
 detection. Uses thorough mode to cross-check findings across multiple
 medical sources, ensuring claims are supported by current evidence.
 
 Usage:
-    pip install browseaidev
-    BROWSEAI_API_KEY=bai_xxx python agent.py
-    BROWSEAI_API_KEY=bai_xxx python agent.py "Is intermittent fasting safe for diabetics?"
+    pip install lastsearch
+    LASTSEARCH_API_KEY=ls_xxx python agent.py
+    LASTSEARCH_API_KEY=ls_xxx python agent.py "Is intermittent fasting safe for diabetics?"
 """
 
 import os
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def verify_medical_claim(query: str):
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     print(f"\nHealthcare Research: {query}\n")
     print("Running thorough verification (cross-checking multiple sources)...\n")

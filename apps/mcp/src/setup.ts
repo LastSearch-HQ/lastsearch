@@ -32,27 +32,27 @@ function getConfigPath(): string {
 
 export async function runSetup() {
   console.log(`
-  browseai-dev setup
+  lastsearch setup
   ================
-  Configure browseai-dev for Claude Desktop / Cursor / Windsurf
+  Configure lastsearch for Claude Desktop / Cursor / Windsurf
 `);
 
   const browseKey = await ask(
-    "  BrowseAI Dev API key (get one at https://browseai.dev/dashboard): "
+    "  LastSearch API key (get one at https://lastsearch.dev/dashboard): "
   );
 
   if (!browseKey.trim()) {
-    console.log("\n  BrowseAI Dev API key is required. Get one at https://browseai.dev/dashboard\n");
+    console.log("\n  LastSearch API key is required. Get one at https://lastsearch.dev/dashboard\n");
     process.exit(1);
   }
 
-  const mcpEnv: Record<string, string> = { BROWSE_API_KEY: browseKey.trim() };
+  const mcpEnv: Record<string, string> = { LASTSEARCH_API_KEY: browseKey.trim() };
 
   rl.close();
 
   const mcpEntry = {
     command: "npx",
-    args: ["-y", "browseai-dev"],
+    args: ["-y", "lastsearch"],
     env: mcpEnv,
   };
 
@@ -73,23 +73,23 @@ export async function runSetup() {
     mkdirSync(dir, { recursive: true });
   }
 
-  config.mcpServers["browseai-dev"] = mcpEntry;
+  config.mcpServers["lastsearch"] = mcpEntry;
   writeFileSync(configPath, JSON.stringify(config, null, 2));
 
   console.log(`
-  Done! browseai-dev has been configured.
+  Done! lastsearch has been configured.
 
   Next steps:
     1. Restart Claude Desktop
-    2. You should see "browseai-dev" in the MCP tools list
-    3. Try asking: "Use browse_answer to explain quantum computing"
+    2. You should see "lastsearch" in the MCP tools list
+    3. Try asking: "Use answer to explain quantum computing"
 
   Available tools:
-    browse_search    - Search the web
-    browse_open      - Fetch and parse a page
-    browse_extract   - Extract knowledge from a page
-    browse_answer    - Full deep research pipeline
-    browse_compare   - Compare raw LLM vs evidence-backed answer
+    search    - Search the web
+    open      - Fetch and parse a page
+    extract   - Extract knowledge from a page
+    answer    - Full deep research pipeline
+    compare   - Compare raw LLM vs evidence-backed answer
 
   Config written to: ${configPath}
 `);

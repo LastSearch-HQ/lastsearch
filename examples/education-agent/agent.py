@@ -1,24 +1,24 @@
 """
-Education Agent — BrowseAI Dev Example
+Education Agent — LastSearch Example
 
 A research assistant for students and researchers. Uses deep mode to
 explore complex questions with iterative gap analysis, providing
 evidence-backed answers with full citations for academic use.
 
 Usage:
-    pip install browseaidev
-    BROWSEAI_API_KEY=bai_xxx python agent.py
-    BROWSEAI_API_KEY=bai_xxx python agent.py "What was before the Big Bang?"
+    pip install lastsearch
+    LASTSEARCH_API_KEY=ls_xxx python agent.py
+    LASTSEARCH_API_KEY=ls_xxx python agent.py "What was before the Big Bang?"
 """
 
 import os
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def research_question(query: str):
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     print(f"\nResearch Question: {query}\n")
     print("Running deep research (multi-step with gap analysis)...\n")

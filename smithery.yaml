@@ -9,7 +9,7 @@ startCommand:
     properties:
       browseApiKey:
         type: string
-        description: BrowseAI Dev API key (get one at https://browseai.dev/dashboard)
+        description: LastSearch API key (get one at https://lastsearch.dev/dashboard)
   commandFunction:
     |-
-    (config) => ({ command: 'node', args: ['dist/index.js'], env: { BROWSE_API_KEY: config.browseApiKey || '' } })
+    (config) => ({ command: 'node', args: ['dist/index.js'], env: { LASTSEARCH_API_KEY: config.browseApiKey || '' } })

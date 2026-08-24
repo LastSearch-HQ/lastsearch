@@ -1,18 +1,18 @@
-# BrowseAI Dev
+# LastSearch
 
 > Research infrastructure for AI agents. Real-time web search with evidence-backed citations and confidence scores.
 
-BrowseAI Dev gives AI agents structured, verifiable web research. Unlike chat-based search engines, it returns JSON with extracted claims, cited sources, confidence scores, and contradiction detection — designed for programmatic evaluation by agents.
+LastSearch gives AI agents structured, verifiable web research. Unlike chat-based search engines, it returns JSON with extracted claims, cited sources, confidence scores, and contradiction detection — designed for programmatic evaluation by agents.
 
 ## Available As
-- MCP Server: `npx browseai-dev` (13 tools)
-- REST API: `https://browseai.dev/api/browse/*`
-- Python SDK: `pip install browseaidev`
-- LangChain: `pip install langchain-browseaidev`
-- CrewAI: `pip install crewai-browseaidev`
-- LlamaIndex: `pip install llamaindex-browseaidev`
+- MCP Server: `npx lastsearch` (13 tools)
+- REST API: `https://lastsearch.dev/api/browse/*`
+- Python SDK: `pip install lastsearch`
+- LangChain: `pip install langchain-lastsearch`
+- CrewAI: `pip install crewai-lastsearch`
+- LlamaIndex: `pip install llamaindex-lastsearch`
 
-Previously known as `browse-ai` (npm) and `browseai` (PyPI) — renamed to `browseai-dev` and `browseaidev`. The old names still work and redirect to the new packages.
+Previously known as `lastsearch` (npm) and `lastsearch` (PyPI) — renamed to `lastsearch` and `lastsearch`. The old names still work and redirect to the new packages.
 
 ## Key Capabilities
 - **Search**: Web search returning ranked results
@@ -37,16 +37,16 @@ Previously known as `browse-ai` (npm) and `browseai` (PyPI) — renamed to `brow
 Not LLM self-assessed. Computed from: verification rate, domain authority, source count, consensus score, domain diversity, claim grounding, source recency, citation depth. Contradiction penalty applied.
 
 ## Links
-- Website: https://browseai.dev
-- Docs: https://browseai.dev/docs
-- GitHub: https://github.com/BrowseAI-HQ/BrowseAI-Dev
-- npm: https://www.npmjs.com/package/browseai-dev (renamed from browse-ai, old name still works)
-- PyPI: https://pypi.org/project/browseaidev/ (renamed from browseai, old name still works)
-- LangChain: https://pypi.org/project/langchain-browseaidev/
-- CrewAI: https://pypi.org/project/crewai-browseaidev/
-- LlamaIndex: https://pypi.org/project/llamaindex-browseaidev/
-- Agent Skills: https://github.com/BrowseAI-HQ/browseAIDev_Skills
+- Website: https://lastsearch.dev
+- Docs: https://lastsearch.dev/docs
+- GitHub: https://github.com/lastsearch-hq/lastsearch
+- npm: https://www.npmjs.com/package/lastsearch (renamed from lastsearch, old name still works)
+- PyPI: https://pypi.org/project/lastsearch/ (renamed from lastsearch, old name still works)
+- LangChain: https://pypi.org/project/langchain-lastsearch/
+- CrewAI: https://pypi.org/project/crewai-lastsearch/
+- LlamaIndex: https://pypi.org/project/llamaindex-lastsearch/
+- Agent Skills: https://github.com/lastsearch-hq/lastsearch-skills
 - Discord: https://discord.gg/ubAuT4YQsT
 
 ## Optional
-- [Full documentation](https://browseai.dev/llms-full.txt)
+- [Full documentation](https://lastsearch.dev/llms-full.txt)

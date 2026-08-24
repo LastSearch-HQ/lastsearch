@@ -65,15 +65,15 @@ const Docs = () => {
     <>
     <SEO
       title="Documentation — API Reference, Verification Pipeline, Confidence Scoring"
-      description="Complete API docs for BrowseAI Dev's Grounded Intelligence. Learn about the verification pipeline, confidence scoring algorithm, thorough mode, domain authority, and how to integrate with MCP, REST API, or Python SDK."
+      description="Complete API docs for LastSearch's Grounded Intelligence. Learn about the verification pipeline, confidence scoring algorithm, thorough mode, domain authority, and how to integrate with MCP, REST API, or Python SDK."
       canonical="/docs"
       structuredData={{
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "BrowseAI Dev Documentation",
-        "description": "API reference and technical documentation for BrowseAI Dev research infrastructure.",
-        "url": "https://browseai.dev/docs",
-        "author": { "@type": "Organization", "name": "BrowseAI Dev" },
+        "headline": "LastSearch Documentation",
+        "description": "API reference and technical documentation for LastSearch research infrastructure.",
+        "url": "https://lastsearch.dev/docs",
+        "author": { "@type": "Organization", "name": "LastSearch" },
       }}
     />
     <div className="min-h-screen">
@@ -84,8 +84,8 @@ const Docs = () => {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-5 h-5" />
-            <span className="font-semibold text-sm tracking-tight">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-5 h-5" />
+            <span className="font-semibold text-sm tracking-tight">LastSearch</span>
           </div>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
@@ -98,7 +98,7 @@ const Docs = () => {
             <span className="hidden sm:inline">Developers</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
-            <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
               <Github className="w-4 h-4 sm:hidden" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
@@ -128,9 +128,9 @@ const Docs = () => {
           {/* Hero */}
           <div className="relative grid-bg grid-bg-fade rounded-2xl px-6 py-10 -mx-6">
             <Badge variant="outline" className="text-xs font-normal mb-4">Documentation</Badge>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">How BrowseAI Dev Works</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">How LastSearch Works</h1>
             <p className="text-muted-foreground max-w-2xl leading-relaxed">
-              BrowseAI Dev's Grounded Intelligence gives AI agents reliable web research with evidence-backed citations.
+              LastSearch's Grounded Intelligence gives AI agents reliable web research with evidence-backed citations.
               This page explains every feature — how it works, when to use it, and how to integrate it.
             </p>
           </div>
@@ -158,7 +158,7 @@ const Docs = () => {
           {/* Thorough Mode */}
           <Section id="thorough-mode" title="Thorough Mode" icon={Zap}>
             <p>
-              By default, BrowseAI Dev runs in <strong className="text-foreground">fast mode</strong> — a single search-fetch-extract pass.
+              By default, LastSearch runs in <strong className="text-foreground">fast mode</strong> — a single search-fetch-extract pass.
               For important queries where accuracy matters more than speed, use <strong className="text-foreground">thorough mode</strong>.
             </p>
 
@@ -183,14 +183,14 @@ const Docs = () => {
 
             <h4 className="text-sm font-semibold text-foreground pt-2">Usage</h4>
 
-            <CodeBlock label="REST API">{`curl -X POST https://browseai.dev/api/browse/answer \\
+            <CodeBlock label="REST API">{`curl -X POST https://lastsearch.dev/api/browse/answer \\
   -H "Content-Type: application/json" \\
-  -H "Authorization: Bearer bai_xxx" \\
+  -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "What is quantum computing?", "depth": "thorough"}'`}</CodeBlock>
 
-            <CodeBlock label="Python SDK">{`from browseaidev import BrowseAIDev
+            <CodeBlock label="Python SDK">{`from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 
 # Fast (default)
 result = client.ask("What is quantum computing?")
@@ -198,7 +198,7 @@ result = client.ask("What is quantum computing?")
 # Thorough — auto-retries if confidence < 60%
 result = client.ask("What is quantum computing?", depth="thorough")`}</CodeBlock>
 
-            <CodeBlock label="MCP (Claude Desktop)">{`Ask Claude: "Use browse_answer with depth thorough to research quantum computing"`}</CodeBlock>
+            <CodeBlock label="MCP (Claude Desktop)">{`Ask Claude: "Use answer with depth thorough to research quantum computing"`}</CodeBlock>
 
             <CodeBlock label="Website">{`Toggle "Fast Mode" → "Thorough Mode" below the search bar, then search.
 Or append &depth=thorough to the results URL.`}</CodeBlock>
@@ -229,7 +229,7 @@ Or append &depth=thorough to the results URL.`}</CodeBlock>
               <h4 className="text-sm font-semibold text-foreground mb-2">Quota &amp; requirements</h4>
               <ul className="list-disc list-inside space-y-1 text-xs">
                 <li>Deep mode costs <strong>3x</strong> a normal query against your premium quota</li>
-                <li>Requires a BrowseAI API key (<code className="bg-secondary px-1 rounded">bai_xxx</code>)</li>
+                <li>Requires a LastSearch API key (<code className="bg-secondary px-1 rounded">ls_xxx</code>)</li>
                 <li>Falls back to thorough mode if premium quota is exceeded</li>
                 <li>Latency: 10-30s depending on how many follow-up rounds are needed</li>
               </ul>
@@ -252,14 +252,14 @@ Or append &depth=thorough to the results URL.`}</CodeBlock>
 
             <h4 className="text-sm font-semibold text-foreground pt-2">Usage</h4>
 
-            <CodeBlock label="REST API">{`curl -X POST https://browseai.dev/api/browse/answer \\
+            <CodeBlock label="REST API">{`curl -X POST https://lastsearch.dev/api/browse/answer \\
   -H "Content-Type: application/json" \\
-  -H "Authorization: Bearer bai_xxx" \\
+  -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "Compare RISC-V vs ARM for edge AI inference", "depth": "deep"}'`}</CodeBlock>
 
-            <CodeBlock label="Python SDK">{`from browseaidev import BrowseAIDev
+            <CodeBlock label="Python SDK">{`from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 
 # Deep — iterative research with gap analysis
 result = client.ask(
@@ -271,11 +271,11 @@ result = client.ask(
 for step in result.reasoning_steps:
     print(f"Step {step['step']}: {step['query']} → {step['confidence']:.0%}")`}</CodeBlock>
 
-            <CodeBlock label="MCP (Claude Desktop)">{`Ask Claude: "Use browse_answer with depth deep to compare RISC-V vs ARM for edge AI"`}</CodeBlock>
+            <CodeBlock label="MCP (Claude Desktop)">{`Ask Claude: "Use answer with depth deep to compare RISC-V vs ARM for edge AI"`}</CodeBlock>
 
-            <CodeBlock label="Streaming (SSE)">{`curl -N -X POST https://browseai.dev/api/browse/answer/stream \\
+            <CodeBlock label="Streaming (SSE)">{`curl -N -X POST https://lastsearch.dev/api/browse/answer/stream \\
   -H "Content-Type: application/json" \\
-  -H "Authorization: Bearer bai_xxx" \\
+  -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "Compare RISC-V vs ARM for edge AI", "depth": "deep"}'
 
 # Emits reasoning_step events as research progresses:
@@ -313,9 +313,9 @@ for step in result.reasoning_steps:
 
             <h4 className="text-sm font-semibold text-foreground pt-2">Usage</h4>
 
-            <CodeBlock label="Python SDK">{`from browseaidev import BrowseAIDev
+            <CodeBlock label="Python SDK">{`from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 
 # Create a session
 session = client.session("quantum-research")
@@ -332,22 +332,22 @@ print(f"Recalled: {r2.session.recalled_claims}")
 knowledge = session.knowledge()`}</CodeBlock>
 
             <CodeBlock label="REST API">{`# Create session
-curl -X POST https://browseai.dev/api/session \\
-  -H "Authorization: Bearer bai_xxx" \\
+curl -X POST https://lastsearch.dev/api/session \\
+  -H "Authorization: Bearer ls_xxx" \\
   -d '{"name": "quantum-research"}'
 # Returns: { "success": true, "result": { "id": "abc123", "name": "quantum-research" } }
 
 # Ask within session
-curl -X POST https://browseai.dev/api/session/abc123/ask \\
-  -H "Authorization: Bearer bai_xxx" \\
+curl -X POST https://lastsearch.dev/api/session/abc123/ask \\
+  -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "What is quantum entanglement?"}'
 
 # Recall without new search
-curl -X POST https://browseai.dev/api/session/abc123/recall \\
+curl -X POST https://lastsearch.dev/api/session/abc123/recall \\
   -d '{"query": "entanglement"}'
 
 # Export knowledge
-curl https://browseai.dev/api/session/abc123/knowledge`}</CodeBlock>
+curl https://lastsearch.dev/api/session/abc123/knowledge`}</CodeBlock>
 
             <CodeBlock label="MCP (Claude Desktop)">{`Ask Claude: "Create a research session called quantum-research"
 Then: "In the quantum-research session, what is quantum entanglement?"
@@ -368,11 +368,11 @@ Then: "How is entanglement used in computing?" — prior findings are recalled a
             <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20">
               <h4 className="text-sm font-semibold text-foreground mb-1">API key required</h4>
               <p className="text-xs">
-                Sessions require a BrowseAI Dev API key (<code className="bg-secondary px-1 rounded">bai_xxx</code>) for identity and ownership.
-                Get a free key at <a href="https://browseai.dev/dashboard" className="text-accent hover:underline">browseai.dev/dashboard</a>.
-                For MCP, set <code className="bg-secondary px-1 rounded">BROWSE_API_KEY</code> env var.
-                For Python SDK, pass <code className="bg-secondary px-1 rounded">api_key="bai_xxx"</code>.
-                For REST API, use <code className="bg-secondary px-1 rounded">Authorization: Bearer bai_xxx</code>.
+                Sessions require a LastSearch API key (<code className="bg-secondary px-1 rounded">ls_xxx</code>) for identity and ownership.
+                Get a free key at <a href="https://lastsearch.dev/dashboard" className="text-accent hover:underline">lastsearch.dev/dashboard</a>.
+                For MCP, set <code className="bg-secondary px-1 rounded">LASTSEARCH_API_KEY</code> env var.
+                For Python SDK, pass <code className="bg-secondary px-1 rounded">api_key="ls_xxx"</code>.
+                For REST API, use <code className="bg-secondary px-1 rounded">Authorization: Bearer ls_xxx</code>.
               </p>
             </div>
 
@@ -384,7 +384,7 @@ Then: "How is entanglement used in computing?" — prior findings are recalled a
 
             <CodeBlock label="Python SDK">{`# Share a session
 share = session.share()
-print(share.url)  # https://browseai.dev/session/share/abc123def456
+print(share.url)  # https://lastsearch.dev/session/share/abc123def456
 
 # Another agent forks and continues
 forked = client.fork_session(share.share_id)
@@ -392,16 +392,16 @@ forked_session = client.session(forked.session.name)
 forked_session.ask("What about dark energy?")`}</CodeBlock>
 
             <CodeBlock label="REST API">{`# Share
-curl -X POST https://browseai.dev/api/session/abc123/share \\
-  -H "Authorization: Bearer bai_xxx"
+curl -X POST https://lastsearch.dev/api/session/abc123/share \\
+  -H "Authorization: Bearer ls_xxx"
 # Returns: { "shareId": "abc123def456" }
 
 # View shared session (public, no auth)
-curl https://browseai.dev/api/session/share/abc123def456
+curl https://lastsearch.dev/api/session/share/abc123def456
 
 # Fork into your account
-curl -X POST https://browseai.dev/api/session/share/abc123def456/fork \\
-  -H "Authorization: Bearer bai_xxx"`}</CodeBlock>
+curl -X POST https://lastsearch.dev/api/session/share/abc123def456/fork \\
+  -H "Authorization: Bearer ls_xxx"`}</CodeBlock>
 
             <CodeBlock label="MCP">{`Ask Claude: "Share my quantum-research session"
 → Returns a share URL
@@ -529,7 +529,7 @@ Another agent: "Fork the shared session abc123def456"
             </p>
             <p>
               Curated tier scores are trusted initially. As evidence accumulates for a domain,
-              its real verification rate gradually takes over. The more your agents use BrowseAI Dev, the more
+              its real verification rate gradually takes over. The more your agents use LastSearch, the more
               accurate future results become.
             </p>
           </Section>
@@ -598,9 +598,9 @@ Another agent: "Fork the shared session abc123def456"
             </div>
 
             <h4 className="text-sm font-semibold text-foreground pt-4">Python SDK</h4>
-            <CodeBlock label="pip install browseaidev">{`from browseaidev import BrowseAIDev
+            <CodeBlock label="pip install lastsearch">{`from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 
 # Full pipeline
 result = client.ask("What is quantum computing?")
@@ -619,34 +619,34 @@ r = session.ask("What is quantum computing?")
 knowledge = session.knowledge()`}</CodeBlock>
 
             <h4 className="text-sm font-semibold text-foreground pt-4">Framework Integrations</h4>
-            <CodeBlock label="pip install langchain-browseaidev">{`from langchain_browseaidev import BrowseAIDevAnswerTool
+            <CodeBlock label="pip install langchain-lastsearch">{`from langchain_lastsearch import LastSearchAnswerTool
 
-tool = BrowseAIDevAnswerTool(api_key="bai_xxx")
+tool = LastSearchAnswerTool(api_key="ls_xxx")
 result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"})
 
-# 4 tools: BrowseAIDevSearchTool, BrowseAIDevAnswerTool,
-#           BrowseAIDevExtractTool, BrowseAIDevCompareTool`}</CodeBlock>
+# 4 tools: LastSearchSearchTool, LastSearchAnswerTool,
+#           LastSearchExtractTool, LastSearchCompareTool`}</CodeBlock>
             <p>
-              Also available: <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">pip install crewai-browseaidev</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">pip install llamaindex-browseaidev</code>
+              Also available: <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">pip install crewai-lastsearch</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">pip install llamaindex-lastsearch</code>
             </p>
 
             <h4 className="text-sm font-semibold text-foreground pt-4">MCP Server</h4>
-            <CodeBlock label="Setup">{`npx browseai-dev setup`}</CodeBlock>
+            <CodeBlock label="Setup">{`npx lastsearch setup`}</CodeBlock>
             <p>
-              13 tools: <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_search</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_open</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_extract</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_answer</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_compare</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_clarity</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_feedback</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_session_create</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_session_ask</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_session_recall</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_session_share</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_session_knowledge</code>,{" "}
-              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">browse_session_fork</code>.
+              13 tools: <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">search</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">open</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">extract</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">answer</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">compare</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">clarity</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">feedback</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">session_create</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">session_ask</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">session_recall</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">session_share</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">session_knowledge</code>,{" "}
+              <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">session_fork</code>.
               Works with Claude Desktop, Cursor, and Windsurf.
             </p>
 
@@ -661,8 +661,8 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/50">
-                  <tr><td className="py-2 pr-4">API Key (Free)</td><td className="py-2 pr-4"><code className="bg-secondary px-1 rounded">Authorization: Bearer bai_xxx</code></td><td className="py-2">100 queries/day + sessions</td></tr>
-                  <tr><td className="py-2 pr-4">API Key (Pro)</td><td className="py-2 pr-4"><code className="bg-secondary px-1 rounded">Authorization: Bearer bai_xxx</code></td><td className="py-2">Unlimited + priority</td></tr>
+                  <tr><td className="py-2 pr-4">API Key (Free)</td><td className="py-2 pr-4"><code className="bg-secondary px-1 rounded">Authorization: Bearer ls_xxx</code></td><td className="py-2">100 queries/day + sessions</td></tr>
+                  <tr><td className="py-2 pr-4">API Key (Pro)</td><td className="py-2 pr-4"><code className="bg-secondary px-1 rounded">Authorization: Bearer ls_xxx</code></td><td className="py-2">Unlimited + priority</td></tr>
                   <tr><td className="py-2 pr-4">Demo</td><td className="py-2 pr-4">No auth</td><td className="py-2">1 query/hour per IP</td></tr>
                 </tbody>
               </table>
@@ -672,9 +672,9 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
           {/* Hosted vs Self-Hosted */}
           <Section id="hosted-vs-self" title="Hosted vs Self-Hosted" icon={Cloud}>
             <p>
-              BrowseAI Dev follows an open-core model. The SDKs, MCP server, and frontend are Apache 2.0 licensed.
+              LastSearch follows an open-core model. The SDKs, MCP server, and frontend are Apache 2.0 licensed.
               The verification engine runs as a hosted service at{" "}
-              <a href="https://browseai.dev" className="text-accent hover:underline">browseai.dev</a>.
+              <a href="https://lastsearch.dev" className="text-accent hover:underline">lastsearch.dev</a>.
               Here's what the hosted service provides:
             </p>
 
@@ -683,7 +683,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 <thead>
                   <tr className="border-b border-border">
                     <th className="text-left py-2 pr-4 font-semibold text-foreground">Feature</th>
-                    <th className="text-left py-2 pr-4 font-semibold text-foreground">Hosted (browseai.dev)</th>
+                    <th className="text-left py-2 pr-4 font-semibold text-foreground">Hosted (lastsearch.dev)</th>
                     <th className="text-left py-2 font-semibold text-foreground">Self-Hosted</th>
                   </tr>
                 </thead>
@@ -693,7 +693,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                   <tr><td className="py-2 pr-4">Accuracy over time</td><td className="py-2 pr-4 text-accent">Gets smarter with every query</td><td className="py-2">Same accuracy forever</td></tr>
                   <tr><td className="py-2 pr-4">Updates</td><td className="py-2 pr-4 text-accent">Automatic — new algorithms, domains, features</td><td className="py-2">Manual git pull</td></tr>
                   <tr><td className="py-2 pr-4">Infrastructure</td><td className="py-2 pr-4 text-accent">Zero ops — we handle scaling, uptime, monitoring</td><td className="py-2">You manage everything</td></tr>
-                  <tr><td className="py-2 pr-4">API key management</td><td className="py-2 pr-4 text-accent">One BrowseAI Dev key bundles all services</td><td className="py-2">Configure search and LLM provider keys yourself</td></tr>
+                  <tr><td className="py-2 pr-4">API key management</td><td className="py-2 pr-4 text-accent">One LastSearch key bundles all services</td><td className="py-2">Configure search and LLM provider keys yourself</td></tr>
                   <tr><td className="py-2 pr-4">Pro features (coming)</td><td className="py-2 pr-4 text-accent">Multi-model verification, priority queue, 15+ sources</td><td className="py-2">Not available</td></tr>
                 </tbody>
               </table>
@@ -719,7 +719,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
           {/* Query Tips */}
           <Section id="query-tips" title="Query Tips" icon={Search}>
             <p>
-              BrowseAI Dev classifies queries into types and optimizes each differently.
+              LastSearch classifies queries into types and optimizes each differently.
               Here's how to get the best results for each type:
             </p>
 
@@ -782,7 +782,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
               },
               {
                 type: "Opinion / Nuanced",
-                desc: "Topics with multiple valid perspectives. BrowseAI Dev searches more sources and highlights contradictions.",
+                desc: "Topics with multiple valid perspectives. LastSearch searches more sources and highlights contradictions.",
                 good: [
                   "Is nuclear energy safe and should it be expanded to fight climate change?",
                   "What are the arguments for and against universal basic income?",
@@ -792,7 +792,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                   "Is nuclear good?",
                   "UBI opinions",
                 ],
-                tip: "Frame as a balanced question. BrowseAI Dev will surface contradictions and multiple viewpoints automatically.",
+                tip: "Frame as a balanced question. LastSearch will surface contradictions and multiple viewpoints automatically.",
               },
             ].map((item) => (
               <div key={item.type} className="p-4 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 space-y-3">
@@ -835,8 +835,8 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 a: "Fast mode runs one search-fetch-extract pass. Thorough mode does the same, then checks confidence — if below 60%, it rephrases your query and runs a second pass, merging sources from both. Thorough mode takes ~2x longer but produces higher-confidence results on complex queries.",
               },
               {
-                q: "How does BrowseAI Dev differ from Perplexity?",
-                a: "Perplexity is a consumer search engine for humans. BrowseAI Dev is research infrastructure for AI agents. It returns structured JSON (claims, sources, confidence, trace) that agents can programmatically evaluate — not a chat response. Available as MCP server, REST API, and Python SDK.",
+                q: "How does LastSearch differ from Perplexity?",
+                a: "Perplexity is a consumer search engine for humans. LastSearch is research infrastructure for AI agents. It returns structured JSON (claims, sources, confidence, trace) that agents can programmatically evaluate — not a chat response. Available as MCP server, REST API, and Python SDK.",
               },
               {
                 q: "Is the confidence score the LLM's self-assessment?",
@@ -847,12 +847,12 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 a: "Domain authority scores start from curated tiers (gov/edu = high, content farms = low). Over time, real verification data from queries is blended in automatically. Domains that consistently produce verified claims get higher scores; unreliable ones get lower scores. The system gets smarter with use.",
               },
               {
-                q: "Can I self-host BrowseAI Dev?",
-                a: "The SDKs, MCP server, and frontend are open-source (Apache 2.0) and can be run locally. The verification engine runs as a hosted service — all API requests are processed by BrowseAI Dev cloud infrastructure. This gives you the benefit of the self-improving data flywheel, shared cache, and automatic updates without managing any infrastructure.",
+                q: "Can I self-host LastSearch?",
+                a: "The SDKs, MCP server, and frontend are open-source (Apache 2.0) and can be run locally. The verification engine runs as a hosted service — all API requests are processed by LastSearch cloud infrastructure. This gives you the benefit of the self-improving data flywheel, shared cache, and automatic updates without managing any infrastructure.",
               },
               {
                 q: "What is the open-core model?",
-                a: "BrowseAI Dev uses an open-core model. The client-side components (MCP server, Python SDK, LangChain integration, frontend) are fully open-source under Apache 2.0. The verification engine (search, extraction, verification pipeline, confidence scoring) is a hosted service. All API access requires a BrowseAI Dev API key (bai_xxx) — get a free one at browseai.dev/dashboard.",
+                a: "LastSearch uses an open-core model. The client-side components (MCP server, Python SDK, LangChain integration, frontend) are fully open-source under Apache 2.0. The verification engine (search, extraction, verification pipeline, confidence scoring) is a hosted service. All API access requires a LastSearch API key (ls_xxx) — get a free one at lastsearch.dev/dashboard.",
               },
               {
                 q: "How is my query data used?",
@@ -863,7 +863,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 a: "Sessions give your agents persistent memory across multiple research queries. Create a session, ask questions within it, and each query automatically stores verified claims. Follow-up queries recall prior findings before searching, building deeper understanding over time. Vague follow-ups like 'How does this work?' are automatically contextualized using the session's accumulated knowledge.",
               },
               {
-                q: "What LLM does BrowseAI Dev use?",
+                q: "What LLM does LastSearch use?",
                 a: "An advanced LLM via OpenRouter handles claim extraction and answer generation. All verification (evidence matching, consensus, domain authority, contradictions) happens in code — not in the LLM.",
               },
             ].map((item) => (
@@ -880,11 +880,11 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
       <footer className="py-12 px-6 border-t border-border">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="text-sm font-semibold">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="text-sm font-semibold">LastSearch</span>
           </div>
           <div className="flex items-center gap-2 sm:gap-4 md:gap-6 text-xs text-muted-foreground">
-            <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
             <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
             <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>
             <button onClick={() => navigate("/developers")} className="hover:text-foreground transition-colors">Developers</button>

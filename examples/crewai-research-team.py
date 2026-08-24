@@ -1,20 +1,20 @@
 """
-CrewAI Research Team — BrowseAI Dev Example
+CrewAI Research Team — LastSearch Example
 
-A multi-agent research team using CrewAI + BrowseAI Dev.
+A multi-agent research team using CrewAI + LastSearch.
 One agent researches, another analyzes and summarizes.
 
 Usage:
-    pip install crewai-browseaidev crewai
+    pip install crewai-lastsearch crewai
     python crewai-research-team.py
 """
 
 from crewai import Agent, Task, Crew
-from crewai_browseaidev import BrowseAIDevAnswerTool, BrowseAIDevSearchTool
+from crewai_lastsearch import LastSearchAnswerTool, LastSearchSearchTool
 
-# BrowseAI Dev as CrewAI tools
-answer_tool = BrowseAIDevAnswerTool(api_key="bai_xxx")
-search_tool = BrowseAIDevSearchTool(api_key="bai_xxx")
+# LastSearch as CrewAI tools
+answer_tool = LastSearchAnswerTool(api_key="ls_xxx")
+search_tool = LastSearchSearchTool(api_key="ls_xxx")
 
 # Agent 1: Researcher — finds evidence-backed information
 researcher = Agent(
@@ -37,7 +37,7 @@ writer = Agent(
 research_task = Task(
     description="Research the current state of AI agent frameworks in 2025. "
     "Find the top frameworks, their key features, and adoption trends. "
-    "Use BrowseAI Dev to get evidence-backed results with confidence scores.",
+    "Use LastSearch to get evidence-backed results with confidence scores.",
     expected_output="Detailed research findings with sources and confidence scores",
     agent=researcher,
 )

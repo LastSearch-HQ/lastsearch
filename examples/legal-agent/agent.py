@@ -1,24 +1,24 @@
 """
-Legal Agent — BrowseAI Dev Example
+Legal Agent — LastSearch Example
 
 Cross-references legal and regulatory claims against current sources.
 Uses thorough mode to verify compliance requirements, legal precedents,
 and regulatory frameworks with evidence-backed citations.
 
 Usage:
-    pip install browseaidev
-    BROWSEAI_API_KEY=bai_xxx python agent.py
-    BROWSEAI_API_KEY=bai_xxx python agent.py "GDPR requirements for AI-generated content"
+    pip install lastsearch
+    LASTSEARCH_API_KEY=ls_xxx python agent.py
+    LASTSEARCH_API_KEY=ls_xxx python agent.py "GDPR requirements for AI-generated content"
 """
 
 import os
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def research_legal_query(query: str):
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     print(f"\nLegal Research: {query}\n")
     print("Running thorough verification (cross-referencing regulatory sources)...\n")

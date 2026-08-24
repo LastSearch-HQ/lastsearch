@@ -19,7 +19,7 @@ interface CompetitorDetail {
   strengths: string[];
   limitations: string[];
   useCases: string[];
-  browseaiDifferentiators: string[];
+  lastsearchDifferentiators: string[];
   transparencyNote?: string;
   seoTitle: string;
   seoDescription: string;
@@ -54,18 +54,18 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
       "RAG pipelines needing web context",
       "LangChain/CrewAI tool use",
     ],
-    browseaiDifferentiators: [
-      "BrowseAI Dev decomposes claims and verifies each individually — adding a verification layer on top of search",
+    lastsearchDifferentiators: [
+      "LastSearch decomposes claims and verifies each individually — adding a verification layer on top of search",
       "Evidence-based confidence scores derived from verification data, not query-match relevance",
       "Contradiction detection surfaces conflicting information across sources",
       "Cross-source consensus ensures answers are corroborated by multiple independent sources",
       "Open-core model: SDKs and integrations are Apache 2.0, verification engine is source-available",
       "Both have LangChain/CrewAI/MCP integrations — comparable distribution footprint",
     ],
-    transparencyNote: "BrowseAI Dev uses Tavily as one of its underlying search providers. We add a verification + intelligence layer on top — claim extraction, cross-source verification, contradiction detection, and confidence scoring.",
-    seoTitle: "BrowseAI Dev vs Tavily — AI Search API Comparison",
+    transparencyNote: "LastSearch uses Tavily as one of its underlying search providers. We add a verification + intelligence layer on top — claim extraction, cross-source verification, contradiction detection, and confidence scoring.",
+    seoTitle: "LastSearch vs Tavily — AI Search API Comparison",
     seoDescription:
-      "Compare BrowseAI Dev and Tavily for AI agent search. See how BrowseAI Dev adds native claim verification, confidence scores, and contradiction detection as a layer on top of web search.",
+      "Compare LastSearch and Tavily for AI agent search. See how LastSearch adds native claim verification, confidence scores, and contradiction detection as a layer on top of web search.",
   },
   perplexity: {
     slug: "perplexity",
@@ -94,17 +94,17 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
       "Quick Q&A with citations",
       "Research summaries for human readers",
     ],
-    browseaiDifferentiators: [
+    lastsearchDifferentiators: [
       "Evidence-based confidence scores vs. no confidence scoring in Perplexity API",
       "Claim decomposition and individual verification vs. monolithic grounded answers",
       "Contradiction detection surfaces conflicting information across sources",
       "Both have MCP servers and LangChain integration — comparable distribution",
       "Open-core with source-available engine and free API keys — Perplexity's core is proprietary",
-      "BrowseAI Dev is infrastructure for agents; Perplexity is primarily a consumer product with an API",
+      "LastSearch is infrastructure for agents; Perplexity is primarily a consumer product with an API",
     ],
-    seoTitle: "BrowseAI Dev vs Perplexity AI — AI Research Infrastructure Comparison",
+    seoTitle: "LastSearch vs Perplexity AI — AI Research Infrastructure Comparison",
     seoDescription:
-      "Compare BrowseAI Dev and Perplexity AI for AI agents. BrowseAI Dev offers native claim verification and evidence-based confidence as open infrastructure vs. Perplexity's consumer answer engine.",
+      "Compare LastSearch and Perplexity AI for AI agents. LastSearch offers native claim verification and evidence-based confidence as open infrastructure vs. Perplexity's consumer answer engine.",
   },
   exa: {
     slug: "exa",
@@ -133,18 +133,18 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
       "Similar content discovery",
       "Research exploration and literature review",
     ],
-    browseaiDifferentiators: [
+    lastsearchDifferentiators: [
       "Native claim verification pipeline built into the API — no external tooling needed",
       "Evidence-based confidence scores vs. no factual confidence scoring in API",
       "Contradiction detection and cross-source consensus as native features",
       "Both have MCP servers, Python SDKs, and LangChain — comparable distribution",
       "Open-core model: Apache 2.0 SDKs and integrations, source-available verification engine",
-      "Exa has excellent semantic search — BrowseAI Dev adds the verification layer on top of search",
+      "Exa has excellent semantic search — LastSearch adds the verification layer on top of search",
     ],
-    transparencyNote: "Exa offers an open-source hallucination detection tool that combines Exa search with an external LLM. BrowseAI Dev's differentiation is that claim verification, confidence scoring, and contradiction detection are native built-in API features — not separate tools requiring external setup.",
-    seoTitle: "BrowseAI Dev vs Exa — AI Search & Verification Comparison",
+    transparencyNote: "Exa offers an open-source hallucination detection tool that combines Exa search with an external LLM. LastSearch's differentiation is that claim verification, confidence scoring, and contradiction detection are native built-in API features — not separate tools requiring external setup.",
+    seoTitle: "LastSearch vs Exa — AI Search & Verification Comparison",
     seoDescription:
-      "Compare BrowseAI Dev and Exa for AI agents. BrowseAI Dev adds native claim verification and confidence scoring as built-in API features vs. Exa's semantic neural search.",
+      "Compare LastSearch and Exa for AI agents. LastSearch adds native claim verification and confidence scoring as built-in API features vs. Exa's semantic neural search.",
   },
   you: {
     slug: "you",
@@ -171,17 +171,17 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
       "Research with controllable depth",
       "RAG applications needing web context",
     ],
-    browseaiDifferentiators: [
+    lastsearchDifferentiators: [
       "Native verification pipeline built into the API vs. unverified AI summaries",
       "Evidence-based confidence scores vs. no scoring",
       "Contradiction detection catches conflicting sources automatically",
       "Both have MCP servers and LangChain — comparable distribution",
       "Open-core with source-available engine and free API keys — You.com core is proprietary",
-      "BrowseAI Dev is purpose-built for agents that need to verify before acting",
+      "LastSearch is purpose-built for agents that need to verify before acting",
     ],
-    seoTitle: "BrowseAI Dev vs You.com — AI Search API Comparison",
+    seoTitle: "LastSearch vs You.com — AI Search API Comparison",
     seoDescription:
-      "Compare BrowseAI Dev and You.com for AI agents. BrowseAI Dev provides native verification, confidence scores, and open-source infrastructure vs. You.com's AI search platform.",
+      "Compare LastSearch and You.com for AI agents. LastSearch provides native verification, confidence scores, and open-source infrastructure vs. You.com's AI search platform.",
   },
   brave: {
     slug: "brave",
@@ -210,18 +210,18 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
       "Independent search index access",
       "Cost-effective bulk search operations",
     ],
-    browseaiDifferentiators: [
-      "BrowseAI Dev uses Brave as one of its underlying search providers for source diversity",
+    lastsearchDifferentiators: [
+      "LastSearch uses Brave as one of its underlying search providers for source diversity",
       "Native claim verification, contradiction detection, and consensus scoring built on top of search",
       "Evidence-backed confidence scores derived from verification data",
-      "Brave provides excellent grounded search — BrowseAI Dev adds the verification intelligence layer",
+      "Brave provides excellent grounded search — LastSearch adds the verification intelligence layer",
       "Open-core model: Apache 2.0 SDKs and integrations, source-available verification engine with free API keys",
       "Both have MCP servers and LangChain integration — comparable distribution",
     ],
-    transparencyNote: "BrowseAI Dev uses Brave Search as one of its underlying search providers for source diversity. We add a verification + intelligence layer on top — claim extraction, cross-source verification, contradiction detection, and confidence scoring. Brave is great at search; we add the trust layer.",
-    seoTitle: "BrowseAI Dev vs Brave Search API — Verification Layer vs Raw Search",
+    transparencyNote: "LastSearch uses Brave Search as one of its underlying search providers for source diversity. We add a verification + intelligence layer on top — claim extraction, cross-source verification, contradiction detection, and confidence scoring. Brave is great at search; we add the trust layer.",
+    seoTitle: "LastSearch vs Brave Search API — Verification Layer vs Raw Search",
     seoDescription:
-      "Compare BrowseAI Dev and Brave Search API. BrowseAI Dev actually uses Brave as one of its search providers and adds native claim verification, confidence scoring, and contradiction detection on top.",
+      "Compare LastSearch and Brave Search API. LastSearch actually uses Brave as one of its search providers and adds native claim verification, confidence scoring, and contradiction detection on top.",
   },
 };
 
@@ -258,8 +258,8 @@ const AlternativeDetail = () => {
           "@type": "Article",
           headline: competitor.seoTitle,
           description: competitor.seoDescription,
-          url: `https://browseai.dev/alternatives/${competitor.slug}`,
-          author: { "@type": "Organization", name: "BrowseAI Dev" },
+          url: `https://lastsearch.dev/alternatives/${competitor.slug}`,
+          author: { "@type": "Organization", name: "LastSearch" },
         }}
       />
 
@@ -283,8 +283,8 @@ const AlternativeDetail = () => {
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => navigate("/")}
             >
-              <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-              <span className="font-semibold text-sm">BrowseAI Dev</span>
+              <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+              <span className="font-semibold text-sm">LastSearch</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -309,7 +309,7 @@ const AlternativeDetail = () => {
               vs. {competitor.name}
             </Badge>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              BrowseAI Dev vs. {competitor.name}
+              LastSearch vs. {competitor.name}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
               {competitor.description}
@@ -385,7 +385,7 @@ const AlternativeDetail = () => {
             </div>
           </motion.section>
 
-          {/* BrowseAI Dev differentiation */}
+          {/* LastSearch differentiation */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -394,14 +394,14 @@ const AlternativeDetail = () => {
           >
             <h3 className="font-medium text-lg flex items-center gap-2">
               <Shield className="w-5 h-5 text-accent bg-accent/10 rounded" />
-              How BrowseAI Dev's Grounded Intelligence is differentiated
+              How LastSearch's Grounded Intelligence is differentiated
             </h3>
             <p className="text-xs text-muted-foreground">
-              BrowseAI Dev's Grounded Intelligence is differentiated in offering native claim-level verification, contradiction detection,
+              LastSearch's Grounded Intelligence is differentiated in offering native claim-level verification, contradiction detection,
               and cross-source consensus in a single agent-focused workflow.
             </p>
             <ul className="space-y-2">
-              {competitor.browseaiDifferentiators.map((a) => (
+              {competitor.lastsearchDifferentiators.map((a) => (
                 <li
                   key={a}
                   className="flex items-start gap-2 text-sm text-foreground"
@@ -436,7 +436,7 @@ const AlternativeDetail = () => {
             </div>
             <p className="text-sm text-muted-foreground">
               If your AI agent needs to <em>verify what it can trust before acting</em>,
-              BrowseAI Dev's Grounded Intelligence verification pipeline is built for that.
+              LastSearch's Grounded Intelligence verification pipeline is built for that.
             </p>
           </motion.section>
 
@@ -465,7 +465,7 @@ const AlternativeDetail = () => {
           >
             <h2 className="text-2xl font-bold">Try it yourself</h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              Run your own queries through BrowseAI Dev and see evidence-backed answers
+              Run your own queries through LastSearch and see evidence-backed answers
               with claim verification, confidence scores, and verified sources.
             </p>
             <div className="flex items-center justify-center gap-3">

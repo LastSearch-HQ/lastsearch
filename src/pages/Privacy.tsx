@@ -12,8 +12,8 @@ const Privacy = () => {
           <ArrowLeft className="w-4 h-4" />
         </Button>
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-          <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-          <span className="font-semibold text-sm">BrowseAI Dev</span>
+          <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+          <span className="font-semibold text-sm">LastSearch</span>
         </div>
       </nav>
 
@@ -27,7 +27,7 @@ const Privacy = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">Overview</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              BrowseAI Dev ("we", "us", "our") operates browseai.dev. This policy describes how we collect, use, and protect your information when you use our website, API, MCP server, and Python SDK.
+              LastSearch ("we", "us", "our") operates lastsearch.dev. This policy describes how we collect, use, and protect your information when you use our website, API, MCP server, and Python SDK.
             </p>
           </section>
 
@@ -42,13 +42,13 @@ const Privacy = () => {
             <div className="space-y-2">
               <h3 className="text-sm font-medium">API Keys</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Your BrowseAI Dev API keys (bai_xxx) are encrypted using AES-256-GCM before storage. We never log, share, or access your keys in plaintext.
+                Your LastSearch API keys (ls_xxx) are encrypted using AES-256-GCM before storage. We never log, share, or access your keys in plaintext.
               </p>
             </div>
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Queries & Results</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Your queries and results are stored on our servers.</strong> When you submit a query through the hosted service (browseai.dev, REST API, MCP server, or Python SDK with a BAI key), we store the query text, the full result (answer, claims, sources, confidence scores), and metadata (timestamps, depth mode, client type). For authenticated users, results are linked to your account and visible in your query history.
+                <strong className="text-foreground">Your queries and results are stored on our servers.</strong> When you submit a query through the hosted service (lastsearch.dev, REST API, MCP server, or Python SDK with a BAI key), we store the query text, the full result (answer, claims, sources, confidence scores), and metadata (timestamps, depth mode, client type). For authenticated users, results are linked to your account and visible in your query history.
               </p>
             </div>
             <div className="space-y-2">
@@ -68,8 +68,8 @@ const Privacy = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">How We Use Your Information</h2>
             <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-              <li>To provide and maintain the BrowseAI Dev service</li>
-              <li>To generate and manage your BrowseAI Dev API keys</li>
+              <li>To provide and maintain the LastSearch service</li>
+              <li>To generate and manage your LastSearch API keys</li>
               <li>To cache search results and improve response times</li>
               <li>To display your query history and usage statistics</li>
               <li>To improve the product based on aggregate usage patterns</li>
@@ -80,7 +80,7 @@ const Privacy = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">Data Used to Improve Accuracy</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">BrowseAI Dev is not a fully private service.</strong> Queries and results processed through the hosted service are stored and used to improve accuracy for all users. We believe in being transparent about this. Here is exactly what we use and how:
+              <strong className="text-foreground">LastSearch is not a fully private service.</strong> Queries and results processed through the hosted service are stored and used to improve accuracy for all users. We believe in being transparent about this. Here is exactly what we use and how:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
               <li><strong className="text-foreground">Query & result storage</strong> — Your queries, answers, claims, sources, and confidence scores are stored in our database. This data powers your query history, cached results, and the self-learning systems described below. Results are stored as long as your account is active (or until you delete them).</li>
@@ -95,7 +95,7 @@ const Privacy = () => {
               <strong className="text-foreground">What we do NOT do:</strong> We do not sell your data. We do not share individual queries or results with third parties (beyond the search/LLM providers needed to process your request). We do not use your queries to train large language models (LLMs). Aggregate statistical improvements are computed from patterns across all queries — your individual queries are not exposed to other users.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              This data flywheel is a core part of how BrowseAI Dev improves over time. By using the managed service, you benefit from the collective verification data of all users — making every result more accurate. <strong className="text-foreground">Your data stays private</strong> — individual queries are never exposed to other users, and we do not use your queries to train large language models. Only aggregate patterns and anonymized claim-evidence pairs are used to improve domain authority scores, verification accuracy, and our evidence verification models.
+              This data flywheel is a core part of how LastSearch improves over time. By using the managed service, you benefit from the collective verification data of all users — making every result more accurate. <strong className="text-foreground">Your data stays private</strong> — individual queries are never exposed to other users, and we do not use your queries to train large language models. Only aggregate patterns and anonymized claim-evidence pairs are used to improve domain authority scores, verification accuracy, and our evidence verification models.
             </p>
           </section>
 
@@ -116,7 +116,7 @@ const Privacy = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">API Keys</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              All API access requires a BrowseAI Dev API key (bai_xxx). Your API key is transmitted over HTTPS and used to authenticate requests. Keys are stored securely and can be regenerated or deleted from your dashboard at any time.
+              All API access requires a LastSearch API key (ls_xxx). Your API key is transmitted over HTTPS and used to authenticate requests. Keys are stored securely and can be regenerated or deleted from your dashboard at any time.
             </p>
           </section>
 
@@ -137,8 +137,8 @@ const Privacy = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">Open Source</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              BrowseAI Dev's MCP server, SDKs, and frontend are open source. You can review how the client code works by checking our{" "}
-              <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener" className="text-accent hover:underline">
+              LastSearch's MCP server, SDKs, and frontend are open source. You can review how the client code works by checking our{" "}
+              <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener" className="text-accent hover:underline">
                 source code
               </a>.
             </p>

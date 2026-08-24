@@ -1,4 +1,4 @@
-"""BrowseAI Dev tools for CrewAI agents."""
+"""LastSearch tools for CrewAI agents."""
 
 from __future__ import annotations
 
@@ -9,11 +9,11 @@ from pydantic import BaseModel, Field
 
 
 _KEY_ERROR = (
-    "api_key is required. Sign in and get your free API key at https://browseai.dev"
+    "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
 )
 _KEY_FORMAT_ERROR = (
-    "Invalid API key format — must start with 'bai_'. "
-    "Sign in and get your free API key at https://browseai.dev"
+    "Invalid API key format — must start with 'ls_'. "
+    "Sign in and get your free API key at https://lastsearch.dev"
 )
 
 
@@ -21,7 +21,7 @@ class _ClientMixin:
     """Shared client initialization."""
 
     api_key: str = ""
-    base_url: str = "https://browseai.dev/api"
+    base_url: str = "https://lastsearch.dev/api"
     _client: Any = None
 
     def __init_subclass__(cls, **kwargs: Any) -> None:
@@ -32,16 +32,16 @@ class _ClientMixin:
             original_init(self, *args, **kw)
             if not self.api_key:
                 raise ValueError(_KEY_ERROR)
-            if not self.api_key.startswith("bai_"):
+            if not self.api_key.startswith("ls_"):
                 raise ValueError(_KEY_FORMAT_ERROR)
 
         cls.__init__ = _validated_init  # type: ignore[assignment]
 
     def _get_client(self) -> Any:
         if self._client is None:
-            from browseaidev import BrowseAIDev
+            from lastsearch import LastSearch
 
-            self._client = BrowseAIDev(api_key=self.api_key, base_url=self.base_url)
+            self._client = LastSearch(api_key=self.api_key, base_url=self.base_url)
         return self._client
 
 
@@ -53,10 +53,10 @@ class SearchInput(BaseModel):
     limit: int = Field(default=5, description="Maximum number of results")
 
 
-class BrowseAIDevSearchTool(_ClientMixin, BaseTool):
+class LastSearchSearchTool(_ClientMixin, BaseTool):
     """Search the web and return ranked results with URLs, titles, and snippets."""
 
-    name: str = "browseaidev_search"
+    name: str = "lastsearch_search"
     description: str = "Search the web for information. Returns ranked results with URLs, titles, and snippets."
     args_schema: Type[BaseModel] = SearchInput
 
@@ -79,14 +79,14 @@ class AnswerInput(BaseModel):
     depth: str = Field(default="fast", description="'fast', 'thorough', or 'deep'")
 
 
-class BrowseAIDevAnswerTool(_ClientMixin, BaseTool):
+class LastSearchAnswerTool(_ClientMixin, BaseTool):
     """Research a question with evidence-backed verification, citations, and confidence scores.
 
     Searches the web, verifies claims using multi-signal evidence matching,
     detects contradictions, and returns an answer with per-claim confidence.
     """
 
-    name: str = "browseaidev_answer"
+    name: str = "lastsearch_answer"
     description: str = (
         "Research a question with verified, evidence-backed answers. Returns citations, "
         "per-claim verification, confidence score (0-100%), and contradiction detection."
@@ -126,10 +126,10 @@ class ExtractInput(BaseModel):
     query: str | None = Field(default=None, description="Optional focus query")
 
 
-class BrowseAIDevExtractTool(_ClientMixin, BaseTool):
+class LastSearchExtractTool(_ClientMixin, BaseTool):
     """Extract structured claims and knowledge from a web page."""
 
-    name: str = "browseaidev_extract"
+    name: str = "lastsearch_extract"
     description: str = "Extract verified claims and knowledge from a URL."
     args_schema: Type[BaseModel] = ExtractInput
 
@@ -158,10 +158,10 @@ class CompareInput(BaseModel):
     query: str = Field(description="Question to compare raw LLM vs verified answers")
 
 
-class BrowseAIDevCompareTool(_ClientMixin, BaseTool):
+class LastSearchCompareTool(_ClientMixin, BaseTool):
     """Compare raw LLM answer against evidence-backed verified answer."""
 
-    name: str = "browseaidev_compare"
+    name: str = "lastsearch_compare"
     description: str = "Compare raw LLM vs verified answer to detect hallucinations."
     args_schema: Type[BaseModel] = CompareInput
 
@@ -191,10 +191,10 @@ class ClarityInput(BaseModel):
     verify: bool = Field(default=False, description="Deprecated: use mode='verified' instead")
 
 
-class BrowseAIDevClarityTool(_ClientMixin, BaseTool):
+class LastSearchClarityTool(_ClientMixin, BaseTool):
     """Clarity — anti-hallucination answer engine. Three modes: mode='prompt' (prompts only), mode='answer' (default, LLM answer), mode='verified' (LLM + web fusion)."""
 
-    name: str = "browseaidev_clarity"
+    name: str = "lastsearch_clarity"
     description: str = (
         "Clarity — anti-hallucination answer engine. Three modes: "
         "mode='prompt' returns enhanced prompts only (no LLM call). "

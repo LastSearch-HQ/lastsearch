@@ -38,7 +38,7 @@ jobs:
       - name: Type check frontend
         run: pnpm exec tsc --noEmit -p tsconfig.app.json
       - name: Type check MCP
-        run: pnpm --filter browseai-dev exec tsc --noEmit
+        run: pnpm --filter lastsearch exec tsc --noEmit
 
   build:
     name: Build
@@ -52,7 +52,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Build MCP
-        run: pnpm --filter browseai-dev build
+        run: pnpm --filter lastsearch build
       - name: Build frontend
         run: pnpm exec vite build
         env:

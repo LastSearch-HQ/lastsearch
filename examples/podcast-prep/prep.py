@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Podcast Prep Agent — build a research brief for any guest and topic.
 
-Uses BrowseAI's async SDK with sessions to research a podcast guest,
+Uses LastSearch's async SDK with sessions to research a podcast guest,
 then exports a formatted brief with verified facts, contradictions,
 and suggested questions.
 
@@ -20,7 +20,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from browseaidev import AsyncBrowseAIDev
+from lastsearch import AsyncLastSearch
 from rich.console import Console
 from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
@@ -60,7 +60,7 @@ def build_queries(guest: str, topic: str) -> list[dict[str, str]]:
 # ── Research engine ─────────────────────────────────────────────────
 
 async def run_research(
-    client: AsyncBrowseAIDev,
+    client: AsyncLastSearch,
     guest: str,
     topic: str,
     depth: str,
@@ -350,7 +350,7 @@ def display_brief(data: dict) -> None:
 
 # ── Recall mode ─────────────────────────────────────────────────────
 
-async def recall_fact(client: AsyncBrowseAIDev, session_id: str, query: str) -> None:
+async def recall_fact(client: AsyncLastSearch, session_id: str, query: str) -> None:
     """Look up a specific fact from an existing session."""
     session = await client.get_session(session_id)
 
@@ -401,8 +401,8 @@ async def main() -> None:
         help="Research depth: 'fast' (default) or 'thorough' (retries low-confidence queries)",
     )
     parser.add_argument(
-        "--api-key", default=os.getenv("BROWSEAI_API_KEY", "bai_xxx"),
-        help="BrowseAI API key (default: $BROWSEAI_API_KEY or bai_xxx)",
+        "--api-key", default=os.getenv("LASTSEARCH_API_KEY", "ls_xxx"),
+        help="LastSearch API key (default: $LASTSEARCH_API_KEY or ls_xxx)",
     )
     parser.add_argument(
         "--output", "-o", default=None,
@@ -419,7 +419,7 @@ async def main() -> None:
 
     args = parser.parse_args()
 
-    async with AsyncBrowseAIDev(api_key=args.api_key) as client:
+    async with AsyncLastSearch(api_key=args.api_key) as client:
 
         # ── Recall mode ──
         if args.recall:
