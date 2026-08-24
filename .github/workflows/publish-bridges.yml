@@ -13,7 +13,7 @@ jobs:
       - name: Build and upload all PyPI bridges
         env:
           TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
           FAILED=""
           for d in bridges/pypi/*/; do
