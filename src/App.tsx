@@ -13,6 +13,7 @@ import { PendingForkRedirect } from "./components/PendingForkRedirect";
 // Lazy-load all pages for route-based code splitting
 const Index = lazy(() => import("./pages/Index"));
 const Results = lazy(() => import("./pages/Results"));
+const Migrate = lazy(() => import("./pages/Migrate"));
 const Compare = lazy(() => import("./pages/Compare"));
 const Share = lazy(() => import("./pages/Share"));
 const Playground = lazy(() => import("./pages/Playground"));
@@ -51,6 +52,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/results" element={<Results />} />
+              <Route path="/migrate" element={<Migrate />} />
               <Route path="/compare" element={<Compare />} />
               <Route path="/share/:id" element={<Share />} />
               <Route path="/playground" element={<Playground />} />
