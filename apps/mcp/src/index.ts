@@ -8,7 +8,7 @@ import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 
 // --- Constants (inlined for standalone npm package) ---
-const VERSION = "1.0.0";
+const VERSION = "1.0.1";
 
 // --- LastSearch API key (required) ---
 // Wind-down compatibility (until 2026-10-31): the old BrowseAI Dev env var
