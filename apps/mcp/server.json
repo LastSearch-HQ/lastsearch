@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.lastsearch-hq/lastsearch",
+  "name": "io.github.LastSearch-HQ/lastsearch",
   "description": "Evidence-backed web research for AI agents with citations and confidence scores.",
   "title": "LastSearch",
   "websiteUrl": "https://lastsearch.ai",
