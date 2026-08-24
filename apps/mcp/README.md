@@ -18,7 +18,7 @@ Every answer includes:
 - **Source quotes** verified against actual page text
 - **Atomic claim decomposition** — compound facts split and verified independently
 - **Execution trace** with timing
-- **3 depth modes** — `"fast"` (default), `"thorough"` (auto-retry with rephrased queries), `"deep"` (premium multi-step agentic research: iterative think-search-extract-evaluate cycles with gap analysis, up to 4 steps, targets 0.85 confidence — requires BAI key + sign-in, 3x quota cost, falls back to thorough when exhausted)
+- **3 depth modes** — `"fast"` (default), `"thorough"` (auto-retry with rephrased queries), `"deep"` (premium multi-step agentic research: iterative think-search-extract-evaluate cycles with gap analysis, up to 4 steps, targets 0.85 confidence — requires LastSearch key + sign-in, 3x quota cost, falls back to thorough when exhausted)
 
 ### Premium Features (with `LASTSEARCH_API_KEY`)
 
@@ -30,7 +30,7 @@ Users with a LastSearch API key (`ls_xxx`) get enhanced verification:
 - **Deep reasoning mode** — multi-step agentic research with iterative think-search-extract-evaluate cycles, gap analysis, and cross-step claim merging (up to 4 steps, 3x quota cost, 100 deep queries/day)
 - **Research Sessions** — persistent memory across queries
 
-Free BAI key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough). Quota resets every 24 hours.
+Free LastSearch key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough). Quota resets every 24 hours.
 
 Sign up at [lastsearch.ai](https://lastsearch.ai) for a free API key — 100 premium queries/day with full verification pipeline.
 
@@ -129,10 +129,10 @@ docker run -p 3100:3100 -e LASTSEARCH_API_KEY=ls_xxx lastsearch
 **Higher accuracy:**
 > *"Use answer with depth thorough to research quantum computing"*
 
-**Deep research (multi-step, requires BAI key):**
+**Deep research (multi-step, requires LastSearch key):**
 > *"Use answer with depth deep to compare CRISPR approaches for sickle cell disease"*
 >
-> Deep mode runs iterative think-search-extract-evaluate cycles: gap analysis identifies missing info, follow-up queries fill the gaps, and claims/sources are merged across steps with final re-verification. Targets 0.85 confidence across up to 4 steps. Falls back to thorough without a BAI key or when quota is exhausted.
+> Deep mode runs iterative think-search-extract-evaluate cycles: gap analysis identifies missing info, follow-up queries fill the gaps, and claims/sources are merged across steps with final re-verification. Targets 0.85 confidence across up to 4 steps. Falls back to thorough without a LastSearch key or when quota is exhausted.
 
 **Contradiction detection:**
 > *"Use answer with depth thorough to check if coffee is good for health, and show me any contradictions"*

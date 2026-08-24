@@ -114,7 +114,7 @@ const Compare = () => {
           </motion.div>
         )}
 
-        {/* API key gate (logged-in users without BAI key) */}
+        {/* API key gate (logged-in users without LastSearch key) */}
         {showApiKeyGate && user && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-8 rounded-xl border border-accent/20 bg-card/60 backdrop-blur-sm text-center space-y-4">
             <Zap className="w-10 h-10 text-accent mx-auto animate-float" />

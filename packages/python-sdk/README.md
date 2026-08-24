@@ -25,7 +25,7 @@ for source in result.sources:
 # Thorough mode — auto-retries if confidence < 60%
 thorough = client.ask("What is quantum computing?", depth="thorough")
 
-# Deep mode — multi-step agentic research with iterative gap analysis (requires BAI key + sign-in)
+# Deep mode — multi-step agentic research with iterative gap analysis (requires LastSearch key + sign-in)
 # Runs think→search→extract→evaluate cycles (up to 4 steps), 3x quota cost
 deep = client.ask("Compare CRISPR approaches", depth="deep")
 for step in deep.reasoning_steps or []:
@@ -74,7 +74,7 @@ async with AsyncLastSearch(api_key="ls_xxx") as client:
     result = await client.ask("What is quantum computing?")
     # Thorough mode works with async too
     thorough = await client.ask("What is quantum computing?", depth="thorough")
-    # Deep mode — multi-step agentic research (requires BAI key + sign-in, 3x quota cost)
+    # Deep mode — multi-step agentic research (requires LastSearch key + sign-in, 3x quota cost)
     deep = await client.ask("Complex research question", depth="deep")
 ```
 
@@ -164,9 +164,9 @@ Users with a LastSearch API key (`ls_xxx`) get enhanced verification:
 - **Token streaming** — per-token answer delivery via SSE for real-time UI
 - **Research Sessions** — persistent memory across queries
 
-Free BAI key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough) — still works, just basic matching. Quota resets every 24 hours. Check `client.last_quota` after any API call for current usage.
+Free LastSearch key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough) — still works, just basic matching. Quota resets every 24 hours. Check `client.last_quota` after any API call for current usage.
 
-Sign in at [lastsearch.ai](https://lastsearch.ai) for a free BAI key to unlock premium features.
+Sign in at [lastsearch.ai](https://lastsearch.ai) for a free LastSearch key to unlock premium features.
 
 ## Contradictions
 

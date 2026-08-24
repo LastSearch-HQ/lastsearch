@@ -12,7 +12,7 @@ interface ClarityToggleProps {
 
 /**
  * Returns true if the user cannot use Clarity mode.
- * Clarity requires BAI key (premium).
+ * Clarity requires LastSearch key (premium).
  */
 export function isClarityBlocked(
   isLoggedIn: boolean,
@@ -36,7 +36,7 @@ export function ClarityToggle({ enabled, setEnabled, quota, size = "md" }: Clari
 
     if (next && blocked) {
       if (!isLoggedIn) {
-        setHint("Clarity generates answers with reduced hallucinations — requires BAI key, sign in to unlock");
+        setHint("Clarity generates answers with reduced hallucinations — requires LastSearch key, sign in to unlock");
       } else if (quota && !quota.premiumActive) {
         setHint("Premium quota exhausted — Clarity unavailable until reset");
       }

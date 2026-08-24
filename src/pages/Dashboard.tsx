@@ -156,9 +156,9 @@ const Dashboard = () => {
                   <Key className="w-5 h-5 text-accent" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="font-semibold">Welcome! Create your BAI key to get started</h3>
+                  <h3 className="font-semibold">Welcome! Create your LastSearch key to get started</h3>
                   <p className="text-sm text-muted-foreground">
-                    Add your Tavily and OpenRouter keys below to generate a BAI key. This gives you 100 premium queries/day with semantic verification, multi-source search, and more.
+                    Add your Tavily and OpenRouter keys below to generate a LastSearch key. This gives you 100 premium queries/day with semantic verification, multi-source search, and more.
                   </p>
                   <button
                     onClick={() => document.getElementById("api-keys")?.scrollIntoView({ behavior: "smooth" })}
