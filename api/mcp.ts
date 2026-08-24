@@ -4,7 +4,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { z } from "zod";
 
 const VERSION = "1.0.0";
-const LASTSEARCH_API_URL = process.env.LASTSEARCH_API_URL || "https://lastsearch.dev/api";
+const LASTSEARCH_API_URL = process.env.LASTSEARCH_API_URL || "https://lastsearch.ai/api";
 
 async function apiCall(apiKey: string, path: string, body: Record<string, unknown>) {
   const res = await fetch(`${LASTSEARCH_API_URL}${path}`, {
@@ -104,7 +104,7 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
   if (!apiKey) {
     res.setHeader("Content-Type", "application/json");
     res.statusCode = 401;
-    res.end(JSON.stringify({ error: "API key required. Pass via X-API-Key header or Authorization: Bearer <key>. Get one at https://lastsearch.dev/dashboard" }));
+    res.end(JSON.stringify({ error: "API key required. Pass via X-API-Key header or Authorization: Bearer <key>. Get one at https://lastsearch.ai/dashboard" }));
     return;
   }
 

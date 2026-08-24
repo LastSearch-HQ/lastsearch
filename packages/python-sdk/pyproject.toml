@@ -35,7 +35,7 @@ langchain = ["langchain-core>=0.2.0"]
 crewai = ["crewai>=0.41.0"]
 
 [project.urls]
-Homepage = "https://lastsearch.dev"
-Documentation = "https://lastsearch.dev/developers"
+Homepage = "https://lastsearch.ai"
+Documentation = "https://lastsearch.ai/developers"
 Repository = "https://github.com/lastsearch-hq/lastsearch"
 Discord = "https://discord.gg/ubAuT4YQsT"

@@ -14,7 +14,7 @@ pnpm dev
 ```
 
 ### Required API Keys
-- **LastSearch API key**: https://lastsearch.dev/dashboard
+- **LastSearch API key**: https://lastsearch.ai/dashboard
 
 ## Project Structure
 

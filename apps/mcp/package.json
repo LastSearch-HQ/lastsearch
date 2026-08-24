@@ -42,7 +42,7 @@
     "url": "git+https://github.com/lastsearch-hq/lastsearch.git",
     "directory": "apps/mcp"
   },
-  "homepage": "https://lastsearch.dev",
+  "homepage": "https://lastsearch.ai",
   "bugs": "https://github.com/lastsearch-hq/lastsearch/issues",
   "bin": {
     "lastsearch": "dist/index.js"

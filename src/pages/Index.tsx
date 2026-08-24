@@ -184,11 +184,11 @@ const Index = () => {
         "@type": "WebApplication",
         "name": "LastSearch",
         "description": "Grounded Intelligence — research infrastructure for AI agents. Real-time web search with evidence-backed citations and confidence scores.",
-        "url": "https://lastsearch.dev",
+        "url": "https://lastsearch.ai",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "author": { "@type": "Organization", "name": "LastSearch", "url": "https://lastsearch.dev" },
+        "author": { "@type": "Organization", "name": "LastSearch", "url": "https://lastsearch.ai" },
         "license": "https://www.apache.org/licenses/LICENSE-2.0",
         "codeRepository": "https://github.com/lastsearch-hq/lastsearch",
         "programmingLanguage": ["TypeScript", "Python"],
@@ -1381,13 +1381,13 @@ const Index = () => {
             <div className="flex items-center justify-center gap-3 md:gap-4 py-3 flex-wrap">
               {([
                 { name: "MCP Server", hint: "npx lastsearch" },
-                { name: "REST API", hint: "POST lastsearch.dev/api/browse/*" },
+                { name: "REST API", hint: "POST lastsearch.ai/api/browse/*" },
                 { name: "Python SDK", hint: "pip install lastsearch" },
                 { name: "LangChain", hint: "pip install langchain-lastsearch" },
                 { name: "CrewAI", hint: "pip install crewai-lastsearch" },
                 { name: "LlamaIndex", hint: "pip install llamaindex-lastsearch" },
                 { name: "SSE Streaming", hint: "POST /browse/answer/stream" },
-                { name: "Free API Keys", hint: "Get a ls_ key at lastsearch.dev" },
+                { name: "Free API Keys", hint: "Get a ls_ key at lastsearch.ai" },
               ]).map((item, i) => (
                 <motion.span
                   key={item.name}
@@ -1523,12 +1523,12 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-accent uppercase tracking-wider">REST API</span>
-                <button onClick={() => copyText(`curl -X POST https://lastsearch.dev/api/browse/answer -H "Content-Type: application/json" -H "X-API-Key: ls_xxx" -d '{"query": "What causes aurora borealis?"}'`, "api")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                <button onClick={() => copyText(`curl -X POST https://lastsearch.ai/api/browse/answer -H "Content-Type: application/json" -H "X-API-Key: ls_xxx" -d '{"query": "What causes aurora borealis?"}'`, "api")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                   {copied === "api" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied === "api" ? "Copied" : "Copy"}
                 </button>
               </div>
-              <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-3 overflow-x-auto">{`curl -X POST https://lastsearch.dev/api/browse/answer \\
+              <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-3 overflow-x-auto">{`curl -X POST https://lastsearch.ai/api/browse/answer \\
   -H "Content-Type: application/json" \\
   -H "X-API-Key: ls_your_key" \\
   -d '{"query": "What causes aurora borealis?"}'`}</pre>

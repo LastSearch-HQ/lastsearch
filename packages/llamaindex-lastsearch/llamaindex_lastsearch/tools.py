@@ -9,11 +9,11 @@ from llama_index.core.tools import FunctionTool
 from lastsearch import LastSearch
 
 
-def _get_client(api_key: str, base_url: str = "https://lastsearch.dev/api") -> LastSearch:
+def _get_client(api_key: str, base_url: str = "https://lastsearch.ai/api") -> LastSearch:
     return LastSearch(api_key=api_key, base_url=base_url)
 
 
-def LastSearchSearchTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
+def LastSearchSearchTool(api_key: str, base_url: str = "https://lastsearch.ai/api") -> FunctionTool:
     """Create a LlamaIndex tool for web search."""
     client = _get_client(api_key, base_url)
 
@@ -30,7 +30,7 @@ def LastSearchSearchTool(api_key: str, base_url: str = "https://lastsearch.dev/a
     return FunctionTool.from_defaults(fn=search, name="lastsearch_search")
 
 
-def LastSearchAnswerTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
+def LastSearchAnswerTool(api_key: str, base_url: str = "https://lastsearch.ai/api") -> FunctionTool:
     """Create a LlamaIndex tool for verified research with citations and confidence scores.
 
     This is the primary LastSearch tool. It searches the web, verifies claims
@@ -66,7 +66,7 @@ def LastSearchAnswerTool(api_key: str, base_url: str = "https://lastsearch.dev/a
     return FunctionTool.from_defaults(fn=answer, name="lastsearch_answer")
 
 
-def LastSearchExtractTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
+def LastSearchExtractTool(api_key: str, base_url: str = "https://lastsearch.ai/api") -> FunctionTool:
     """Create a LlamaIndex tool for extracting structured claims from a URL."""
     client = _get_client(api_key, base_url)
 
@@ -90,7 +90,7 @@ def LastSearchExtractTool(api_key: str, base_url: str = "https://lastsearch.dev/
     return FunctionTool.from_defaults(fn=extract, name="lastsearch_extract")
 
 
-def LastSearchCompareTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
+def LastSearchCompareTool(api_key: str, base_url: str = "https://lastsearch.ai/api") -> FunctionTool:
     """Create a LlamaIndex tool for comparing raw LLM vs verified answers."""
     client = _get_client(api_key, base_url)
 
@@ -112,7 +112,7 @@ def LastSearchCompareTool(api_key: str, base_url: str = "https://lastsearch.dev/
     return FunctionTool.from_defaults(fn=compare, name="lastsearch_compare")
 
 
-def LastSearchClarityTool(api_key: str, base_url: str = "https://lastsearch.dev/api") -> FunctionTool:
+def LastSearchClarityTool(api_key: str, base_url: str = "https://lastsearch.ai/api") -> FunctionTool:
     """Create a LlamaIndex tool for Clarity anti-hallucination answer engine.
 
     Three modes: (1) mode='prompt': returns only enhanced system + user prompts

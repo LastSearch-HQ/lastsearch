@@ -258,7 +258,7 @@ const AlternativeDetail = () => {
           "@type": "Article",
           headline: competitor.seoTitle,
           description: competitor.seoDescription,
-          url: `https://lastsearch.dev/alternatives/${competitor.slug}`,
+          url: `https://lastsearch.ai/alternatives/${competitor.slug}`,
           author: { "@type": "Organization", name: "LastSearch" },
         }}
       />

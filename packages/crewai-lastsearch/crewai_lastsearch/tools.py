@@ -9,11 +9,11 @@ from pydantic import BaseModel, Field
 
 
 _KEY_ERROR = (
-    "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
+    "api_key is required. Sign in and get your free API key at https://lastsearch.ai"
 )
 _KEY_FORMAT_ERROR = (
     "Invalid API key format — must start with 'ls_'. "
-    "Sign in and get your free API key at https://lastsearch.dev"
+    "Sign in and get your free API key at https://lastsearch.ai"
 )
 
 
@@ -21,7 +21,7 @@ class _ClientMixin:
     """Shared client initialization."""
 
     api_key: str = ""
-    base_url: str = "https://lastsearch.dev/api"
+    base_url: str = "https://lastsearch.ai/api"
     _client: Any = None
 
     def __init_subclass__(cls, **kwargs: Any) -> None:

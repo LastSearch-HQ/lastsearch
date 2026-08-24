@@ -18,10 +18,10 @@ def cmd_setup(args: argparse.Namespace) -> None:
     print("  =================")
     print("  Configure the LastSearch Python SDK\n")
 
-    api_key = input("  LastSearch API key (get a free one at https://lastsearch.dev/dashboard): ").strip()
+    api_key = input("  LastSearch API key (get a free one at https://lastsearch.ai/dashboard): ").strip()
 
     if not api_key:
-        print("\n  API key is required. Sign up at https://lastsearch.dev to get a free key.\n")
+        print("\n  API key is required. Sign up at https://lastsearch.ai to get a free key.\n")
         sys.exit(1)
 
     config: dict[str, str] = {"api_key": api_key}

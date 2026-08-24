@@ -1,6 +1,6 @@
 # Healthcare Agent
 
-A medical research agent that verifies health claims using evidence-backed search with contradiction detection. Built on [LastSearch](https://lastsearch.dev).
+A medical research agent that verifies health claims using evidence-backed search with contradiction detection. Built on [LastSearch](https://lastsearch.ai).
 
 ## What it does
 

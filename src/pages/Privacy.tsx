@@ -27,7 +27,7 @@ const Privacy = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">Overview</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              LastSearch ("we", "us", "our") operates lastsearch.dev. This policy describes how we collect, use, and protect your information when you use our website, API, MCP server, and Python SDK.
+              LastSearch ("we", "us", "our") operates lastsearch.ai. This policy describes how we collect, use, and protect your information when you use our website, API, MCP server, and Python SDK.
             </p>
           </section>
 
@@ -48,7 +48,7 @@ const Privacy = () => {
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Queries & Results</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Your queries and results are stored on our servers.</strong> When you submit a query through the hosted service (lastsearch.dev, REST API, MCP server, or Python SDK with a BAI key), we store the query text, the full result (answer, claims, sources, confidence scores), and metadata (timestamps, depth mode, client type). For authenticated users, results are linked to your account and visible in your query history.
+                <strong className="text-foreground">Your queries and results are stored on our servers.</strong> When you submit a query through the hosted service (lastsearch.ai, REST API, MCP server, or Python SDK with a BAI key), we store the query text, the full result (answer, claims, sources, confidence scores), and metadata (timestamps, depth mode, client type). For authenticated users, results are linked to your account and visible in your query history.
               </p>
             </div>
             <div className="space-y-2">

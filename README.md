@@ -12,7 +12,7 @@
 Agent → LastSearch → Internet → Verified answers + sources
 ```
 
-[Website](https://lastsearch.dev) · [Playground](https://lastsearch.dev/playground) · [API Docs](https://lastsearch.dev/developers) · [Alternatives](https://lastsearch.dev/alternatives) · [Discord](https://discord.gg/ubAuT4YQsT)
+[Website](https://lastsearch.ai) · [Playground](https://lastsearch.ai/playground) · [API Docs](https://lastsearch.ai/developers) · [Alternatives](https://lastsearch.ai/alternatives) · [Discord](https://discord.gg/ubAuT4YQsT)
 
 > **Package names:** npm: [`lastsearch`](https://www.npmjs.com/package/lastsearch) · PyPI: [`lastsearch`](https://pypi.org/project/lastsearch/) · LangChain: [`langchain-lastsearch`](https://pypi.org/project/langchain-lastsearch/) — Previously `lastsearch` and `lastsearch`. Old names still work and redirect automatically.
 
@@ -60,13 +60,13 @@ Three depth levels control research thoroughness:
 
 ```bash
 # Thorough mode
-curl -X POST https://lastsearch.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?", "depth": "thorough"}'
 
 # Deep mode (uses premium features)
-curl -X POST https://lastsearch.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "Compare CRISPR approaches for sickle cell disease", "depth": "deep"}'
@@ -81,7 +81,7 @@ Deep mode responses include `reasoningSteps` showing the multi-step research pro
 Get real-time progress with per-token answer streaming. The streaming endpoint sends Server-Sent Events (SSE) as each pipeline step completes. Deep mode steps are grouped by research pass for clean progress display:
 
 ```bash
-curl -N -X POST https://lastsearch.dev/api/browse/answer/stream \
+curl -N -X POST https://lastsearch.ai/api/browse/answer/stream \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?"}'
@@ -97,7 +97,7 @@ All external API calls (search providers, LLM, page fetching) automatically retr
 
 Persistent research sessions that accumulate knowledge across multiple queries. Later queries automatically recall prior verified claims, building deeper understanding over time.
 
-> **Sessions require a LastSearch API key (`ls_xxx`)** for identity and ownership. Get a free key at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard). For MCP, set `LASTSEARCH_API_KEY` env var. For Python SDK, pass `api_key="ls_xxx"`. For REST API, use `Authorization: Bearer ls_xxx`.
+> **Sessions require a LastSearch API key (`ls_xxx`)** for identity and ownership. Get a free key at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard). For MCP, set `LASTSEARCH_API_KEY` env var. For Python SDK, pass `api_key="ls_xxx"`. For REST API, use `Authorization: Bearer ls_xxx`.
 
 ```python
 # Python SDK
@@ -114,20 +114,20 @@ forked = client.fork_session(share.share_id)
 
 ```bash
 # REST API
-curl -X POST https://lastsearch.dev/api/session \
+curl -X POST https://lastsearch.ai/api/session \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"name": "my-research"}'
 # Returns session ID, then:
-curl -X POST https://lastsearch.dev/api/session/{id}/ask \
+curl -X POST https://lastsearch.ai/api/session/{id}/ask \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum entanglement?"}'
 
 # Share a session publicly
-curl -X POST https://lastsearch.dev/api/session/{id}/share \
+curl -X POST https://lastsearch.ai/api/session/{id}/share \
   -H "Authorization: Bearer ls_xxx"
 
 # Fork a shared session (copies all knowledge)
-curl -X POST https://lastsearch.dev/api/session/share/{shareId}/fork \
+curl -X POST https://lastsearch.ai/api/session/share/{shareId}/fork \
   -H "Authorization: Bearer ls_xxx"
 ```
 
@@ -152,7 +152,7 @@ The entire verification pipeline improves automatically with usage:
 Submit feedback on results to accelerate learning. Agents and users can rate results as `good`, `bad`, or `wrong` — this feeds directly into the adaptive threshold engine.
 
 ```bash
-curl -X POST https://lastsearch.dev/api/browse/feedback \
+curl -X POST https://lastsearch.ai/api/browse/feedback \
   -H "Content-Type: application/json" \
   -d '{"resultId": "abc123", "rating": "good"}'
 ```
@@ -236,25 +236,25 @@ Or manually add to your MCP config:
 }
 ```
 
-> Get a free API key at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard).
+> Get a free API key at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 ### REST API
 
 ```bash
 # Basic query
-curl -X POST https://lastsearch.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?"}'
 
 # Thorough mode (auto-retries if confidence < 60%)
-curl -X POST https://lastsearch.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?", "depth": "thorough"}'
 
 # Deep mode (multi-step reasoning)
-curl -X POST https://lastsearch.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "Compare CRISPR approaches", "depth": "deep"}'
@@ -268,12 +268,12 @@ The MCP server and frontend are open-source and can be run locally. The verifica
 git clone https://github.com/lastsearch-hq/lastsearch.git
 cd lastsearch
 pnpm install
-pnpm dev:web    # Run the frontend locally (API calls go to lastsearch.dev)
+pnpm dev:web    # Run the frontend locally (API calls go to lastsearch.ai)
 ```
 
 ## API Keys
 
-All API access requires a LastSearch API key (`ls_xxx`). Sign up for free at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard).
+All API access requires a LastSearch API key (`ls_xxx`). Sign up for free at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 | Method | How | Verification | Limits |
 |--------|-----|-------------|--------|
@@ -407,7 +407,7 @@ result = client.ask("Patient protocols", search_provider={
 
 ```bash
 # REST API — enterprise search
-curl -X POST https://lastsearch.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ls_xxx" \
   -d '{
@@ -520,7 +520,7 @@ These are for running the MCP server or frontend locally. The verification engin
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `LASTSEARCH_API_KEY` | Yes (MCP) | LastSearch API key (`ls_xxx`) — get one at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard) |
+| `LASTSEARCH_API_KEY` | Yes (MCP) | LastSearch API key (`ls_xxx`) — get one at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard) |
 
 ## Tech Stack
 

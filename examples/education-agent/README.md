@@ -1,6 +1,6 @@
 # Education Agent
 
-A research assistant for students and researchers that provides evidence-backed answers with full citations. Built on [LastSearch](https://lastsearch.dev).
+A research assistant for students and researchers that provides evidence-backed answers with full citations. Built on [LastSearch](https://lastsearch.ai).
 
 ## What it does
 

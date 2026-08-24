@@ -1,6 +1,6 @@
 # Fact-Checker Bot
 
-A Discord bot that verifies claims in real time using [LastSearch](https://lastsearch.dev). Paste any claim and get an evidence-backed verdict with confidence scores, sources, and contradiction warnings.
+A Discord bot that verifies claims in real time using [LastSearch](https://lastsearch.ai). Paste any claim and get an evidence-backed verdict with confidence scores, sources, and contradiction warnings.
 
 ## Commands
 
@@ -23,7 +23,7 @@ A Discord bot that verifies claims in real time using [LastSearch](https://lasts
 
 ### 2. Get a LastSearch API Key
 
-Sign up at [lastsearch.dev](https://lastsearch.dev) and get your API key (starts with `ls_`).
+Sign up at [lastsearch.ai](https://lastsearch.ai) and get your API key (starts with `ls_`).
 
 ### 3. Install and Run
 
@@ -113,7 +113,7 @@ Thorough mode automatically retries with a rephrased query if the first-pass con
 |   > A: The wall is not visible from orbit  |
 |   > B: Chinese textbooks claim visibility  |
 |                                            |
-| Powered by LastSearch | lastsearch.dev        |
+| Powered by LastSearch | lastsearch.ai        |
 +--------------------------------------------+
 ```
 
@@ -145,7 +145,7 @@ Thorough mode automatically retries with a rephrased query if the first-pass con
 | - Mayo Clinic (mayoclinic.org)             |
 | - Harvard Health (health.harvard.edu)      |
 |                                            |
-| Powered by LastSearch | lastsearch.dev        |
+| Powered by LastSearch | lastsearch.ai        |
 +--------------------------------------------+
 ```
 

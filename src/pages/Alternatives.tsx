@@ -197,7 +197,7 @@ const Alternatives = () => {
           name: "LastSearch Alternatives — Compare AI Search APIs",
           description:
             "Compare LastSearch vs Tavily, Perplexity, Exa, You.com, and Brave Search API for AI agent research.",
-          url: "https://lastsearch.dev/alternatives",
+          url: "https://lastsearch.ai/alternatives",
         }}
       />
 

@@ -27,7 +27,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">1. Acceptance of Terms</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              By using LastSearch ("the Service"), including the website at lastsearch.dev, the REST API, MCP server, and Python SDK, you agree to these terms. If you don't agree, don't use the Service.
+              By using LastSearch ("the Service"), including the website at lastsearch.ai, the REST API, MCP server, and Python SDK, you agree to these terms. If you don't agree, don't use the Service.
             </p>
           </section>
 
@@ -70,7 +70,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">6. Open Source License</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              LastSearch uses an open-core model. SDKs, MCP server, integrations, and frontend are licensed under Apache 2.0. The verification engine is a hosted service — free to use via API, source is not publicly available. These Terms of Service apply specifically to the hosted service at lastsearch.dev.
+              LastSearch uses an open-core model. SDKs, MCP server, integrations, and frontend are licensed under Apache 2.0. The verification engine is a hosted service — free to use via API, source is not publicly available. These Terms of Service apply specifically to the hosted service at lastsearch.ai.
             </p>
           </section>
 

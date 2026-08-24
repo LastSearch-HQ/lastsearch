@@ -44,7 +44,7 @@ pip install llamaindex-lastsearch  # LlamaIndex tools
 
 ### REST API
 ```bash
-curl -X POST https://lastsearch.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
   -d '{"query": "How do mRNA vaccines work?"}'
 ```
@@ -278,9 +278,9 @@ Optional: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (persistence).
 
 ## Links
 
-- Website: https://lastsearch.dev
-- Documentation: https://lastsearch.dev/docs
-- Playground: https://lastsearch.dev/playground
+- Website: https://lastsearch.ai
+- Documentation: https://lastsearch.ai/docs
+- Playground: https://lastsearch.ai/playground
 - GitHub: https://github.com/lastsearch-hq/lastsearch
 - npm: https://www.npmjs.com/package/lastsearch (renamed from lastsearch, old name still works)
 - PyPI: https://pypi.org/project/lastsearch/ (renamed from lastsearch, old name still works)

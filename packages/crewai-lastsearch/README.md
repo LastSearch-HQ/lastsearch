@@ -1,6 +1,6 @@
 # crewai-lastsearch
 
-CrewAI integration for [LastSearch](https://lastsearch.dev) — verified web search with citations and confidence scores for AI agents.
+CrewAI integration for [LastSearch](https://lastsearch.ai) — verified web search with citations and confidence scores for AI agents.
 
 ## Installation
 
@@ -51,7 +51,7 @@ Unlike raw search APIs, LastSearch fact-checks results. Every answer includes pe
 
 ## Links
 
-- [Website](https://lastsearch.dev) · [GitHub](https://github.com/lastsearch-hq/lastsearch) · [Discord](https://discord.gg/ubAuT4YQsT)
+- [Website](https://lastsearch.ai) · [GitHub](https://github.com/lastsearch-hq/lastsearch) · [Discord](https://discord.gg/ubAuT4YQsT)
 - [Python SDK](https://pypi.org/project/lastsearch/) · [LangChain](https://pypi.org/project/langchain-lastsearch/) · [MCP Server](https://www.npmjs.com/package/lastsearch)
 
 ## License

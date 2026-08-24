@@ -1,6 +1,6 @@
 # Legal Agent
 
-A legal research agent that cross-references regulatory and compliance claims against current sources. Built on [LastSearch](https://lastsearch.dev).
+A legal research agent that cross-references regulatory and compliance claims against current sources. Built on [LastSearch](https://lastsearch.ai).
 
 ## What it does
 

@@ -1,6 +1,6 @@
 # Scientific Agent
 
-A scientific research agent that cross-checks findings and detects contradictions in the literature. Built on [LastSearch](https://lastsearch.dev).
+A scientific research agent that cross-checks findings and detects contradictions in the literature. Built on [LastSearch](https://lastsearch.ai).
 
 ## What it does
 

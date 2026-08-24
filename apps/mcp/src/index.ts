@@ -14,7 +14,7 @@ const VERSION = "1.0.0";
 // Wind-down compatibility (until 2026-10-31): the old BrowseAI Dev env var
 // and key prefix keep working so existing configs don't break.
 const LASTSEARCH_API_KEY = process.env.LASTSEARCH_API_KEY ?? process.env.BROWSE_API_KEY;
-const LASTSEARCH_API_URL = process.env.LASTSEARCH_API_URL || "https://lastsearch.dev/api";
+const LASTSEARCH_API_URL = process.env.LASTSEARCH_API_URL || "https://lastsearch.ai/api";
 
 // --- CLI handling ---
 const args = process.argv.slice(2);
@@ -32,7 +32,7 @@ if (args.includes("--help") || args.includes("-h")) {
     lastsearch --version    Show version
 
   Environment Variables:
-    LASTSEARCH_API_KEY         LastSearch API key (required — sign in at https://lastsearch.dev)
+    LASTSEARCH_API_KEY         LastSearch API key (required — sign in at https://lastsearch.ai)
     MCP_HTTP_PORT          Port for HTTP transport (default: 3100)
 
   MCP Tools:
@@ -50,7 +50,7 @@ if (args.includes("--help") || args.includes("-h")) {
     session_knowledge  Export all knowledge from a session
 
   Quick Setup:
-    1. Sign in at https://lastsearch.dev and generate a free API key
+    1. Sign in at https://lastsearch.ai and generate a free API key
     2. Run: npx lastsearch setup
     3. Restart Claude Desktop
 `);
@@ -107,7 +107,7 @@ function validateEnv() {
     console.error(`
   lastsearch: Missing LASTSEARCH_API_KEY
 
-  A LastSearch API key is required. Sign in and get your free key at https://lastsearch.dev
+  A LastSearch API key is required. Sign in and get your free key at https://lastsearch.ai
 
   Quick fix: run 'npx lastsearch setup' to configure automatically.
 `);
@@ -142,7 +142,7 @@ function registerAliases(server: McpServer) {
   for (const [oldName, newName] of Object.entries(WINDDOWN_ALIASES)) {
     server.tool(
       oldName,
-      `DEPRECATED alias of "${newName}" — BrowseAI Dev is now LastSearch. Update your config before 2026-10-31. See https://lastsearch.dev/migrate`,
+      `DEPRECATED alias of "${newName}" — BrowseAI Dev is now LastSearch. Update your config before 2026-10-31. See https://lastsearch.ai/migrate`,
       { payload: z.record(z.string(), z.any()).optional() },
       async () => ({
         content: [{
@@ -150,7 +150,7 @@ function registerAliases(server: McpServer) {
           text: JSON.stringify({
             deprecated: true,
             use_instead: newName,
-            message: `This tool was renamed to "${newName}" (BrowseAI Dev is now LastSearch). Call "${newName}" with the same arguments. Old names stop working 2026-10-31. Migration guide: https://lastsearch.dev/migrate`,
+            message: `This tool was renamed to "${newName}" (BrowseAI Dev is now LastSearch). Call "${newName}" with the same arguments. Old names stop working 2026-10-31. Migration guide: https://lastsearch.ai/migrate`,
           }),
         }],
       })
@@ -328,7 +328,7 @@ function registerTools(server: McpServer) {
     },
     async ({ session_id }) => {
       const result = await apiCall(`/session/${session_id}/share`, {});
-      const shareUrl = `https://lastsearch.dev/session/share/${result.shareId}`;
+      const shareUrl = `https://lastsearch.ai/session/share/${result.shareId}`;
       return {
         content: [{
           type: "text",

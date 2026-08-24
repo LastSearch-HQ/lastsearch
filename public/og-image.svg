@@ -17,5 +17,5 @@
   <!-- Text (vertically centered with logo) -->
   <text x="430" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="80" font-weight="700" fill="#FAFAFA">LastSearch</text>
   <text x="430" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="30" fill="#A1A1AA">Research Infra for AI Agents</text>
-  <text x="430" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#F97316">lastsearch.dev</text>
+  <text x="430" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#F97316">lastsearch.ai</text>
 </svg>

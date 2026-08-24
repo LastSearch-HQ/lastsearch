@@ -1,6 +1,6 @@
 # Financial Agent
 
-A financial research agent that verifies market data and financial claims with real-time evidence. Built on [LastSearch](https://lastsearch.dev).
+A financial research agent that verifies market data and financial claims with real-time evidence. Built on [LastSearch](https://lastsearch.ai).
 
 ## What it does
 

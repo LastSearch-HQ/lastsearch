@@ -1,6 +1,6 @@
 # Customer Support Agent
 
-A terminal-based customer support agent powered by [LastSearch](https://lastsearch.dev). This is what enterprise agents look like -- they don't guess, they verify. LastSearch gives your support agent a confidence score so it knows when to answer and when to escalate.
+A terminal-based customer support agent powered by [LastSearch](https://lastsearch.ai). This is what enterprise agents look like -- they don't guess, they verify. LastSearch gives your support agent a confidence score so it knows when to answer and when to escalate.
 
 ## How It Works
 
@@ -44,7 +44,7 @@ The agent uses LastSearch's session API to accumulate knowledge over time. Repea
 
 ### 1. Get a LastSearch API Key
 
-Sign up at [lastsearch.dev](https://lastsearch.dev) and get your API key (starts with `ls_`).
+Sign up at [lastsearch.ai](https://lastsearch.ai) and get your API key (starts with `ls_`).
 
 ### 2. Install and Run
 

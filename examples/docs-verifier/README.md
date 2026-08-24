@@ -103,7 +103,7 @@ Flagged Claims (need attention):
   Claim: Supports 10,000+ domains in the authority database
   Reason: Low confidence (38%)
   Finding: The documentation claims 10,000+ domains but current data shows...
-  Source: LastSearch Documentation (https://lastsearch.dev/developers)
+  Source: LastSearch Documentation (https://lastsearch.ai/developers)
 ```
 
 ## How claim extraction works

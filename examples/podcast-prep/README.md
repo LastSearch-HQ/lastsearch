@@ -160,4 +160,4 @@ The exported brief is a standard markdown file with these sections:
 ## Requirements
 
 - Python 3.10+
-- LastSearch API key ([get one here](https://lastsearch.dev))
+- LastSearch API key ([get one here](https://lastsearch.ai))

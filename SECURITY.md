@@ -41,5 +41,5 @@ Instead, please email security concerns or report via [GitHub Security Advisorie
 All API access requires a LastSearch API key (`ls_xxx` prefix). Your BAI key:
 - Should be kept secret and never committed to source control
 - Is stored encrypted with AES-256-GCM if saved server-side
-- Can be rotated at any time from the dashboard at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard)
+- Can be rotated at any time from the dashboard at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard)
 - Should be set via the `LASTSEARCH_API_KEY` environment variable for MCP and SDK usage

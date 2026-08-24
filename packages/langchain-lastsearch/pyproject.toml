@@ -34,7 +34,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://lastsearch.dev"
-Documentation = "https://lastsearch.dev/docs"
+Homepage = "https://lastsearch.ai"
+Documentation = "https://lastsearch.ai/docs"
 Repository = "https://github.com/lastsearch-hq/lastsearch"
 Discord = "https://discord.gg/ubAuT4YQsT"

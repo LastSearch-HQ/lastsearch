@@ -38,11 +38,11 @@ export async function runSetup() {
 `);
 
   const browseKey = await ask(
-    "  LastSearch API key (get one at https://lastsearch.dev/dashboard): "
+    "  LastSearch API key (get one at https://lastsearch.ai/dashboard): "
   );
 
   if (!browseKey.trim()) {
-    console.log("\n  LastSearch API key is required. Get one at https://lastsearch.dev/dashboard\n");
+    console.log("\n  LastSearch API key is required. Get one at https://lastsearch.ai/dashboard\n");
     process.exit(1);
   }
 

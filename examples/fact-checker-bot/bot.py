@@ -134,9 +134,9 @@ async def handle_verify(message: discord.Message, claim: str) -> None:
         )
 
     # Footer with share link
-    footer_text = "Powered by LastSearch | lastsearch.dev"
+    footer_text = "Powered by LastSearch | lastsearch.ai"
     if result.share_id:
-        footer_text += f" | Share: lastsearch.dev/share/{result.share_id}"
+        footer_text += f" | Share: lastsearch.ai/share/{result.share_id}"
     embed.set_footer(text=footer_text)
 
     await message.reply(embed=embed)
@@ -197,7 +197,7 @@ async def handle_compare(message: discord.Message, claim: str) -> None:
             inline=False,
         )
 
-    embed.set_footer(text="Powered by LastSearch | lastsearch.dev")
+    embed.set_footer(text="Powered by LastSearch | lastsearch.ai")
     await message.reply(embed=embed)
 
 

@@ -30,7 +30,7 @@ from .models import (
     SessionAskResult,
 )
 
-DEFAULT_BASE_URL = "https://lastsearch.dev/api"
+DEFAULT_BASE_URL = "https://lastsearch.ai/api"
 # Must exceed the engine's 120s function budget (deep mode can run close to it),
 # plus network margin — otherwise valid deep/thorough queries raise a false client
 # timeout while the engine actually succeeds and caches the result.
@@ -41,7 +41,7 @@ DISCLAIMER = (
     "Not financial, medical, legal, or professional advice. "
     "Confidence scores are algorithmic estimates, not guarantees of accuracy. "
     "Verify critical information from authoritative primary sources before acting. "
-    "See https://lastsearch.dev/terms"
+    "See https://lastsearch.ai/terms"
 )
 
 
@@ -94,12 +94,12 @@ class LastSearch:
     ):
         if not api_key:
             raise ValueError(
-                "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
+                "api_key is required. Sign in and get your free API key at https://lastsearch.ai"
             )
         if not api_key.startswith("ls_"):
             raise ValueError(
                 "Invalid API key format — must start with 'ls_'. "
-                "Sign in and get your free API key at https://lastsearch.dev"
+                "Sign in and get your free API key at https://lastsearch.ai"
             )
 
         self._headers = _build_headers(api_key)
@@ -383,7 +383,7 @@ class SessionClient:
         share_id = data.get("shareId", "")
         return {
             "share_id": share_id,
-            "url": f"https://lastsearch.dev/session/share/{share_id}",
+            "url": f"https://lastsearch.ai/session/share/{share_id}",
         }
 
     def delete(self) -> None:
@@ -420,12 +420,12 @@ class AsyncLastSearch:
     ):
         if not api_key:
             raise ValueError(
-                "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
+                "api_key is required. Sign in and get your free API key at https://lastsearch.ai"
             )
         if not api_key.startswith("ls_"):
             raise ValueError(
                 "Invalid API key format — must start with 'ls_'. "
-                "Sign in and get your free API key at https://lastsearch.dev"
+                "Sign in and get your free API key at https://lastsearch.ai"
             )
 
         self._headers = _build_headers(api_key)
@@ -653,7 +653,7 @@ class AsyncSessionClient:
         share_id = data.get("shareId", "")
         return {
             "share_id": share_id,
-            "url": f"https://lastsearch.dev/session/share/{share_id}",
+            "url": f"https://lastsearch.ai/session/share/{share_id}",
         }
 
     async def delete(self) -> None:

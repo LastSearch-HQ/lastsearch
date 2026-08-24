@@ -32,7 +32,7 @@ Users with a LastSearch API key (`ls_xxx`) get enhanced verification:
 
 Free BAI key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough). Quota resets every 24 hours.
 
-Sign up at [lastsearch.dev](https://lastsearch.dev) for a free API key — 100 premium queries/day with full verification pipeline.
+Sign up at [lastsearch.ai](https://lastsearch.ai) for a free API key — 100 premium queries/day with full verification pipeline.
 
 ## Quick Start
 
@@ -40,7 +40,7 @@ Sign up at [lastsearch.dev](https://lastsearch.dev) for a free API key — 100 p
 npx lastsearch setup
 ```
 
-This auto-configures Claude Desktop. You'll need a LastSearch API key — get one free at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard).
+This auto-configures Claude Desktop. You'll need a LastSearch API key — get one free at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 ## Manual Setup
 
@@ -119,7 +119,7 @@ docker run -p 3100:3100 -e LASTSEARCH_API_KEY=ls_xxx lastsearch
 | `session_fork` | Fork a shared session to continue the research |
 | `feedback` | Submit accuracy feedback on a result |
 
-> **Note:** All tools require a LastSearch API key (`ls_xxx`). Get a free one at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard).
+> **Note:** All tools require a LastSearch API key (`ls_xxx`). Get a free one at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 ## Examples
 

@@ -1,6 +1,6 @@
 # langchain-lastsearch
 
-LangChain integration for [LastSearch](https://lastsearch.dev) — verified web search with citations and confidence scores for AI agents.
+LangChain integration for [LastSearch](https://lastsearch.ai) — verified web search with citations and confidence scores for AI agents.
 
 **Unlike raw search APIs, LastSearch fact-checks results before returning them.** Every answer includes per-claim verification, cross-source consensus, contradiction detection, and evidence-based confidence scores.
 
@@ -116,7 +116,7 @@ print(result["output"])
 
 ## Get an API Key
 
-1. Go to [lastsearch.dev](https://lastsearch.dev)
+1. Go to [lastsearch.ai](https://lastsearch.ai)
 2. Sign in with GitHub
 3. Your `ls_xxx` key is on the dashboard
 
@@ -124,8 +124,8 @@ Your `ls_xxx` key is on the dashboard.
 
 ## Links
 
-- [Website](https://lastsearch.dev)
-- [Documentation](https://lastsearch.dev/docs)
+- [Website](https://lastsearch.ai)
+- [Documentation](https://lastsearch.ai/docs)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)
 - [Discord](https://discord.gg/ubAuT4YQsT)
 - [Python SDK](https://pypi.org/project/lastsearch/)

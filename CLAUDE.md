@@ -146,7 +146,7 @@ Every time a new feature is implemented, go through this checklist before consid
 
 ## Links
 
-- **Site:** https://lastsearch.dev
+- **Site:** https://lastsearch.ai
 - **GitHub:** https://github.com/lastsearch-hq/lastsearch
 - **Discord:** https://discord.gg/ubAuT4YQsT
 - **npm:** https://www.npmjs.com/package/lastsearch

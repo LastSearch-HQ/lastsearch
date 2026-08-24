@@ -15,7 +15,7 @@ import sys
 import httpx
 
 
-API_URL = "https://lastsearch.dev/api/browse/answer/stream"
+API_URL = "https://lastsearch.ai/api/browse/answer/stream"
 
 
 def stream_research(query: str, depth: str = "fast"):

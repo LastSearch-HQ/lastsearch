@@ -118,7 +118,7 @@ Use fast mode when speed matters. Use verified mode when accuracy matters.
 
 ## Links
 
-- [LastSearch](https://lastsearch.dev)
-- [Documentation](https://lastsearch.dev/docs)
+- [LastSearch](https://lastsearch.ai)
+- [Documentation](https://lastsearch.ai/docs)
 - [MCP Server](https://www.npmjs.com/package/lastsearch)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)

@@ -205,7 +205,7 @@ python agent.py "Create a real-time chat application"
 ## Requirements
 
 - Python 3.10+
-- A [LastSearch API key](https://lastsearch.dev) (`ls_xxx` prefix)
+- A [LastSearch API key](https://lastsearch.ai) (`ls_xxx` prefix)
 - Dependencies: `lastsearch`, `rich`
 
 ## License

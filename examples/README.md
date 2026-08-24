@@ -51,10 +51,10 @@ LastSearch is **research infrastructure for AI agents** — every answer comes w
 
 ## Get API Key
 
-- **Free**: Get a BAI key at [lastsearch.dev](https://lastsearch.dev)
+- **Free**: Get a BAI key at [lastsearch.ai](https://lastsearch.ai)
 
 ## Links
 
-- [Documentation](https://lastsearch.dev/developers)
+- [Documentation](https://lastsearch.ai/developers)
 - [Discord](https://discord.gg/ubAuT4YQsT)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)

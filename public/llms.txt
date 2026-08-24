@@ -6,7 +6,7 @@ LastSearch gives AI agents structured, verifiable web research. Unlike chat-base
 
 ## Available As
 - MCP Server: `npx lastsearch` (13 tools)
-- REST API: `https://lastsearch.dev/api/browse/*`
+- REST API: `https://lastsearch.ai/api/browse/*`
 - Python SDK: `pip install lastsearch`
 - LangChain: `pip install langchain-lastsearch`
 - CrewAI: `pip install crewai-lastsearch`
@@ -37,8 +37,8 @@ Previously known as `lastsearch` (npm) and `lastsearch` (PyPI) — renamed to `l
 Not LLM self-assessed. Computed from: verification rate, domain authority, source count, consensus score, domain diversity, claim grounding, source recency, citation depth. Contradiction penalty applied.
 
 ## Links
-- Website: https://lastsearch.dev
-- Docs: https://lastsearch.dev/docs
+- Website: https://lastsearch.ai
+- Docs: https://lastsearch.ai/docs
 - GitHub: https://github.com/lastsearch-hq/lastsearch
 - npm: https://www.npmjs.com/package/lastsearch (renamed from lastsearch, old name still works)
 - PyPI: https://pypi.org/project/lastsearch/ (renamed from lastsearch, old name still works)
@@ -49,4 +49,4 @@ Not LLM self-assessed. Computed from: verification rate, domain authority, sourc
 - Discord: https://discord.gg/ubAuT4YQsT
 
 ## Optional
-- [Full documentation](https://lastsearch.dev/llms-full.txt)
+- [Full documentation](https://lastsearch.ai/llms-full.txt)

@@ -2,9 +2,9 @@
 
 A minimal web app to fact-check any sentence. Paste a claim, get a confidence score, sources, and contradictions.
 
-Built with [LastSearch](https://lastsearch.dev) Python SDK + FastAPI. No build step, no JavaScript framework -- just `pip install` and run.
+Built with [LastSearch](https://lastsearch.ai) Python SDK + FastAPI. No build step, no JavaScript framework -- just `pip install` and run.
 
-![screenshot placeholder](https://lastsearch.dev/og-image.png)
+![screenshot placeholder](https://lastsearch.ai/og-image.png)
 
 ## Quick start
 
@@ -14,7 +14,7 @@ cd examples/is-this-true
 # Install dependencies
 pip install -r requirements.txt
 
-# Set your API key (get one at https://lastsearch.dev)
+# Set your API key (get one at https://lastsearch.ai)
 export LASTSEARCH_API_KEY=ls_xxx
 
 # Run
@@ -68,7 +68,7 @@ This is a standard FastAPI app. Deploy anywhere that runs Python -- Railway, Ren
 
 ## Links
 
-- [LastSearch Docs](https://lastsearch.dev)
+- [LastSearch Docs](https://lastsearch.ai)
 - [Python SDK on PyPI](https://pypi.org/project/lastsearch/)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)
 - [Discord](https://discord.gg/ubAuT4YQsT)

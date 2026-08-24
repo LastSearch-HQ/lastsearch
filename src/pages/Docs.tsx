@@ -72,7 +72,7 @@ const Docs = () => {
         "@type": "TechArticle",
         "headline": "LastSearch Documentation",
         "description": "API reference and technical documentation for LastSearch research infrastructure.",
-        "url": "https://lastsearch.dev/docs",
+        "url": "https://lastsearch.ai/docs",
         "author": { "@type": "Organization", "name": "LastSearch" },
       }}
     />
@@ -183,7 +183,7 @@ const Docs = () => {
 
             <h4 className="text-sm font-semibold text-foreground pt-2">Usage</h4>
 
-            <CodeBlock label="REST API">{`curl -X POST https://lastsearch.dev/api/browse/answer \\
+            <CodeBlock label="REST API">{`curl -X POST https://lastsearch.ai/api/browse/answer \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "What is quantum computing?", "depth": "thorough"}'`}</CodeBlock>
@@ -252,7 +252,7 @@ Or append &depth=thorough to the results URL.`}</CodeBlock>
 
             <h4 className="text-sm font-semibold text-foreground pt-2">Usage</h4>
 
-            <CodeBlock label="REST API">{`curl -X POST https://lastsearch.dev/api/browse/answer \\
+            <CodeBlock label="REST API">{`curl -X POST https://lastsearch.ai/api/browse/answer \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "Compare RISC-V vs ARM for edge AI inference", "depth": "deep"}'`}</CodeBlock>
@@ -273,7 +273,7 @@ for step in result.reasoning_steps:
 
             <CodeBlock label="MCP (Claude Desktop)">{`Ask Claude: "Use answer with depth deep to compare RISC-V vs ARM for edge AI"`}</CodeBlock>
 
-            <CodeBlock label="Streaming (SSE)">{`curl -N -X POST https://lastsearch.dev/api/browse/answer/stream \\
+            <CodeBlock label="Streaming (SSE)">{`curl -N -X POST https://lastsearch.ai/api/browse/answer/stream \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "Compare RISC-V vs ARM for edge AI", "depth": "deep"}'
@@ -332,22 +332,22 @@ print(f"Recalled: {r2.session.recalled_claims}")
 knowledge = session.knowledge()`}</CodeBlock>
 
             <CodeBlock label="REST API">{`# Create session
-curl -X POST https://lastsearch.dev/api/session \\
+curl -X POST https://lastsearch.ai/api/session \\
   -H "Authorization: Bearer ls_xxx" \\
   -d '{"name": "quantum-research"}'
 # Returns: { "success": true, "result": { "id": "abc123", "name": "quantum-research" } }
 
 # Ask within session
-curl -X POST https://lastsearch.dev/api/session/abc123/ask \\
+curl -X POST https://lastsearch.ai/api/session/abc123/ask \\
   -H "Authorization: Bearer ls_xxx" \\
   -d '{"query": "What is quantum entanglement?"}'
 
 # Recall without new search
-curl -X POST https://lastsearch.dev/api/session/abc123/recall \\
+curl -X POST https://lastsearch.ai/api/session/abc123/recall \\
   -d '{"query": "entanglement"}'
 
 # Export knowledge
-curl https://lastsearch.dev/api/session/abc123/knowledge`}</CodeBlock>
+curl https://lastsearch.ai/api/session/abc123/knowledge`}</CodeBlock>
 
             <CodeBlock label="MCP (Claude Desktop)">{`Ask Claude: "Create a research session called quantum-research"
 Then: "In the quantum-research session, what is quantum entanglement?"
@@ -369,7 +369,7 @@ Then: "How is entanglement used in computing?" — prior findings are recalled a
               <h4 className="text-sm font-semibold text-foreground mb-1">API key required</h4>
               <p className="text-xs">
                 Sessions require a LastSearch API key (<code className="bg-secondary px-1 rounded">ls_xxx</code>) for identity and ownership.
-                Get a free key at <a href="https://lastsearch.dev/dashboard" className="text-accent hover:underline">lastsearch.dev/dashboard</a>.
+                Get a free key at <a href="https://lastsearch.ai/dashboard" className="text-accent hover:underline">lastsearch.ai/dashboard</a>.
                 For MCP, set <code className="bg-secondary px-1 rounded">LASTSEARCH_API_KEY</code> env var.
                 For Python SDK, pass <code className="bg-secondary px-1 rounded">api_key="ls_xxx"</code>.
                 For REST API, use <code className="bg-secondary px-1 rounded">Authorization: Bearer ls_xxx</code>.
@@ -384,7 +384,7 @@ Then: "How is entanglement used in computing?" — prior findings are recalled a
 
             <CodeBlock label="Python SDK">{`# Share a session
 share = session.share()
-print(share.url)  # https://lastsearch.dev/session/share/abc123def456
+print(share.url)  # https://lastsearch.ai/session/share/abc123def456
 
 # Another agent forks and continues
 forked = client.fork_session(share.share_id)
@@ -392,15 +392,15 @@ forked_session = client.session(forked.session.name)
 forked_session.ask("What about dark energy?")`}</CodeBlock>
 
             <CodeBlock label="REST API">{`# Share
-curl -X POST https://lastsearch.dev/api/session/abc123/share \\
+curl -X POST https://lastsearch.ai/api/session/abc123/share \\
   -H "Authorization: Bearer ls_xxx"
 # Returns: { "shareId": "abc123def456" }
 
 # View shared session (public, no auth)
-curl https://lastsearch.dev/api/session/share/abc123def456
+curl https://lastsearch.ai/api/session/share/abc123def456
 
 # Fork into your account
-curl -X POST https://lastsearch.dev/api/session/share/abc123def456/fork \\
+curl -X POST https://lastsearch.ai/api/session/share/abc123def456/fork \\
   -H "Authorization: Bearer ls_xxx"`}</CodeBlock>
 
             <CodeBlock label="MCP">{`Ask Claude: "Share my quantum-research session"
@@ -674,7 +674,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
             <p>
               LastSearch follows an open-core model. The SDKs, MCP server, and frontend are Apache 2.0 licensed.
               The verification engine runs as a hosted service at{" "}
-              <a href="https://lastsearch.dev" className="text-accent hover:underline">lastsearch.dev</a>.
+              <a href="https://lastsearch.ai" className="text-accent hover:underline">lastsearch.ai</a>.
               Here's what the hosted service provides:
             </p>
 
@@ -683,7 +683,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 <thead>
                   <tr className="border-b border-border">
                     <th className="text-left py-2 pr-4 font-semibold text-foreground">Feature</th>
-                    <th className="text-left py-2 pr-4 font-semibold text-foreground">Hosted (lastsearch.dev)</th>
+                    <th className="text-left py-2 pr-4 font-semibold text-foreground">Hosted (lastsearch.ai)</th>
                     <th className="text-left py-2 font-semibold text-foreground">Self-Hosted</th>
                   </tr>
                 </thead>
@@ -852,7 +852,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
               },
               {
                 q: "What is the open-core model?",
-                a: "LastSearch uses an open-core model. The client-side components (MCP server, Python SDK, LangChain integration, frontend) are fully open-source under Apache 2.0. The verification engine (search, extraction, verification pipeline, confidence scoring) is a hosted service. All API access requires a LastSearch API key (ls_xxx) — get a free one at lastsearch.dev/dashboard.",
+                a: "LastSearch uses an open-core model. The client-side components (MCP server, Python SDK, LangChain integration, frontend) are fully open-source under Apache 2.0. The verification engine (search, extraction, verification pipeline, confidence scoring) is a hosted service. All API access requires a LastSearch API key (ls_xxx) — get a free one at lastsearch.ai/dashboard.",
               },
               {
                 q: "How is my query data used?",

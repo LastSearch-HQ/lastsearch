@@ -1,6 +1,6 @@
 # lastsearch
 
-**Reliable research infrastructure for AI agents.** Python SDK for [LastSearch](https://lastsearch.dev) — the research layer for LangChain, CrewAI, and custom agent pipelines.
+**Reliable research infrastructure for AI agents.** Python SDK for [LastSearch](https://lastsearch.ai) — the research layer for LangChain, CrewAI, and custom agent pipelines.
 
 ## Install
 
@@ -85,7 +85,7 @@ For real-time progress events, use the streaming endpoint directly:
 ```python
 import httpx
 
-with httpx.stream("POST", "https://lastsearch.dev/api/browse/answer/stream",
+with httpx.stream("POST", "https://lastsearch.ai/api/browse/answer/stream",
     json={"query": "What is quantum computing?"},
     headers={"X-API-Key": "ls_xxx"}
 ) as response:
@@ -100,7 +100,7 @@ Events: `trace` (progress), `sources` (discovered early), `token` (streamed answ
 
 Persistent research sessions that accumulate knowledge across multiple queries. Later queries recall prior knowledge — faster, cheaper, more coherent.
 
-> **Sessions require a LastSearch API key** (`api_key="ls_xxx"`) for identity and ownership. Get a free API key at [lastsearch.dev/dashboard](https://lastsearch.dev/dashboard).
+> **Sessions require a LastSearch API key** (`api_key="ls_xxx"`) for identity and ownership. Get a free API key at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 ```python
 from lastsearch import LastSearch
@@ -134,7 +134,7 @@ session = client.get_session("session-id-here")
 
 # Share with other agents
 share = session.share()
-print(share.url)  # https://lastsearch.dev/session/share/abc123def456
+print(share.url)  # https://lastsearch.ai/session/share/abc123def456
 
 # Another agent forks and continues the research
 forked = client.fork_session(share.share_id)
@@ -166,7 +166,7 @@ Users with a LastSearch API key (`ls_xxx`) get enhanced verification:
 
 Free BAI key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough) — still works, just basic matching. Quota resets every 24 hours. Check `client.last_quota` after any API call for current usage.
 
-Sign in at [lastsearch.dev](https://lastsearch.dev) for a free BAI key to unlock premium features.
+Sign in at [lastsearch.ai](https://lastsearch.ai) for a free BAI key to unlock premium features.
 
 ## Contradictions
 

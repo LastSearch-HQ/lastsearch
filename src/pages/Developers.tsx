@@ -457,7 +457,7 @@ print(result.answer, result.confidence)`}</pre>
                 <p className="text-sm text-muted-foreground mb-3">
                   Use the REST API from any HTTP client. Get a free API key to start.
                 </p>
-                <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`curl -X POST https://lastsearch.dev/api/browse/answer \\
+                <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`curl -X POST https://lastsearch.ai/api/browse/answer \\
   -H "Content-Type: application/json" \\
   -H "X-API-Key: ls_your_key" \\
   -d '{"query": "What causes aurora borealis?", "depth": "deep"}'
@@ -489,7 +489,7 @@ answer  = client.clarity("...", mode="answer")   # LLM answer
 verified = client.clarity("...", mode="verified") # LLM + web fusion
 
 # REST API
-curl -X POST https://lastsearch.dev/api/browse/clarity \\
+curl -X POST https://lastsearch.ai/api/browse/clarity \\
   -H "X-API-Key: ls_xxx" -H "Content-Type: application/json" \\
   -d '{"prompt": "Is coffee good for you?", "mode": "verified"}'`}</pre>
               </div>

@@ -3,7 +3,7 @@
   "name": "io.github.lastsearch-hq/lastsearch",
   "description": "Evidence-backed web research for AI agents with citations and confidence scores.",
   "title": "LastSearch",
-  "websiteUrl": "https://lastsearch.dev",
+  "websiteUrl": "https://lastsearch.ai",
   "repository": {
     "url": "https://github.com/lastsearch-hq/lastsearch",
     "source": "github",
@@ -24,7 +24,7 @@
       "environmentVariables": [
         {
           "name": "LASTSEARCH_API_KEY",
-          "description": "LastSearch API key (get one at https://lastsearch.dev/dashboard). Required for all API access.",
+          "description": "LastSearch API key (get one at https://lastsearch.ai/dashboard). Required for all API access.",
           "isRequired": true,
           "isSecret": true
         }

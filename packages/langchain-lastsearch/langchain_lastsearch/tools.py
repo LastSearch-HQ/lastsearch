@@ -13,7 +13,7 @@ class _LastSearchBase(BaseTool):
     """Base class for LastSearch tools."""
 
     api_key: str = Field(default="", description="LastSearch API key (ls_xxx)")
-    base_url: str = Field(default="https://lastsearch.dev/api", description="API base URL")
+    base_url: str = Field(default="https://lastsearch.ai/api", description="API base URL")
 
     _client: Any = None
 
@@ -21,12 +21,12 @@ class _LastSearchBase(BaseTool):
     def _validate_api_key(self) -> "_LastSearchBase":
         if not self.api_key:
             raise ValueError(
-                "api_key is required. Sign in and get your free API key at https://lastsearch.dev"
+                "api_key is required. Sign in and get your free API key at https://lastsearch.ai"
             )
         if not self.api_key.startswith("ls_"):
             raise ValueError(
                 "Invalid API key format — must start with 'ls_'. "
-                "Sign in and get your free API key at https://lastsearch.dev"
+                "Sign in and get your free API key at https://lastsearch.ai"
             )
         return self
 

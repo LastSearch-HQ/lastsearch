@@ -346,7 +346,7 @@ const Recipes = () => {
               <div className="p-4 rounded-xl bg-accent/5 border border-accent/20 gradient-border card-lift hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
                 <p className="text-sm text-muted-foreground">
                   <span className="text-foreground font-medium">Option 1 — LastSearch API key:</span>{" "}
-                  Log in at <a href="https://lastsearch.dev" className="text-accent hover:underline">lastsearch.dev</a>, get a <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">ls_xxx</code> key,
+                  Log in at <a href="https://lastsearch.ai" className="text-accent hover:underline">lastsearch.ai</a>, get a <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">ls_xxx</code> key,
                   and use it everywhere. One key, all tools, no setup.
                 </p>
               </div>
