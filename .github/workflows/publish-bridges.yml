@@ -1,0 +1,20 @@
+name: Publish Bridge Packages
+on: workflow_dispatch
+
+jobs:
+  pypi-bridges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build twine
+      - name: Build and upload all PyPI bridges
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          for d in bridges/pypi/*/; do
+            (cd "$d" && python -m build && twine upload --skip-existing dist/*)
+          done
