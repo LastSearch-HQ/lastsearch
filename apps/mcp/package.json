@@ -1,7 +1,7 @@
 {
   "name": "lastsearch",
-  "version": "1.0.1",
-  "mcpName": "io.github.lastsearch-hq/lastsearch",
+  "version": "1.0.2",
+  "mcpName": "io.github.LastSearch-HQ/lastsearch",
   "type": "module",
   "description": "Grounded Intelligence for AI agents. MCP server with real-time web search, evidence extraction, verification, and structured citations. The research infrastructure for LangChain, CrewAI, and custom agents.",
   "keywords": [
