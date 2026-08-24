@@ -450,7 +450,7 @@ const Playground = () => {
                       onClick={() => setLoginOpen(true)}
                     >
                       <Lock className="w-4 h-4 text-amber-400 shrink-0" />
-                      <span className="text-amber-400 text-sm">Clarity generates answers with reduced hallucinations — requires BAI key, sign in to unlock</span>
+                      <span className="text-amber-400 text-sm">Clarity generates answers with reduced hallucinations — requires LastSearch key, sign in to unlock</span>
                     </div>
                     <ClarityToggle enabled={clarityEnabled} setEnabled={setClarityEnabled} quota={quota} />
                     <DepthToggle depth={depth} setDepth={setDepth} quota={quota} />
@@ -584,7 +584,7 @@ const Playground = () => {
           </motion.div>
         )}
 
-        {/* API key gate: shown when logged-in user hits demo limit without BAI key */}
+        {/* API key gate: shown when logged-in user hits demo limit without LastSearch key */}
         {showApiKeyGate && user && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-8 rounded-xl bg-card border border-border border-glow text-center space-y-4">
             <div className="w-12 h-12 mx-auto rounded-full bg-accent/10 flex items-center justify-center animate-float">

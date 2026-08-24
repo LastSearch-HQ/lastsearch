@@ -278,7 +278,7 @@ const Index = () => {
             onClick={() => user ? navigate("/dashboard#api-keys") : setLoginOpen(true)}
           >
             <Key className="w-4 h-4" />
-            <span className="hidden sm:inline">Free BAI Key</span>
+            <span className="hidden sm:inline">Free LastSearch Key</span>
           </Button>
           {!authLoading && (user ? <UserMenu /> : (
             <Button variant="ghost" size="sm" className="text-muted-foreground text-xs gap-1.5" onClick={() => setLoginOpen(true)}>
@@ -344,7 +344,7 @@ const Index = () => {
                     className="w-full h-14 pl-12 pr-16 sm:pr-36 bg-amber-500/5 border border-amber-500/30 rounded-xl flex items-center cursor-pointer"
                     onClick={() => setLoginOpen(true)}
                   >
-                    <span className="text-amber-400 text-sm">Clarity rewrites prompts to reduce hallucinations — requires BAI key, sign in to unlock</span>
+                    <span className="text-amber-400 text-sm">Clarity rewrites prompts to reduce hallucinations — requires LastSearch key, sign in to unlock</span>
                   </div>
                   <Button
                     onClick={() => setLoginOpen(true)}
@@ -1599,11 +1599,11 @@ result = client.ask("What causes aurora borealis?")`}</pre>
               </div>
               <ul className="space-y-2.5 text-sm flex-1">
                 <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> MCP, Python SDK &amp; REST API access</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> 100 premium queries/day with BAI key</li>
+                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> 100 premium queries/day with LastSearch key</li>
                 <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Semantic verification + multi-provider search</li>
                 <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Thorough + deep modes</li>
                 <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Falls back to unlimited basic after quota</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> One BAI key + query history</li>
+                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> One LastSearch key + query history</li>
               </ul>
               <Button
                 variant="outline"

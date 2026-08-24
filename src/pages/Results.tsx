@@ -57,7 +57,7 @@ const Results = () => {
 
   // Login gate: show modal when demo limit is reached (non-logged-in users)
   const [showLoginGate, setShowLoginGate] = useState(false);
-  // API key gate: show prompt when logged-in user has no BAI key and hits limit
+  // API key gate: show prompt when logged-in user has no LastSearch key and hits limit
   const [showApiKeyGate, setShowApiKeyGate] = useState(false);
 
   // Track whether we're in the "streaming tokens" phase
@@ -354,7 +354,7 @@ const Results = () => {
               </motion.div>
             )}
 
-            {/* API key gate: shown when logged-in user hits demo limit without BAI key */}
+            {/* API key gate: shown when logged-in user hits demo limit without LastSearch key */}
             {showApiKeyGate && user && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-8 rounded-xl bg-card border border-border text-center space-y-4 transition-all duration-300 hover:border-accent/20 hover:shadow-lg hover:shadow-accent/5">
                 <div className="w-12 h-12 mx-auto rounded-full bg-accent/10 flex items-center justify-center glow-pulse">

@@ -123,7 +123,7 @@ class LastSearch:
         api_key = config.get("api_key")
         if not api_key:
             raise ValueError(
-                "No api_key in config. Run 'lastsearch setup' to configure your BAI key."
+                "No api_key in config. Run 'lastsearch setup' to configure your LastSearch key."
             )
         return cls(api_key=api_key, **kwargs)
 
@@ -449,7 +449,7 @@ class AsyncLastSearch:
         api_key = config.get("api_key")
         if not api_key:
             raise ValueError(
-                "No api_key in config. Run 'lastsearch setup' to configure your BAI key."
+                "No api_key in config. Run 'lastsearch setup' to configure your LastSearch key."
             )
         return cls(api_key=api_key, **kwargs)
 

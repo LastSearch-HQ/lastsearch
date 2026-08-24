@@ -53,7 +53,7 @@ export function DepthToggle({ depth, setDepth, quota, size = "md" }: DepthToggle
 
     if (next === "deep" && !deepAvailable) {
       if (!isLoggedIn) {
-        setHint("Deep mode requires a BAI key — sign in to unlock");
+        setHint("Deep mode requires a LastSearch key — sign in to unlock");
       } else if (quota && !quota.premiumActive) {
         const resetTime = formatResetTime(quota.resetsInSeconds);
         setHint(`Deep mode exhausted today (${quota.used}/${quota.limit}) — resets in ${resetTime}`);

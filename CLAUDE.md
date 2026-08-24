@@ -32,7 +32,7 @@ This project spans **two repositories**. Always consider both when making change
 - **Auth/key changes** → both repos (engine auth middleware + MCP/SDK client code)
 - **Version bumps** → public repo only (MCP package.json + index.ts, Python SDK pyproject.toml + __init__.py)
 
-**All API access requires a BAI key (`ls_xxx`).** There is no BYOK (bring your own keys) mode. The engine handles all search and LLM calls server-side.
+**All API access requires a LastSearch key (`ls_xxx`).** There is no BYOK (bring your own keys) mode. The engine handles all search and LLM calls server-side.
 
 ## Key commands
 
@@ -62,7 +62,7 @@ npx pnpm --filter lastsearch build  # Build MCP only
 - **Counter-query verification:** Verified claims are stress-tested with adversarial "what would disprove this?" search queries. If counter-evidence snippets contain strong negation signals, claim scores are penalized. Premium tier only.
 - **Cached secondary search:** Brave and Exa search results are cached (10 min TTL) to avoid wasting API credits on page refresh or pipeline retries.
 - **Tier gating:** `ls_` API key users get premium pipeline (NLI reranking, multi-provider search, multi-pass consistency). Demo users get BM25-only verification. Controlled via `hasBaiKey` flag in engine.
-- **Premium quota:** Free BAI key users get 100 premium queries/day (`FREE_PREMIUM_DAILY_LIMIT`). Deep mode costs 3x. Tracked via Redis counter (`premium_quota:{userId}`, 24hr TTL). When exceeded, premium keys are stripped — graceful fallback to BM25 keyword verification. Quota info returned in API responses as `{ quota: { used, limit, premiumActive, resetsInSeconds } }`. Increment happens after successful answer/stream queries only.
+- **Premium quota:** Free LastSearch key users get 100 premium queries/day (`FREE_PREMIUM_DAILY_LIMIT`). Deep mode costs 3x. Tracked via Redis counter (`premium_quota:{userId}`, 24hr TTL). When exceeded, premium keys are stripped — graceful fallback to BM25 keyword verification. Quota info returned in API responses as `{ quota: { used, limit, premiumActive, resetsInSeconds } }`. Increment happens after successful answer/stream queries only.
 - **Caching:** Upstash Redis (via Vercel KV) with smart TTL (time-sensitive queries get shorter TTL). Falls back to in-memory if KV env vars not set. Cache key includes depth param.
 - **Demo rate limit:** 1 query/hour per IP for unauthenticated users.
 - **API keys:** All API access requires a LastSearch API key (`ls_xxx` prefix). Demo mode on the website uses server-side keys with rate limits.

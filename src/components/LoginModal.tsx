@@ -59,7 +59,7 @@ export function LoginModal({ open: controlledOpen, onOpenChange, redirectTo }: L
           </Button>
         </div>
         <p className="text-xs text-muted-foreground text-center">
-          Sign in to create a BAI key and access free premium features.
+          Sign in to create a LastSearch key and access free premium features.
         </p>
       </DialogContent>
     </Dialog>

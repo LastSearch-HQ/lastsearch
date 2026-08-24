@@ -56,7 +56,7 @@ Three depth levels control research thoroughness:
 |-------|----------|----------|
 | `fast` (default) | Single search → extract → verify pass | Quick lookups, real-time agents |
 | `thorough` | Iterative confidence-gated loop (up to 3 passes), per-claim evidence retrieval, counter-query verification, multi-pass consistency checking | Important research, fact-checking |
-| `deep` | Premium multi-step agentic research: iterative think-search-extract-evaluate cycles (up to 4 total steps). Gap analysis identifies missing info, generates follow-up queries. Claims/sources merged across steps with final re-verification. Target confidence: 0.85. Requires BAI key + sign-in. Falls back to thorough when quota exhausted. | Complex research questions, comprehensive analysis |
+| `deep` | Premium multi-step agentic research: iterative think-search-extract-evaluate cycles (up to 4 total steps). Gap analysis identifies missing info, generates follow-up queries. Claims/sources merged across steps with final re-verification. Target confidence: 0.85. Requires LastSearch key + sign-in. Falls back to thorough when quota exhausted. | Complex research questions, comprehensive analysis |
 
 ```bash
 # Thorough mode
@@ -72,7 +72,7 @@ curl -X POST https://lastsearch.ai/api/browse/answer \
   -d '{"query": "Compare CRISPR approaches for sickle cell disease", "depth": "deep"}'
 ```
 
-Deep mode runs iterative think-search-extract-evaluate cycles: each step performs gap analysis to identify what's missing, generates targeted follow-up queries, and merges claims/sources across steps with a final re-verification pass. It targets a confidence threshold of 0.85 (`DEEP_CONFIDENCE_THRESHOLD`) and runs up to 3 follow-up steps (`MAX_FOLLOW_UP_STEPS`, 4 total including the initial pass). Uses semantic reranking, multi-provider search, and multi-pass consistency. Each deep query costs 3x quota (100 deep queries/day). When quota is exhausted, deep mode gracefully falls back to thorough. Without a BAI key, deep mode also falls back to thorough.
+Deep mode runs iterative think-search-extract-evaluate cycles: each step performs gap analysis to identify what's missing, generates targeted follow-up queries, and merges claims/sources across steps with a final re-verification pass. It targets a confidence threshold of 0.85 (`DEEP_CONFIDENCE_THRESHOLD`) and runs up to 3 follow-up steps (`MAX_FOLLOW_UP_STEPS`, 4 total including the initial pass). Uses semantic reranking, multi-provider search, and multi-pass consistency. Each deep query costs 3x quota (100 deep queries/day). When quota is exhausted, deep mode gracefully falls back to thorough. Without a LastSearch key, deep mode also falls back to thorough.
 
 Deep mode responses include `reasoningSteps` showing the multi-step research process (step number, query, gap analysis, claim count, confidence per step).
 
@@ -186,7 +186,7 @@ for source in result.sources:
 # Thorough mode — auto-retries if confidence < 60%
 thorough = client.ask("What is quantum computing?", depth="thorough")
 
-# Deep mode — multi-step reasoning with gap analysis (requires BAI key)
+# Deep mode — multi-step reasoning with gap analysis (requires LastSearch key)
 deep = client.ask("Compare CRISPR approaches for sickle cell disease", depth="deep")
 for step in deep.reasoning_steps or []:
     print(f"  Step {step.step}: {step.query} ({step.confidence:.0%})")
@@ -283,7 +283,7 @@ All API access requires a LastSearch API key (`ls_xxx`). Sign up for free at [la
 
 The free tier includes 100 premium queries/day (or ~33 deep queries/day at 3x cost each). When the quota is reached, queries gracefully fall back to keyword verification (or deep falls back to thorough) — still works, just basic matching. Quota resets every 24 hours. Pro removes all limits.
 
-API responses include quota info when using a BAI key:
+API responses include quota info when using a LastSearch key:
 ```json
 {
   "success": true,
@@ -480,7 +480,7 @@ Every answer includes structured fields for programmatic trust decisions:
 - `contradictions` — detected conflicts between claims (with confidence score)
 - `reasoningSteps` — deep mode only: multi-step research iterations with gap analysis
 - `trace` — execution timeline for debugging and monitoring
-- `quota` — premium quota usage (BAI key users only): `used`, `limit`, `premiumActive`
+- `quota` — premium quota usage (LastSearch key users only): `used`, `limit`, `premiumActive`
 
 ## Examples
 
