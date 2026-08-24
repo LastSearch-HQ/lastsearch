@@ -36,7 +36,7 @@ cat > .vercel/output/functions/api/mcp.func/.vc-config.json << 'EOF'
 EOF
 
 # 5. Route config — /api/mcp served locally, /api/* proxied to engine
-ENGINE_URL="${ENGINE_URL:-https://lastsearch-engine.vercel.app}"
+ENGINE_URL="${ENGINE_URL:-https://api.lastsearch.ai}"
 cat > .vercel/output/config.json << CONF
 {
   "version": 3,
