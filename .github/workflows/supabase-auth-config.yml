@@ -1,0 +1,47 @@
+name: Update Supabase Auth URLs
+on: workflow_dispatch
+
+jobs:
+  update-auth-config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add lastsearch.ai to site URL and redirect allowlist
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+        run: |
+          python3 - << 'PYEOF'
+          import json, os, urllib.request
+
+          ref = os.environ["PROJECT_REF"]
+          headers = {
+              "Authorization": f"Bearer {os.environ['SUPABASE_ACCESS_TOKEN']}",
+              "Content-Type": "application/json",
+          }
+          base = f"https://api.supabase.com/v1/projects/{ref}/config/auth"
+
+          req = urllib.request.Request(base, headers=headers)
+          cfg = json.loads(urllib.request.urlopen(req).read())
+          print("BEFORE site_url:", cfg.get("site_url"))
+          print("BEFORE uri_allow_list:", cfg.get("uri_allow_list"))
+
+          current = [u.strip() for u in (cfg.get("uri_allow_list") or "").split(",") if u.strip()]
+          for u in [
+              "https://lastsearch.ai/**",
+              "https://www.lastsearch.ai/**",
+              "https://lastsearch.dev/**",
+              "https://browseai.dev/**",
+              "https://www.browseai.dev/**",
+          ]:
+              if u not in current:
+                  current.append(u)
+
+          payload = json.dumps({
+              "site_url": "https://lastsearch.ai",
+              "uri_allow_list": ",".join(current),
+          }).encode()
+          req = urllib.request.Request(base, data=payload, headers=headers, method="PATCH")
+          out = json.loads(urllib.request.urlopen(req).read())
+          print("AFTER site_url:", out.get("site_url"))
+          print("AFTER uri_allow_list:", out.get("uri_allow_list"))
+          PYEOF
