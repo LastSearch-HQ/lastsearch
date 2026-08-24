@@ -88,7 +88,7 @@ async function apiCall(path: string, body: Record<string, unknown>) {
     });
   } catch (e) {
     if (e instanceof Error && e.name === "TimeoutError") {
-      throw new Error("Request timed out. Try a lower depth (fast/thorough) or retry.");
+      throw new Error("Request timed out. Try a lower depth (fast/thorough) or retry.", { cause: e });
     }
     throw e;
   }

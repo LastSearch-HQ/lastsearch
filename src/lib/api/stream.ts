@@ -4,7 +4,7 @@
  */
 
 import { getCachedAccessToken } from "./auth";
-import type { BrowseResult } from "./browse";
+import type { BrowseResult } from "./lastsearch";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 

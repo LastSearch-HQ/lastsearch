@@ -18,7 +18,7 @@ const rows: Array<[string, string]> = [
 export default function Migrate() {
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Migrating from BrowseAI Dev — LastSearch" description="BrowseAI Dev is now LastSearch. One-line migration for every surface: packages, API keys, env vars, MCP tools. Nothing breaks before October 31, 2026." path="/migrate" />
+      <SEO title="Migrating from BrowseAI Dev — LastSearch" description="BrowseAI Dev is now LastSearch. One-line migration for every surface: packages, API keys, env vars, MCP tools. Nothing breaks before October 31, 2026." canonical="/migrate" />
       <main className="max-w-3xl mx-auto px-6 py-16">
         <div className="flex items-center gap-3 mb-8">
           <LastSearchLogo className="w-8 h-8" />
