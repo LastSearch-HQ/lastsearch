@@ -1,0 +1,8 @@
+{
+  "name": "browse-ai",
+  "version": "1.0.0",
+  "description": "DEPRECATED — BrowseAI Dev is now LastSearch. This package installs and launches lastsearch. Migrate: npx lastsearch · https://lastsearch.ai/migrate",
+  "bin": { "browse-ai": "index.js" },
+  "dependencies": { "lastsearch": "^1.0.0" },
+  "scripts": { "postinstall": "node -e \"console.warn('\n⚠ browse-ai is now lastsearch — https://lastsearch.ai/migrate (this bridge stops working 2026-10-31)\n')\"" }
+}

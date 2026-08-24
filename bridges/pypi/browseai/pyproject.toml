@@ -1,0 +1,8 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[project]
+name = "browseai"
+version = "1.0.0"
+description = "DEPRECATED - BrowseAI Dev is now LastSearch. pip install lastsearch - https://lastsearch.ai/migrate"
+dependencies = ["lastsearch>=1.0.0"]
