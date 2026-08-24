@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BrowseLogo } from "@/components/BrowseLogo";
+import { LastSearchLogo } from "@/components/LastSearchLogo";
 
 const NAV_ITEMS = [
   { id: "pipeline", label: "Pipeline", icon: Layers },

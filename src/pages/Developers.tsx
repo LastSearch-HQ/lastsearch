@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BrowseLogo } from "@/components/BrowseLogo";
+import { LastSearchLogo } from "@/components/LastSearchLogo";
 import { useContributors } from "@/hooks/useContributors";
 
 const CONTRIBUTION_AREAS = [
@@ -170,7 +170,7 @@ const Developers = () => {
             <span className="hidden sm:inline">Developers</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" onClick={() => navigate("/recipes")}>
-            <BrowseLogo className="w-4 h-4 sm:hidden" />
+            <LastSearchLogo className="w-4 h-4 sm:hidden" />
             <span className="hidden sm:inline">Recipes</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
@@ -508,7 +508,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
             className="p-8 rounded-xl bg-accent/5 border border-accent/20 text-center glow-pulse"
           >
             <div className="flex items-center justify-center gap-2 mb-3">
-              <BrowseLogo className="w-5 h-5 text-accent animate-float" />
+              <LastSearchLogo className="w-5 h-5 text-accent animate-float" />
               <h3 className="text-xl font-bold">Agent Recipes</h3>
             </div>
             <p className="text-muted-foreground mb-5 max-w-lg mx-auto">

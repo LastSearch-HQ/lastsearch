@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Shield, ShieldAlert, Globe, Quote, Bot, Clock, CheckCircle2, Code, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BrowseBadge } from "@/components/BrowseBadge";
+import { LastSearchBadge } from "@/components/LastSearchBadge";
 import { LoginModal } from "@/components/LoginModal";
 import { UserMenu } from "@/components/UserMenu";
 import { useAuth } from "@/contexts/AuthContext";
-import { browseCompare, type CompareResult } from "@/lib/api/browse";
+import { browseCompare, type CompareResult } from "@/lib/api/lastsearch";
 
 const Compare = () => {
   const [searchParams] = useSearchParams();
@@ -326,7 +326,7 @@ const Compare = () => {
             </motion.div>
 
             <div className="flex justify-center pt-4">
-              <BrowseBadge />
+              <LastSearchBadge />
             </div>
           </motion.div>
         )}

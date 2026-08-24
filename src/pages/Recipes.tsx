@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BrowseLogo } from "@/components/BrowseLogo";
+import { LastSearchLogo } from "@/components/LastSearchLogo";
 
 const GITHUB_EXAMPLES = "https://github.com/lastsearch-hq/lastsearch/blob/main/examples";
 
@@ -148,7 +148,7 @@ const Recipes = () => {
             <span className="hidden sm:inline">Developers</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-foreground text-xs font-medium" onClick={() => navigate("/recipes")}>
-            <BrowseLogo className="w-4 h-4 sm:hidden" />
+            <LastSearchLogo className="w-4 h-4 sm:hidden" />
             <span className="hidden sm:inline">Recipes</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
@@ -270,7 +270,7 @@ const Recipes = () => {
               className="p-6 rounded-xl border border-dashed border-accent/20 hover:border-accent/30 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3"
             >
               <div className="p-2 rounded-lg bg-accent/10">
-                <BrowseLogo className="w-4 h-4 text-accent animate-float" />
+                <LastSearchLogo className="w-4 h-4 text-accent animate-float" />
               </div>
               <span className="font-semibold text-muted-foreground">More coming soon</span>
               <p className="text-sm text-muted-foreground">

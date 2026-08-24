@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Brain, CheckCircle2, ExternalLink, GitFork, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BrowseBadge } from "@/components/BrowseBadge";
+import { LastSearchBadge } from "@/components/LastSearchBadge";
 import { LoginModal } from "@/components/LoginModal";
 import { UserMenu } from "@/components/UserMenu";
 import { useAuth } from "@/contexts/AuthContext";
@@ -251,7 +251,7 @@ const SharedSession = () => {
                   Try a Quick Search
                 </Button>
               </div>
-              <BrowseBadge />
+              <LastSearchBadge />
             </motion.div>
           </>
         )}

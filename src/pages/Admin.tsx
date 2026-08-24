@@ -6,7 +6,7 @@ import {
   Plus, Trash2, CheckCircle2, Sparkles, Download, Star, GitFork, Package,
   RefreshCw, Globe, Loader2,
 } from "lucide-react";
-import { BrowseLogo } from "@/components/BrowseLogo";
+import { LastSearchLogo } from "@/components/LastSearchLogo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -195,7 +195,7 @@ const Admin = () => {
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-                    <BrowseLogo className="w-4 h-4" />
+                    <LastSearchLogo className="w-4 h-4" />
                     Today
                   </div>
                   <p className="text-3xl font-bold">{metrics.queriesToday}</p>

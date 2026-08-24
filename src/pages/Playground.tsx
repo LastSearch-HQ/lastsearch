@@ -15,7 +15,7 @@ import { ClarityToggle, isClarityBlocked } from "@/components/ClarityToggle";
 import {
   browseSearch, browseExtract, browseCompare, browseOpen, browseFeedback, browseClarity,
   type BrowseSource, type BrowseClaim, type QuotaInfo, type ClarityResult,
-} from "@/lib/api/browse";
+} from "@/lib/api/lastsearch";
 import { streamAnswer as streamAnswerApi, type TraceEvent, type SourcePreview, type StreamEvent, type PremiumQuota } from "@/lib/api/stream";
 import { StreamingAnswer } from "@/components/results/StreamingAnswer";
 import { StreamingPipeline } from "@/components/results/StreamingPipeline";

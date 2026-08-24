@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Code2 } from "lucide-react";
-import type { BrowseResult } from "@/lib/api/browse";
+import type { BrowseResult } from "@/lib/api/lastsearch";
 
 export function AgentJson({ result }: { result: BrowseResult }) {
   const json = JSON.stringify(

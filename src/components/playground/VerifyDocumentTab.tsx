@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Loader2, FileCheck2, CheckCircle2, XCircle, AlertCircle, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { browseVerifyDocument, type VerifyDocumentResult } from "@/lib/api/browse";
+import { browseVerifyDocument, type VerifyDocumentResult } from "@/lib/api/lastsearch";
 
 const EXAMPLE_REPORT = `Apple announced the iPhone 15 in September 2023, featuring USB-C port replacing the Lightning connector. OpenAI released GPT-4o in May 2024 with native multimodal capabilities. Anthropic released Claude 3.5 Sonnet in October 2023. Python 3.12 removed the GIL.`;
 

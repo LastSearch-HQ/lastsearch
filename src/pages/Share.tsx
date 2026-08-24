@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 import { FinalAnswer } from "@/components/results/FinalAnswer";
 import { EvidenceGraph } from "@/components/results/EvidenceGraph";
 import { TracePipeline } from "@/components/results/TracePipeline";
-import { BrowseBadge } from "@/components/BrowseBadge";
+import { LastSearchBadge } from "@/components/LastSearchBadge";
 import { LoginModal } from "@/components/LoginModal";
 import { UserMenu } from "@/components/UserMenu";
 import { useAuth } from "@/contexts/AuthContext";
-import type { BrowseResult } from "@/lib/api/browse";
+import type { BrowseResult } from "@/lib/api/lastsearch";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -96,7 +96,7 @@ const Share = () => {
                 Try your own query
                 <ExternalLink className="w-3.5 h-3.5" />
               </Button>
-              <BrowseBadge />
+              <LastSearchBadge />
             </motion.div>
           </>
         )}
