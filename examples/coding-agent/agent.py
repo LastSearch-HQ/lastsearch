@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Coding Agent — Research before you write, so you never ship hallucinated APIs.
 
-An AI coding agent that uses BrowseAI to verify libraries, check for deprecations,
+An AI coding agent that uses LastSearch to verify libraries, check for deprecations,
 and find current best practices BEFORE generating code. No more recommending
 packages that don't exist or APIs that were removed three versions ago.
 
@@ -9,7 +9,7 @@ Usage:
     python agent.py "Build a WebSocket server in Python"
     python agent.py "Create a REST API with JWT authentication"
     python agent.py  # Interactive mode
-    BROWSEAI_API_KEY=bai_xxx python agent.py "Build a rate limiter in Python"
+    LASTSEARCH_API_KEY=ls_xxx python agent.py "Build a rate limiter in Python"
 """
 
 from __future__ import annotations
@@ -21,8 +21,8 @@ import sys
 import time
 import textwrap
 
-from browseaidev import BrowseAIDev
-from browseaidev.models import BrowseResult
+from lastsearch import LastSearch
+from lastsearch.models import BrowseResult
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -40,13 +40,13 @@ console = Console()
 
 def get_api_key() -> str:
     """Resolve API key from env or prompt."""
-    key = os.environ.get("BROWSEAI_API_KEY", "")
+    key = os.environ.get("LASTSEARCH_API_KEY", "")
     if key:
         return key
     console.print(
-        "[dim]Tip: set BROWSEAI_API_KEY env var to skip this prompt.[/dim]"
+        "[dim]Tip: set LASTSEARCH_API_KEY env var to skip this prompt.[/dim]"
     )
-    key = console.input("[bold]Enter your BrowseAI API key:[/bold] ").strip()
+    key = console.input("[bold]Enter your LastSearch API key:[/bold] ").strip()
     if not key:
         console.print("[red]No API key provided. Exiting.[/red]")
         sys.exit(1)
@@ -284,7 +284,7 @@ def phase_generate(session, task: str, research: BrowseResult, verified: list[di
             + ", ".join(f"[bold]{lib}[/bold]" for lib in unsafe_libs)
         )
 
-    # Ask BrowseAI to generate code with the verified context
+    # Ask LastSearch to generate code with the verified context
     lib_context = ""
     if safe_libs:
         lib_context = f"Use ONLY these verified libraries: {', '.join(safe_libs)}. "
@@ -346,9 +346,9 @@ def phase_generate(session, task: str, research: BrowseResult, verified: list[di
 
 
 def show_comparison(task: str) -> None:
-    """Show the 'Without BrowseAI' vs 'With BrowseAI' comparison."""
+    """Show the 'Without LastSearch' vs 'With LastSearch' comparison."""
     console.print()
-    console.rule("[bold]Without BrowseAI vs With BrowseAI[/bold]")
+    console.rule("[bold]Without LastSearch vs With LastSearch[/bold]")
     console.print()
 
     without = Panel(
@@ -362,12 +362,12 @@ def show_comparison(task: str) -> None:
         "[bold red]Risk:[/bold red] Code uses packages that don't\n"
         "exist or APIs that were removed, breaking\n"
         "at install time or runtime.",
-        title="Without BrowseAI",
+        title="Without LastSearch",
         border_style="red",
         padding=(1, 2),
     )
 
-    with_browseai = Panel(
+    with_lastsearch = Panel(
         "[green]1.[/green] Agent receives task\n"
         "[green]2.[/green] Researches best libraries (real-time search)\n"
         "[green]3.[/green] Verifies each library on PyPI\n"
@@ -378,12 +378,12 @@ def show_comparison(task: str) -> None:
         "[bold green]Result:[/bold green] Every import in the generated\n"
         "code maps to a real, maintained package\n"
         "with verified API usage.",
-        title="With BrowseAI",
+        title="With LastSearch",
         border_style="green",
         padding=(1, 2),
     )
 
-    console.print(Columns([without, with_browseai], padding=(0, 2), expand=True))
+    console.print(Columns([without, with_lastsearch], padding=(0, 2), expand=True))
 
 
 def show_session_knowledge(session) -> None:
@@ -433,7 +433,7 @@ def show_session_knowledge(session) -> None:
 
 def run_agent(task: str, api_key: str) -> None:
     """Run the full coding agent pipeline for a single task."""
-    client = BrowseAIDev(api_key=api_key)
+    client = LastSearch(api_key=api_key)
 
     # Create a session so knowledge accumulates across tasks
     session = client.session("coding-agent")
@@ -482,7 +482,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "AI Coding Agent that researches before writing code. "
-            "Uses BrowseAI to verify libraries and check for deprecations."
+            "Uses LastSearch to verify libraries and check for deprecations."
         ),
         epilog=(
             "Examples:\n"
@@ -500,7 +500,7 @@ def main() -> None:
     console.print(
         Panel(
             "[bold]CODING AGENT[/bold]\n"
-            "[dim]Research-first code generation powered by BrowseAI[/dim]\n\n"
+            "[dim]Research-first code generation powered by LastSearch[/dim]\n\n"
             "[dim]Research  ->  Verify  ->  Generate[/dim]",
             border_style="bright_blue",
             padding=(1, 4),

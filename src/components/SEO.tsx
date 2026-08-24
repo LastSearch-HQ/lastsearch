@@ -9,9 +9,9 @@ interface SEOProps {
   structuredData?: object;
 }
 
-const SITE_NAME = "BrowseAI Dev";
+const SITE_NAME = "LastSearch";
 const DEFAULT_DESC = "Research infrastructure for AI agents. Evidence-backed web search with citations, confidence scores, and Clarity anti-hallucination answer engine. MCP server, REST API, and Python SDK.";
-const BASE_URL = "https://browseai.dev";
+const BASE_URL = "https://lastsearch.ai";
 
 export function SEO({
   title,

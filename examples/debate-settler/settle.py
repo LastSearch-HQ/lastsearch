@@ -4,7 +4,7 @@
 Usage:
     python settle.py "Python is faster than JavaScript" "JavaScript is faster than Python"
     python settle.py  # Interactive mode — prompts for claims
-    BROWSEAI_API_KEY=bai_xxx python settle.py "claim A" "claim B"
+    LASTSEARCH_API_KEY=ls_xxx python settle.py "claim A" "claim B"
 """
 
 from __future__ import annotations
@@ -14,8 +14,8 @@ import os
 import sys
 import time
 
-from browseaidev import BrowseAIDev
-from browseaidev.models import BrowseResult
+from lastsearch import LastSearch
+from lastsearch.models import BrowseResult
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -30,20 +30,20 @@ console = Console()
 
 def get_api_key() -> str:
     """Resolve API key from env or prompt."""
-    key = os.environ.get("BROWSEAI_API_KEY", "")
+    key = os.environ.get("LASTSEARCH_API_KEY", "")
     if key:
         return key
     console.print(
-        "[dim]Tip: set BROWSEAI_API_KEY env var to skip this prompt.[/dim]"
+        "[dim]Tip: set LASTSEARCH_API_KEY env var to skip this prompt.[/dim]"
     )
-    key = console.input("[bold]Enter your BrowseAI API key:[/bold] ").strip()
+    key = console.input("[bold]Enter your LastSearch API key:[/bold] ").strip()
     if not key:
         console.print("[red]No API key provided. Exiting.[/red]")
         sys.exit(1)
     return key
 
 
-def research_claim(client: BrowseAIDev, claim: str, label: str) -> BrowseResult:
+def research_claim(client: LastSearch, claim: str, label: str) -> BrowseResult:
     """Research a single claim using thorough mode."""
     console.print(f"\n[bold blue]Researching {label}:[/bold blue] {claim}")
     with console.status(f"[bold green]Searching & verifying {label}...[/bold green]"):
@@ -316,7 +316,7 @@ def main() -> None:
     console.print(
         Panel(
             "[bold]DEBATE SETTLER[/bold]\n"
-            "[dim]Powered by BrowseAI — Evidence-backed research[/dim]",
+            "[dim]Powered by LastSearch — Evidence-backed research[/dim]",
             border_style="bright_blue",
             padding=(1, 4),
         )
@@ -336,7 +336,7 @@ def main() -> None:
 
     # Initialize client
     api_key = get_api_key()
-    client = BrowseAIDev(api_key=api_key)
+    client = LastSearch(api_key=api_key)
 
     # Research both sides
     console.rule("[bold]Researching Both Sides[/bold]")

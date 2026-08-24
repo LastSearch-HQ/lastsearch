@@ -105,10 +105,10 @@ export function ApiKeyManager() {
     if (!newKey) return;
     const snippet = JSON.stringify(
       {
-        "browseai-dev": {
+        "lastsearch": {
           command: "npx",
-          args: ["-y", "browseai-dev"],
-          env: { BROWSE_API_KEY: newKey },
+          args: ["-y", "lastsearch"],
+          env: { LASTSEARCH_API_KEY: newKey },
         },
       },
       null,
@@ -140,7 +140,7 @@ export function ApiKeyManager() {
           {/* Generate form */}
           <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); handleCreate(); }}>
             <p className="text-sm text-muted-foreground">
-              Generate a BrowseAI Dev API key to use with MCP, Python SDK, REST API, and CLI.
+              Generate a LastSearch API key to use with MCP, Python SDK, REST API, and CLI.
               Add your OpenRouter and Tavily keys to get unlimited access with the full Grounded Intelligence verification pipeline.
             </p>
 
@@ -190,11 +190,11 @@ export function ApiKeyManager() {
               <div className="p-2.5 rounded-md bg-emerald-500/5 border border-emerald-500/15 space-y-1">
                 <p className="text-[11px] font-medium text-emerald-400">What you get beyond raw search & LLM</p>
                 <p className="text-[10px] text-muted-foreground leading-relaxed">
-                  Your keys power search and answer generation. BrowseAI Dev layers <strong className="text-foreground">Grounded Intelligence</strong> on top — semantic NLI verification, cross-source consensus analysis, contradiction detection, Bayesian domain authority scoring, evidence-based confidence calibration, and multi-provider source diversity. One <code className="bg-secondary px-0.5 rounded">bai_xxx</code> key unlocks the full pipeline across MCP, SDK, and API.
+                  Your keys power search and answer generation. LastSearch layers <strong className="text-foreground">Grounded Intelligence</strong> on top — semantic NLI verification, cross-source consensus analysis, contradiction detection, Bayesian domain authority scoring, evidence-based confidence calibration, and multi-provider source diversity. One <code className="bg-secondary px-0.5 rounded">ls_xxx</code> key unlocks the full pipeline across MCP, SDK, and API.
                 </p>
               </div>
 
-              <h4 className="text-xs font-semibold text-foreground pt-1">Step 3: Generate your BrowseAI Dev key</h4>
+              <h4 className="text-xs font-semibold text-foreground pt-1">Step 3: Generate your LastSearch key</h4>
               <div className="flex items-center gap-3">
                 <Input
                   placeholder="Key label (optional, e.g. 'cursor', 'production')"
@@ -213,7 +213,7 @@ export function ApiKeyManager() {
                 </Button>
               </div>
               <p className="text-[11px] text-muted-foreground">
-                Your keys are encrypted and stored securely. You'll get a single <code className="bg-secondary px-1 rounded">bai_xxx</code> key to use everywhere.
+                Your keys are encrypted and stored securely. You'll get a single <code className="bg-secondary px-1 rounded">ls_xxx</code> key to use everywhere.
               </p>
             </div>
           </form>
@@ -280,7 +280,7 @@ export function ApiKeyManager() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Key className="w-4 h-4 text-accent" />
-              Your BrowseAI Dev API Key
+              Your LastSearch API Key
             </DialogTitle>
             <DialogDescription>
               Copy this key now. It will not be shown again.
@@ -314,11 +314,11 @@ export function ApiKeyManager() {
               </h4>
               <pre className="text-xs font-mono bg-muted p-3 rounded-lg overflow-x-auto">
 {`{
-  "browseai-dev": {
+  "lastsearch": {
     "command": "npx",
-    "args": ["-y", "browseai-dev"],
+    "args": ["-y", "lastsearch"],
     "env": {
-      "BROWSE_API_KEY": "${newKey}"
+      "LASTSEARCH_API_KEY": "${newKey}"
     }
   }
 }`}

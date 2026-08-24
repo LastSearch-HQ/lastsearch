@@ -1,4 +1,4 @@
-# browseai-dev
+# lastsearch
 
 **Reliable research infrastructure for AI agents.** The research layer your agents are missing.
 
@@ -6,7 +6,7 @@ MCP server with real-time web search, evidence extraction, and structured citati
 
 ## What it does
 
-Instead of letting your AI hallucinate, `browseai-dev` gives it real-time access to the web with **structured, cited answers**:
+Instead of letting your AI hallucinate, `lastsearch` gives it real-time access to the web with **structured, cited answers**:
 
 ```
 Your question → Web search → Neural rerank → Fetch pages → Extract claims → Verify → Cited answer (streamed)
@@ -20,9 +20,9 @@ Every answer includes:
 - **Execution trace** with timing
 - **3 depth modes** — `"fast"` (default), `"thorough"` (auto-retry with rephrased queries), `"deep"` (premium multi-step agentic research: iterative think-search-extract-evaluate cycles with gap analysis, up to 4 steps, targets 0.85 confidence — requires BAI key + sign-in, 3x quota cost, falls back to thorough when exhausted)
 
-### Premium Features (with `BROWSE_API_KEY`)
+### Premium Features (with `LASTSEARCH_API_KEY`)
 
-Users with a BrowseAI Dev API key (`bai_xxx`) get enhanced verification:
+Users with a LastSearch API key (`ls_xxx`) get enhanced verification:
 - **Semantic re-ranking** — search results re-scored by semantic query-document relevance
 - **Semantic reranking** — evidence matched by meaning, not just keywords
 - **Multi-provider search** — parallel search across multiple sources for broader coverage
@@ -32,15 +32,15 @@ Users with a BrowseAI Dev API key (`bai_xxx`) get enhanced verification:
 
 Free BAI key users get a generous daily quota (100 premium queries/day, or ~33 deep queries/day at 3x cost each). When exceeded, queries gracefully fall back to keyword verification (deep falls back to thorough). Quota resets every 24 hours.
 
-Sign up at [browseai.dev](https://browseai.dev) for a free API key — 100 premium queries/day with full verification pipeline.
+Sign up at [lastsearch.ai](https://lastsearch.ai) for a free API key — 100 premium queries/day with full verification pipeline.
 
 ## Quick Start
 
 ```bash
-npx browseai-dev setup
+npx lastsearch setup
 ```
 
-This auto-configures Claude Desktop. You'll need a BrowseAI Dev API key — get one free at [browseai.dev/dashboard](https://browseai.dev/dashboard).
+This auto-configures Claude Desktop. You'll need a LastSearch API key — get one free at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 ## Manual Setup
 
@@ -51,11 +51,11 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "browseai-dev": {
+    "lastsearch": {
       "command": "npx",
-      "args": ["-y", "browseai-dev"],
+      "args": ["-y", "lastsearch"],
       "env": {
-        "BROWSE_API_KEY": "bai_xxx"
+        "LASTSEARCH_API_KEY": "ls_xxx"
       }
     }
   }
@@ -68,11 +68,11 @@ Add to your MCP settings:
 
 ```json
 {
-  "browseai-dev": {
+  "lastsearch": {
     "command": "npx",
-    "args": ["-y", "browseai-dev"],
+    "args": ["-y", "lastsearch"],
     "env": {
-      "BROWSE_API_KEY": "bai_xxx"
+      "LASTSEARCH_API_KEY": "ls_xxx"
     }
   }
 }
@@ -84,10 +84,10 @@ Run as an HTTP server for browser-based clients, Smithery, or any HTTP-capable a
 
 ```bash
 # Start with HTTP transport
-npx browseai-dev --http
+npx lastsearch --http
 
 # Or set the port via environment variable
-MCP_HTTP_PORT=3100 npx browseai-dev --http
+MCP_HTTP_PORT=3100 npx lastsearch --http
 ```
 
 The server exposes:
@@ -97,51 +97,51 @@ The server exposes:
 ### Docker
 
 ```bash
-docker build -t browseai-dev ./apps/mcp
-docker run -p 3100:3100 -e BROWSE_API_KEY=bai_xxx browseai-dev
+docker build -t lastsearch ./apps/mcp
+docker run -p 3100:3100 -e LASTSEARCH_API_KEY=ls_xxx lastsearch
 ```
 
 ## MCP Tools
 
 | Tool | Description |
 |------|-------------|
-| `browse_search` | Search the web via multi-provider search |
-| `browse_open` | Fetch and parse a page into clean text |
-| `browse_extract` | Extract structured knowledge from a page |
-| `browse_answer` | Full pipeline: search + extract + cite. `depth`: `"fast"`, `"thorough"`, or `"deep"` |
-| `browse_compare` | Compare raw LLM vs evidence-backed answer |
-| `browse_clarity` | Clarity — anti-hallucination answer engine. Three modes: `mode: "prompt"` (enhanced prompts only), `mode: "answer"` (LLM answer, default), `mode: "verified"` (LLM + web fusion) |
-| `browse_session_create` | Create a research session (persistent memory across queries) |
-| `browse_session_ask` | Research within a session (recalls prior knowledge, stores new claims) |
-| `browse_session_recall` | Query session knowledge without new web searches |
-| `browse_session_share` | Share a session publicly (returns share URL) |
-| `browse_session_knowledge` | Export all claims from a session |
-| `browse_session_fork` | Fork a shared session to continue the research |
-| `browse_feedback` | Submit accuracy feedback on a result |
+| `search` | Search the web via multi-provider search |
+| `open` | Fetch and parse a page into clean text |
+| `extract` | Extract structured knowledge from a page |
+| `answer` | Full pipeline: search + extract + cite. `depth`: `"fast"`, `"thorough"`, or `"deep"` |
+| `compare` | Compare raw LLM vs evidence-backed answer |
+| `clarity` | Clarity — anti-hallucination answer engine. Three modes: `mode: "prompt"` (enhanced prompts only), `mode: "answer"` (LLM answer, default), `mode: "verified"` (LLM + web fusion) |
+| `session_create` | Create a research session (persistent memory across queries) |
+| `session_ask` | Research within a session (recalls prior knowledge, stores new claims) |
+| `session_recall` | Query session knowledge without new web searches |
+| `session_share` | Share a session publicly (returns share URL) |
+| `session_knowledge` | Export all claims from a session |
+| `session_fork` | Fork a shared session to continue the research |
+| `feedback` | Submit accuracy feedback on a result |
 
-> **Note:** All tools require a BrowseAI Dev API key (`bai_xxx`). Get a free one at [browseai.dev/dashboard](https://browseai.dev/dashboard).
+> **Note:** All tools require a LastSearch API key (`ls_xxx`). Get a free one at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 ## Examples
 
 **Quick lookup:**
-> *"Use browse_answer to explain what causes aurora borealis"*
+> *"Use answer to explain what causes aurora borealis"*
 
 **Higher accuracy:**
-> *"Use browse_answer with depth thorough to research quantum computing"*
+> *"Use answer with depth thorough to research quantum computing"*
 
 **Deep research (multi-step, requires BAI key):**
-> *"Use browse_answer with depth deep to compare CRISPR approaches for sickle cell disease"*
+> *"Use answer with depth deep to compare CRISPR approaches for sickle cell disease"*
 >
 > Deep mode runs iterative think-search-extract-evaluate cycles: gap analysis identifies missing info, follow-up queries fill the gaps, and claims/sources are merged across steps with final re-verification. Targets 0.85 confidence across up to 4 steps. Falls back to thorough without a BAI key or when quota is exhausted.
 
 **Contradiction detection:**
-> *"Use browse_answer with depth thorough to check if coffee is good for health, and show me any contradictions"*
+> *"Use answer with depth thorough to check if coffee is good for health, and show me any contradictions"*
 
 **Research session:**
 > *"Create a session called quantum-research, then ask about quantum entanglement, then ask how entanglement is used in computing"*
 
 **Enterprise search:**
-> *"Use browse_answer to search our Elasticsearch at https://es.company.com/kb/_search for our refund policy"*
+> *"Use answer to search our Elasticsearch at https://es.company.com/kb/_search for our refund policy"*
 
 ### Response structure
 
@@ -173,9 +173,9 @@ docker run -p 3100:3100 -e BROWSE_API_KEY=bai_xxx browseai-dev
 }
 ```
 
-## Why browseai-dev?
+## Why lastsearch?
 
-| Feature | Raw LLM | browseai-dev |
+| Feature | Raw LLM | lastsearch |
 |---------|---------|-----------|
 | Sources | None | Real URLs with quotes |
 | Citations | Hallucinated | Verified from pages |
@@ -198,18 +198,18 @@ All API calls include automatic retry with exponential backoff on transient fail
 
 ## Agent Skills
 
-Pre-built skills that teach coding agents when to use BrowseAI Dev tools:
+Pre-built skills that teach coding agents when to use LastSearch tools:
 
 ```bash
-npx skills add BrowseAI-HQ/browseAIDev_Skills
+npx skills add lastsearch-hq/lastsearch-skills
 ```
 
-Skills work with Claude Code, Codex CLI, Gemini CLI, Cursor, and more. [View skills →](https://github.com/BrowseAI-HQ/browseAIDev_Skills)
+Skills work with Claude Code, Codex CLI, Gemini CLI, Cursor, and more. [View skills →](https://github.com/lastsearch-hq/lastsearch-skills)
 
 ## Community
 
 - [Discord](https://discord.gg/ubAuT4YQsT)
-- [GitHub](https://github.com/BrowseAI-HQ/BrowseAI-Dev)
+- [GitHub](https://github.com/lastsearch-hq/lastsearch)
 
 ## License
 

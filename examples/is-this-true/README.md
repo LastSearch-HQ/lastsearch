@@ -2,9 +2,9 @@
 
 A minimal web app to fact-check any sentence. Paste a claim, get a confidence score, sources, and contradictions.
 
-Built with [BrowseAI](https://browseai.dev) Python SDK + FastAPI. No build step, no JavaScript framework -- just `pip install` and run.
+Built with [LastSearch](https://lastsearch.ai) Python SDK + FastAPI. No build step, no JavaScript framework -- just `pip install` and run.
 
-![screenshot placeholder](https://browseai.dev/og-image.png)
+![screenshot placeholder](https://lastsearch.ai/og-image.png)
 
 ## Quick start
 
@@ -14,8 +14,8 @@ cd examples/is-this-true
 # Install dependencies
 pip install -r requirements.txt
 
-# Set your API key (get one at https://browseai.dev)
-export BROWSEAI_API_KEY=bai_xxx
+# Set your API key (get one at https://lastsearch.ai)
+export LASTSEARCH_API_KEY=ls_xxx
 
 # Run
 python app.py
@@ -26,8 +26,8 @@ Open [http://localhost:8000](http://localhost:8000).
 ## How it works
 
 1. You type a claim like "The Great Wall of China is visible from space"
-2. The app calls `client.ask(query)` via the BrowseAI Python SDK
-3. BrowseAI's verification pipeline runs:
+2. The app calls `client.ask(query)` via the LastSearch Python SDK
+3. LastSearch's verification pipeline runs:
    - Web search across multiple sources
    - Sentence matching to ground claims
    - Cross-source consensus detection
@@ -68,7 +68,7 @@ This is a standard FastAPI app. Deploy anywhere that runs Python -- Railway, Ren
 
 ## Links
 
-- [BrowseAI Docs](https://browseai.dev)
-- [Python SDK on PyPI](https://pypi.org/project/browseaidev/)
-- [GitHub](https://github.com/BrowseAI-HQ/BrowseAI-Dev)
+- [LastSearch Docs](https://lastsearch.ai)
+- [Python SDK on PyPI](https://pypi.org/project/lastsearch/)
+- [GitHub](https://github.com/lastsearch-hq/lastsearch)
 - [Discord](https://discord.gg/ubAuT4YQsT)

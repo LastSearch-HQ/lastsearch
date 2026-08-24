@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Globe, Quote, LinkIcon, CheckCircle2, AlertCircle, Users, AlertTriangle, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import type { BrowseClaim, BrowseSource, Contradiction } from "@/lib/api/browse";
+import type { BrowseClaim, BrowseSource, Contradiction } from "@/lib/api/lastsearch";
 
 const CONSENSUS_COLORS: Record<string, string> = {
   strong: "text-emerald-500 border-emerald-500/30",

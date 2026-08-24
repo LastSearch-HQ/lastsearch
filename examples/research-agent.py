@@ -1,20 +1,20 @@
 """
-Research Agent — BrowseAI Example
+Research Agent — LastSearch Example
 
 A simple agent that researches any topic and returns
 evidence-backed answers with citations and confidence scores.
 
 Usage:
-    pip install browseaidev
+    pip install lastsearch
     python research-agent.py "What are the latest breakthroughs in fusion energy?"
 """
 
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def research(query: str):
-    client = BrowseAIDev(api_key="bai_xxx")
+    client = LastSearch(api_key="ls_xxx")
 
     print(f"\nResearching: {query}\n")
 

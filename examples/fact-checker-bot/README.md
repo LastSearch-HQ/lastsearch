@@ -1,6 +1,6 @@
 # Fact-Checker Bot
 
-A Discord bot that verifies claims in real time using [BrowseAI](https://browseai.dev). Paste any claim and get an evidence-backed verdict with confidence scores, sources, and contradiction warnings.
+A Discord bot that verifies claims in real time using [LastSearch](https://lastsearch.ai). Paste any claim and get an evidence-backed verdict with confidence scores, sources, and contradiction warnings.
 
 ## Commands
 
@@ -21,9 +21,9 @@ A Discord bot that verifies claims in real time using [BrowseAI](https://browsea
 5. Go to **OAuth2 > URL Generator**, select `bot` scope with permissions: Send Messages, Embed Links, Read Message History
 6. Use the generated URL to invite the bot to your server
 
-### 2. Get a BrowseAI API Key
+### 2. Get a LastSearch API Key
 
-Sign up at [browseai.dev](https://browseai.dev) and get your API key (starts with `bai_`).
+Sign up at [lastsearch.ai](https://lastsearch.ai) and get your API key (starts with `ls_`).
 
 ### 3. Install and Run
 
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 # Set environment variables
 export DISCORD_BOT_TOKEN="your-discord-bot-token"
-export BROWSEAI_API_KEY="bai_your_key_here"
+export LASTSEARCH_API_KEY="ls_your_key_here"
 
 # Run the bot
 python bot.py
@@ -50,7 +50,7 @@ You can also create a `.env` file in this directory:
 
 ```env
 DISCORD_BOT_TOKEN=your-discord-bot-token
-BROWSEAI_API_KEY=bai_your_key_here
+LASTSEARCH_API_KEY=ls_your_key_here
 ```
 
 ## How It Works
@@ -60,7 +60,7 @@ User sends: !verify The Great Wall of China is visible from space
                 |
                 v
     +---------------------------+
-    |  BrowseAI ask() API       |
+    |  LastSearch ask() API       |
     |  depth="thorough"         |
     |                           |
     |  1. Web search (Tavily)   |
@@ -113,7 +113,7 @@ Thorough mode automatically retries with a rephrased query if the first-pass con
 |   > A: The wall is not visible from orbit  |
 |   > B: Chinese textbooks claim visibility  |
 |                                            |
-| Powered by BrowseAI | browseai.dev        |
+| Powered by LastSearch | lastsearch.ai        |
 +--------------------------------------------+
 ```
 
@@ -145,7 +145,7 @@ Thorough mode automatically retries with a rephrased query if the first-pass con
 | - Mayo Clinic (mayoclinic.org)             |
 | - Harvard Health (health.harvard.edu)      |
 |                                            |
-| Powered by BrowseAI | browseai.dev        |
+| Powered by LastSearch | lastsearch.ai        |
 +--------------------------------------------+
 ```
 
@@ -154,19 +154,19 @@ Thorough mode automatically retries with a rephrased query if the first-pass con
 The bot is intentionally simple -- a single `bot.py` file with no framework overhead:
 
 - **`discord.py`** handles the Discord gateway connection and message events
-- **`AsyncBrowseAIDev`** (the async Python SDK client) calls the BrowseAI Dev API without blocking the event loop
+- **`AsyncLastSearch`** (the async Python SDK client) calls the LastSearch API without blocking the event loop
 - The bot listens for `!verify`, `!fact`, and `!compare` prefixes, extracts the claim text, and dispatches to the appropriate handler
 - Results are formatted into Discord embeds with color-coded confidence (green/yellow/red)
 - The `typing()` context manager shows "Bot is typing..." while the API call is in progress
 
-The heavy lifting (search, extraction, verification, confidence scoring) all happens server-side in BrowseAI. The bot is just a thin presentation layer.
+The heavy lifting (search, extraction, verification, confidence scoring) all happens server-side in LastSearch. The bot is just a thin presentation layer.
 
 ## Tips
 
 - **Thorough mode** takes 5-15 seconds because it does multi-pass research. Users see the typing indicator while it works.
-- **Rate limits**: Without a BrowseAI API key, the demo limit is 1 query/hour. Get an API key for unlimited use.
+- **Rate limits**: Without a LastSearch API key, the demo limit is 1 query/hour. Get an API key for unlimited use.
 - **Hosting**: For a production bot, run with `systemd`, Docker, or a cloud VM. The bot is stateless so it can restart freely.
 
 ## License
 
-Apache 2.0 -- same as the parent BrowseAI Dev project.
+Apache 2.0 -- same as the parent LastSearch project.

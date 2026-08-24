@@ -130,7 +130,7 @@ type FeatureSupport = "full" | "partial" | "none";
 interface FeatureRow {
   feature: string;
   tooltip?: string;
-  browseai: FeatureSupport;
+  lastsearch: FeatureSupport;
   tavily: FeatureSupport;
   perplexity: FeatureSupport;
   exa: FeatureSupport;
@@ -144,27 +144,27 @@ interface FeatureRow {
 // "none" = not documented as a native built-in feature.
 const FEATURE_MATRIX: FeatureRow[] = [
   // Shared capabilities — most providers offer these
-  { feature: "Web search", browseai: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
-  { feature: "AI-synthesized answers", browseai: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
-  { feature: "Citations / sources", browseai: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
-  { feature: "MCP server", browseai: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
-  { feature: "Python SDK", browseai: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "partial" },
-  { feature: "LangChain integration", browseai: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
-  { feature: "CrewAI integration", browseai: "full", tavily: "full", perplexity: "partial", exa: "partial", you: "none", brave: "none" },
-  // BrowseAI Dev differentiation — native built-in verification features
-  { feature: "Native claim verification", tooltip: "Built-in claim-level verification pipeline", browseai: "full", tavily: "none", perplexity: "none", exa: "partial", you: "none", brave: "none" },
-  { feature: "Evidence-based confidence scores", tooltip: "Evidence-based algorithm, not LLM self-assessment", browseai: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
-  { feature: "Contradiction detection", tooltip: "Cross-source contradiction scanning", browseai: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
-  { feature: "Cross-source consensus", tooltip: "Claims verified across multiple independent sources", browseai: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
-  { feature: "Domain authority scoring", tooltip: "Domain authority scoring with 10K+ domains", browseai: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
+  { feature: "Web search", lastsearch: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
+  { feature: "AI-synthesized answers", lastsearch: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
+  { feature: "Citations / sources", lastsearch: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
+  { feature: "MCP server", lastsearch: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
+  { feature: "Python SDK", lastsearch: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "partial" },
+  { feature: "LangChain integration", lastsearch: "full", tavily: "full", perplexity: "full", exa: "full", you: "full", brave: "full" },
+  { feature: "CrewAI integration", lastsearch: "full", tavily: "full", perplexity: "partial", exa: "partial", you: "none", brave: "none" },
+  // LastSearch differentiation — native built-in verification features
+  { feature: "Native claim verification", tooltip: "Built-in claim-level verification pipeline", lastsearch: "full", tavily: "none", perplexity: "none", exa: "partial", you: "none", brave: "none" },
+  { feature: "Evidence-based confidence scores", tooltip: "Evidence-based algorithm, not LLM self-assessment", lastsearch: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
+  { feature: "Contradiction detection", tooltip: "Cross-source contradiction scanning", lastsearch: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
+  { feature: "Cross-source consensus", tooltip: "Claims verified across multiple independent sources", lastsearch: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
+  { feature: "Domain authority scoring", tooltip: "Domain authority scoring with 10K+ domains", lastsearch: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
   // Infrastructure
-  { feature: "Open source (full pipeline)", browseai: "full", tavily: "partial", perplexity: "partial", exa: "partial", you: "partial", brave: "partial" },
-  { feature: "Open-core (SDKs + integrations)", browseai: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
-  { feature: "Free API key with generous quota", browseai: "full", tavily: "partial", perplexity: "none", exa: "partial", you: "none", brave: "partial" },
+  { feature: "Open source (full pipeline)", lastsearch: "full", tavily: "partial", perplexity: "partial", exa: "partial", you: "partial", brave: "partial" },
+  { feature: "Open-core (SDKs + integrations)", lastsearch: "full", tavily: "none", perplexity: "none", exa: "none", you: "none", brave: "none" },
+  { feature: "Free API key with generous quota", lastsearch: "full", tavily: "partial", perplexity: "none", exa: "partial", you: "none", brave: "partial" },
 ];
 
 const COLUMN_NAMES: Record<string, string> = {
-  browseai: "BrowseAI Dev",
+  lastsearch: "LastSearch",
   tavily: "Tavily",
   perplexity: "Perplexity",
   exa: "Exa",
@@ -189,15 +189,15 @@ const Alternatives = () => {
     <>
       <SEO
         title="Alternatives — Compare AI Search APIs"
-        description="Compare BrowseAI Dev vs Tavily, Perplexity, Exa, You.com, and Brave Search. Feature matrix, pricing, and honest comparison of AI search APIs for agents."
+        description="Compare LastSearch vs Tavily, Perplexity, Exa, You.com, and Brave Search. Feature matrix, pricing, and honest comparison of AI search APIs for agents."
         canonical="/alternatives"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "BrowseAI Dev Alternatives — Compare AI Search APIs",
+          name: "LastSearch Alternatives — Compare AI Search APIs",
           description:
-            "Compare BrowseAI Dev vs Tavily, Perplexity, Exa, You.com, and Brave Search API for AI agent research.",
-          url: "https://browseai.dev/alternatives",
+            "Compare LastSearch vs Tavily, Perplexity, Exa, You.com, and Brave Search API for AI agent research.",
+          url: "https://lastsearch.ai/alternatives",
         }}
       />
 
@@ -216,8 +216,8 @@ const Alternatives = () => {
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => navigate("/")}
             >
-              <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-              <span className="font-semibold text-sm">BrowseAI Dev</span>
+              <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+              <span className="font-semibold text-sm">LastSearch</span>
             </div>
           </div>
           <div className="flex items-center gap-2" />
@@ -235,16 +235,16 @@ const Alternatives = () => {
               Grounded Intelligence · Agent-First Research Infrastructure
             </Badge>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-shimmer">
-              BrowseAI Dev vs. the alternatives
+              LastSearch vs. the alternatives
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               Tavily, Exa, Brave, Perplexity, and You.com all help agents search
-              or synthesize web information. BrowseAI Dev's distinction is native
+              or synthesize web information. LastSearch's distinction is native
               claim verification and evidence-based confidence, rather than search
               or citations alone.
             </p>
             <p className="text-sm text-muted-foreground max-w-xl mx-auto font-mono terminal-card px-4 py-2 rounded-lg bg-card/50 border border-border/50 inline-block">
-              Agent → BrowseAI Dev → Internet → Evidence-backed answers + confidence scores
+              Agent → LastSearch → Internet → Evidence-backed answers + confidence scores
             </p>
           </motion.section>
 
@@ -258,10 +258,10 @@ const Alternatives = () => {
               <div className="flex items-start gap-3">
                 <Layers className="w-4 h-4 text-accent bg-accent/10 mt-0.5 shrink-0" />
                 <div className="text-sm text-muted-foreground leading-relaxed">
-                  <strong className="text-foreground">Full transparency:</strong> BrowseAI Dev is a Grounded Intelligence and verification layer,
+                  <strong className="text-foreground">Full transparency:</strong> LastSearch is a Grounded Intelligence and verification layer,
                   not a search engine replacement. We use providers like Tavily and Brave for web search,
                   then add claim extraction, cross-source verification, contradiction detection, domain authority scoring,
-                  and confidence calibration on top. These providers are excellent at search. BrowseAI Dev adds the
+                  and confidence calibration on top. These providers are excellent at search. LastSearch adds the
                   Grounded Intelligence layer that turns raw search results into agent-ready, evidence-backed outputs.
                 </div>
               </div>
@@ -295,7 +295,7 @@ const Alternatives = () => {
                       <th
                         key={key}
                         className={`text-center px-3 py-3 font-medium min-w-[100px] ${
-                          key === "browseai"
+                          key === "lastsearch"
                             ? "text-accent bg-accent/5"
                             : "text-muted-foreground"
                         }`}
@@ -327,7 +327,7 @@ const Alternatives = () => {
                         <td
                           key={key}
                           className={`text-center px-3 py-2.5 ${
-                            key === "browseai" ? "bg-accent/5" : ""
+                            key === "lastsearch" ? "bg-accent/5" : ""
                           }`}
                         >
                           <div className="flex justify-center">
@@ -363,10 +363,10 @@ const Alternatives = () => {
             className="space-y-6"
           >
             <h2 className="text-xl font-semibold text-shimmer inline-block">
-              What BrowseAI Dev adds on top
+              What LastSearch adds on top
             </h2>
             <p className="text-sm text-muted-foreground max-w-2xl">
-              BrowseAI Dev is differentiated in offering native claim-level verification,
+              LastSearch is differentiated in offering native claim-level verification,
               contradiction detection, and cross-source consensus in a single agent-focused
               workflow. We did not find these documented together as built-in features
               in competing products.
@@ -470,7 +470,7 @@ const Alternatives = () => {
             <div className="hero-glow" />
             <h2 className="text-2xl font-bold text-shimmer inline-block">Try it yourself</h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              Run your own queries through BrowseAI Dev and see evidence-backed answers
+              Run your own queries through LastSearch and see evidence-backed answers
               with claim verification, confidence scores, and verified sources.
             </p>
             <div className="flex items-center justify-center gap-3">

@@ -1,7 +1,7 @@
 {
-  "name": "browseai-dev",
-  "version": "0.4.0",
-  "mcpName": "io.github.BrowseAI-HQ/browseai-dev",
+  "name": "lastsearch",
+  "version": "1.0.0",
+  "mcpName": "io.github.lastsearch-hq/lastsearch",
   "type": "module",
   "description": "Grounded Intelligence for AI agents. MCP server with real-time web search, evidence extraction, verification, and structured citations. The research infrastructure for LangChain, CrewAI, and custom agents.",
   "keywords": [
@@ -28,9 +28,9 @@
     "llamaindex",
     "evidence",
     "fact-checking",
-    "browse-ai",
-    "browseai",
-    "browseaidev",
+    "lastsearch",
+    "lastsearch",
+    "lastsearch",
     "hallucination-prevention",
     "confidence-scoring",
     "grounded-intelligence",
@@ -39,13 +39,13 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BrowseAI-HQ/BrowseAI-Dev.git",
+    "url": "git+https://github.com/lastsearch-hq/lastsearch.git",
     "directory": "apps/mcp"
   },
-  "homepage": "https://browseai.dev",
-  "bugs": "https://github.com/BrowseAI-HQ/BrowseAI-Dev/issues",
+  "homepage": "https://lastsearch.ai",
+  "bugs": "https://github.com/lastsearch-hq/lastsearch/issues",
   "bin": {
-    "browseai-dev": "dist/index.js"
+    "lastsearch": "dist/index.js"
   },
   "files": [
     "dist",

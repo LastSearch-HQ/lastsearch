@@ -4,7 +4,7 @@
  */
 
 import { getCachedAccessToken } from "./auth";
-import type { BrowseResult } from "./browse";
+import type { BrowseResult } from "./lastsearch";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -145,7 +145,7 @@ export async function streamAnswer(
     throw new Error("Stream ended without result");
   }
 
-  (window as any).posthog?.capture("browse_query", {
+  (window as any).posthog?.capture("query", {
     tool: "/browse/answer/stream",
   });
 

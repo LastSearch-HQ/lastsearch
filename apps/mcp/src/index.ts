@@ -8,48 +8,50 @@ import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 
 // --- Constants (inlined for standalone npm package) ---
-const VERSION = "0.4.0";
+const VERSION = "1.0.0";
 
-// --- BrowseAI Dev API key (required) ---
-const BROWSE_API_KEY = process.env.BROWSE_API_KEY;
-const BROWSE_API_URL = process.env.BROWSE_API_URL || "https://browseai.dev/api";
+// --- LastSearch API key (required) ---
+// Wind-down compatibility (until 2026-10-31): the old BrowseAI Dev env var
+// and key prefix keep working so existing configs don't break.
+const LASTSEARCH_API_KEY = process.env.LASTSEARCH_API_KEY ?? process.env.BROWSE_API_KEY;
+const LASTSEARCH_API_URL = process.env.LASTSEARCH_API_URL || "https://lastsearch.ai/api";
 
 // --- CLI handling ---
 const args = process.argv.slice(2);
 
 if (args.includes("--help") || args.includes("-h")) {
   console.log(`
-  browseai-dev v${VERSION}
+  lastsearch v${VERSION}
   Grounded Intelligence — open-source deep research MCP server for AI agents
 
   Usage:
-    browseai-dev              Start the MCP server (stdio transport)
-    browseai-dev --http       Start the MCP server (HTTP transport)
-    browseai-dev setup        Auto-configure Claude Desktop
-    browseai-dev --help       Show this help
-    browseai-dev --version    Show version
+    lastsearch              Start the MCP server (stdio transport)
+    lastsearch --http       Start the MCP server (HTTP transport)
+    lastsearch setup        Auto-configure Claude Desktop
+    lastsearch --help       Show this help
+    lastsearch --version    Show version
 
   Environment Variables:
-    BROWSE_API_KEY         BrowseAI Dev API key (required — sign in at https://browseai.dev)
+    LASTSEARCH_API_KEY         LastSearch API key (required — sign in at https://lastsearch.ai)
     MCP_HTTP_PORT          Port for HTTP transport (default: 3100)
 
   MCP Tools:
-    browse_search          Search the web for information
-    browse_open            Fetch and parse a web page
-    browse_extract         Extract structured knowledge from a page
-    browse_answer          Full pipeline: search + extract + answer
-    browse_compare         Compare raw LLM vs evidence-backed answer
-    browse_verify_document Fact-check an entire document (report, analysis, article)
-    browse_clarity         Clarity: anti-hallucination answer engine (fast LLM or verified with web fusion)
-    browse_session_create  Create a research session (persistent memory)
-    browse_session_ask     Research within a session (recalls prior knowledge)
-    browse_session_recall  Query session knowledge without new searches
-    browse_session_share   Share a session publicly via URL
-    browse_session_knowledge  Export all knowledge from a session
+    search          Search the web for information
+    open            Fetch and parse a web page
+    extract         Extract structured knowledge from a page
+    answer          Full pipeline: search + extract + answer
+    compare         Compare raw LLM vs evidence-backed answer
+    verify_document Fact-check an entire document (report, analysis, article)
+    clarity         Clarity: anti-hallucination answer engine (fast LLM or verified with web fusion)
+    session_create  Create a research session (persistent memory)
+    session_ask     Research within a session (recalls prior knowledge)
+    session_recall  Query session knowledge without new searches
+    session_share   Share a session publicly via URL
+    session_knowledge  Export all knowledge from a session
 
   Quick Setup:
-    1. Sign in at https://browseai.dev and generate a free API key
-    2. Run: npx browseai-dev setup
+    1. Sign in at https://lastsearch.ai and generate a free API key
+    2. Run: npx lastsearch setup
     3. Restart Claude Desktop
 `);
   process.exit(0);
@@ -67,15 +69,29 @@ if (args[0] === "setup") {
   startServer();
 }
 
+// Must exceed the engine's 120s function budget (deep mode runs close to it) plus
+// network margin — without a timeout at all, a hung request blocks the agent forever;
+// too short and valid deep queries look broken.
+const API_TIMEOUT_MS = 150_000;
+
 async function apiCall(path: string, body: Record<string, unknown>) {
-  const res = await fetch(`${BROWSE_API_URL}${path}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-API-Key": BROWSE_API_KEY!,
-    },
-    body: JSON.stringify(body),
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${LASTSEARCH_API_URL}${path}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": LASTSEARCH_API_KEY!,
+      },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(API_TIMEOUT_MS),
+    });
+  } catch (e) {
+    if (e instanceof Error && e.name === "TimeoutError") {
+      throw new Error("Request timed out. Try a lower depth (fast/thorough) or retry.", { cause: e });
+    }
+    throw e;
+  }
   const data = await res.json();
   if (!res.ok || !data.success) throw new Error(data.error || `API failed: ${res.status}`);
   // Include quota info in result if present
@@ -87,22 +103,65 @@ async function apiCall(path: string, body: Record<string, unknown>) {
 
 // --- Env validation ---
 function validateEnv() {
-  if (!BROWSE_API_KEY) {
+  if (!LASTSEARCH_API_KEY) {
     console.error(`
-  browseai-dev: Missing BROWSE_API_KEY
+  lastsearch: Missing LASTSEARCH_API_KEY
 
-  A BrowseAI Dev API key is required. Sign in and get your free key at https://browseai.dev
+  A LastSearch API key is required. Sign in and get your free key at https://lastsearch.ai
 
-  Quick fix: run 'npx browseai-dev setup' to configure automatically.
+  Quick fix: run 'npx lastsearch setup' to configure automatically.
 `);
     process.exit(1);
+  }
+}
+
+
+// --- Wind-down aliases (until 2026-10-31): the old browse_* tool names keep
+// working so existing agent configs and saved workflows don't break. Each
+// alias calls the same handler as its renamed tool. Remove after Oct 31.
+const WINDDOWN_ALIASES: Record<string, string> = {
+  browse_search: "search",
+  browse_open: "open",
+  browse_extract: "extract",
+  browse_answer: "answer",
+  browse_compare: "compare",
+  browse_verify_document: "verify_document",
+  browse_clarity: "clarity",
+  browse_session_create: "session_create",
+  browse_session_ask: "session_ask",
+  browse_session_recall: "session_recall",
+  browse_session_share: "session_share",
+  browse_session_knowledge: "session_knowledge",
+  browse_session_fork: "session_fork",
+  browse_feedback: "feedback",
+};
+
+function registerAliases(server: McpServer) {
+  // MCP servers can't share handlers across names post-hoc, so aliases are
+  // registered as thin passthrough tools annotated as deprecated.
+  for (const [oldName, newName] of Object.entries(WINDDOWN_ALIASES)) {
+    server.tool(
+      oldName,
+      `DEPRECATED alias of "${newName}" — BrowseAI Dev is now LastSearch. Update your config before 2026-10-31. See https://lastsearch.ai/migrate`,
+      { payload: z.record(z.string(), z.any()).optional() },
+      async () => ({
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            deprecated: true,
+            use_instead: newName,
+            message: `This tool was renamed to "${newName}" (BrowseAI Dev is now LastSearch). Call "${newName}" with the same arguments. Old names stop working 2026-10-31. Migration guide: https://lastsearch.ai/migrate`,
+          }),
+        }],
+      })
+    );
   }
 }
 
 // --- Tool registration (shared between stdio and http) ---
 function registerTools(server: McpServer) {
   server.tool(
-    "browse_search",
+    "search",
     "Search the web for information on a topic. Returns URLs, titles, snippets, and relevance scores.",
     { query: z.string(), limit: z.number().optional() },
     async ({ query, limit }) => {
@@ -112,7 +171,7 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_open",
+    "open",
     "Fetch and parse a web page into clean text using Readability. Strips ads, nav, and boilerplate.",
     { url: z.string() },
     async ({ url }) => {
@@ -122,7 +181,7 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_extract",
+    "extract",
     "Extract structured knowledge (claims + sources + confidence) from a single web page using AI.",
     { url: z.string(), query: z.string().optional() },
     async ({ url, query }) => {
@@ -132,7 +191,7 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_answer",
+    "answer",
     "Full deep research pipeline: search the web, fetch pages, extract claims, build evidence graph, and generate a structured answer with citations and confidence score. Use depth='thorough' for auto-retry with rephrased queries when confidence is low. Use depth='deep' for multi-step agentic research that identifies knowledge gaps and runs follow-up searches. Enterprise: use searchProvider to search internal data instead of the public web. DISCLAIMER: Results are AI-generated for informational purposes only — not financial, medical, or legal advice. Confidence scores are algorithmic estimates, not accuracy guarantees. Always verify critical information from primary sources.",
     {
       query: z.string(),
@@ -167,7 +226,7 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_compare",
+    "compare",
     "Compare a raw LLM answer (no sources) vs an evidence-backed answer. Shows the difference between hallucination-prone and grounded responses.",
     { query: z.string() },
     async ({ query }) => {
@@ -176,7 +235,7 @@ function registerTools(server: McpServer) {
     }
   );
   server.tool(
-    "browse_verify_document",
+    "verify_document",
     "Fact-check an entire document (AI-generated report, competitive analysis, market research, news article). Pass either raw text OR a URL — we'll extract every atomic claim and verify each against live web sources. Returns per-claim verification status with sources, NLI scores, and an overall A-F grade. Use for auditing the accuracy of long-form content from other AI agents.",
     {
       text: z.string().optional().describe("The document text to verify (50-50000 chars). Either text OR url required."),
@@ -199,7 +258,7 @@ function registerTools(server: McpServer) {
   // --- Clarity — Anti-Hallucination Answer Engine ---
 
   server.tool(
-    "browse_clarity",
+    "clarity",
     "Clarity — anti-hallucination answer engine. Three modes: (1) mode='prompt': Returns only enhanced system + user prompts with anti-hallucination techniques. No LLM call, no internet. Use this when you want YOUR OWN LLM (e.g. Claude) to answer using the enhanced prompts. (2) mode='answer' (default): Rewrites prompt, calls LLM with grounding instructions, returns answer with extracted claims. Fast, no internet. (3) mode='verified': Does #2, then runs full browse pipeline (search + extract + verify), fuses best of both — source-backed claims, evidence-based confidence. Use for maximum accuracy.",
     {
       prompt: z.string().describe("The prompt to answer with anti-hallucination techniques"),
@@ -224,7 +283,7 @@ function registerTools(server: McpServer) {
   // --- Research Memory tools (API mode only — sessions require Supabase) ---
 
   server.tool(
-    "browse_session_create",
+    "session_create",
     "Create a new research session. Sessions persist knowledge across multiple queries — each query builds on prior research.",
     { name: z.string().describe("Name for the session (e.g. 'wasm-research', 'react-comparison')") },
     async ({ name }) => {
@@ -234,10 +293,10 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_session_ask",
+    "session_ask",
     "Research a question within a session. Recalls prior knowledge, runs the research pipeline, and stores new claims. Later queries in the same session benefit from accumulated knowledge.",
     {
-      session_id: z.string().describe("Session ID from browse_session_create"),
+      session_id: z.string().describe("Session ID from session_create"),
       query: z.string(),
       depth: z.enum(["fast", "thorough", "deep"]).optional().describe("'fast' (default), 'thorough', or 'deep' (multi-step agentic)"),
     },
@@ -248,7 +307,7 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_session_recall",
+    "session_recall",
     "Query accumulated knowledge from a session without making new web searches. Returns previously verified claims relevant to the query.",
     {
       session_id: z.string().describe("Session ID"),
@@ -262,14 +321,14 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_session_share",
+    "session_share",
     "Share a research session publicly. Returns a shareable URL that anyone can view — great for sharing research findings with teammates, in reports, or on social media.",
     {
       session_id: z.string().describe("Session ID to share"),
     },
     async ({ session_id }) => {
       const result = await apiCall(`/session/${session_id}/share`, {});
-      const shareUrl = `https://browseai.dev/session/share/${result.shareId}`;
+      const shareUrl = `https://lastsearch.ai/session/share/${result.shareId}`;
       return {
         content: [{
           type: "text",
@@ -280,15 +339,15 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_session_knowledge",
+    "session_knowledge",
     "Export all knowledge from a research session. Returns all verified claims, sources, and confidence scores accumulated across queries.",
     {
       session_id: z.string().describe("Session ID"),
       limit: z.number().optional().describe("Max entries to return (default 50)"),
     },
     async ({ session_id, limit }) => {
-      const res = await fetch(`${BROWSE_API_URL}/session/${session_id}/knowledge?limit=${limit ?? 50}`, {
-        headers: { "X-API-Key": BROWSE_API_KEY! },
+      const res = await fetch(`${LASTSEARCH_API_URL}/session/${session_id}/knowledge?limit=${limit ?? 50}`, {
+        headers: { "X-API-Key": LASTSEARCH_API_KEY! },
       });
       const data = await res.json();
       if (!data.success) throw new Error(data.error || "Failed to export knowledge");
@@ -297,7 +356,7 @@ function registerTools(server: McpServer) {
   );
 
   server.tool(
-    "browse_session_fork",
+    "session_fork",
     "Fork a shared research session to continue building on someone else's research. Creates a copy of all knowledge in your own session.",
     {
       share_id: z.string().describe("Share ID from a shared session URL"),
@@ -320,7 +379,7 @@ function registerTools(server: McpServer) {
 
   // --- Feedback Tool ---
   server.tool(
-    "browse_feedback",
+    "feedback",
     "Submit feedback on a search result to improve future accuracy. Helps the self-learning engine tune verification thresholds.",
     {
       result_id: z.string().describe("The shareId/resultId from a previous search result"),
@@ -383,10 +442,11 @@ function startServer() {
         };
 
         const server = new McpServer({
-          name: "browseai-dev",
+          name: "lastsearch",
           version: VERSION,
         });
         registerTools(server);
+        registerAliases(server);
         await server.connect(transport);
 
         if (transport.sessionId) {
@@ -402,23 +462,24 @@ function startServer() {
     });
 
     httpServer.listen(port, () => {
-      console.error(`browseai-dev v${VERSION} MCP server running on http://localhost:${port}/mcp`);
+      console.error(`lastsearch v${VERSION} MCP server running on http://localhost:${port}/mcp`);
     });
   } else {
     const server = new McpServer({
-      name: "browseai-dev",
+      name: "lastsearch",
       version: VERSION,
     });
     registerTools(server);
+    registerAliases(server);
 
     async function run() {
       const transport = new StdioServerTransport();
       await server.connect(transport);
-      console.error(`browseai-dev v${VERSION} MCP server running on stdio`);
+      console.error(`lastsearch v${VERSION} MCP server running on stdio`);
     }
 
     run().catch((err) => {
-      console.error("Failed to start browseai-dev:", err);
+      console.error("Failed to start lastsearch:", err);
       process.exit(1);
     });
   }

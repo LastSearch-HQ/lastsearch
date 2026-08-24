@@ -1,20 +1,20 @@
-# BrowseAI Dev
+# LastSearch
 
-[![npm](https://img.shields.io/npm/v/browseai-dev)](https://www.npmjs.com/package/browseai-dev)
-[![PyPI](https://img.shields.io/pypi/v/browseaidev)](https://pypi.org/project/browseaidev/)
-[![LangChain](https://img.shields.io/pypi/v/langchain-browseaidev?label=langchain-browseaidev)](https://pypi.org/project/langchain-browseaidev/)
+[![npm](https://img.shields.io/npm/v/lastsearch)](https://www.npmjs.com/package/lastsearch)
+[![PyPI](https://img.shields.io/pypi/v/lastsearch)](https://pypi.org/project/lastsearch/)
+[![LangChain](https://img.shields.io/pypi/v/langchain-lastsearch?label=langchain-lastsearch)](https://pypi.org/project/langchain-lastsearch/)
 [![License](https://img.shields.io/badge/License-Apache_2.0_(open--core)-blue.svg)](LICENSE)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/ubAuT4YQsT)
 
 **Research infrastructure for AI agents with Grounded Intelligence** — real-time web search, evidence extraction, verification, and structured citations. Every claim is backed by a URL. Every answer has a confidence score.
 
 ```
-Agent → BrowseAI Dev → Internet → Verified answers + sources
+Agent → LastSearch → Internet → Verified answers + sources
 ```
 
-[Website](https://browseai.dev) · [Playground](https://browseai.dev/playground) · [API Docs](https://browseai.dev/developers) · [Alternatives](https://browseai.dev/alternatives) · [Discord](https://discord.gg/ubAuT4YQsT)
+[Website](https://lastsearch.ai) · [Playground](https://lastsearch.ai/playground) · [API Docs](https://lastsearch.ai/developers) · [Alternatives](https://lastsearch.ai/alternatives) · [Discord](https://discord.gg/ubAuT4YQsT)
 
-> **Package names:** npm: [`browseai-dev`](https://www.npmjs.com/package/browseai-dev) · PyPI: [`browseaidev`](https://pypi.org/project/browseaidev/) · LangChain: [`langchain-browseaidev`](https://pypi.org/project/langchain-browseaidev/) — Previously `browse-ai` and `browseai`. Old names still work and redirect automatically.
+> **Package names:** npm: [`lastsearch`](https://www.npmjs.com/package/lastsearch) · PyPI: [`lastsearch`](https://pypi.org/project/lastsearch/) · LangChain: [`langchain-lastsearch`](https://pypi.org/project/langchain-lastsearch/) — Previously `lastsearch` and `lastsearch`. Old names still work and redirect automatically.
 
 ---
 
@@ -60,15 +60,15 @@ Three depth levels control research thoroughness:
 
 ```bash
 # Thorough mode
-curl -X POST https://browseai.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer bai_xxx" \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?", "depth": "thorough"}'
 
 # Deep mode (uses premium features)
-curl -X POST https://browseai.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer bai_xxx" \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "Compare CRISPR approaches for sickle cell disease", "depth": "deep"}'
 ```
 
@@ -81,9 +81,9 @@ Deep mode responses include `reasoningSteps` showing the multi-step research pro
 Get real-time progress with per-token answer streaming. The streaming endpoint sends Server-Sent Events (SSE) as each pipeline step completes. Deep mode steps are grouped by research pass for clean progress display:
 
 ```bash
-curl -N -X POST https://browseai.dev/api/browse/answer/stream \
+curl -N -X POST https://lastsearch.ai/api/browse/answer/stream \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer bai_xxx" \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?"}'
 ```
 
@@ -97,7 +97,7 @@ All external API calls (search providers, LLM, page fetching) automatically retr
 
 Persistent research sessions that accumulate knowledge across multiple queries. Later queries automatically recall prior verified claims, building deeper understanding over time.
 
-> **Sessions require a BrowseAI Dev API key (`bai_xxx`)** for identity and ownership. Get a free key at [browseai.dev/dashboard](https://browseai.dev/dashboard). For MCP, set `BROWSE_API_KEY` env var. For Python SDK, pass `api_key="bai_xxx"`. For REST API, use `Authorization: Bearer bai_xxx`.
+> **Sessions require a LastSearch API key (`ls_xxx`)** for identity and ownership. Get a free key at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard). For MCP, set `LASTSEARCH_API_KEY` env var. For Python SDK, pass `api_key="ls_xxx"`. For REST API, use `Authorization: Bearer ls_xxx`.
 
 ```python
 # Python SDK
@@ -114,21 +114,21 @@ forked = client.fork_session(share.share_id)
 
 ```bash
 # REST API
-curl -X POST https://browseai.dev/api/session \
-  -H "Authorization: Bearer bai_xxx" \
+curl -X POST https://lastsearch.ai/api/session \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"name": "my-research"}'
 # Returns session ID, then:
-curl -X POST https://browseai.dev/api/session/{id}/ask \
-  -H "Authorization: Bearer bai_xxx" \
+curl -X POST https://lastsearch.ai/api/session/{id}/ask \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum entanglement?"}'
 
 # Share a session publicly
-curl -X POST https://browseai.dev/api/session/{id}/share \
-  -H "Authorization: Bearer bai_xxx"
+curl -X POST https://lastsearch.ai/api/session/{id}/share \
+  -H "Authorization: Bearer ls_xxx"
 
 # Fork a shared session (copies all knowledge)
-curl -X POST https://browseai.dev/api/session/share/{shareId}/fork \
-  -H "Authorization: Bearer bai_xxx"
+curl -X POST https://lastsearch.ai/api/session/share/{shareId}/fork \
+  -H "Authorization: Bearer ls_xxx"
 ```
 
 Each session response includes `recalledClaims` and `newClaimsStored`. Sessions can be shared publicly and forked by other agents — enabling collaborative, multi-agent research workflows.
@@ -152,7 +152,7 @@ The entire verification pipeline improves automatically with usage:
 Submit feedback on results to accelerate learning. Agents and users can rate results as `good`, `bad`, or `wrong` — this feeds directly into the adaptive threshold engine.
 
 ```bash
-curl -X POST https://browseai.dev/api/browse/feedback \
+curl -X POST https://lastsearch.ai/api/browse/feedback \
   -H "Content-Type: application/json" \
   -d '{"resultId": "abc123", "rating": "good"}'
 ```
@@ -168,13 +168,13 @@ client.feedback(result_id="abc123", rating="wrong", claim_index=2)
 ### Python SDK
 
 ```bash
-pip install browseaidev
+pip install lastsearch
 ```
 
 ```python
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
-client = BrowseAIDev(api_key="bai_xxx")
+client = LastSearch(api_key="ls_xxx")
 
 # Research with citations
 result = client.ask("What is quantum computing?")
@@ -192,32 +192,32 @@ for step in deep.reasoning_steps or []:
     print(f"  Step {step.step}: {step.query} ({step.confidence:.0%})")
 ```
 
-**LangChain integration:** ([PyPI](https://pypi.org/project/langchain-browseaidev/))
+**LangChain integration:** ([PyPI](https://pypi.org/project/langchain-lastsearch/))
 
 ```bash
-pip install langchain-browseaidev
+pip install langchain-lastsearch
 ```
 
 ```python
-from langchain_browseaidev import BrowseAIDevAnswerTool, BrowseAIDevSearchTool
+from langchain_lastsearch import LastSearchAnswerTool, LastSearchSearchTool
 
 # Use with any LangChain agent
 tools = [
-    BrowseAIDevAnswerTool(api_key="bai_xxx"),   # Verified search with citations
-    BrowseAIDevSearchTool(api_key="bai_xxx"),    # Basic web search
+    LastSearchAnswerTool(api_key="ls_xxx"),   # Verified search with citations
+    LastSearchSearchTool(api_key="ls_xxx"),    # Basic web search
 ]
 
 # Standalone usage
-tool = BrowseAIDevAnswerTool(api_key="bai_xxx")
+tool = LastSearchAnswerTool(api_key="ls_xxx")
 result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"})
 ```
 
-5 tools available: `BrowseAIDevSearchTool`, `BrowseAIDevAnswerTool` (verified), `BrowseAIDevExtractTool`, `BrowseAIDevCompareTool`, `BrowseAIDevClarityTool` (anti-hallucination).
+5 tools available: `LastSearchSearchTool`, `LastSearchAnswerTool` (verified), `LastSearchExtractTool`, `LastSearchCompareTool`, `LastSearchClarityTool` (anti-hallucination).
 
 ### MCP Server (Claude Desktop, Cursor, Windsurf)
 
 ```sh
-npx browseai-dev setup
+npx lastsearch setup
 ```
 
 Or manually add to your MCP config:
@@ -225,60 +225,60 @@ Or manually add to your MCP config:
 ```json
 {
   "mcpServers": {
-    "browseai-dev": {
+    "lastsearch": {
       "command": "npx",
-      "args": ["-y", "browseai-dev"],
+      "args": ["-y", "lastsearch"],
       "env": {
-        "BROWSE_API_KEY": "bai_xxx"
+        "LASTSEARCH_API_KEY": "ls_xxx"
       }
     }
   }
 }
 ```
 
-> Get a free API key at [browseai.dev/dashboard](https://browseai.dev/dashboard).
+> Get a free API key at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 ### REST API
 
 ```bash
 # Basic query
-curl -X POST https://browseai.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer bai_xxx" \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?"}'
 
 # Thorough mode (auto-retries if confidence < 60%)
-curl -X POST https://browseai.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer bai_xxx" \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "What is quantum computing?", "depth": "thorough"}'
 
 # Deep mode (multi-step reasoning)
-curl -X POST https://browseai.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer bai_xxx" \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{"query": "Compare CRISPR approaches", "depth": "deep"}'
 ```
 
 ### Self-Host
 
-The MCP server and frontend are open-source and can be run locally. The verification engine is a hosted service — all API requests are processed by the BrowseAI Dev cloud infrastructure.
+The MCP server and frontend are open-source and can be run locally. The verification engine is a hosted service — all API requests are processed by the LastSearch cloud infrastructure.
 
 ```sh
-git clone https://github.com/BrowseAI-HQ/BrowseAI-Dev.git
-cd BrowseAI-Dev
+git clone https://github.com/lastsearch-hq/lastsearch.git
+cd lastsearch
 pnpm install
-pnpm dev:web    # Run the frontend locally (API calls go to browseai.dev)
+pnpm dev:web    # Run the frontend locally (API calls go to lastsearch.ai)
 ```
 
 ## API Keys
 
-All API access requires a BrowseAI Dev API key (`bai_xxx`). Sign up for free at [browseai.dev/dashboard](https://browseai.dev/dashboard).
+All API access requires a LastSearch API key (`ls_xxx`). Sign up for free at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard).
 
 | Method | How | Verification | Limits |
 |--------|-----|-------------|--------|
-| **BrowseAI Dev API Key** (Free) | `Authorization: Bearer bai_xxx` | Full premium — semantic verification, multi-provider, multi-pass consistency | Generous quota with graceful fallback |
-| **BrowseAI Dev API Key** (Pro) | `Authorization: Bearer bai_xxx` | Full premium — unlimited, no fallback | Unlimited + priority queue, managed keys, team seats |
+| **LastSearch API Key** (Free) | `Authorization: Bearer ls_xxx` | Full premium — semantic verification, multi-provider, multi-pass consistency | Generous quota with graceful fallback |
+| **LastSearch API Key** (Pro) | `Authorization: Bearer ls_xxx` | Full premium — unlimited, no fallback | Unlimited + priority queue, managed keys, team seats |
 | **Demo** (website) | No auth needed | Keyword verification | 1 query/hour per IP |
 
 The free tier includes 100 premium queries/day (or ~33 deep queries/day at 3x cost each). When the quota is reached, queries gracefully fall back to keyword verification (or deep falls back to thorough) — still works, just basic matching. Quota resets every 24 hours. Pro removes all limits.
@@ -295,14 +295,14 @@ API responses include quota info when using a BAI key:
 ## Project Structure
 
 ```
-/apps/mcp              MCP server (stdio transport, npm: browseai-dev)
+/apps/mcp              MCP server (stdio transport, npm: lastsearch)
 /packages/shared       Shared types, Zod schemas, constants
-/packages/python-sdk   Python SDK (PyPI: browseaidev)
+/packages/python-sdk   Python SDK (PyPI: lastsearch)
 /src                   React frontend (Vite, port 8080)
 /supabase              Database migrations
 ```
 
-> The verification engine (API server) is in a separate private repository ([BrowseAI-HQ/browseaidev-engine](https://github.com/BrowseAI-HQ/browseaidev-engine)) and runs as a hosted service.
+> The verification engine (API server) is in a separate private repository ([lastsearch-hq/lastsearch-engine](https://github.com/lastsearch-hq/lastsearch-engine)) and runs as a hosted service.
 
 ## API Endpoints
 
@@ -339,19 +339,19 @@ API responses include quota info when using a BAI key:
 
 | Tool | Description |
 |------|-------------|
-| `browse_search` | Search the web for information on any topic |
-| `browse_open` | Fetch and parse a web page into clean text |
-| `browse_extract` | Extract structured claims from a page |
-| `browse_answer` | Full pipeline: search + extract + cite. `depth`: `"fast"`, `"thorough"`, or `"deep"` |
-| `browse_compare` | Compare raw LLM vs evidence-backed answer |
-| `browse_clarity` | Anti-hallucination answer engine — three modes: prompt (prompts only), answer (LLM), verified (LLM + web fusion) |
-| `browse_session_create` | Create a research session (persistent memory) |
-| `browse_session_ask` | Research within a session (recalls prior knowledge) |
-| `browse_session_recall` | Query session knowledge without new web search |
-| `browse_session_share` | Share a session publicly (returns share URL) |
-| `browse_session_knowledge` | Export all claims from a session |
-| `browse_session_fork` | Fork a shared session to continue the research |
-| `browse_feedback` | Submit feedback on a result to improve accuracy |
+| `search` | Search the web for information on any topic |
+| `open` | Fetch and parse a web page into clean text |
+| `extract` | Extract structured claims from a page |
+| `answer` | Full pipeline: search + extract + cite. `depth`: `"fast"`, `"thorough"`, or `"deep"` |
+| `compare` | Compare raw LLM vs evidence-backed answer |
+| `clarity` | Anti-hallucination answer engine — three modes: prompt (prompts only), answer (LLM), verified (LLM + web fusion) |
+| `session_create` | Create a research session (persistent memory) |
+| `session_ask` | Research within a session (recalls prior knowledge) |
+| `session_recall` | Query session knowledge without new web search |
+| `session_share` | Share a session publicly (returns share URL) |
+| `session_knowledge` | Export all claims from a session |
+| `session_fork` | Fork a shared session to continue the research |
+| `feedback` | Submit feedback on a result to improve accuracy |
 
 ## Python SDK
 
@@ -373,11 +373,11 @@ API responses include quota info when using a BAI key:
 | `session.delete()` | Delete a session |
 | `client.feedback(result_id, rating)` | Submit feedback (good/bad/wrong) to improve accuracy |
 
-Async support: `AsyncBrowseAIDev` with the same API.
+Async support: `AsyncLastSearch` with the same API.
 
 ### Enterprise Search Providers
 
-Use BrowseAI Dev with your own data sources instead of — or alongside — public web search. Supports Elasticsearch, Confluence, and custom endpoints with optional zero data retention for compliance.
+Use LastSearch with your own data sources instead of — or alongside — public web search. Supports Elasticsearch, Confluence, and custom endpoints with optional zero data retention for compliance.
 
 ```python
 # Elasticsearch
@@ -407,9 +407,9 @@ result = client.ask("Patient protocols", search_provider={
 
 ```bash
 # REST API — enterprise search
-curl -X POST https://browseai.dev/api/browse/answer \
+curl -X POST https://lastsearch.ai/api/browse/answer \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer bai_xxx" \
+  -H "Authorization: Bearer ls_xxx" \
   -d '{
     "query": "What is our refund policy?",
     "searchProvider": {
@@ -497,7 +497,7 @@ See the [examples/](examples/) directory for ready-to-run agent recipes:
 | [enterprise-search.py](examples/enterprise-search.py) | Custom data sources + zero retention mode |
 | [code-research-agent.py](examples/code-research-agent.py) | Research libraries/docs before writing code |
 | [hallucination-detector.py](examples/hallucination-detector.py) | Compare raw LLM vs evidence-backed answers |
-| [langchain-agent.py](examples/langchain-agent.py) | BrowseAI Dev as a LangChain tool |
+| [langchain-agent.py](examples/langchain-agent.py) | LastSearch as a LangChain tool |
 | [crewai-research-team.py](examples/crewai-research-team.py) | Multi-agent research team with CrewAI |
 | [research-session.py](examples/research-session.py) | Research sessions with persistent memory |
 
@@ -520,7 +520,7 @@ These are for running the MCP server or frontend locally. The verification engin
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `BROWSE_API_KEY` | Yes (MCP) | BrowseAI Dev API key (`bai_xxx`) — get one at [browseai.dev/dashboard](https://browseai.dev/dashboard) |
+| `LASTSEARCH_API_KEY` | Yes (MCP) | LastSearch API key (`ls_xxx`) — get one at [lastsearch.ai/dashboard](https://lastsearch.ai/dashboard) |
 
 ## Tech Stack
 
@@ -537,30 +537,30 @@ These are for running the MCP server or frontend locally. The verification engin
 
 ## Agent Skills
 
-Pre-built skills that teach AI coding agents (Claude Code, Codex, Cursor, etc.) when and how to use BrowseAI Dev:
+Pre-built skills that teach AI coding agents (Claude Code, Codex, Cursor, etc.) when and how to use LastSearch:
 
 ```bash
-npx skills add BrowseAI-HQ/browseAIDev_Skills
+npx skills add lastsearch-hq/lastsearch-skills
 ```
 
 | Skill | What it does |
 |-------|-------------|
-| [browse-research](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-research) | Evidence-backed answers with citations and confidence |
-| [browse-fact-check](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-fact-check) | Compare raw LLM vs evidence-backed, verify claims |
-| [browse-extract](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-extract) | Structured claim extraction from URLs |
-| [browse-sessions](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-sessions) | Multi-query research with persistent knowledge |
-| [browse-deep-dive](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-deep-dive) | Multi-step agentic research with reasoning chains and gap analysis |
-| [browse-compare-claims](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-compare-claims) | Settle factual disputes — evidence-backed vs raw LLM side-by-side |
-| [browse-monitor](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-monitor) | Track evolving topics over time, diff against prior knowledge |
-| [browse-cite](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-cite) | Generate formatted citations (APA/MLA) with authority scores |
-| [browse-clarity](https://github.com/BrowseAI-HQ/browseAIDev_Skills/tree/main/browse-clarity) | Clarity — anti-hallucination answer engine with optional web verification |
+| [research](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/research) | Evidence-backed answers with citations and confidence |
+| [fact-check](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/fact-check) | Compare raw LLM vs evidence-backed, verify claims |
+| [extract](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/extract) | Structured claim extraction from URLs |
+| [sessions](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/sessions) | Multi-query research with persistent knowledge |
+| [deep-dive](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/deep-dive) | Multi-step agentic research with reasoning chains and gap analysis |
+| [compare-claims](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/compare-claims) | Settle factual disputes — evidence-backed vs raw LLM side-by-side |
+| [monitor](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/monitor) | Track evolving topics over time, diff against prior knowledge |
+| [cite](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/cite) | Generate formatted citations (APA/MLA) with authority scores |
+| [clarity](https://github.com/lastsearch-hq/lastsearch-skills/tree/main/clarity) | Clarity — anti-hallucination answer engine with optional web verification |
 
-[View all skills →](https://github.com/BrowseAI-HQ/browseAIDev_Skills)
+[View all skills →](https://github.com/lastsearch-hq/lastsearch-skills)
 
 ## Community
 
 - [Discord](https://discord.gg/ubAuT4YQsT) — questions, feedback, showcase
-- [GitHub Issues](https://github.com/BrowseAI-HQ/BrowseAI-Dev/issues) — bugs, feature requests
+- [GitHub Issues](https://github.com/lastsearch-hq/lastsearch/issues) — bugs, feature requests
 
 ## Contributing
 

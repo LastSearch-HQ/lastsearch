@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
-import type { BrowseClaim, Contradiction } from "@/lib/api/browse";
+import type { BrowseClaim, Contradiction } from "@/lib/api/lastsearch";
 
 interface FollowUpSuggestionsProps {
   query: string;

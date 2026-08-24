@@ -26,7 +26,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            You are reviewing a PR for BrowseAI Dev — an open-source research infrastructure
+            You are reviewing a PR for LastSearch — an open-source research infrastructure
             monorepo (TypeScript/React/Fastify) with an MCP server, REST API, and Python SDK.
 
             Structure: apps/api/ (Fastify), apps/mcp/ (MCP server), packages/shared/ (types),
@@ -73,7 +73,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            Perform a security-focused review of this PR for BrowseAI Dev.
+            Perform a security-focused review of this PR for LastSearch.
             This is an open-source project handling user API keys and making requests
             to third-party services (Tavily, OpenRouter via LLM).
 
@@ -82,7 +82,7 @@ jobs:
                in JSX), SQL injection in Supabase queries, command injection in any exec/spawn calls
             2. **Secrets exposure** — API keys logged to console, included in error responses, committed
                in code, or leaked via stack traces. Check for hardcoded keys matching patterns:
-               tvly-*, sk-or-*, sk-ant-*, bai_*, supabase service role keys
+               tvly-*, sk-or-*, sk-ant-*, ls_*, supabase service role keys
             3. **Authentication bypass** — changes to apps/api/src/lib/auth.ts or rate limiting logic
                that could let unauthenticated users bypass the 5/hour demo limit
             4. **Cryptography** — changes to apps/api/src/lib/crypto.ts must maintain AES-256-GCM.

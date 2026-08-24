@@ -1,11 +1,11 @@
-# BrowseAI Dev Examples
+# LastSearch Examples
 
-Agent recipes and tutorials showing how to use BrowseAI Dev as the research layer for AI agents.
+Agent recipes and tutorials showing how to use LastSearch as the research layer for AI agents.
 
 ## Quick Start
 
 ```bash
-pip install browseaidev
+pip install lastsearch
 ```
 
 ## Agent Recipes
@@ -21,9 +21,9 @@ Quick single-file examples to get started fast.
 | [enterprise-search.py](enterprise-search.py) | Custom data sources (Elasticsearch, Confluence) + zero retention |
 | [code-research-agent.py](code-research-agent.py) | Agent that researches libraries and docs before writing code |
 | [hallucination-detector.py](hallucination-detector.py) | Compare raw LLM answers vs evidence-backed answers |
-| [langchain-agent.py](langchain-agent.py) | Drop BrowseAI Dev into a LangChain agent pipeline |
-| [crewai-research-team.py](crewai-research-team.py) | Multi-agent research team with CrewAI + BrowseAI Dev |
-| [llamaindex-agent.py](llamaindex-agent.py) | ReAct agent with LlamaIndex + BrowseAI Dev verified research |
+| [langchain-agent.py](langchain-agent.py) | Drop LastSearch into a LangChain agent pipeline |
+| [crewai-research-team.py](crewai-research-team.py) | Multi-agent research team with CrewAI + LastSearch |
+| [llamaindex-agent.py](llamaindex-agent.py) | ReAct agent with LlamaIndex + LastSearch verified research |
 | [research-session.py](research-session.py) | Multi-turn research with persistent knowledge across queries |
 
 ## Tutorials
@@ -35,7 +35,7 @@ Full project tutorials — each with its own README, working code, and setup ins
 | [coding-agent/](coding-agent/) | Agent that researches before writing code — never recommends deprecated libraries | Ask (thorough), Code Research |
 | [support-agent/](support-agent/) | Agent that verifies answers before responding — escalates when confidence is low | Ask (fast), Confidence Thresholds |
 | [content-agent/](content-agent/) | Agent that writes blog posts where every stat has a citation and confidence score | Ask (thorough), Citations, Writing |
-| [fact-checker-bot/](fact-checker-bot/) | Discord bot that verifies any claim with `!verify` and `!compare` | Ask (thorough), Compare, AsyncBrowseAIDev |
+| [fact-checker-bot/](fact-checker-bot/) | Discord bot that verifies any claim with `!verify` and `!compare` | Ask (thorough), Compare, AsyncLastSearch |
 | [is-this-true/](is-this-true/) | Web app — paste any sentence, get a confidence score and sources | Ask, Streaming, FastAPI |
 | [debate-settler/](debate-settler/) | CLI tool — two claims battle it out, evidence decides the winner | Ask (thorough), Contradictions |
 | [docs-verifier/](docs-verifier/) | Verify every factual claim in your README or docs | Ask, Open, Extract |
@@ -44,17 +44,17 @@ Full project tutorials — each with its own README, working code, and setup ins
 ## How it works
 
 ```
-Agent → BrowseAI Dev → Internet / Enterprise Data → Verified answers + sources
+Agent → LastSearch → Internet / Enterprise Data → Verified answers + sources
 ```
 
-BrowseAI Dev is **research infrastructure for AI agents** — every answer comes with real sources, confidence scores, and verified claims. Works with internet search out of the box, or plug in enterprise data sources (Elasticsearch, Confluence, custom endpoints).
+LastSearch is **research infrastructure for AI agents** — every answer comes with real sources, confidence scores, and verified claims. Works with internet search out of the box, or plug in enterprise data sources (Elasticsearch, Confluence, custom endpoints).
 
 ## Get API Key
 
-- **Free**: Get a BAI key at [browseai.dev](https://browseai.dev)
+- **Free**: Get a BAI key at [lastsearch.ai](https://lastsearch.ai)
 
 ## Links
 
-- [Documentation](https://browseai.dev/developers)
+- [Documentation](https://lastsearch.ai/developers)
 - [Discord](https://discord.gg/ubAuT4YQsT)
-- [GitHub](https://github.com/BrowseAI-HQ/BrowseAI-Dev)
+- [GitHub](https://github.com/lastsearch-hq/lastsearch)

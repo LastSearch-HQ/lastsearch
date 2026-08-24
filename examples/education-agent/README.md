@@ -1,6 +1,6 @@
 # Education Agent
 
-A research assistant for students and researchers that provides evidence-backed answers with full citations. Built on [BrowseAI Dev](https://browseai.dev).
+A research assistant for students and researchers that provides evidence-backed answers with full citations. Built on [LastSearch](https://lastsearch.ai).
 
 ## What it does
 
@@ -13,8 +13,8 @@ A research assistant for students and researchers that provides evidence-backed 
 ## How to run
 
 ```bash
-pip install browseaidev
-export BROWSEAI_API_KEY=bai_xxx
+pip install lastsearch
+export LASTSEARCH_API_KEY=ls_xxx
 python agent.py
 ```
 
@@ -42,4 +42,4 @@ python agent.py "How does CRISPR gene editing work?"
 
 ## License
 
-Apache 2.0 — part of the [BrowseAI Dev](https://github.com/BrowseAI-HQ/BrowseAI-Dev) project.
+Apache 2.0 — part of the [LastSearch](https://github.com/lastsearch-hq/lastsearch) project.

@@ -27,7 +27,7 @@ bun.lockb
 # TypeScript build info
 *.tsbuildinfo
 
-# Supabase — lives in browseaidev-engine private repo
+# Supabase — lives in lastsearch-engine private repo
 supabase/
 
 # Claude Code local settings
@@ -54,7 +54,7 @@ __pycache__/
 *.sln
 *.sw?
 .vercel
-packages/python-sdk/browseaidev/__pycache__/
+packages/python-sdk/lastsearch/__pycache__/
 .env*.local
 scripts/benchmark-results.json
 scripts/seed-benchmark.ts
@@ -75,7 +75,7 @@ apps/mcp/.mcpregistry*
 benchmarks/data/
 benchmarks/results/
 
-# Training — lives in browseaidev-engine private repo
+# Training — lives in lastsearch-engine private repo
 training/
 
 # Internal planning & strategy (not for public repo)

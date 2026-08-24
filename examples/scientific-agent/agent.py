@@ -1,24 +1,24 @@
 """
-Scientific Agent — BrowseAI Dev Example
+Scientific Agent — LastSearch Example
 
 Cross-checks research findings and detects contradictions in scientific
 literature. Uses deep mode for iterative gap analysis with follow-up
 searches, ideal for complex topics where consensus is evolving.
 
 Usage:
-    pip install browseaidev
-    BROWSEAI_API_KEY=bai_xxx python agent.py
-    BROWSEAI_API_KEY=bai_xxx python agent.py "Current consensus on dark matter vs modified gravity"
+    pip install lastsearch
+    LASTSEARCH_API_KEY=ls_xxx python agent.py
+    LASTSEARCH_API_KEY=ls_xxx python agent.py "Current consensus on dark matter vs modified gravity"
 """
 
 import os
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def research_scientific_topic(query: str):
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     print(f"\nScientific Research: {query}\n")
     print("Running deep research (iterative gap analysis with follow-up searches)...\n")

@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Share2, GitCompare, Check, Zap, Brain, Shield, Loader2, CheckCircle2, AlertTriangle, ThumbsUp, ThumbsDown, Flag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { BrowseResult } from "@/lib/api/browse";
-import { browseClarity, browseFeedback, type ClarityResult } from "@/lib/api/browse";
+import type { BrowseResult } from "@/lib/api/lastsearch";
+import { browseClarity, browseFeedback, type ClarityResult } from "@/lib/api/lastsearch";
 import { streamAnswer, type TraceEvent, type SourcePreview, type StreamEvent, type PremiumQuota } from "@/lib/api/stream";
 import { StreamingAnswer } from "@/components/results/StreamingAnswer";
 import { FinalAnswer } from "@/components/results/FinalAnswer";
@@ -15,7 +15,7 @@ import { AgentJson } from "@/components/results/AgentJson";
 import { StreamingPipeline } from "@/components/results/StreamingPipeline";
 import { FollowUpSuggestions } from "@/components/FollowUpSuggestions";
 import { SearchInput, saveRecentQuery } from "@/components/SearchInput";
-import { BrowseBadge } from "@/components/BrowseBadge";
+import { LastSearchBadge } from "@/components/LastSearchBadge";
 import { LoginModal } from "@/components/LoginModal";
 import { UserMenu } from "@/components/UserMenu";
 import { useAuth } from "@/contexts/AuthContext";
@@ -184,8 +184,8 @@ const Results = () => {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="font-semibold text-sm hidden sm:inline">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="font-semibold text-sm hidden sm:inline">LastSearch</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -587,7 +587,7 @@ const Results = () => {
                   <a href="/terms" className="underline hover:text-muted-foreground transition-colors">Terms</a>
                 </p>
                 <div className="flex justify-center pt-4">
-                  <BrowseBadge />
+                  <LastSearchBadge />
                 </div>
               </>
             )}

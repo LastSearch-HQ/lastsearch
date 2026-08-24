@@ -148,7 +148,7 @@ async function demoCompare(query: string) {
   // Citations
   if (result.evidence_backed.citations?.length > 0) {
     console.log();
-    console.log(c("green", `  Citations (only available with Browse AI):`));
+    console.log(c("green", `  Citations (only available with LastSearch):`));
     result.evidence_backed.citations.slice(0, 5).forEach((s: any, i: number) => {
       console.log(c("cyan", `  [${i + 1}]`) + ` ${s.title} ` + c("gray", `(${s.domain})`));
     });
@@ -160,7 +160,7 @@ async function main() {
   const mode = process.argv[3] || "all";
 
   console.log();
-  console.log(c("bold", `  Browse AI Demo`));
+  console.log(c("bold", `  LastSearch Demo`));
   console.log(c("gray", `  Open-source deep research for AI agents`));
   hr();
   console.log(c("gray", `  Query: `) + c("cyan", `"${query}"`));
@@ -182,7 +182,7 @@ async function main() {
     console.log(c("gray", `  Web UI:  http://localhost:8080`));
     console.log(c("gray", `  Compare: http://localhost:8080/compare?q=${encodeURIComponent(query)}`));
     console.log(c("gray", `  API:     ${API_BASE}`));
-    console.log(c("gray", `  MCP:     npx browseai-dev setup`));
+    console.log(c("gray", `  MCP:     npx lastsearch setup`));
     console.log();
   } catch (err: any) {
     console.error();

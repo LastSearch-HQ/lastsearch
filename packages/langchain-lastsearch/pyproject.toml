@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "langchain-lastsearch"
+version = "1.0.0"
+description = "LangChain integration for LastSearch — research infrastructure with Grounded Intelligence for AI agents"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{ name = "LastSearch" }]
+keywords = [
+    "langchain", "langchain-tools", "lastsearch", "lastsearch",
+    "ai-agent", "web-search", "fact-checking", "citations",
+    "confidence-scoring", "mcp", "rag", "hallucination-prevention",
+    "verified-search", "evidence-based", "crewai", "autogen",
+    "grounded-intelligence",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "langchain-core>=0.2.0",
+    "lastsearch>=0.1.7",
+]
+
+[project.urls]
+Homepage = "https://lastsearch.ai"
+Documentation = "https://lastsearch.ai/docs"
+Repository = "https://github.com/lastsearch-hq/lastsearch"
+Discord = "https://discord.gg/ubAuT4YQsT"

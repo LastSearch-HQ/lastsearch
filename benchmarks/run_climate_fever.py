@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-CLIMATE-FEVER Benchmark Runner for BrowseAI Dev
+CLIMATE-FEVER Benchmark Runner for LastSearch
 
-Evaluates BrowseAI Dev against CLIMATE-FEVER (1,535 climate claims).
+Evaluates LastSearch against CLIMATE-FEVER (1,535 climate claims).
 Low baselines (38.78% accuracy) make this an easy win for marketing.
 
 Usage:
@@ -26,8 +26,8 @@ from datasets import load_dataset
 from tqdm import tqdm
 
 
-API_BASE = os.environ.get("BROWSE_API_URL", "http://localhost:3001")
-API_KEY = os.environ.get("BROWSE_API_KEY", "")
+API_BASE = os.environ.get("LASTSEARCH_API_URL", "http://localhost:3001")
+API_KEY = os.environ.get("LASTSEARCH_API_KEY", "")
 RESULTS_DIR = Path(__file__).parent / "results"
 
 # CLIMATE-FEVER labels: SUPPORTS (0), REFUTES (1), NOT_ENOUGH_INFO (2)
@@ -39,7 +39,7 @@ CONFIDENCE_LOW = 0.35
 
 
 def map_to_fever_label(result: dict) -> str:
-    """Map BrowseAI Dev result to FEVER tri-label."""
+    """Map LastSearch result to FEVER tri-label."""
     confidence = result.get("confidence", 0)
     claims = result.get("claims", [])
 
@@ -61,8 +61,8 @@ def map_to_fever_label(result: dict) -> str:
     return "NOT_ENOUGH_INFO"
 
 
-def query_browseai(claim: str, depth: str = "fast", retries: int = 2) -> dict | None:
-    """Query BrowseAI Dev API for a claim."""
+def query_lastsearch(claim: str, depth: str = "fast", retries: int = 2) -> dict | None:
+    """Query LastSearch API for a claim."""
     headers = {"Content-Type": "application/json"}
     if API_KEY:
         headers["Authorization"] = f"Bearer {API_KEY}"
@@ -105,7 +105,7 @@ def run_benchmark(limit: int | None, depth: str, concurrency: int):
     def process_claim(idx, item):
         claim_text = item["claim"]
         gold_label = LABEL_MAP.get(item["claim_label"], "NOT_ENOUGH_INFO")
-        result = query_browseai(claim_text, depth=depth)
+        result = query_lastsearch(claim_text, depth=depth)
 
         if result is None:
             return idx, None

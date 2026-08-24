@@ -1,6 +1,6 @@
 # Financial Agent
 
-A financial research agent that verifies market data and financial claims with real-time evidence. Built on [BrowseAI Dev](https://browseai.dev).
+A financial research agent that verifies market data and financial claims with real-time evidence. Built on [LastSearch](https://lastsearch.ai).
 
 ## What it does
 
@@ -13,8 +13,8 @@ A financial research agent that verifies market data and financial claims with r
 ## How to run
 
 ```bash
-pip install browseaidev
-export BROWSEAI_API_KEY=bai_xxx
+pip install lastsearch
+export LASTSEARCH_API_KEY=ls_xxx
 python agent.py
 ```
 
@@ -42,4 +42,4 @@ python agent.py "Federal Reserve interest rate decisions 2025-2026"
 
 ## License
 
-Apache 2.0 — part of the [BrowseAI Dev](https://github.com/BrowseAI-HQ/BrowseAI-Dev) project.
+Apache 2.0 — part of the [LastSearch](https://github.com/lastsearch-hq/lastsearch) project.

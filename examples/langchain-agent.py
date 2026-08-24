@@ -1,35 +1,35 @@
 """
-LangChain Research Agent — BrowseAI Dev Example
+LangChain Research Agent — LastSearch Example
 
-Drop BrowseAI Dev into a LangChain agent as a research tool.
+Drop LastSearch into a LangChain agent as a research tool.
 The agent gets evidence-backed web research capabilities.
 
 Usage:
-    pip install langchain-browseaidev langchain langchain-openai
+    pip install langchain-lastsearch langchain langchain-openai
     python langchain-agent.py
 """
 
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_browseaidev import (
-    BrowseAIDevSearchTool,
-    BrowseAIDevAnswerTool,
-    BrowseAIDevExtractTool,
+from langchain_lastsearch import (
+    LastSearchSearchTool,
+    LastSearchAnswerTool,
+    LastSearchExtractTool,
 )
 
-# BrowseAI Dev tools — agent gets evidence-backed research
+# LastSearch tools — agent gets evidence-backed research
 tools = [
-    BrowseAIDevSearchTool(api_key="bai_xxx"),     # Web search
-    BrowseAIDevAnswerTool(api_key="bai_xxx"),      # Full research pipeline (verified)
-    BrowseAIDevExtractTool(api_key="bai_xxx"),     # Page extraction
+    LastSearchSearchTool(api_key="ls_xxx"),     # Web search
+    LastSearchAnswerTool(api_key="ls_xxx"),      # Full research pipeline (verified)
+    LastSearchExtractTool(api_key="ls_xxx"),     # Page extraction
 ]
 
 # Standard LangChain agent setup
 llm = ChatOpenAI(model="gpt-4o")
 
 prompt = ChatPromptTemplate.from_messages([
-    ("system", """You are a research assistant. Use BrowseAI Dev tools to find
+    ("system", """You are a research assistant. Use LastSearch tools to find
     evidence-backed answers. Always cite your sources and mention the
     confidence score. Never make claims without evidence."""),
     ("human", "{input}"),

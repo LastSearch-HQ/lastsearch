@@ -1,5 +1,5 @@
 """
-Support Agent — A customer support agent powered by BrowseAI Dev.
+Support Agent — A customer support agent powered by LastSearch.
 
 Verifies answers against multiple sources before responding. Escalates to
 humans when confidence is low. Tracks verified answers in a session-based
@@ -10,7 +10,7 @@ Usage:
     python agent.py --knowledge-base https://docs.example.com
 
 Environment:
-    BROWSEAI_API_KEY  — BrowseAI API key (starts with bai_)
+    LASTSEARCH_API_KEY  — LastSearch API key (starts with ls_)
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ import sys
 import time
 from dataclasses import dataclass, field
 
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 from dotenv import load_dotenv
 from rich.console import Console
 from rich.live import Live
@@ -101,14 +101,14 @@ class SupportAgent:
     """Customer support agent that verifies answers before responding."""
 
     def __init__(self, api_key: str, knowledge_base_url: str | None = None):
-        self.client = BrowseAIDev(api_key=api_key, timeout=120.0)
+        self.client = LastSearch(api_key=api_key, timeout=120.0)
         self.knowledge_base_url = knowledge_base_url
         self.session_client = None
         self.cache: dict[str, CachedAnswer] = {}
         self.stats = AgentStats()
 
     def start_session(self) -> None:
-        """Initialize a BrowseAI research session for knowledge accumulation."""
+        """Initialize a LastSearch research session for knowledge accumulation."""
         self.session_client = self.client.session("support-agent")
         console.print(
             f"  Session started: [info]{self.session_client.id}[/info]",
@@ -189,7 +189,7 @@ class SupportAgent:
             self.stats.record(cached.confidence, "answered")
             return
 
-        # ── Step 2: Research via BrowseAI ─────────────────────────────────
+        # ── Step 2: Research via LastSearch ─────────────────────────────────
         self._show_step("Searching and verifying across multiple sources...")
 
         query = question
@@ -412,7 +412,7 @@ class SupportAgent:
 
 BANNER = """
 [agent]Customer Support Agent[/agent]
-[dim]Powered by BrowseAI Dev — answers verified before delivery[/dim]
+[dim]Powered by LastSearch — answers verified before delivery[/dim]
 
 [dim]Commands:[/dim]
   [info]/stats[/info]      Show session statistics
@@ -436,7 +436,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
     agent = SupportAgent(api_key=api_key, knowledge_base_url=args.knowledge_base)
 
     console.print(Panel(BANNER, border_style="blue", title="Support Agent"))

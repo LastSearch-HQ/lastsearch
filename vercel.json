@@ -3,5 +3,19 @@
     "deploymentEnabled": {
       "shreyas": false
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/:path((?!api/).*)",
+      "has": [{ "type": "host", "value": "browseai.dev" }],
+      "destination": "https://lastsearch.ai/:path",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!api/).*)",
+      "has": [{ "type": "host", "value": "www.browseai.dev" }],
+      "destination": "https://lastsearch.ai/:path",
+      "permanent": false
+    }
+  ]
 }

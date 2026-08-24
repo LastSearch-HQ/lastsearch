@@ -1,0 +1,8 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[project]
+name = "llamaindex-browseaidev"
+version = "1.0.0"
+description = "DEPRECATED - renamed to llamaindex-lastsearch. https://lastsearch.ai/migrate"
+dependencies = ["llamaindex-lastsearch>=1.0.0"]

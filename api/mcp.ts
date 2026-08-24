@@ -3,11 +3,11 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
 
-const VERSION = "0.1.6";
-const BROWSE_API_URL = process.env.BROWSE_API_URL || "https://browseai.dev/api";
+const VERSION = "1.0.0";
+const LASTSEARCH_API_URL = process.env.LASTSEARCH_API_URL || "https://lastsearch.ai/api";
 
 async function apiCall(apiKey: string, path: string, body: Record<string, unknown>) {
-  const res = await fetch(`${BROWSE_API_URL}${path}`, {
+  const res = await fetch(`${LASTSEARCH_API_URL}${path}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ async function apiCall(apiKey: string, path: string, body: Record<string, unknow
 
 function registerTools(server: McpServer, apiKey: string) {
   server.tool(
-    "browse_search",
+    "search",
     "Search the web for information on a topic. Returns URLs, titles, snippets, and relevance scores.",
     { query: z.string(), limit: z.number().optional() },
     async ({ query, limit }) => {
@@ -32,7 +32,7 @@ function registerTools(server: McpServer, apiKey: string) {
   );
 
   server.tool(
-    "browse_open",
+    "open",
     "Fetch and parse a web page into clean text using Readability. Strips ads, nav, and boilerplate.",
     { url: z.string() },
     async ({ url }) => {
@@ -42,7 +42,7 @@ function registerTools(server: McpServer, apiKey: string) {
   );
 
   server.tool(
-    "browse_extract",
+    "extract",
     "Extract structured knowledge (claims + sources + confidence) from a single web page using AI.",
     { url: z.string(), query: z.string().optional() },
     async ({ url, query }) => {
@@ -52,7 +52,7 @@ function registerTools(server: McpServer, apiKey: string) {
   );
 
   server.tool(
-    "browse_answer",
+    "answer",
     "Full deep research pipeline: search the web, fetch pages, extract claims, build evidence graph, and generate a structured answer with citations and confidence score.",
     { query: z.string() },
     async ({ query }) => {
@@ -62,7 +62,7 @@ function registerTools(server: McpServer, apiKey: string) {
   );
 
   server.tool(
-    "browse_compare",
+    "compare",
     "Compare a raw LLM answer (no sources) vs an evidence-backed answer. Shows the difference between hallucination-prone and grounded responses.",
     { query: z.string() },
     async ({ query }) => {
@@ -104,7 +104,7 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
   if (!apiKey) {
     res.setHeader("Content-Type", "application/json");
     res.statusCode = 401;
-    res.end(JSON.stringify({ error: "API key required. Pass via X-API-Key header or Authorization: Bearer <key>. Get one at https://browseai.dev/dashboard" }));
+    res.end(JSON.stringify({ error: "API key required. Pass via X-API-Key header or Authorization: Bearer <key>. Get one at https://lastsearch.ai/dashboard" }));
     return;
   }
 
@@ -114,7 +114,7 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
   });
 
   const server = new McpServer({
-    name: "browseai-dev",
+    name: "lastsearch",
     version: VERSION,
   });
   registerTools(server, apiKey);

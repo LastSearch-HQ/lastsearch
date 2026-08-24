@@ -33,7 +33,7 @@ const TYPEWRITER_QUERIES = [
 // ── Autocomplete suggestions for landing page ──────────────────────
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
-const RECENT_KEY = "browseai_recent_queries";
+const RECENT_KEY = "lastsearch_recent_queries";
 function getRecentQueries(): string[] {
   try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); } catch { return []; }
 }
@@ -182,15 +182,15 @@ const Index = () => {
       structuredData={{
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "BrowseAI Dev",
+        "name": "LastSearch",
         "description": "Grounded Intelligence — research infrastructure for AI agents. Real-time web search with evidence-backed citations and confidence scores.",
-        "url": "https://browseai.dev",
+        "url": "https://lastsearch.ai",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "author": { "@type": "Organization", "name": "BrowseAI Dev", "url": "https://browseai.dev" },
+        "author": { "@type": "Organization", "name": "LastSearch", "url": "https://lastsearch.ai" },
         "license": "https://www.apache.org/licenses/LICENSE-2.0",
-        "codeRepository": "https://github.com/BrowseAI-HQ/BrowseAI-Dev",
+        "codeRepository": "https://github.com/lastsearch-hq/lastsearch",
         "programmingLanguage": ["TypeScript", "Python"],
       }}
     />
@@ -202,8 +202,8 @@ const Index = () => {
         className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-5 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
       >
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); navigate("/"); }}>
-          <img src="/logo.svg" alt="BrowseAI Dev" className="w-5 h-5" />
-          <span className="font-semibold text-sm tracking-tight hidden sm:inline">BrowseAI Dev</span>
+          <img src="/logo.svg" alt="LastSearch" className="w-5 h-5" />
+          <span className="font-semibold text-sm tracking-tight hidden sm:inline">LastSearch</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
           {/* Desktop nav links */}
@@ -229,7 +229,7 @@ const Index = () => {
             </a>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" asChild>
-            <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
               <Github className="w-4 h-4" />
               <span className="ml-1">GitHub</span>
             </a>
@@ -256,7 +256,7 @@ const Index = () => {
               <DropdownMenuItem onClick={() => navigate("/recipes")}>Recipes</DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/alternatives")}>Alternatives</DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <a href="https://github.com/BrowseAI-HQ/BrowseAI-Dev" target="_blank" rel="noopener" className="flex items-center gap-2">
+                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener" className="flex items-center gap-2">
                   <Star className="w-3.5 h-3.5" /> Star on GitHub
                 </a>
               </DropdownMenuItem>
@@ -471,7 +471,7 @@ const Index = () => {
             </h2>
           </motion.div>
 
-          {/* Flow: Agent → BrowseAI Dev → Web */}
+          {/* Flow: Agent → LastSearch → Web */}
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
             {/* Node 1: Your Agent */}
             <motion.div
@@ -499,7 +499,7 @@ const Index = () => {
             </div>
             <ArrowDown className="md:hidden w-4 h-4 text-accent" />
 
-            {/* Node 2: BrowseAI Dev (center, highlighted) */}
+            {/* Node 2: LastSearch (center, highlighted) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -511,7 +511,7 @@ const Index = () => {
                 <Shield className="w-12 h-12 text-accent/30 absolute" />
                 <img src="/logo.svg" alt="B" className="w-5 h-5 relative z-10" />
               </div>
-              <span className="text-sm font-bold text-accent">BrowseAI Dev</span>
+              <span className="text-sm font-bold text-accent">LastSearch</span>
               <div className="flex flex-wrap justify-center gap-1.5">
                 <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[10px] font-medium text-accent">Search</span>
                 <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[10px] font-medium text-accent">Verify</span>
@@ -558,7 +558,7 @@ const Index = () => {
             <div className="p-4 rounded-xl bg-red-500/5 border border-red-500/10">
               <div className="flex items-center gap-2 mb-2">
                 <ShieldAlert className="w-4 h-4 text-red-400" />
-                <span className="text-xs font-semibold text-red-400">Without BrowseAI Dev</span>
+                <span className="text-xs font-semibold text-red-400">Without LastSearch</span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Agent generates plausible-sounding text. No sources. No trust scores. You hope it's right.
@@ -567,7 +567,7 @@ const Index = () => {
             <div className="p-4 rounded-xl bg-accent/5 border border-accent/20">
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle2 className="w-4 h-4 text-accent" />
-                <span className="text-xs font-semibold text-accent">With BrowseAI Dev</span>
+                <span className="text-xs font-semibold text-accent">With LastSearch</span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Agent checks sources, sees trust scores, spots contradictions — then decides whether to act or reconsider.
@@ -1100,7 +1100,7 @@ const Index = () => {
                           </div>
                         </div>
                         <a
-                          href={`https://github.com/BrowseAI-HQ/BrowseAI-Dev/tree/main/examples/${active.github}`}
+                          href={`https://github.com/lastsearch-hq/lastsearch/tree/main/examples/${active.github}`}
                           target="_blank"
                           rel="noopener"
                           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-secondary border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-accent/30 transition-colors"
@@ -1123,7 +1123,7 @@ const Index = () => {
                           <span className="text-[10px] text-muted-foreground font-mono ml-2">{active.github}/agent.py</span>
                         </div>
                         <pre className="p-4 text-xs font-mono text-muted-foreground leading-relaxed overflow-x-auto">
-                          <code>{`from browseaidev import BrowseAIDev\nclient = BrowseAIDev(api_key="bai_xxx")\n\n${active.snippet}`}</code>
+                          <code>{`from lastsearch import LastSearch\nclient = LastSearch(api_key="ls_xxx")\n\n${active.snippet}`}</code>
                         </pre>
                       </div>
 
@@ -1214,21 +1214,21 @@ const Index = () => {
           {(() => {
             const tools = [
               // Core tools
-              { title: "Search", desc: "Multi-provider parallel web search. Real sources ranked and fetched.", icon: Search, mcp: "browse_search", endpoint: "POST /browse/search", sdk: "client.search(\"query\")", snippet: `result = client.search("quantum computing")\nfor r in result.results:\n  print(f"{r.title} — {r.url}")`, category: "core" },
-              { title: "Open", desc: "Fetch and parse any web page into clean text. Strips ads, nav, boilerplate.", icon: FileText, mcp: "browse_open", endpoint: "POST /browse/open", sdk: "client.open(url)", snippet: `page = client.open("https://arxiv.org/abs/2301.00001")\nprint(page.title)\nprint(page.text[:500])  # Clean parsed content`, category: "core" },
-              { title: "Extract", desc: "Pull structured claims, quotes, and knowledge from any URL.", icon: Quote, mcp: "browse_extract", endpoint: "POST /browse/extract", sdk: "client.extract(url)", snippet: `result = client.extract(\n  "https://arxiv.org/abs/2301.00001"\n)\nfor claim in result.claims:\n  print(f"{claim.text} [{claim.score:.0%}]")`, category: "core" },
-              { title: "Answer", desc: "Full research pipeline — search, verify, cite. Three depth modes: fast, thorough, deep.", icon: Shield, mcp: "browse_answer", endpoint: "POST /browse/answer", sdk: "client.ask(query, depth=...)", snippet: `result = client.ask(\n  "Is nuclear fusion viable by 2035?",\n  depth="thorough"\n)\nprint(f"Confidence: {result.confidence:.0%}")\nprint(f"Sources: {len(result.sources)}")`, category: "core" },
-              { title: "Compare", desc: "Raw LLM vs evidence-backed — side by side. See hallucination exposed.", icon: GitCompare, mcp: "browse_compare", endpoint: "POST /browse/compare", sdk: "client.compare(query)", snippet: `result = client.compare(\n  "Effects of creatine on muscle growth"\n)\nprint(f"Raw LLM: {result.raw[:100]}...")\nprint(f"Verified: {result.verified[:100]}...")`, category: "core" },
-              { title: "Clarity", desc: "Anti-hallucination engine. Three modes: prompt rewriting, grounded answers, verified fusion.", icon: Sparkles, mcp: "browse_clarity", endpoint: "POST /browse/clarity", sdk: "client.clarity(query, mode=...)", snippet: `# Mode: "prompt" | "answer" | "verified"\nresult = client.clarity(\n  "Explain CRISPR gene editing",\n  mode="verified"\n)\nprint(result.answer)  # Grounded in sources`, category: "core" },
+              { title: "Search", desc: "Multi-provider parallel web search. Real sources ranked and fetched.", icon: Search, mcp: "search", endpoint: "POST /browse/search", sdk: "client.search(\"query\")", snippet: `result = client.search("quantum computing")\nfor r in result.results:\n  print(f"{r.title} — {r.url}")`, category: "core" },
+              { title: "Open", desc: "Fetch and parse any web page into clean text. Strips ads, nav, boilerplate.", icon: FileText, mcp: "open", endpoint: "POST /browse/open", sdk: "client.open(url)", snippet: `page = client.open("https://arxiv.org/abs/2301.00001")\nprint(page.title)\nprint(page.text[:500])  # Clean parsed content`, category: "core" },
+              { title: "Extract", desc: "Pull structured claims, quotes, and knowledge from any URL.", icon: Quote, mcp: "extract", endpoint: "POST /browse/extract", sdk: "client.extract(url)", snippet: `result = client.extract(\n  "https://arxiv.org/abs/2301.00001"\n)\nfor claim in result.claims:\n  print(f"{claim.text} [{claim.score:.0%}]")`, category: "core" },
+              { title: "Answer", desc: "Full research pipeline — search, verify, cite. Three depth modes: fast, thorough, deep.", icon: Shield, mcp: "answer", endpoint: "POST /browse/answer", sdk: "client.ask(query, depth=...)", snippet: `result = client.ask(\n  "Is nuclear fusion viable by 2035?",\n  depth="thorough"\n)\nprint(f"Confidence: {result.confidence:.0%}")\nprint(f"Sources: {len(result.sources)}")`, category: "core" },
+              { title: "Compare", desc: "Raw LLM vs evidence-backed — side by side. See hallucination exposed.", icon: GitCompare, mcp: "compare", endpoint: "POST /browse/compare", sdk: "client.compare(query)", snippet: `result = client.compare(\n  "Effects of creatine on muscle growth"\n)\nprint(f"Raw LLM: {result.raw[:100]}...")\nprint(f"Verified: {result.verified[:100]}...")`, category: "core" },
+              { title: "Clarity", desc: "Anti-hallucination engine. Three modes: prompt rewriting, grounded answers, verified fusion.", icon: Sparkles, mcp: "clarity", endpoint: "POST /browse/clarity", sdk: "client.clarity(query, mode=...)", snippet: `# Mode: "prompt" | "answer" | "verified"\nresult = client.clarity(\n  "Explain CRISPR gene editing",\n  mode="verified"\n)\nprint(result.answer)  # Grounded in sources`, category: "core" },
               // Sessions & Memory
-              { title: "Session Create", desc: "Start a persistent research session. Knowledge accumulates across queries.", icon: Brain, mcp: "browse_session_create", endpoint: "POST /session", sdk: "client.session(name)", snippet: `session = client.session("AI safety research")\nr1 = session.ask("What is AI alignment?")\nr2 = session.ask("Who are the key researchers?")\n# r2 has context from r1`, category: "sessions" },
-              { title: "Session Recall", desc: "Query accumulated knowledge without new web searches.", icon: Layers, mcp: "browse_session_recall", endpoint: "POST /session/:id/recall", sdk: "session.recall(query)", snippet: `# No new web search — queries memory only\nrecall = session.recall(\n  "What did we learn about alignment?"\n)\nprint(recall.answer)  # From accumulated knowledge`, category: "sessions" },
-              { title: "Session Share", desc: "Share your research session publicly. Anyone can view via URL.", icon: Share2, mcp: "browse_session_share", endpoint: "POST /session/:id/share", sdk: "session.share()", snippet: `share_url = session.share()\nprint(f"Share: {share_url}")\n# Anyone can view all findings + sources`, category: "sessions" },
-              { title: "Session Fork", desc: "Fork a shared session to continue building on someone else's research.", icon: GitFork, mcp: "browse_session_fork", endpoint: "POST /session/share/:id/fork", sdk: "client.fork_session(share_id)", snippet: `# Build on a colleague's research\nforked = client.fork_session("share_abc123")\nresult = forked.ask("What's missing from this?")`, category: "sessions" },
-              { title: "Knowledge Export", desc: "Export all verified claims and sources from a session.", icon: Layers, mcp: "browse_session_knowledge", endpoint: "GET /session/:id/knowledge", sdk: "session.knowledge()", snippet: `entries = session.knowledge()\nfor entry in entries:\n  print(f"[{entry.confidence:.0%}] {entry.claim}")\n  for s in entry.sources:\n    print(f"  — {s.url}")`, category: "sessions" },
+              { title: "Session Create", desc: "Start a persistent research session. Knowledge accumulates across queries.", icon: Brain, mcp: "session_create", endpoint: "POST /session", sdk: "client.session(name)", snippet: `session = client.session("AI safety research")\nr1 = session.ask("What is AI alignment?")\nr2 = session.ask("Who are the key researchers?")\n# r2 has context from r1`, category: "sessions" },
+              { title: "Session Recall", desc: "Query accumulated knowledge without new web searches.", icon: Layers, mcp: "session_recall", endpoint: "POST /session/:id/recall", sdk: "session.recall(query)", snippet: `# No new web search — queries memory only\nrecall = session.recall(\n  "What did we learn about alignment?"\n)\nprint(recall.answer)  # From accumulated knowledge`, category: "sessions" },
+              { title: "Session Share", desc: "Share your research session publicly. Anyone can view via URL.", icon: Share2, mcp: "session_share", endpoint: "POST /session/:id/share", sdk: "session.share()", snippet: `share_url = session.share()\nprint(f"Share: {share_url}")\n# Anyone can view all findings + sources`, category: "sessions" },
+              { title: "Session Fork", desc: "Fork a shared session to continue building on someone else's research.", icon: GitFork, mcp: "session_fork", endpoint: "POST /session/share/:id/fork", sdk: "client.fork_session(share_id)", snippet: `# Build on a colleague's research\nforked = client.fork_session("share_abc123")\nresult = forked.ask("What's missing from this?")`, category: "sessions" },
+              { title: "Knowledge Export", desc: "Export all verified claims and sources from a session.", icon: Layers, mcp: "session_knowledge", endpoint: "GET /session/:id/knowledge", sdk: "session.knowledge()", snippet: `entries = session.knowledge()\nfor entry in entries:\n  print(f"[{entry.confidence:.0%}] {entry.claim}")\n  for s in entry.sources:\n    print(f"  — {s.url}")`, category: "sessions" },
               // Feedback & Learning
-              { title: "Feedback", desc: "Submit feedback on results. Improves verification accuracy over time.", icon: ThumbsUp, mcp: "browse_feedback", endpoint: "POST /browse/feedback", sdk: "client.feedback(id, rating)", snippet: `# Help improve the system\nclient.feedback(\n  result_id=result.id,\n  rating="good",  # or "bad", "wrong"\n  comment="Missed a key source"\n)`, category: "feedback" },
-              { title: "Stream", desc: "Real-time SSE streaming. Get search, verify, and answer progress live.", icon: Layers, mcp: "browse_answer (stream)", endpoint: "POST /browse/answer/stream", sdk: "SSE via REST API", snippet: `# Server-Sent Events streaming\nimport httpx\nwith httpx.stream("POST", url, json=payload) as r:\n  for line in r.iter_lines():\n    event = json.loads(line)\n    print(event["stage"], event["progress"])`, category: "core" },
+              { title: "Feedback", desc: "Submit feedback on results. Improves verification accuracy over time.", icon: ThumbsUp, mcp: "feedback", endpoint: "POST /browse/feedback", sdk: "client.feedback(id, rating)", snippet: `# Help improve the system\nclient.feedback(\n  result_id=result.id,\n  rating="good",  # or "bad", "wrong"\n  comment="Missed a key source"\n)`, category: "feedback" },
+              { title: "Stream", desc: "Real-time SSE streaming. Get search, verify, and answer progress live.", icon: Layers, mcp: "answer (stream)", endpoint: "POST /browse/answer/stream", sdk: "SSE via REST API", snippet: `# Server-Sent Events streaming\nimport httpx\nwith httpx.stream("POST", url, json=payload) as r:\n  for line in r.iter_lines():\n    event = json.loads(line)\n    print(event["stage"], event["progress"])`, category: "core" },
             ];
             const active = activeTool !== null ? tools[activeTool] : null;
             return (
@@ -1321,7 +1321,7 @@ const Index = () => {
                           <span className="text-[10px] text-muted-foreground font-mono ml-1">example.py</span>
                         </div>
                         <pre className="p-4 text-[11px] font-mono text-muted-foreground leading-relaxed overflow-x-auto">
-                          <code>{`from browseaidev import BrowseAIDev\nclient = BrowseAIDev(api_key="bai_xxx")\n\n${active.snippet}`}</code>
+                          <code>{`from lastsearch import LastSearch\nclient = LastSearch(api_key="ls_xxx")\n\n${active.snippet}`}</code>
                         </pre>
                       </motion.div>
                     ) : (
@@ -1380,14 +1380,14 @@ const Index = () => {
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-10">
             <div className="flex items-center justify-center gap-3 md:gap-4 py-3 flex-wrap">
               {([
-                { name: "MCP Server", hint: "npx browseai-dev" },
-                { name: "REST API", hint: "POST browseai.dev/api/browse/*" },
-                { name: "Python SDK", hint: "pip install browseaidev" },
-                { name: "LangChain", hint: "pip install langchain-browseaidev" },
-                { name: "CrewAI", hint: "pip install crewai-browseaidev" },
-                { name: "LlamaIndex", hint: "pip install llamaindex-browseaidev" },
+                { name: "MCP Server", hint: "npx lastsearch" },
+                { name: "REST API", hint: "POST lastsearch.ai/api/browse/*" },
+                { name: "Python SDK", hint: "pip install lastsearch" },
+                { name: "LangChain", hint: "pip install langchain-lastsearch" },
+                { name: "CrewAI", hint: "pip install crewai-lastsearch" },
+                { name: "LlamaIndex", hint: "pip install llamaindex-lastsearch" },
                 { name: "SSE Streaming", hint: "POST /browse/answer/stream" },
-                { name: "Free API Keys", hint: "Get a bai_ key at browseai.dev" },
+                { name: "Free API Keys", hint: "Get a ls_ key at lastsearch.ai" },
               ]).map((item, i) => (
                 <motion.span
                   key={item.name}
@@ -1489,14 +1489,14 @@ const Index = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-accent uppercase tracking-wider">MCP Server</span>
-                <button onClick={() => copyText("npx browseai-dev setup", "setup")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                <button onClick={() => copyText("npx lastsearch setup", "setup")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                   {copied === "setup" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied === "setup" ? "Copied" : "Copy"}
                 </button>
               </div>
               <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary mb-2">
                 <Terminal className="w-4 h-4 text-accent" />
-                <code className="text-sm font-mono">npx browseai-dev setup</code>
+                <code className="text-sm font-mono">npx lastsearch setup</code>
               </div>
               <p className="text-xs text-muted-foreground">Auto-configures Claude Desktop, Cursor, Windsurf, or any MCP client.</p>
             </motion.div>
@@ -1505,17 +1505,17 @@ const Index = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-accent uppercase tracking-wider">Python SDK</span>
-                <button onClick={() => copyText("pip install browseaidev", "pip")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                <button onClick={() => copyText("pip install lastsearch", "pip")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                   {copied === "pip" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied === "pip" ? "Copied" : "Copy"}
                 </button>
               </div>
               <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary mb-2">
                 <Terminal className="w-4 h-4 text-accent" />
-                <code className="text-sm font-mono">pip install browseaidev</code>
+                <code className="text-sm font-mono">pip install lastsearch</code>
               </div>
-              <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-3 overflow-x-auto">{`from browseaidev import BrowseAIDev
-client = BrowseAIDev(api_key="bai_xxx")
+              <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-3 overflow-x-auto">{`from lastsearch import LastSearch
+client = LastSearch(api_key="ls_xxx")
 result = client.ask("What causes aurora borealis?")`}</pre>
             </motion.div>
 
@@ -1523,14 +1523,14 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-accent uppercase tracking-wider">REST API</span>
-                <button onClick={() => copyText(`curl -X POST https://browseai.dev/api/browse/answer -H "Content-Type: application/json" -H "X-API-Key: bai_xxx" -d '{"query": "What causes aurora borealis?"}'`, "api")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                <button onClick={() => copyText(`curl -X POST https://lastsearch.ai/api/browse/answer -H "Content-Type: application/json" -H "X-API-Key: ls_xxx" -d '{"query": "What causes aurora borealis?"}'`, "api")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                   {copied === "api" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied === "api" ? "Copied" : "Copy"}
                 </button>
               </div>
-              <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-3 overflow-x-auto">{`curl -X POST https://browseai.dev/api/browse/answer \\
+              <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-3 overflow-x-auto">{`curl -X POST https://lastsearch.ai/api/browse/answer \\
   -H "Content-Type: application/json" \\
-  -H "X-API-Key: bai_your_key" \\
+  -H "X-API-Key: ls_your_key" \\
   -d '{"query": "What causes aurora borealis?"}'`}</pre>
               <p className="text-xs text-muted-foreground mt-2">Works with any HTTP client or agent framework. Free API keys available.</p>
             </motion.div>
@@ -1540,9 +1540,9 @@ result = client.ask("What causes aurora borealis?")`}</pre>
               <span className="text-xs font-semibold text-accent uppercase tracking-wider block mb-3">Agent Frameworks</span>
               <div className="space-y-2">
                 {[
-                  { name: "LangChain", pkg: "langchain-browseaidev" },
-                  { name: "CrewAI", pkg: "crewai-browseaidev" },
-                  { name: "LlamaIndex", pkg: "llamaindex-browseaidev" },
+                  { name: "LangChain", pkg: "langchain-lastsearch" },
+                  { name: "CrewAI", pkg: "crewai-lastsearch" },
+                  { name: "LlamaIndex", pkg: "llamaindex-lastsearch" },
                 ].map((fw) => (
                   <div key={fw.name} className="flex items-center justify-between px-3 py-2 rounded-lg bg-secondary">
                     <span className="text-sm font-medium">{fw.name}</span>
@@ -1712,7 +1712,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
         <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none opacity-20" />
         <div className="max-w-2xl mx-auto text-center space-y-6 relative">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">Build on <span className="text-accent">BrowseAI Dev.</span></h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">Build on <span className="text-accent">LastSearch.</span></h2>
             <p className="text-muted-foreground text-sm">
               Open source MCP server, Python SDK, and REST API. Add verified research to any agent in minutes. Star the repo, join Discord, and help build the trust layer agents deserve.
             </p>
@@ -1724,7 +1724,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             className="flex flex-col sm:flex-row items-center justify-center gap-3"
           >
             <a
-              href="https://github.com/BrowseAI-HQ/BrowseAI-Dev"
+              href="https://github.com/lastsearch-hq/lastsearch"
               target="_blank"
               rel="noopener"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary border border-border text-sm font-semibold hover:border-accent/40 hover:text-accent transition-all w-full sm:w-auto justify-center"
@@ -1749,8 +1749,8 @@ result = client.ask("What causes aurora borealis?")`}</pre>
       <footer className="py-12 px-6 border-t border-border">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="BrowseAI Dev" className="w-4 h-4" />
-            <span className="text-sm font-semibold">BrowseAI Dev</span>
+            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
+            <span className="text-sm font-semibold">LastSearch</span>
           </div>
           <p className="text-sm text-muted-foreground">
             Crafted with <span className="text-red-400">&#9829;</span> and a lot of <span className="text-amber-400">&#9889;</span> by <a href="https://www.instagram.com/shreyassaw/?hl=en" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:text-accent transition-colors">Shreyas</a>

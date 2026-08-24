@@ -2,7 +2,7 @@
 
 Write blog posts where every stat, claim, and fact is verified with real citations. No hallucinated numbers.
 
-The Content Agent takes a topic, researches it across multiple angles using BrowseAI sessions, writes a cited blog post, and runs a final verification sweep. Every claim gets a source citation, every statistic gets a confidence score, and contradictions between sources are explicitly called out.
+The Content Agent takes a topic, researches it across multiple angles using LastSearch sessions, writes a cited blog post, and runs a final verification sweep. Every claim gets a source citation, every statistic gets a confidence score, and contradictions between sources are explicitly called out.
 
 ## How it works
 
@@ -10,7 +10,7 @@ The agent runs four phases:
 
 ### Phase 1: Research
 
-Creates a BrowseAI research session and runs 6 queries covering different angles of the topic:
+Creates a LastSearch research session and runs 6 queries covering different angles of the topic:
 
 - Latest statistics and data
 - Current trends and developments
@@ -46,7 +46,7 @@ For each section, the agent writes content using ONLY verified claims from the r
 
 ### Phase 4: Verify
 
-Runs the entire draft through BrowseAI's `ask` endpoint one more time to catch any remaining unverified claims. Aggregates all contradictions from every research query into a final report.
+Runs the entire draft through LastSearch's `ask` endpoint one more time to catch any remaining unverified claims. Aggregates all contradictions from every research query into a final report.
 
 ## Output
 
@@ -75,7 +75,7 @@ pip install -r requirements.txt
 Set your API key:
 
 ```bash
-export BROWSEAI_API_KEY=bai_xxx
+export LASTSEARCH_API_KEY=ls_xxx
 ```
 
 Or the script will prompt you for it.
@@ -117,7 +117,7 @@ The agent will:
 
 1. Research the topic across 6 queries (statistics, trends, challenges, expert views, examples, economic impact)
 2. Create a blog post outline with 8 sections
-3. Write each section using only verified claims from BrowseAI
+3. Write each section using only verified claims from LastSearch
 4. Run a final verification sweep
 5. Save the result to `impact-of-ai-on-software-engineering-jobs.md`
 
@@ -127,7 +127,7 @@ Example terminal output:
 ╭─────────────────────────────────────────────────╮
 │          CONTENT AGENT                          │
 │   Write verified blog posts — powered by        │
-│   BrowseAI                                      │
+│   LastSearch                                      │
 │                                                 │
 │   Every stat gets a confidence score. Every     │
 │   claim gets a citation. Contradictions are     │
@@ -234,7 +234,7 @@ python agent.py "State of the global semiconductor industry"
 
 ## How verification works
 
-The Content Agent relies on BrowseAI's verification pipeline:
+The Content Agent relies on LastSearch's verification pipeline:
 
 | Step | What it does |
 |------|-------------|
@@ -250,9 +250,9 @@ The `depth="thorough"` mode auto-retries with a rephrased query when confidence 
 ## Requirements
 
 - Python 3.10+
-- A [BrowseAI API key](https://browseai.dev) (`bai_xxx` prefix)
-- Dependencies: `browseaidev`, `rich`
+- A [LastSearch API key](https://lastsearch.ai) (`ls_xxx` prefix)
+- Dependencies: `lastsearch`, `rich`
 
 ## License
 
-Apache 2.0 — part of the [BrowseAI Dev](https://github.com/BrowseAI-HQ/BrowseAI-Dev) project.
+Apache 2.0 — part of the [LastSearch](https://github.com/lastsearch-hq/lastsearch) project.

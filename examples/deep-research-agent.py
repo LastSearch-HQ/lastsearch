@@ -1,23 +1,23 @@
 """
-Deep Research Agent — BrowseAI Example
+Deep Research Agent — LastSearch Example
 
 Multi-step agentic reasoning that iteratively searches, identifies knowledge
 gaps, and follows up until confidence is high. Shows reasoning steps,
 contradictions, and verified claims.
 
 Usage:
-    pip install browseaidev
-    BROWSEAI_API_KEY=bai_xxx python deep-research-agent.py "Compare CRISPR approaches for sickle cell disease"
+    pip install lastsearch
+    LASTSEARCH_API_KEY=ls_xxx python deep-research-agent.py "Compare CRISPR approaches for sickle cell disease"
 """
 
 import os
 import sys
-from browseaidev import BrowseAIDev
+from lastsearch import LastSearch
 
 
 def deep_research(query: str):
-    api_key = os.environ.get("BROWSEAI_API_KEY", "bai_xxx")
-    client = BrowseAIDev(api_key=api_key)
+    api_key = os.environ.get("LASTSEARCH_API_KEY", "ls_xxx")
+    client = LastSearch(api_key=api_key)
 
     print(f"\nDeep researching: {query}\n")
 

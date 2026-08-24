@@ -36,7 +36,7 @@ export function LoginModal({ open: controlledOpen, onOpenChange, redirectTo }: L
       )}
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
-          <DialogTitle>Sign in to BrowseAI Dev</DialogTitle>
+          <DialogTitle>Sign in to LastSearch</DialogTitle>
           <DialogDescription>
             Save your query history and API keys across devices.
           </DialogDescription>
