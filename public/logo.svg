@@ -1,6 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64">
-  <circle cx="26" cy="26" r="15" stroke="#F97316" stroke-width="4.2" fill="none"/>
-  <line x1="37.5" y1="37.5" x2="50" y2="50" stroke="#F97316" stroke-width="4.8" stroke-linecap="round"/>
-  <path d="M19.5 26.5 L24.2 31.2 L33 21.5" stroke="#F97316" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="62" y="41" font-family="-apple-system, 'SF Pro Display', Helvetica, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.5" fill="#FAFAFA">Last<tspan fill="#F97316">Search</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64">
+  <defs>
+    <linearGradient id="lsg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FB923C"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="6" width="52" height="52" rx="14" fill="url(#lsg)"/>
+  <text x="26" y="42.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="27" font-weight="800" letter-spacing="-1.2" fill="#FFFFFF">LS</text>
+  <text x="66" y="42" font-family="-apple-system, 'SF Pro Display', Helvetica, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.5" fill="#FAFAFA">Last<tspan fill="#F97316">Search</tspan></text>
 </svg>
