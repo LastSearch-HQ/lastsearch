@@ -15,6 +15,13 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
+          FAILED=""
           for d in bridges/pypi/*/; do
-            (cd "$d" && python -m build && twine upload --skip-existing dist/*)
+            if (cd "$d" && python -m build && twine upload --verbose --skip-existing dist/*); then
+              echo "OK: $d"
+            else
+              FAILED="$FAILED $d"
+            fi
           done
+          echo "FAILED:$FAILED"
+          [ -z "$FAILED" ]
