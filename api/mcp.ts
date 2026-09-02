@@ -100,7 +100,9 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
 
   // Users must bring their own API key via headers
   const bearerMatch = req.headers["authorization"]?.match(/^Bearer\s+(.+)$/);
-  const apiKey = (req.headers["x-api-key"] || bearerMatch?.[1] || "") as string;
+  // Smithery's gateway (and similar hosts) pass config as query params
+  const queryKey = new URL(req.url ?? "/", "http://localhost").searchParams.get("apiKey") ?? "";
+  const apiKey = (req.headers["x-api-key"] || bearerMatch?.[1] || queryKey || "") as string;
   if (!apiKey) {
     res.setHeader("Content-Type", "application/json");
     res.statusCode = 401;
