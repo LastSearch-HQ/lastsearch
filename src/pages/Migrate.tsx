@@ -8,7 +8,7 @@ const rows: Array<[string, string]> = [
   ["Python: pip install browseaidev", "pip install lastsearch"],
   ["import browseaidev / BrowseAIDev()", "import lastsearch / LastSearch()"],
   ["BROWSE_API_KEY / BROWSEAI_API_KEY", "LASTSEARCH_API_KEY (old names read until Oct 31)"],
-  ["bai_ API keys", "keep working until Oct 31 — new keys are ls_"],
+  ["bai_ API keys", "change the prefix to ls_ — same key, no regeneration (bai_ form accepted until Oct 31; the ls_ form works permanently)"],
   ["MCP tools browse_search … browse_feedback", "search, answer, clarity, … (old names alias until Oct 31)"],
   ['MCP config: "args": ["-y", "browseai-dev"]', '"args": ["-y", "lastsearch"]'],
   ["API base: browseai.dev/api", "lastsearch.ai/api (old host served until Oct 31)"],
