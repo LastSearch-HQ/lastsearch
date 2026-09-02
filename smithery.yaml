@@ -7,9 +7,9 @@ startCommand:
   configSchema:
     type: object
     properties:
-      browseApiKey:
+      apiKey:
         type: string
         description: LastSearch API key (get one at https://lastsearch.ai/dashboard)
   commandFunction:
     |-
-    (config) => ({ command: 'node', args: ['dist/index.js'], env: { LASTSEARCH_API_KEY: config.browseApiKey || '' } })
+    (config) => ({ command: 'node', args: ['dist/index.js'], env: { LASTSEARCH_API_KEY: config.apiKey || '' } })
