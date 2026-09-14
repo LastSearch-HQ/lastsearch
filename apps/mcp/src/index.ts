@@ -8,7 +8,7 @@ import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 
 // --- Constants (inlined for standalone npm package) ---
-const VERSION = "1.0.3";
+const VERSION = "1.1.0";
 
 // --- LastSearch API key (required) ---
 // Wind-down compatibility (until 2026-10-31): the old BrowseAI Dev env var
@@ -192,7 +192,7 @@ function registerTools(server: McpServer) {
 
   server.tool(
     "answer",
-    "Full deep research pipeline: search the web, fetch pages, extract claims, build evidence graph, and generate a structured answer with citations and confidence score. Use depth='thorough' for auto-retry with rephrased queries when confidence is low. Use depth='deep' for multi-step agentic research that identifies knowledge gaps and runs follow-up searches. Enterprise: use searchProvider to search internal data instead of the public web. DISCLAIMER: Results are AI-generated for informational purposes only — not financial, medical, or legal advice. Confidence scores are algorithmic estimates, not accuracy guarantees. Always verify critical information from primary sources.",
+    "Full deep research pipeline: search the web, fetch pages, extract claims, build evidence graph, and generate a structured answer with citations and confidence score. Use depth='thorough' for auto-retry with rephrased queries when confidence is low. Use depth='deep' for multi-step agentic research that identifies knowledge gaps and runs follow-up searches. On thorough/deep, every cited URL is probed for liveness: each source carries a urlHealth field (live | stale | dead | unchecked) and the result includes a citationHealth summary, so you can trust that citations resolve and detect fabricated links. Enterprise: use searchProvider to search internal data instead of the public web. DISCLAIMER: Results are AI-generated for informational purposes only — not financial, medical, or legal advice. Confidence scores are algorithmic estimates, not accuracy guarantees. Always verify critical information from primary sources.",
     {
       query: z.string(),
       depth: z.enum(["fast", "thorough", "deep"]).optional().describe("Research depth: 'fast' (default), 'thorough' (auto-retry if confidence < 60%), or 'deep' (multi-step agentic research with gap analysis)"),

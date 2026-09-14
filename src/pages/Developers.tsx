@@ -53,6 +53,12 @@ const CONTRIBUTION_AREAS = [
 const ROADMAP_ITEMS = [
   {
     phase: "Shipped",
+    title: "Live Citation Health",
+    desc: "New: every cited URL is probed server-side and tagged live, stale, or dead — so you can trust citations resolve and catch fabricated links. No other agent-search API verifies this.",
+    done: true,
+  },
+  {
+    phase: "Shipped",
     title: "Research Infrastructure",
     desc: "Search, extract, cite. Every claim backed by a URL. Every answer has a confidence score.",
     done: true,
@@ -114,7 +120,7 @@ const ROADMAP_ITEMS = [
   {
     phase: "Shipped",
     title: "Evidence Engine",
-    desc: "13-step verification pipeline with DeBERTa-v3 NLI (small + base, depth-routed), BM25 + dense retrieval, RRF fusion, cross-source consensus, contradiction detection, and 8-factor calibrated confidence.",
+    desc: "14-step verification pipeline with DeBERTa-v3 NLI (small + base, depth-routed), BM25 + dense retrieval, RRF fusion, cross-source consensus, contradiction detection, live citation-health checks, and 8-factor calibrated confidence.",
     done: true,
   },
   {
