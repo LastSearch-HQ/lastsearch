@@ -17,8 +17,22 @@ class BrowseSource(BaseModel):
     published_date: str | None = Field(None, alias="publishedDate")
     source_age: int | None = Field(None, alias="sourceAge")
     outdated: bool | None = None
+    # Liveness of the citation URL, verified server-side: "live" (resolves now),
+    # "stale" (link rot — archived once), "dead" (never archived, likely
+    # fabricated), or "unchecked".
+    url_health: Literal["live", "stale", "dead", "unchecked"] | None = Field(
+        None, alias="urlHealth"
+    )
 
     model_config = {"populate_by_name": True}
+
+
+class CitationHealth(BaseModel):
+    """Counts of cited source URLs by liveness."""
+    live: int = 0
+    stale: int = 0
+    dead: int = 0
+    unchecked: int = 0
 
 
 class NLIScore(BaseModel):
@@ -78,6 +92,7 @@ class BrowseResult(BaseModel):
     share_id: str | None = Field(None, alias="shareId")
     effective_depth: str | None = Field(None, alias="effectiveDepth")
     temporal_warning: str | None = Field(None, alias="temporalWarning")
+    citation_health: CitationHealth | None = Field(None, alias="citationHealth")
 
     model_config = {"populate_by_name": True}
 

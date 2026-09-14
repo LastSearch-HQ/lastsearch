@@ -11,6 +11,14 @@ export type BrowseSource = {
   sourceAge?: number;
   /** Whether this source is considered outdated for the query context. */
   outdated?: boolean;
+  /**
+   * Liveness of the citation URL, verified server-side:
+   * - "live": the URL resolves right now
+   * - "stale": doesn't resolve but was archived once (link rot)
+   * - "dead": doesn't resolve and was never archived (likely fabricated)
+   * - "unchecked": health could not be determined
+   */
+  urlHealth?: "live" | "stale" | "dead" | "unchecked";
 };
 
 export type NLIScore = {
@@ -70,6 +78,16 @@ export type BrowseResult = {
   effectiveDepth?: "fast" | "thorough" | "deep";
   /** Warning when sources are outdated or time-sensitive info may be stale. */
   temporalWarning?: string;
+  /**
+   * Citation health summary — counts of source URLs by liveness. Every cited
+   * URL is probed server-side so callers can trust that citations resolve.
+   */
+  citationHealth?: {
+    live: number;
+    stale: number;
+    dead: number;
+    unchecked: number;
+  };
 };
 
 export type SearchRequest = {

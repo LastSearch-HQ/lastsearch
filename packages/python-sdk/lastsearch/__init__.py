@@ -13,6 +13,7 @@ from .models import (
     BrowseClaim,
     BrowseResult,
     BrowseSource,
+    CitationHealth,
     ClarityClaim,
     ClarityResult,
     CompareResult,
@@ -42,6 +43,7 @@ __all__ = [
     "BrowseResult",
     "BrowseSource",
     "BrowseClaim",
+    "CitationHealth",
     "Contradiction",
     "ReasoningStep",
     "TraceStep",
@@ -60,4 +62,4 @@ __all__ = [
     "DISCLAIMER",
 ]
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"

@@ -999,6 +999,7 @@ const Index = () => {
                   "Cross-source consensus",
                   "Contradiction detection",
                   "Counter-query adversarial",
+                  "Live citation health",
                   "Domain authority (Bayesian)",
                   "Isotonic calibration",
                   "Multi-pass consistency",
@@ -1446,7 +1447,7 @@ const Index = () => {
               <ul className="space-y-3 text-sm">
                 {[
                   "DeBERTa-v3 NLI — battle-tested on MNLI/FEVER/ANLI",
-                  "13-step verification pipeline (the real moat)",
+                  "14-step verification pipeline (the real moat)",
                   "Atomic claim decomposition + per-claim verification",
                   "BM25 + dense embedding retrieval with RRF fusion",
                   "Cross-source consensus + contradiction detection",
