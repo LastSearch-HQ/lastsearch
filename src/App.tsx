@@ -21,6 +21,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Admin = lazy(() => import("./pages/Admin"));
 const Developers = lazy(() => import("./pages/Developers"));
 const Recipes = lazy(() => import("./pages/Recipes"));
+const Scorecard = lazy(() => import("./pages/Scorecard"));
 const Docs = lazy(() => import("./pages/Docs"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
@@ -62,6 +63,7 @@ const App = () => (
               <Route path="/admin" element={<Admin />} />
               <Route path="/developers" element={<Developers />} />
               <Route path="/recipes" element={<Recipes />} />
+              <Route path="/scorecard" element={<Scorecard />} />
               <Route path="/docs" element={<Docs />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />

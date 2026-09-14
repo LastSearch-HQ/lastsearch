@@ -219,6 +219,9 @@ const Index = () => {
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/recipes")}>
             Recipes
           </Button>
+          <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/scorecard")}>
+            Scorecard
+          </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/alternatives")}>
             Alternatives
           </Button>
