@@ -7,6 +7,25 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 
+class SourceIntegrity(BaseModel):
+    """Per-source content-integrity signal computed on the raw DOM."""
+    hidden_content: int = Field(0, alias="hiddenContent")
+    instruction_spans: int = Field(0, alias="instructionSpans")
+    hidden_instructions: int = Field(0, alias="hiddenInstructions")
+    risk: Literal["none", "low", "high"] = "none"
+
+    model_config = {"populate_by_name": True}
+
+
+class ContentRisk(BaseModel):
+    """Result-level content-integrity summary across fetched sources."""
+    risk: Literal["none", "low", "high"] = "none"
+    flagged_sources: int = Field(0, alias="flaggedSources")
+    hidden_instructions: int = Field(0, alias="hiddenInstructions")
+
+    model_config = {"populate_by_name": True}
+
+
 class BrowseSource(BaseModel):
     url: str
     title: str
@@ -23,6 +42,9 @@ class BrowseSource(BaseModel):
     url_health: Literal["live", "stale", "dead", "unchecked"] | None = Field(
         None, alias="urlHealth"
     )
+    # Structural content-integrity signal (hidden/non-rendered content stripped
+    # before extraction; instruction-shaped text counted). Not a guarantee.
+    integrity: SourceIntegrity | None = None
 
     model_config = {"populate_by_name": True}
 
@@ -93,6 +115,7 @@ class BrowseResult(BaseModel):
     effective_depth: str | None = Field(None, alias="effectiveDepth")
     temporal_warning: str | None = Field(None, alias="temporalWarning")
     citation_health: CitationHealth | None = Field(None, alias="citationHealth")
+    content_risk: ContentRisk | None = Field(None, alias="contentRisk")
 
     model_config = {"populate_by_name": True}
 
