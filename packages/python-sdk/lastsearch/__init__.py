@@ -14,6 +14,8 @@ from .models import (
     BrowseResult,
     BrowseSource,
     CitationHealth,
+    ContentRisk,
+    SourceIntegrity,
     ClarityClaim,
     ClarityResult,
     CompareResult,
@@ -44,6 +46,8 @@ __all__ = [
     "BrowseSource",
     "BrowseClaim",
     "CitationHealth",
+    "ContentRisk",
+    "SourceIntegrity",
     "Contradiction",
     "ReasoningStep",
     "TraceStep",
@@ -62,4 +66,4 @@ __all__ = [
     "DISCLAIMER",
 ]
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"

@@ -19,6 +19,22 @@ export type BrowseSource = {
    * - "unchecked": health could not be determined
    */
   urlHealth?: "live" | "stale" | "dead" | "unchecked";
+  /**
+   * Structural content-integrity signal for this source, computed on the raw
+   * DOM before text extraction. Hidden / non-rendered content is stripped so
+   * the extraction model never sees it; this reports what was found so the
+   * caller's policy layer can decide. Not a guarantee — adaptive attacks can
+   * bypass any content filter.
+   */
+  integrity?: {
+    /** Hidden / non-rendered nodes with text that were stripped. */
+    hiddenContent: number;
+    /** Instruction-shaped (AI-directed) spans found, hidden or visible. */
+    instructionSpans: number;
+    /** Instruction-shaped spans that were hidden/non-rendered — the strongest signal. */
+    hiddenInstructions: number;
+    risk: "none" | "low" | "high";
+  };
 };
 
 export type NLIScore = {
@@ -87,6 +103,15 @@ export type BrowseResult = {
     stale: number;
     dead: number;
     unchecked: number;
+  };
+  /**
+   * Result-level content-integrity summary across all fetched sources.
+   * "high" = at least one source carried hidden instruction-shaped text.
+   */
+  contentRisk?: {
+    risk: "none" | "low" | "high";
+    flaggedSources: number;
+    hiddenInstructions: number;
   };
 };
 

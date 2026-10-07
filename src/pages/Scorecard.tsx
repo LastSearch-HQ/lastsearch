@@ -126,9 +126,9 @@ export default function Scorecard() {
 
         <h2 className="text-xl font-semibold mt-14 mb-3">How LastSearch verifies</h2>
         <p className="text-muted-foreground mb-4 max-w-2xl">
-          A 14-step pipeline runs on every answer: BM25 + dense retrieval fused with Reciprocal
+          A 15-step pipeline runs on every answer: BM25 + dense retrieval fused with Reciprocal
           Rank Fusion, DeBERTa NLI entailment scoring and reranking, cross-source consensus,
-          counter-query adversarial checks, live citation-health probing, and an 8-factor
+          counter-query adversarial checks, live citation-health probing, structural content-integrity scanning of every fetched page, and an 8-factor
           confidence score auto-calibrated from real feedback with isotonic regression. Every
           claim carries its verification state; every source carries its liveness; every answer
           carries a confidence number you can act on.
