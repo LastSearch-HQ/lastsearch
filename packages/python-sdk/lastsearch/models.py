@@ -12,7 +12,23 @@ class SourceIntegrity(BaseModel):
     hidden_content: int = Field(0, alias="hiddenContent")
     instruction_spans: int = Field(0, alias="instructionSpans")
     hidden_instructions: int = Field(0, alias="hiddenInstructions")
+    sanitized_spans: int = Field(0, alias="sanitizedSpans")
     risk: Literal["none", "low", "high"] = "none"
+
+    model_config = {"populate_by_name": True}
+
+
+class EvidenceBundle(BaseModel):
+    """Signed, replayable evidence record for one answer (GET /browse/evidence/{id})."""
+    record: dict
+    canonical: str
+    hash: str
+    hash_algorithm: str = Field("sha256", alias="hashAlgorithm")
+    canonicalization: str
+    signature: str | None = None
+    signed: bool = False
+    algorithm: str = "ed25519"
+    key_id: str | None = Field(None, alias="keyId")
 
     model_config = {"populate_by_name": True}
 
@@ -45,6 +61,8 @@ class BrowseSource(BaseModel):
     # Structural content-integrity signal (hidden/non-rendered content stripped
     # before extraction; instruction-shaped text counted). Not a guarantee.
     integrity: SourceIntegrity | None = None
+    # SHA-256 of the fetched page text this source was verified against
+    content_hash: str | None = Field(None, alias="contentHash")
 
     model_config = {"populate_by_name": True}
 

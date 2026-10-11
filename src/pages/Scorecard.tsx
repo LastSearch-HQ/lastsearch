@@ -40,6 +40,11 @@ const rows: Array<{ axis: string; note: string; cells: Cell[] }> = [
     cells: ["yes", "no", "no", "no", "no", "no", "no"],
   },
   {
+    axis: "Signed evidence record",
+    note: "Replayable, signed record binding claims → sources → verification",
+    cells: ["yes", "no", "no", "no", "no", "no", "no"],
+  },
+  {
     axis: "Inline citations",
     note: "Sources returned with the answer",
     cells: ["yes", "yes", "yes", "yes", "yes", "yes", "yes"],
