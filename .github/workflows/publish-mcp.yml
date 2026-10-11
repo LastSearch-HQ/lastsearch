@@ -46,8 +46,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Wait for npm indexing
-        if: steps.version.outputs.skip != 'true'
-        run: sleep 30
+        run: |
+          VERSION=$(node -p "require('./apps/mcp/package.json').version")
+          echo "Waiting for lastsearch@$VERSION to be resolvable on npm (registry validates it)..."
+          for i in $(seq 1 24); do
+            if npm view "lastsearch@$VERSION" version >/dev/null 2>&1; then echo "indexed after $((i*10))s"; exit 0; fi
+            sleep 10
+          done
+          echo "lastsearch@$VERSION still not resolvable after 240s" && exit 1
       - name: Install mcp-publisher
         if: steps.version.outputs.skip != 'true'
         run: |
