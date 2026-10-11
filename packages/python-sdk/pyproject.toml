@@ -27,13 +27,11 @@ dependencies = [
     "pydantic>=2.0.0",
 ]
 
-[project.optional-dependencies]
-verify = ["cryptography>=42.0"]
-
 [project.scripts]
 lastsearch = "lastsearch.cli:main"
 
 [project.optional-dependencies]
+verify = ["cryptography>=42.0"]
 langchain = ["langchain-core>=0.2.0"]
 crewai = ["crewai>=0.41.0"]
 
