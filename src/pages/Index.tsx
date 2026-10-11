@@ -219,6 +219,9 @@ const Index = () => {
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/recipes")}>
             Recipes
           </Button>
+          <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/changelog")}>
+            What's new<span className="ml-1.5 text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">new</span>
+          </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/scorecard")}>
             Scorecard
           </Button>
@@ -309,6 +312,14 @@ const Index = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               Powered by E2 Evidence Engine
             </Badge>
+            <button
+              onClick={() => navigate("/changelog")}
+              className="inline-flex items-center gap-2 mx-auto mb-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs text-foreground/90 hover:bg-primary/15 transition-colors"
+            >
+              <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">New</span>
+              <span>Signed evidence records · prompt-injection scanning with 0% false positives on real pages</span>
+              <span aria-hidden="true">→</span>
+            </button>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] sm:leading-[1.05]">
               Research Infra
               <br />

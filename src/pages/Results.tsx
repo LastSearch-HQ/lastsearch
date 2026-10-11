@@ -282,6 +282,15 @@ const Results = () => {
                 transition={{ delay: 0.6 }}
                 className="flex items-center gap-2"
               >
+                <a
+                  href={`/api/browse/evidence/${result.shareId}`}
+                  target="_blank"
+                  rel="noopener"
+                  className="text-xs text-muted-foreground/70 hover:text-foreground underline underline-offset-2 mr-3"
+                  title="Signed, replayable record of what was retrieved and verified for this answer"
+                >
+                  Evidence record
+                </a>
                 <span className="text-xs text-muted-foreground/60">Was this helpful?</span>
                 <div className="flex gap-1">
                   {([
