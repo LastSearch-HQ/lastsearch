@@ -138,6 +138,12 @@ export default function Scorecard() {
           claim carries its verification state; every source carries its liveness; every answer
           carries a confidence number you can act on.
         </p>
+        <h2 className="text-xl font-semibold mt-10 mb-3">Measured, not claimed</h2>
+        <ul className="text-muted-foreground max-w-2xl text-sm space-y-2 mb-8">
+          <li>— Content-integrity scanner: <strong>100% detection</strong> across 11 injection carriers (comments, hidden/off-screen/zero-font elements, aria-hidden, metadata, zero-width text); <strong>0.0% high-risk false positives</strong> on a hard-benign set <em>and</em> on 24 real pages including OWASP, Wikipedia's prompt-injection article, and Microsoft/Anthropic docs.</li>
+          <li>— Sanitization: 10/10 injected sentences removed, 10/10 surrounding content kept.</li>
+          <li>— Evidence records: Ed25519 signature verifies offline; tampered records fail. All from the open eval harness in the repo (<code>eval/</code>).</li>
+        </ul>
         <p className="text-muted-foreground max-w-2xl text-sm">
           We describe the process, not a promise. Confidence scores are algorithmic estimates,
           not accuracy guarantees — always verify critical information from primary sources.
