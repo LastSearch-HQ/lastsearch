@@ -17,6 +17,7 @@ from .exceptions import (
     ValidationError,
 )
 from .models import (
+    EvidenceBundle,
     BrowseResult,
     CompareResult,
     ClarityResult,
@@ -179,6 +180,7 @@ class LastSearch:
         *,
         depth: str = "fast",
         search_provider: SearchProviderConfig | dict | None = None,
+        strict: bool = False,
     ) -> BrowseResult:
         """Full research pipeline: search, fetch, extract, and answer with citations.
 
@@ -189,8 +191,12 @@ class LastSearch:
             search_provider: Enterprise search provider config. Use to search
                 internal data (Elasticsearch, Confluence, custom endpoint)
                 instead of the public web.
+            strict: Exclude sources whose content-integrity risk is "high"
+                (hidden instruction-shaped text) from extraction entirely.
         """
         body: dict[str, Any] = {"query": query, "depth": depth}
+        if strict:
+            body["strict"] = True
         if search_provider is not None:
             if isinstance(search_provider, SearchProviderConfig):
                 body["searchProvider"] = search_provider.model_dump(by_alias=True, exclude_none=True)
@@ -319,6 +325,52 @@ class LastSearch:
         data = self._post("/session", {"name": name})
         sess = Session(**data)
         return SessionClient(self, sess)
+
+    def get_evidence(self, result_id: str) -> EvidenceBundle:
+        """Fetch the signed evidence record for a result (``result.share_id``).
+
+        The bundle carries the typed record (retrieval → verification → decision),
+        the exact canonical bytes that were signed, their SHA-256, and an Ed25519
+        signature. It attests what LastSearch retrieved, verified, and returned —
+        not what your agent did with it.
+        """
+        data = self._get(f"/browse/evidence/{result_id}")
+        return EvidenceBundle(**data)
+
+    def get_evidence_public_key(self) -> dict[str, Any]:
+        """Return the Ed25519 public key (PEM) + keyId used to sign evidence records."""
+        return self._get("/browse/evidence/public-key")
+
+    @staticmethod
+    def verify_evidence(bundle: EvidenceBundle, public_key_pem: str) -> bool:
+        """Verify an evidence bundle offline.
+
+        Checks (1) SHA-256 of ``canonical`` matches ``hash``, (2) ``canonical``
+        parses to ``record``, and (3) the Ed25519 signature over the canonical
+        bytes. Requires the optional ``cryptography`` package
+        (``pip install lastsearch[verify]``).
+        """
+        import hashlib, json
+        if hashlib.sha256(bundle.canonical.encode("utf-8")).hexdigest() != bundle.hash:
+            return False
+        if json.loads(bundle.canonical) != bundle.record:
+            return False
+        if not bundle.signed or not bundle.signature:
+            return False
+        try:
+            from cryptography.hazmat.primitives import serialization
+            from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+        except ImportError as e:  # pragma: no cover
+            raise ImportError("verify_evidence needs the 'cryptography' package: pip install lastsearch[verify]") from e
+        import base64
+        key = serialization.load_pem_public_key(public_key_pem.encode("utf-8"))
+        if not isinstance(key, Ed25519PublicKey):
+            return False
+        try:
+            key.verify(base64.b64decode(bundle.signature), bundle.canonical.encode("utf-8"))
+            return True
+        except Exception:
+            return False
 
     def get_session(self, session_id: str) -> "SessionClient":
         """Resume an existing session by ID."""
@@ -502,6 +554,7 @@ class AsyncLastSearch:
         *,
         depth: str = "fast",
         search_provider: SearchProviderConfig | dict | None = None,
+        strict: bool = False,
     ) -> BrowseResult:
         """Full research pipeline with optional deep mode.
 
@@ -511,6 +564,8 @@ class AsyncLastSearch:
             search_provider: Enterprise search provider config.
         """
         body: dict[str, Any] = {"query": query, "depth": depth}
+        if strict:
+            body["strict"] = True
         if search_provider is not None:
             if isinstance(search_provider, SearchProviderConfig):
                 body["searchProvider"] = search_provider.model_dump(by_alias=True, exclude_none=True)
@@ -589,6 +644,16 @@ class AsyncLastSearch:
         data = await self._post("/session", {"name": name})
         sess = Session(**data)
         return AsyncSessionClient(self, sess)
+
+    async def get_evidence(self, result_id: str) -> EvidenceBundle:
+        """Async: fetch the signed evidence record for a result (see LastSearch.get_evidence)."""
+        data = await self._get(f"/browse/evidence/{result_id}")
+        return EvidenceBundle(**data)
+
+    async def get_evidence_public_key(self) -> dict[str, Any]:
+        return await self._get("/browse/evidence/public-key")
+
+    verify_evidence = staticmethod(LastSearch.verify_evidence)
 
     async def get_session(self, session_id: str) -> "AsyncSessionClient":
         """Resume an existing session by ID."""

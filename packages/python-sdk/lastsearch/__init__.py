@@ -15,6 +15,7 @@ from .models import (
     BrowseSource,
     CitationHealth,
     ContentRisk,
+    EvidenceBundle,
     SourceIntegrity,
     ClarityClaim,
     ClarityResult,
@@ -47,6 +48,7 @@ __all__ = [
     "BrowseClaim",
     "CitationHealth",
     "ContentRisk",
+    "EvidenceBundle",
     "SourceIntegrity",
     "Contradiction",
     "ReasoningStep",
@@ -66,4 +68,4 @@ __all__ = [
     "DISCLAIMER",
 ]
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"

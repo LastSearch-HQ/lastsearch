@@ -33,8 +33,12 @@ export type BrowseSource = {
     instructionSpans: number;
     /** Instruction-shaped spans that were hidden/non-rendered — the strongest signal. */
     hiddenInstructions: number;
+    /** Instruction-directed spans redacted from the text handed to extraction. */
+    sanitizedSpans?: number;
     risk: "none" | "low" | "high";
   };
+  /** SHA-256 of the fetched page text this source was verified against (evidence record). */
+  contentHash?: string;
 };
 
 export type NLIScore = {
@@ -134,6 +138,8 @@ export type AnswerRequest = {
   depth?: "fast" | "thorough" | "deep";
   sessionId?: string;
   searchProvider?: SearchProviderConfig;
+  /** Exclude sources whose content-integrity risk is "high" from extraction. */
+  strict?: boolean;
 };
 
 // ── Search Provider (Enterprise) ──

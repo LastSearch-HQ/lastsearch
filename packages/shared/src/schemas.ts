@@ -91,6 +91,8 @@ export const AnswerRequestSchema = z.object({
   depth: z.enum(["fast", "thorough", "deep"]).optional().default("fast"),
   sessionId: z.string().max(36).optional(),
   searchProvider: SearchProviderConfigSchema.optional(),
+  /** Exclude sources whose content-integrity risk is "high" from extraction. */
+  strict: z.boolean().optional(),
 });
 
 export const CompareRequestSchema = z.object({

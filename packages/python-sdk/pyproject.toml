@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lastsearch"
-version = "1.2.0"
+version = "1.3.0"
 description = "Python SDK for LastSearch — Grounded Intelligence research infrastructure for AI agents"
 readme = "README.md"
 license = "Apache-2.0"
@@ -31,6 +31,7 @@ dependencies = [
 lastsearch = "lastsearch.cli:main"
 
 [project.optional-dependencies]
+verify = ["cryptography>=42.0"]
 langchain = ["langchain-core>=0.2.0"]
 crewai = ["crewai>=0.41.0"]
 

@@ -53,8 +53,14 @@ const CONTRIBUTION_AREAS = [
 const ROADMAP_ITEMS = [
   {
     phase: "Shipped",
+    title: "Evidence Record",
+    desc: "New: every answer has a signed, replayable evidence record — claims bound to sources, sources bound to the hash of the exact text they were verified against, Ed25519-signed. One evidentiary link for your audit trail, not a compliance guarantee.",
+    done: true,
+  },
+  {
+    phase: "Shipped",
     title: "Content Integrity",
-    desc: "New: every fetched page is scanned on the raw DOM before extraction. Hidden and non-rendered content — where most real-world prompt injections hide — is stripped, instruction-shaped text is counted, and each source carries an integrity signal for your agent's policy layer. A sensor, not a guarantee.",
+    desc: "New: every fetched page is scanned on the raw DOM before extraction. Hidden and non-rendered content — where most real-world prompt injections hide — is stripped, instruction-directed text is redacted before extraction, and each source carries an integrity signal for your agent's policy layer (strict mode drops high-risk sources). A sensor, not a guarantee.",
     done: true,
   },
   {

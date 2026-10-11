@@ -8,7 +8,7 @@ import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 
 // --- Constants (inlined for standalone npm package) ---
-const VERSION = "1.2.0";
+const VERSION = "1.3.0";
 
 // --- LastSearch API key (required) ---
 // Wind-down compatibility (until 2026-10-31): the old BrowseAI Dev env var
@@ -48,6 +48,7 @@ if (args.includes("--help") || args.includes("-h")) {
     session_recall  Query session knowledge without new searches
     session_share   Share a session publicly via URL
     session_knowledge  Export all knowledge from a session
+    evidence        Signed evidence record for a previous answer
 
   Quick Setup:
     1. Sign in at https://lastsearch.ai and generate a free API key
@@ -98,6 +99,13 @@ async function apiCall(path: string, body: Record<string, unknown>) {
   if (data.quota) {
     return { ...data.result, _quota: data.quota };
   }
+  return data.result;
+}
+
+async function apiGet(path: string) {
+  const res = await fetch(`${LASTSEARCH_API_URL}${path}`, { headers: { "X-API-Key": LASTSEARCH_API_KEY! }, signal: AbortSignal.timeout(30_000) });
+  const data = await res.json();
+  if (!res.ok || !data.success) throw new Error(data.error || `API failed: ${res.status}`);
   return data.result;
 }
 
@@ -161,6 +169,16 @@ function registerAliases(server: McpServer) {
 // --- Tool registration (shared between stdio and http) ---
 function registerTools(server: McpServer) {
   server.tool(
+    "evidence",
+    "Fetch the signed evidence record for a previous answer (pass the result's shareId). Returns a typed record (retrieval → verification → decision) with per-source content hashes, the exact canonical bytes that were signed, their SHA-256, and an Ed25519 signature verifiable against GET /browse/evidence/public-key. Attests what LastSearch retrieved, verified, and returned — not what your agent did with it; not a compliance guarantee.",
+    { resultId: z.string().describe("The shareId returned on an answer result") },
+    async ({ resultId }) => {
+      const result = await apiGet(`/browse/evidence/${encodeURIComponent(resultId)}`);
+      return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+    }
+  );
+
+  server.tool(
     "search",
     "Search the web for information on a topic. Returns URLs, titles, snippets, and relevance scores.",
     { query: z.string(), limit: z.number().optional() },
@@ -192,10 +210,11 @@ function registerTools(server: McpServer) {
 
   server.tool(
     "answer",
-    "Full deep research pipeline: search the web, fetch pages, extract claims, build evidence graph, and generate a structured answer with citations and confidence score. Use depth='thorough' for auto-retry with rephrased queries when confidence is low. Use depth='deep' for multi-step agentic research that identifies knowledge gaps and runs follow-up searches. On thorough/deep, every cited URL is probed for liveness: each source carries a urlHealth field (live | stale | dead | unchecked) and the result includes a citationHealth summary, so you can trust that citations resolve and detect fabricated links. Every fetched page is also scanned for hidden / non-rendered content (where most real-world prompt injections live) before extraction: hidden content is stripped, instruction-shaped text is counted, and each source carries an integrity signal plus a result-level contentRisk summary — a signal for your policy layer, not a guarantee. Enterprise: use searchProvider to search internal data instead of the public web. DISCLAIMER: Results are AI-generated for informational purposes only — not financial, medical, or legal advice. Confidence scores are algorithmic estimates, not accuracy guarantees. Always verify critical information from primary sources.",
+    "Full deep research pipeline: search the web, fetch pages, extract claims, build evidence graph, and generate a structured answer with citations and confidence score. Use depth='thorough' for auto-retry with rephrased queries when confidence is low. Use depth='deep' for multi-step agentic research that identifies knowledge gaps and runs follow-up searches. On thorough/deep, every cited URL is probed for liveness: each source carries a urlHealth field (live | stale | dead | unchecked) and the result includes a citationHealth summary, so you can trust that citations resolve and detect fabricated links. Every fetched page is also scanned for hidden / non-rendered content (where most real-world prompt injections live) before extraction: hidden content is stripped, instruction-shaped text is counted, and each source carries an integrity signal plus a result-level contentRisk summary — a signal for your policy layer, not a guarantee. Instruction-directed spans are redacted from page text before extraction; pass strict=true to drop high-risk sources entirely. Every stored result has a signed evidence record — call the evidence tool with the result's shareId. Enterprise: use searchProvider to search internal data instead of the public web. DISCLAIMER: Results are AI-generated for informational purposes only — not financial, medical, or legal advice. Confidence scores are algorithmic estimates, not accuracy guarantees. Always verify critical information from primary sources.",
     {
       query: z.string(),
       depth: z.enum(["fast", "thorough", "deep"]).optional().describe("Research depth: 'fast' (default), 'thorough' (auto-retry if confidence < 60%), or 'deep' (multi-step agentic research with gap analysis)"),
+      strict: z.boolean().optional().describe("Exclude sources whose content-integrity risk is 'high' (hidden instruction-shaped text) from extraction entirely"),
       searchProvider: z.object({
         type: z.enum(["tavily", "brave", "elasticsearch", "confluence", "custom"]).describe("Search backend type"),
         endpoint: z.string().optional().describe("Endpoint URL (required for elasticsearch, confluence, custom)"),
