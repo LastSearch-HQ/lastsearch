@@ -24,7 +24,7 @@ const RELEASES: Array<{ version: string; date: string; title: string; items: str
     title: "Content Integrity — structural prompt-injection defense",
     items: [
       "Every fetched page is scanned on the raw DOM before extraction. Hidden / non-rendered content — HTML comments, display:none, off-screen, zero-font, aria-hidden, instruction-shaped meta/alt text, zero-width characters — where ~70% of in-the-wild prompt injections live — is stripped, and each source gets an integrity signal (risk: none | low | high) plus a result-level contentRisk.",
-      "Measured: 100% detection across 11 injection carriers; 0.0% high-risk false positives on a hard-benign set AND on 24 real pages (OWASP, Wikipedia's prompt-injection article, Microsoft and Anthropic docs). A signal for your agent's policy layer, never a 'blocks injection' claim.",
+      "Measured on the open eval harness: 100% detection across 11 injection carriers; 0 high-risk false positives in 36 benign pages (12 synthetic hard-benign + 24 real, incl. OWASP, Wikipedia's prompt-injection article, Microsoft and Anthropic docs) — a count on a small set, not a guarantee (95% upper bound ~8% at n=36). A signal for your agent's policy layer, never a 'blocks injection' claim.",
       "Vercel runtime moved to Node 22.",
     ],
   },

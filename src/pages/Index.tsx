@@ -317,7 +317,7 @@ const Index = () => {
               className="inline-flex items-center gap-2 mx-auto mb-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs text-foreground/90 hover:bg-primary/15 transition-colors"
             >
               <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">New</span>
-              <span>Signed evidence records · prompt-injection scanning with 0% false positives on real pages</span>
+              <span>Signed evidence records · hidden-instruction scanning on every fetched page</span>
               <span aria-hidden="true">→</span>
             </button>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] sm:leading-[1.05]">

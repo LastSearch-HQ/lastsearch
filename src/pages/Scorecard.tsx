@@ -140,7 +140,7 @@ export default function Scorecard() {
         </p>
         <h2 className="text-xl font-semibold mt-10 mb-3">Measured, not claimed</h2>
         <ul className="text-muted-foreground max-w-2xl text-sm space-y-2 mb-8">
-          <li>— Content-integrity scanner: <strong>100% detection</strong> across 11 injection carriers (comments, hidden/off-screen/zero-font elements, aria-hidden, metadata, zero-width text); <strong>0.0% high-risk false positives</strong> on a hard-benign set <em>and</em> on 24 real pages including OWASP, Wikipedia's prompt-injection article, and Microsoft/Anthropic docs.</li>
+          <li>— Content-integrity scanner: <strong>100% detection</strong> across 11 injection carriers (comments, hidden/off-screen/zero-font elements, aria-hidden, metadata, zero-width text); <strong>0 high-risk false positives in 36 benign pages</strong> (12 synthetic hard-benign + 24 real, including OWASP, Wikipedia's prompt-injection article, and Microsoft/Anthropic docs). That is a count on a small set, not a guarantee: with n=36 the 95% upper bound on the true rate is still ~8%. 4 of the 24 real pages got a <em>low</em> flag (security articles quoting attack strings — counted, never blocked). The set is growing; we publish the raw results.</li>
           <li>— Sanitization: 10/10 injected sentences removed, 10/10 surrounding content kept.</li>
           <li>— Evidence records: Ed25519 signature verifies offline; tampered records fail. All from the open eval harness in the repo (<code>eval/</code>).</li>
         </ul>
