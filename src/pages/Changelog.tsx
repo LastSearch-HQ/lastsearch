@@ -7,9 +7,19 @@ import { LastSearchLogo } from "@/components/LastSearchLogo";
 // carry their limits (sensor not enforcer; attests retrieval, not compliance).
 const RELEASES: Array<{ version: string; date: string; title: string; items: string[]; tag?: string }> = [
   {
+    version: "engine 2026-10-17",
+    date: "2026-10-17",
+    tag: "New",
+    title: "Verification quality: your exact claim, judged against the exact span",
+    items: [
+      "verify-document now runs the NLI verifier directly on your claim's exact wording against every source quote — previously it scored the pipeline's paraphrase of what the pages said. Each claim returns evidence (the exact span judged, with entailment/contradiction scores) and checks (every source weighed), so a verdict can be audited rather than trusted.",
+      "Premises are claim-focused and title-anchored: 'The tower is 330 metres tall' on the Eiffel Tower page now entails 'The Eiffel Tower is 330 metres tall'; dates no longer get cut off by truncation. Contradictions are asserted only when a source carries a competing value of the claim's kind (a different number, a different entity) — a sentence about construction starting in 1887 cannot contradict completion in 1889 — and a ≥2:1 majority decides with the dissent disclosed.",
+      "thorough and deep now actually use the larger DeBERTa verifier (the depth parameter was not reaching the model, and the larger model had never loaded). Measured on a 5-claim planted-error probe: thorough 5/5 (two entity/location errors contradicted, two date errors contradicted, two true claims verified); fast 4/5. A probe, not a benchmark.",
+    ],
+  },
+  {
     version: "1.3.0",
     date: "2026-10-11",
-    tag: "New",
     title: "Signed evidence records, strict mode, surgical sanitization",
     items: [
       "Every answer now has a signed, replayable Evidence Record (GET /browse/evidence/{shareId}): claims bound to sources, sources bound to the SHA-256 of the exact page text they were verified against, Ed25519-signed — verify offline with the SDK (pip install lastsearch[verify]). Attests what LastSearch retrieved and verified, not a compliance guarantee.",
@@ -76,7 +86,7 @@ export default function Changelog() {
               <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-primary" />
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
                 <h2 className="text-xl font-semibold">{r.title}</h2>
-                <span className="text-xs font-mono text-muted-foreground">v{r.version} · {r.date}</span>
+                <span className="text-xs font-mono text-muted-foreground">{r.version.startsWith("engine") ? r.version : `v${r.version}`} · {r.date}</span>
                 {r.tag && <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/15 text-primary">{r.tag}</span>}
               </div>
               <ul className="space-y-2 text-sm text-muted-foreground">
