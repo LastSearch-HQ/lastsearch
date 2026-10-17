@@ -217,6 +217,18 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
 
 5 tools available: `LastSearchSearchTool`, `LastSearchAnswerTool` (verified), `LastSearchExtractTool`, `LastSearchCompareTool`, `LastSearchClarityTool` (anti-hallucination).
 
+### verify — is this true? (CLI)
+
+```bash
+npx verify-anything "The Eiffel Tower is located in Berlin. It is 330 metres tall."
+npx verify-anything https://example.com/article      # a page
+pbpaste | npx verify-anything                        # a pasted AI answer
+npx verify-anything setup                            # adds a `verify` MCP tool to your agents
+```
+
+Every claim → `✓ verified / ✗ contradicted / ? unverified` with confidence, source, reason and the exact
+evidence span judged. Exit code 1 if anything is contradicted. Source: [LastSearch-HQ/verify](https://github.com/LastSearch-HQ/verify).
+
 ### MCP Server (Claude Desktop, Cursor, Windsurf)
 
 ```sh
