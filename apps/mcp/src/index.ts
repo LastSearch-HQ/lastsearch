@@ -8,12 +8,10 @@ import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 
 // --- Constants (inlined for standalone npm package) ---
-const VERSION = "1.3.0";
+const VERSION = "1.4.0";
 
 // --- LastSearch API key (required) ---
-// Wind-down compatibility (until 2026-10-31): the old BrowseAI Dev env var
-// and key prefix keep working so existing configs don't break.
-const LASTSEARCH_API_KEY = process.env.LASTSEARCH_API_KEY ?? process.env.BROWSE_API_KEY;
+const LASTSEARCH_API_KEY = process.env.LASTSEARCH_API_KEY;
 const LASTSEARCH_API_URL = process.env.LASTSEARCH_API_URL || "https://lastsearch.ai/api";
 
 // --- CLI handling ---
@@ -120,49 +118,6 @@ function validateEnv() {
   Quick fix: run 'npx lastsearch setup' to configure automatically.
 `);
     process.exit(1);
-  }
-}
-
-
-// --- Wind-down aliases (until 2026-10-31): the old browse_* tool names keep
-// working so existing agent configs and saved workflows don't break. Each
-// alias calls the same handler as its renamed tool. Remove after Oct 31.
-const WINDDOWN_ALIASES: Record<string, string> = {
-  browse_search: "search",
-  browse_open: "open",
-  browse_extract: "extract",
-  browse_answer: "answer",
-  browse_compare: "compare",
-  browse_verify_document: "verify_document",
-  browse_clarity: "clarity",
-  browse_session_create: "session_create",
-  browse_session_ask: "session_ask",
-  browse_session_recall: "session_recall",
-  browse_session_share: "session_share",
-  browse_session_knowledge: "session_knowledge",
-  browse_session_fork: "session_fork",
-  browse_feedback: "feedback",
-};
-
-function registerAliases(server: McpServer) {
-  // MCP servers can't share handlers across names post-hoc, so aliases are
-  // registered as thin passthrough tools annotated as deprecated.
-  for (const [oldName, newName] of Object.entries(WINDDOWN_ALIASES)) {
-    server.tool(
-      oldName,
-      `DEPRECATED alias of "${newName}" — BrowseAI Dev is now LastSearch. Update your config before 2026-10-31. See https://lastsearch.ai/migrate`,
-      { payload: z.record(z.string(), z.any()).optional() },
-      async () => ({
-        content: [{
-          type: "text",
-          text: JSON.stringify({
-            deprecated: true,
-            use_instead: newName,
-            message: `This tool was renamed to "${newName}" (BrowseAI Dev is now LastSearch). Call "${newName}" with the same arguments. Old names stop working 2026-10-31. Migration guide: https://lastsearch.ai/migrate`,
-          }),
-        }],
-      })
-    );
   }
 }
 
@@ -465,7 +420,6 @@ function startServer() {
           version: VERSION,
         });
         registerTools(server);
-        registerAliases(server);
         await server.connect(transport);
 
         if (transport.sessionId) {
@@ -489,7 +443,6 @@ function startServer() {
       version: VERSION,
     });
     registerTools(server);
-    registerAliases(server);
 
     async function run() {
       const transport = new StdioServerTransport();

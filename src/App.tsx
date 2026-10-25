@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -13,7 +13,6 @@ import { PendingForkRedirect } from "./components/PendingForkRedirect";
 // Lazy-load all pages for route-based code splitting
 const Index = lazy(() => import("./pages/Index"));
 const Results = lazy(() => import("./pages/Results"));
-const Migrate = lazy(() => import("./pages/Migrate"));
 const Compare = lazy(() => import("./pages/Compare"));
 const Share = lazy(() => import("./pages/Share"));
 const Playground = lazy(() => import("./pages/Playground"));
@@ -54,7 +53,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/results" element={<Results />} />
-              <Route path="/migrate" element={<Migrate />} />
+              <Route path="/migrate" element={<Navigate to="/changelog" replace />} />
               <Route path="/compare" element={<Compare />} />
               <Route path="/share/:id" element={<Share />} />
               <Route path="/playground" element={<Playground />} />

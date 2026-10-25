@@ -30,8 +30,6 @@ jobs:
               "https://lastsearch.ai/**",
               "https://www.lastsearch.ai/**",
               "https://lastsearch.dev/**",
-              "https://browseai.dev/**",
-              "https://www.browseai.dev/**",
           ]:
               if u not in current:
                   current.append(u)
