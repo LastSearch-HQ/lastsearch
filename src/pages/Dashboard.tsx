@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { UserMenu } from "@/components/UserMenu";
 import { ApiKeyManager } from "@/components/ApiKeyManager";
+import { DeleteMyData } from "@/components/DeleteMyData";
 import {
   fetchUserStats,
   fetchUserHistory,
@@ -258,6 +259,8 @@ const Dashboard = () => {
           <div id="api-keys">
             <ApiKeyManager />
           </div>
+
+          <DeleteMyData />
 
           <Card className="border-amber-400/20 hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
             <CardHeader>

@@ -198,3 +198,8 @@ export async function joinWaitlist(email: string, source = "dashboard"): Promise
   if (!res.ok) throw new Error(data.error || "Failed to join waitlist");
   return data;
 }
+
+// Privacy: permanently delete every stored result and API key for the signed-in user
+export async function deleteAllUserData(): Promise<{ deleted: number; message: string }> {
+  return authFetch("/user/data", { method: "DELETE" });
+}

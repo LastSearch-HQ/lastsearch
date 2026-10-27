@@ -2,6 +2,7 @@
  * Streaming API client for SSE-based pipeline progress.
  * Connects to /browse/answer/stream and yields events as they arrive.
  */
+import { track } from "@/lib/privacy/analytics";
 
 import { getCachedAccessToken } from "./auth";
 import type { BrowseResult } from "./lastsearch";
@@ -145,9 +146,7 @@ export async function streamAnswer(
     throw new Error("Stream ended without result");
   }
 
-  (window as any).posthog?.capture("query", {
-    tool: "/browse/answer/stream",
-  });
+  track("query", { tool: "/browse/answer/stream" });
 
   return finalResult;
 }

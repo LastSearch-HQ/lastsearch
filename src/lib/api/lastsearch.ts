@@ -1,3 +1,5 @@
+import { track } from "@/lib/privacy/analytics";
+
 export type BrowseSource = {
   url: string;
   title: string;
@@ -107,9 +109,7 @@ async function apiCall<T>(
   if (!res.ok || !data.success) {
     throw new Error(data.error || `API call failed: ${res.status}`);
   }
-  (window as any).posthog?.capture("query", {
-    tool: path,
-  });
+  track("query", { tool: path });
   return data.result;
 }
 
@@ -134,7 +134,7 @@ export async function browseKnowledge(
   if (!res.ok || !data.success) {
     throw new Error(data.error || `API call failed: ${res.status}`);
   }
-  (window as any).posthog?.capture("query", { tool: "/browse/answer" });
+  track("query", { tool: "/browse/answer" });
   return { ...data.result, ...(data.quota && { quota: data.quota }) };
 }
 

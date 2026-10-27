@@ -5,7 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { Analytics } from "@vercel/analytics/react";
+import { ConsentedAnalytics } from "@/components/ConsentedAnalytics";
+import { CookieConsent } from "@/components/CookieConsent";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { PendingForkRedirect } from "./components/PendingForkRedirect";
@@ -73,8 +74,9 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <CookieConsent />
         </BrowserRouter>
-        <Analytics />
+        <ConsentedAnalytics />
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>

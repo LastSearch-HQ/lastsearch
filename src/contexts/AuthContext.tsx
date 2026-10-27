@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { identify, resetIdentity } from "@/lib/privacy/analytics";
 import type { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { clearTokenCache } from "@/lib/api/auth";
@@ -31,16 +32,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
-      if (session?.user) {
-        (window as unknown as Record<string, unknown>).posthog &&
-          (window as unknown as { posthog: { identify: (id: string, props: Record<string, unknown>) => void } }).posthog.identify(
-            session.user.id,
-            { email: session.user.email, name: session.user.user_metadata?.full_name }
-          );
-      } else {
-        (window as unknown as Record<string, unknown>).posthog &&
-          (window as unknown as { posthog: { reset: () => void } }).posthog.reset();
-      }
+      if (session?.user) identify(session.user.id);
+      else resetIdentity();
     });
 
     return () => subscription.unsubscribe();

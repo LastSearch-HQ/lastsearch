@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { CookieSettingsLink } from "@/components/CookieConsent";
 import { useNavigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
@@ -1711,6 +1712,11 @@ result = client.ask("What causes aurora borealis?")`}</pre>
                 {waitlistStatus === "loading" ? "Joining..." : "Join Waitlist"}
               </Button>
             </div>
+            <p className="text-xs text-muted-foreground">
+              We use this address only to tell you when Pro opens. No marketing email unless you opt in, and you can leave the list any time by
+              emailing <a href="mailto:shreyassaw@gmail.com?subject=Remove%20me%20from%20the%20waitlist" className="underline hover:text-foreground">shreyassaw@gmail.com</a>.
+              See the <button type="button" onClick={() => navigate("/privacy")} className="underline hover:text-foreground">Privacy Policy</button>.
+            </p>
             {waitlistStatus === "success" && (
               <p className="text-sm text-emerald-400 flex items-center justify-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" /> {waitlistMessage}
@@ -1778,6 +1784,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>
             <button onClick={() => navigate("/privacy")} className="hover:text-foreground transition-colors">Privacy</button>
             <button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms</button>
+            <CookieSettingsLink className="hover:text-foreground transition-colors" />
           </div>
         </div>
       </footer>
