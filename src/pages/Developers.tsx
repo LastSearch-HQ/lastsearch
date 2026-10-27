@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { CookieSettingsLink } from "@/components/CookieConsent";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import {
@@ -919,6 +920,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
             <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>
             <button onClick={() => navigate("/privacy")} className="hover:text-foreground transition-colors">Privacy</button>
             <button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms</button>
+            <CookieSettingsLink className="hover:text-foreground transition-colors" />
           </div>
         </div>
       </footer>

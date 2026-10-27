@@ -20,7 +20,7 @@ const Terms = () => {
       <div className="max-w-3xl mx-auto px-6 py-12 space-y-8">
         <div>
           <h1 className="text-2xl font-bold mb-2">Terms of Service</h1>
-          <p className="text-sm text-muted-foreground">Last updated: March 19, 2026</p>
+          <p className="text-sm text-muted-foreground">Last updated: October 27, 2026</p>
         </div>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-6">
@@ -41,7 +41,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">3. Accounts</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              You may use the Service without an account (subject to demo rate limits). Creating an account gives you access to API key management, query history, and higher usage limits. You are responsible for maintaining the security of your account and API keys.
+              You may use the Service without an account (subject to demo rate limits). Creating an account gives you access to API key management, query history, and higher usage limits. You are responsible for maintaining the security of your account and API keys. You must be at least 16 years old (or the age of digital consent where you live, if higher) to create an account or use the Service. The Service is not directed at children, and we will delete any account we learn belongs to someone under that age.
             </p>
           </section>
 
@@ -64,18 +64,52 @@ const Terms = () => {
               <li>Use the Service to generate spam, misinformation, or harmful content</li>
               <li>Reverse engineer the hosted verification engine</li>
               <li>Overwhelm the Service with excessive automated requests beyond reasonable use</li>
+              <li>Submit queries containing other people's personal data, or content you have no right to share</li>
+              <li>Use shared result pages to publish infringing, defamatory, or unlawful material</li>
             </ul>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">6. Open Source License</h2>
+            <h2 className="text-lg font-semibold">6. Your Content and Shared Pages</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              You keep whatever rights you have in the queries and documents you submit. You give us a licence to store, process and display them to
+              operate the Service as described in these Terms and the Privacy Policy. When you create a share link for a result or session, that page
+              becomes viewable by anyone with the link until you delete your data from the dashboard or ask us to remove it. Shared pages contain short quotations from third-party web sources,
+              each attributed and linked to its origin.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">7. Copyright Complaints</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              We respect intellectual property rights. If you believe material available through the Service, including a shared page, infringes
+              your copyright, send a notice to our designated copyright agent at 
+              <a href="mailto:shreyassaw@gmail.com?subject=Copyright%20notice" className="text-accent hover:underline">shreyassaw@gmail.com</a> with
+              the subject "Copyright notice", including:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+              <li>your physical or electronic signature;</li>
+              <li>identification of the copyrighted work you say is infringed;</li>
+              <li>the URL of the material you want removed;</li>
+              <li>your name, address, telephone number and email address;</li>
+              <li>a statement that you have a good-faith belief the use is not authorised by the owner, its agent, or the law; and</li>
+              <li>a statement, under penalty of perjury, that the notice is accurate and that you are the owner or authorised to act for the owner.</li>
+            </ul>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              We remove or disable access to material that is the subject of a valid notice, notify the person who shared it, and accept counter-notices
+              as provided by 17 U.S.C. § 512(g). We terminate, in appropriate circumstances, the accounts of repeat infringers.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold">8. Open Source License</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               LastSearch uses an open-core model. SDKs, MCP server, integrations, and frontend are licensed under Apache 2.0. The verification engine is a hosted service — free to use via API, source is not publicly available. These Terms of Service apply specifically to the hosted service at lastsearch.ai.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">7. Data Usage & Service Improvement</h2>
+            <h2 className="text-lg font-semibold">9. Data Usage & Service Improvement</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               <strong className="text-foreground">By using the hosted service, you acknowledge that your queries and results are stored and used to improve the Service.</strong> This includes:
             </p>
@@ -96,21 +130,21 @@ const Terms = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">8. Data Deletion</h2>
+            <h2 className="text-lg font-semibold">10. Data Deletion</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              You may delete all your stored data at any time using the <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> API endpoint. This permanently removes your query results and API keys. Aggregate statistical data (domain scores, verification rates) computed from your queries cannot be individually reversed. See our <button onClick={() => navigate("/privacy")} className="text-accent hover:underline">Privacy Policy</button> for details on your rights.
+              You may delete all your stored data at any time with "Delete all my data" on the dashboard or the <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> API endpoint. This permanently removes your query results and API keys. Aggregate statistical data (domain scores, verification rates) computed from your queries cannot be individually reversed. See our <button onClick={() => navigate("/privacy")} className="text-accent hover:underline">Privacy Policy</button> for details on your rights.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">9. Third-Party Services</h2>
+            <h2 className="text-lg font-semibold">11. Third-Party Services</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              The Service relies on third-party APIs including Tavily (web search) and OpenRouter (LLM processing). Your use of these services through LastSearch is also subject to their respective terms. We are not responsible for the availability or performance of third-party services.
+              The Service relies on third-party providers including Tavily, Brave Search and Exa (web search), OpenRouter (language-model processing), Supabase (accounts and storage), Upstash (caching) and Vercel (hosting). Your use of these services through LastSearch is also subject to their respective terms. We are not responsible for the availability or performance of third-party services.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">10. Not Professional Advice</h2>
+            <h2 className="text-lg font-semibold">12. Not Professional Advice</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               <strong className="text-foreground">LastSearch does not provide financial, investment, medical, legal, tax, or any other form of professional advice.</strong> All
               information returned by the Service — including answers, citations, confidence scores, claim verifications, and source analyses — is
@@ -130,7 +164,7 @@ const Terms = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">11. Disclaimer of Warranties</h2>
+            <h2 className="text-lg font-semibold">13. Disclaimer of Warranties</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               The Service is provided "as is" and "as available" without warranties of any kind, either express or implied, including but not limited to
               implied warranties of merchantability, fitness for a particular purpose, accuracy, or non-infringement. Research results are AI-generated
@@ -140,7 +174,7 @@ const Terms = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">12. Limitation of Liability</h2>
+            <h2 className="text-lg font-semibold">14. Limitation of Liability</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               To the maximum extent permitted by applicable law, LastSearch, its creators, contributors, and affiliates shall not be liable for any
               direct, indirect, incidental, special, consequential, or punitive damages — including but not limited to loss of profits, data, business
@@ -154,7 +188,7 @@ const Terms = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">13. Indemnification</h2>
+            <h2 className="text-lg font-semibold">15. Indemnification</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               You agree to indemnify, defend, and hold harmless LastSearch, its creators, contributors, and affiliates from any claims, damages,
               losses, liabilities, costs, or expenses (including reasonable legal fees) arising from: (a) your use of the Service, (b) any action
@@ -164,14 +198,14 @@ const Terms = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">14. Changes to Terms</h2>
+            <h2 className="text-lg font-semibold">16. Changes to Terms</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              We may update these terms. Continued use of the Service after changes constitutes acceptance. Material changes will be communicated via the website or email.
+              We may update these terms. Continued use of the Service after changes constitutes acceptance. Material changes will be communicated via the website or email at least 14 days before they take effect, except where a change is required by law.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold">15. Contact</h2>
+            <h2 className="text-lg font-semibold">17. Contact</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Questions about these terms? Email{" "}
               <a href="mailto:shreyassaw@gmail.com" className="text-accent hover:underline">shreyassaw@gmail.com</a>.

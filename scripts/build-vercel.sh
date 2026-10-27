@@ -40,18 +40,18 @@ ENGINE_URL="${ENGINE_URL:-https://api.lastsearch.ai}"
 cat > .vercel/output/config.json << CONF
 {
   "version": 3,
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
-      ]
-    }
-  ],
   "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+      },
+      "continue": true
+    },
     { "src": "/api/mcp", "dest": "/api/mcp" },
     { "src": "/api/(.*)", "dest": "${ENGINE_URL}/api/\$1" },
     { "handle": "filesystem" },
