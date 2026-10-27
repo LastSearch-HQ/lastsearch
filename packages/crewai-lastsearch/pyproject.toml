@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "crewai-lastsearch"
-version = "1.0.0"
+version = "1.0.1"
 description = "CrewAI integration for LastSearch — research infrastructure with Grounded Intelligence for AI agents"
 readme = "README.md"
 license = "Apache-2.0"

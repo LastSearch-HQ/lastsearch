@@ -220,7 +220,7 @@ const Developers = () => {
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             LastSearch is Grounded Intelligence — an open-source research engine that gives AI agents the ability to search the web,
-            extract evidence, and produce cited answers. No hallucinations. Just facts.
+            extract evidence, and produce cited answers where every claim is checked against its sources.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button className="gap-2" asChild>
@@ -913,7 +913,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
             <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
             <span className="text-sm font-semibold">LastSearch</span>
           </div>
-          <div className="flex items-center gap-6 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
             <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
             <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
             <button onClick={() => navigate("/")} className="hover:text-foreground transition-colors">Home</button>
@@ -922,6 +922,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
             <button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms</button>
             <CookieSettingsLink className="hover:text-foreground transition-colors" />
           </div>
+          <p className="text-xs text-muted-foreground w-full text-center mt-3">LastSearch is a free, non-commercial passion project by an independent developer.</p>
         </div>
       </footer>
     </div>

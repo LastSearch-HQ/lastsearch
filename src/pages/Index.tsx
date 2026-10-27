@@ -1777,6 +1777,9 @@ result = client.ask("What causes aurora borealis?")`}</pre>
           <p className="text-sm text-muted-foreground">
             Crafted with <span className="text-red-400">&#9829;</span> and a lot of <span className="text-amber-400">&#9889;</span> by <a href="https://www.instagram.com/shreyassaw/?hl=en" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:text-accent transition-colors">Shreyas</a>
           </p>
+          <p className="text-xs text-muted-foreground">
+            LastSearch is a free, non-commercial passion project by an independent developer. Results are AI-generated research, not professional advice.
+          </p>
           <div className="flex items-center justify-center gap-4 sm:gap-6 text-xs text-muted-foreground flex-wrap">
             <a href="mailto:shreyassaw@gmail.com" className="hover:text-foreground transition-colors">shreyassaw@gmail.com</a>
             <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>

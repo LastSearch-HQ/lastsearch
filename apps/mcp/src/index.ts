@@ -8,7 +8,7 @@ import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 
 // --- Constants (inlined for standalone npm package) ---
-const VERSION = "1.4.0";
+const VERSION = "1.4.1";
 
 // --- LastSearch API key (required) ---
 const LASTSEARCH_API_KEY = process.env.LASTSEARCH_API_KEY;

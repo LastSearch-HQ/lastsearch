@@ -259,3 +259,9 @@ from llamaindex_lastsearch import LastSearchAnswerTool
 
 answer_tool = LastSearchAnswerTool(api_key="ls_xxx")
 ```
+
+## Data, privacy and terms
+
+This package sends your requests (queries, URLs and documents you ask it to verify) and your LastSearch API key to the hosted LastSearch API at lastsearch.ai. Queries and results are stored there and used, in aggregate and without identifiers, to improve verification, as described in the [Privacy Policy](https://lastsearch.ai/privacy). The package itself collects no telemetry. Use of the hosted API is subject to the [Terms](https://lastsearch.ai/terms).
+
+LastSearch is a free, non-commercial passion project run by an individual developer. Answers, citations and confidence scores are AI-generated research, not professional advice; verify anything important against primary sources.
