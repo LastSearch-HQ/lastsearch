@@ -53,8 +53,9 @@ const Privacy = () => {
           <section className="space-y-3">
             <H2>Who we are</H2>
             <P>
-              LastSearch ("we", "us") operates lastsearch.ai, the LastSearch API, the MCP server and the Python SDK. LastSearch is the data
-              controller for the personal data described here. Contact for anything in this policy, including requests about your data:{" "}
+              LastSearch ("we", "us") operates lastsearch.ai, the LastSearch API, the MCP server and the Python SDK. LastSearch is an
+              independent, non-commercial passion project run by an individual developer, not a company: it is free to use, we don't charge for
+              it, run advertising, or sell data. LastSearch is the data controller for the personal data described here. Contact for anything in this policy, including requests about your data:{" "}
               <a href="mailto:shreyassaw@gmail.com" className="text-accent hover:underline">shreyassaw@gmail.com</a>. This policy is written to meet
               the GDPR and UK GDPR, the California Consumer Privacy Act as amended by the CPRA, and comparable laws elsewhere.
             </P>

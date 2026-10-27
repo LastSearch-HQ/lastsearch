@@ -27,7 +27,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">1. Acceptance of Terms</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              By using LastSearch ("the Service"), including the website at lastsearch.ai, the REST API, MCP server, and Python SDK, you agree to these terms. If you don't agree, don't use the Service.
+              By using LastSearch ("the Service"), including the website at lastsearch.ai, the REST API, MCP server, and Python SDK, you agree to these terms. If you don't agree, don't use the Service. LastSearch is an independent, non-commercial passion project run by an individual developer. It is offered free of charge, as a courtesy, and may change, be rate-limited, or be discontinued at any time without notice. If paid plans are ever offered, their price, billing and cancellation terms will be shown before you can buy.
             </p>
           </section>
 
