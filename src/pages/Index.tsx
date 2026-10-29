@@ -198,7 +198,7 @@ const Index = () => {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-4 z-50 bg-background/90 backdrop-blur-sm"
+        className="lg-bar fixed top-3 left-3 right-3 mx-auto max-w-6xl rounded-full flex items-center justify-between px-3 sm:px-5 py-2 z-50"
       >
         <button type="button" aria-label="LastSearch home" className="flex items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); navigate("/"); }}>
           <img src="/logo.svg" alt="LastSearch" width={20} height={20} className="w-5 h-5" />
@@ -367,12 +367,12 @@ const Index = () => {
                     aria-label="Search query"
                     aria-autocomplete="list"
                     aria-expanded={showSuggestions}
-                    className={`w-full h-14 pl-12 pr-16 sm:pr-36 bg-secondary border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all text-base ${showSuggestions ? "rounded-t-xl rounded-b-none border-b-transparent" : "rounded-xl"}`}
+                    className={`liquid-glass-strong w-full h-14 pl-12 pr-16 sm:pr-36 text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all text-base ${showSuggestions ? "rounded-t-xl rounded-b-none border-b-transparent" : "rounded-xl"}`}
                   />
                   <Button
                     onClick={() => handleSearch()}
                     disabled={!query.trim()}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg px-3 sm:px-4 h-10 text-sm font-semibold gap-2 z-10"
+                    className="liquid-glass-accent absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-3 sm:px-4 h-10 text-sm font-semibold gap-2 z-10"
                   >
                     <span className="hidden sm:inline">Search</span>
                     <ArrowRight className="w-4 h-4" />
@@ -388,7 +388,7 @@ const Index = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute z-50 w-full bg-secondary border border-border border-t-0 rounded-b-xl shadow-lg overflow-hidden"
+                  className="liquid-glass-strong absolute z-50 w-full border-t-0 rounded-b-xl overflow-hidden"
                 >
                   {searchSuggestions.map((item, i) => (
                     <button

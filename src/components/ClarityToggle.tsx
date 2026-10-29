@@ -56,14 +56,14 @@ export function ClarityToggle({ enabled, setEnabled, quota, size = "md" }: Clari
     size === "sm"
       ? "h-8 px-2 rounded-lg border text-[10px] font-mono transition-colors"
       : size === "pill"
-      ? "px-4 py-2 rounded-full border text-xs font-medium transition-all"
-      : "h-12 px-3 rounded-lg border text-xs font-mono transition-colors";
+      ? "liquid-glass px-4 py-2 rounded-full border text-xs font-medium transition-all"
+      : "liquid-glass h-12 px-3 rounded-lg border text-xs font-mono transition-colors";
 
   const colorClass = enabled && !blocked
     ? "bg-amber-500/10 border-amber-500/40 text-amber-400"
     : enabled && blocked
     ? "bg-amber-500/10 border-amber-500/40 text-amber-400 opacity-70"
-    : "bg-secondary border-border text-muted-foreground hover:text-foreground";
+    : "text-muted-foreground hover:text-foreground";
 
   if (size === "pill") {
     return (

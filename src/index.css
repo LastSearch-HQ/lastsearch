@@ -235,3 +235,110 @@
     transform: translateY(-2px);
   }
 }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Liquid Glass (+ Minimalism). Glass is used ONLY on things that float above
+   content: navigation, controls, the query bar, menus, dialogs, the consent
+   banner. Reading surfaces stay opaque.
+   taste-skill-ignore: Liquid Glass signature (blur, translucency, specular edge,
+   shadow on floating layers, the calm backdrop fields)
+   ─────────────────────────────────────────────────────────────────────────── */
+@layer base {
+:root {
+  --lg-fill: rgba(16, 18, 20, 0.8);           /* dark glass: muted text stays >= 4.5:1 over the brightest content behind */
+  --lg-fill-strong: rgba(14, 16, 18, 0.86);    /* menus, dialogs, consent: reading text on glass */
+  --lg-edge: rgba(255, 255, 255, 0.14);
+  --lg-spec: rgba(255, 255, 255, 0.28);
+  --lg-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.65);
+  --lg-blur: blur(18px) saturate(165%);
+}
+
+/* the calm field the glass refracts: deep green (brand) and deep blue, very low intensity */
+body {
+  background-image:
+    radial-gradient(60rem 36rem at 12% -6%, rgba(16, 90, 62, 0.22), transparent 70%),
+    radial-gradient(52rem 34rem at 92% 4%, rgba(18, 52, 98, 0.20), transparent 70%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+}
+
+@layer components {
+
+.liquid-glass,
+.liquid-glass-strong {
+  background-color: var(--lg-fill);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: 1px solid var(--lg-edge);
+  box-shadow: inset 0 1px 0 var(--lg-spec), inset 0 -1px 0 rgba(255, 255, 255, 0.04), var(--lg-shadow);
+}
+.liquid-glass-strong { background-color: var(--lg-fill-strong); }
+
+/* the light, "lit" glass used by primary buttons: dark text on a near-opaque white lens */
+.liquid-glass-light {
+  background-color: rgba(244, 246, 245, 0.92);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 0 rgba(0, 0, 0, 0.08), 0 8px 22px -12px rgba(0, 0, 0, 0.7);
+  color: hsl(0 0% 6%);
+}
+
+/* the brand-green lens for the main Search / Run action */
+.liquid-glass-accent {
+  background-color: rgba(18, 112, 77, 0.94);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: 1px solid rgba(160, 255, 210, 0.28);
+  box-shadow: inset 0 1px 0 rgba(220, 255, 238, 0.35), 0 8px 22px -12px rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+/* the floating capsule navigation */
+.lg-bar {
+  background-color: var(--lg-fill);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: 1px solid var(--lg-edge);
+  box-shadow: inset 0 1px 0 var(--lg-spec), var(--lg-shadow);
+}
+
+/* glass needs focus rings that read on any backdrop */
+.liquid-glass:focus-visible,
+.liquid-glass-strong:focus-visible,
+.liquid-glass-light:focus-visible,
+.liquid-glass-accent:focus-visible,
+.lg-bar :focus-visible {
+  outline: 2px solid hsl(150 60% 55%);
+  outline-offset: 2px;
+}
+
+/* fallbacks: no backdrop-filter, or the visitor asked for less transparency → solid material */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .liquid-glass, .lg-bar { background-color: rgb(18, 20, 22); }
+  .liquid-glass-strong { background-color: rgb(16, 18, 20); }
+  .liquid-glass-light { background-color: rgb(244, 246, 245); }
+  .liquid-glass-accent { background-color: rgb(21, 128, 88); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass, .liquid-glass-strong, .lg-bar, .liquid-glass-light, .liquid-glass-accent {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .liquid-glass, .lg-bar { background-color: rgb(18, 20, 22); }
+  .liquid-glass-strong { background-color: rgb(16, 18, 20); }
+  .liquid-glass-light { background-color: rgb(244, 246, 245); }
+  .liquid-glass-accent { background-color: rgb(21, 128, 88); }
+  body { background-image: none; }
+}
+/* secondary text on glass is lifted so it stays >= 4.5:1 even over the brightest content scrolling beneath */
+.lg-bar .text-muted-foreground,
+.liquid-glass .text-muted-foreground { color: hsl(0 0% 74%) !important; }
+
+@media (hover: hover) {
+  button.liquid-glass:hover, a.liquid-glass:hover { background-color: rgba(30, 33, 36, 0.86); border-color: rgba(255, 255, 255, 0.24); }
+  button.liquid-glass-light:hover, a.liquid-glass-light:hover { background-color: rgba(255, 255, 255, 0.97); }
+  button.liquid-glass-accent:hover, a.liquid-glass-accent:hover { background-color: rgba(22, 128, 88, 0.96); }
+}
+}

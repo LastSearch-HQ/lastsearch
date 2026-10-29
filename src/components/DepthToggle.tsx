@@ -74,8 +74,8 @@ export function DepthToggle({ depth, setDepth, quota, size = "md" }: DepthToggle
     size === "sm"
       ? "h-8 px-2 rounded-lg border text-[10px] font-mono transition-colors"
       : size === "pill"
-      ? "px-4 py-2 rounded-full border text-xs font-medium transition-all"
-      : "h-12 px-3 rounded-lg border text-xs font-mono transition-colors";
+      ? "liquid-glass px-4 py-2 rounded-full border text-xs font-medium transition-all"
+      : "liquid-glass h-12 px-3 rounded-lg border text-xs font-mono transition-colors";
 
   const colorClass = blocked
     ? "bg-purple-500/10 border-purple-500/40 text-purple-400 opacity-70"
@@ -83,7 +83,7 @@ export function DepthToggle({ depth, setDepth, quota, size = "md" }: DepthToggle
     ? "bg-purple-500/10 border-purple-500/40 text-purple-400"
     : depth === "thorough"
     ? "bg-accent/10 border-accent/40 text-accent"
-    : "bg-secondary border-border text-muted-foreground hover:text-foreground";
+    : "text-muted-foreground hover:text-foreground";
 
   if (size === "pill") {
     return (

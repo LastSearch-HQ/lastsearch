@@ -51,7 +51,7 @@ const Compare = () => {
     <div className="min-h-screen relative">
       <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none" />
       {/* Nav */}
-      <nav className="relative z-10 flex items-center justify-between px-4 sm:px-8 py-5 border-b border-white/5 backdrop-blur-sm">
+      <nav className="lg-bar mx-3 mt-3 rounded-full relative z-10 flex items-center justify-between px-3 sm:px-5 py-2">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="hover:bg-accent/10 transition-colors">
             <ArrowLeft className="w-4 h-4" />
