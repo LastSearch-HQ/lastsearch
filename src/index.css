@@ -240,105 +240,150 @@
    Liquid Glass (+ Minimalism). Glass is used ONLY on things that float above
    content: navigation, controls, the query bar, menus, dialogs, the consent
    banner. Reading surfaces stay opaque.
-   taste-skill-ignore: Liquid Glass signature (blur, translucency, specular edge,
-   shadow on floating layers, the calm backdrop fields)
+   taste-skill-ignore: Liquid Glass signature (blur, translucency, specular rim,
+   sheen gradient, shadow on floating layers, the aurora backdrop)
    ─────────────────────────────────────────────────────────────────────────── */
 @layer base {
 :root {
-  --lg-fill: rgba(16, 18, 20, 0.8);           /* dark glass: muted text stays >= 4.5:1 over the brightest content behind */
-  --lg-fill-strong: rgba(14, 16, 18, 0.86);    /* menus, dialogs, consent: reading text on glass */
-  --lg-edge: rgba(255, 255, 255, 0.14);
-  --lg-spec: rgba(255, 255, 255, 0.28);
-  --lg-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.65);
-  --lg-blur: blur(18px) saturate(165%);
+  --lg-fill: rgba(12, 16, 18, 0.66);          /* text on it is lifted to #e4e4e4+ → ≥4.5:1 even over pure white */
+  --lg-fill-strong: rgba(12, 15, 17, 0.84);   /* menus, dialogs, consent: reading text */
+  --lg-edge: rgba(255, 255, 255, 0.22);
+  --lg-blur: blur(20px) saturate(180%);
+  --lg-rim: inset 1px 1px 0 rgba(255, 255, 255, 0.42), inset -1px -1px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --lg-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.8), 0 2px 6px -2px rgba(0, 0, 0, 0.5);
 }
 
-/* the calm field the glass refracts: deep green (brand) and deep blue, very low intensity */
+/* the calm field the glass refracts: deep green (brand) and deep teal/blue */
 body {
   background-image:
-    radial-gradient(60rem 36rem at 12% -6%, rgba(16, 90, 62, 0.22), transparent 70%),
-    radial-gradient(52rem 34rem at 92% 4%, rgba(18, 52, 98, 0.20), transparent 70%);
+    radial-gradient(60rem 36rem at 12% -6%, rgba(16, 110, 76, 0.28), transparent 70%),
+    radial-gradient(52rem 34rem at 92% 4%, rgba(14, 84, 98, 0.26), transparent 70%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 }
 
 @layer components {
+/* slow-drifting aurora behind the hero and the Playground header */
+.lg-aurora {
+  position: absolute;
+  inset: -10% -10% auto -10%;
+  height: 120%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(38% 42% at 28% 30%, rgba(16, 185, 129, 0.30), transparent 70%),
+    radial-gradient(34% 40% at 72% 26%, rgba(20, 184, 166, 0.24), transparent 70%),
+    radial-gradient(40% 36% at 52% 70%, rgba(6, 95, 70, 0.32), transparent 70%);
+  filter: blur(30px);
+  opacity: 0.9;
+  animation: lg-drift 38s ease-in-out infinite alternate;
+}
+.lg-aurora-sm { height: 70vh; opacity: 0.75; }
+@keyframes lg-drift {
+  0% { transform: translate3d(-3%, -2%, 0) scale(1); }
+  50% { transform: translate3d(3%, 2%, 0) scale(1.06); }
+  100% { transform: translate3d(-1%, 3%, 0) scale(1.02); }
+}
 
 .liquid-glass,
-.liquid-glass-strong {
+.liquid-glass-strong,
+.lg-bar {
+  position: relative;
+  isolation: isolate;
   background-color: var(--lg-fill);
   -webkit-backdrop-filter: var(--lg-blur);
   backdrop-filter: var(--lg-blur);
   border: 1px solid var(--lg-edge);
-  box-shadow: inset 0 1px 0 var(--lg-spec), inset 0 -1px 0 rgba(255, 255, 255, 0.04), var(--lg-shadow);
+  box-shadow: var(--lg-rim), var(--lg-shadow);
 }
 .liquid-glass-strong { background-color: var(--lg-fill-strong); }
 
-/* the light, "lit" glass used by primary buttons: dark text on a near-opaque white lens */
+/* specular sheen: light falling from the top-left across the lens */
+.liquid-glass::before,
+.liquid-glass-strong::before,
+.lg-bar::before,
+.liquid-glass-light::before,
+.liquid-glass-accent::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 32%, transparent 55%, rgba(255, 255, 255, 0.05) 100%);
+}
+input.liquid-glass-strong, input.liquid-glass { background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 45%); }
+
+/* text on glass is lifted so it stays >= 4.5:1 over the brightest content scrolling beneath */
+.lg-bar, .liquid-glass { color: #f2f2f2; }
+
+/* the light lens used by primary buttons: dark text on near-opaque white */
 .liquid-glass-light {
-  background-color: rgba(244, 246, 245, 0.92);
+  position: relative;
+  isolation: isolate;
+  background-color: rgba(246, 248, 247, 0.92);
   -webkit-backdrop-filter: var(--lg-blur);
   backdrop-filter: var(--lg-blur);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 0 rgba(0, 0, 0, 0.08), 0 8px 22px -12px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 rgba(0, 0, 0, 0.12), 0 10px 24px -12px rgba(0, 0, 0, 0.8);
   color: hsl(0 0% 6%);
 }
 
-/* the brand-green lens for the main Search / Run action */
+/* the brand-green lens for Search / Run: the brightest call to action on the page */
 .liquid-glass-accent {
-  background-color: rgba(18, 112, 77, 0.94);
+  position: relative;
+  isolation: isolate;
+  background-color: rgba(52, 211, 153, 0.92);
   -webkit-backdrop-filter: var(--lg-blur);
   backdrop-filter: var(--lg-blur);
-  border: 1px solid rgba(160, 255, 210, 0.28);
-  box-shadow: inset 0 1px 0 rgba(220, 255, 238, 0.35), 0 8px 22px -12px rgba(0, 0, 0, 0.7);
-  color: #fff;
+  border: 1px solid rgba(190, 255, 225, 0.75);
+  box-shadow: inset 1px 1px 0 rgba(236, 255, 246, 0.85), inset -1px -1px 0 rgba(4, 60, 40, 0.45), 0 10px 28px -10px rgba(16, 185, 129, 0.55);
+  color: #04140d;
+  font-weight: 600;
 }
+.liquid-glass-accent:disabled { opacity: 0.88 !important; }
 
-/* the floating capsule navigation */
-.lg-bar {
-  background-color: var(--lg-fill);
-  -webkit-backdrop-filter: var(--lg-blur);
-  backdrop-filter: var(--lg-blur);
-  border: 1px solid var(--lg-edge);
-  box-shadow: inset 0 1px 0 var(--lg-spec), var(--lg-shadow);
-}
-
-/* glass needs focus rings that read on any backdrop */
+/* focus rings that read on any backdrop */
 .liquid-glass:focus-visible,
 .liquid-glass-strong:focus-visible,
 .liquid-glass-light:focus-visible,
 .liquid-glass-accent:focus-visible,
 .lg-bar :focus-visible {
-  outline: 2px solid hsl(150 60% 55%);
+  outline: 2px solid hsl(150 70% 60%);
   outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  button.liquid-glass:hover, a.liquid-glass:hover { background-color: rgba(26, 32, 34, 0.74); border-color: rgba(255, 255, 255, 0.32); }
+  button.liquid-glass-light:hover, a.liquid-glass-light:hover { background-color: rgba(255, 255, 255, 0.97); }
+  button.liquid-glass-accent:not(:disabled):hover, a.liquid-glass-accent:hover { background-color: rgba(74, 222, 160, 0.96); }
 }
 
 /* fallbacks: no backdrop-filter, or the visitor asked for less transparency → solid material */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .liquid-glass, .lg-bar { background-color: rgb(18, 20, 22); }
-  .liquid-glass-strong { background-color: rgb(16, 18, 20); }
-  .liquid-glass-light { background-color: rgb(244, 246, 245); }
-  .liquid-glass-accent { background-color: rgb(21, 128, 88); }
+  .liquid-glass, .lg-bar { background-color: rgb(20, 24, 26); }
+  .liquid-glass-strong { background-color: rgb(16, 19, 21); }
+  .liquid-glass-light { background-color: rgb(246, 248, 247); }
+  .liquid-glass-accent { background-color: rgb(52, 211, 153); }
 }
 @media (prefers-reduced-transparency: reduce) {
   .liquid-glass, .liquid-glass-strong, .lg-bar, .liquid-glass-light, .liquid-glass-accent {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
-  .liquid-glass, .lg-bar { background-color: rgb(18, 20, 22); }
-  .liquid-glass-strong { background-color: rgb(16, 18, 20); }
-  .liquid-glass-light { background-color: rgb(244, 246, 245); }
-  .liquid-glass-accent { background-color: rgb(21, 128, 88); }
+  .liquid-glass, .lg-bar { background-color: rgb(20, 24, 26); }
+  .liquid-glass-strong { background-color: rgb(16, 19, 21); }
+  .liquid-glass-light { background-color: rgb(246, 248, 247); }
+  .liquid-glass-accent { background-color: rgb(52, 211, 153); }
+  .lg-aurora { display: none; }
   body { background-image: none; }
 }
-/* secondary text on glass is lifted so it stays >= 4.5:1 even over the brightest content scrolling beneath */
-.lg-bar .text-muted-foreground,
-.liquid-glass .text-muted-foreground { color: hsl(0 0% 74%) !important; }
+@media (prefers-reduced-motion: reduce) {
+  .lg-aurora { animation: none; }
+}
+}
 
-@media (hover: hover) {
-  button.liquid-glass:hover, a.liquid-glass:hover { background-color: rgba(30, 33, 36, 0.86); border-color: rgba(255, 255, 255, 0.24); }
-  button.liquid-glass-light:hover, a.liquid-glass-light:hover { background-color: rgba(255, 255, 255, 0.97); }
-  button.liquid-glass-accent:hover, a.liquid-glass-accent:hover { background-color: rgba(22, 128, 88, 0.96); }
-}
-}
+/* secondary text on glass, lifted (must beat the utility layer) */
+.lg-bar .text-muted-foreground,
+.liquid-glass .text-muted-foreground { color: #e4e4e4 !important; }

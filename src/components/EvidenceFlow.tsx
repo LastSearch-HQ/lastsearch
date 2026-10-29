@@ -24,6 +24,7 @@ interface Node {
   alpha: number;
   glowAlpha: number; // emerald glow when "found"
   neighbors: number[]; // indices of nearby nodes
+  lum?: boolean; // a few soft luminous nodes give the glass above something to refract
 }
 
 interface TravelingLight {
@@ -85,23 +86,24 @@ export function EvidenceFlow({ className = "" }: { className?: string }) {
       s.queries = [];
 
       // Create network nodes — fewer on mobile
-      const count = Math.min(isMobile ? 35 : 70, Math.floor((s.w * s.h) / (isMobile ? 18000 : 12000)));
+      const count = Math.min(isMobile ? 50 : 110, Math.floor((s.w * s.h) / (isMobile ? 12000 : 8000)));
       for (let i = 0; i < count; i++) {
         s.nodes.push({
           x: Math.random() * s.w,
           y: Math.random() * s.h,
           vx: (Math.random() - 0.5) * 0.08,
           vy: (Math.random() - 0.5) * 0.06,
-          radius: 0.8 + Math.random() * 0.8,
-          baseAlpha: 0.04 + Math.random() * 0.06,
-          alpha: 0.04 + Math.random() * 0.06,
+          radius: 0.9 + Math.random() * 1.1,
+          baseAlpha: 0.12 + Math.random() * 0.16,
+          alpha: 0.12 + Math.random() * 0.16,
+          lum: Math.random() < 0.09,
           glowAlpha: 0,
           neighbors: [],
         });
       }
 
       // Build edges between nearby nodes (the "internet" topology)
-      const maxDist = Math.min(s.w, s.h) * 0.15;
+      const maxDist = Math.min(s.w, s.h) * 0.17;
       for (let i = 0; i < s.nodes.length; i++) {
         const ni = s.nodes[i];
         for (let j = i + 1; j < s.nodes.length; j++) {
@@ -234,7 +236,7 @@ export function EvidenceFlow({ className = "" }: { className?: string }) {
         if (boost > 0.05) {
           ctx.strokeStyle = `rgba(52, 211, 153, ${boost * 0.3})`;
         } else {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${edgeAlpha})`;
+          ctx.strokeStyle = `rgba(94, 234, 212, ${edgeAlpha * 0.9})`;
         }
         ctx.lineWidth = 0.4;
         ctx.stroke();
@@ -382,6 +384,17 @@ export function EvidenceFlow({ className = "" }: { className?: string }) {
 
       // ── Draw nodes ──
       for (const n of s.nodes) {
+        // Soft luminous nodes: a permanent teal halo
+        if (n.lum) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius * 9, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(45, 212, 191, 0.07)`;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius * 4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(52, 211, 153, 0.14)`;
+          ctx.fill();
+        }
         // Emerald glow halo
         if (n.glowAlpha > 0.02) {
           ctx.beginPath();
@@ -395,7 +408,7 @@ export function EvidenceFlow({ className = "" }: { className?: string }) {
         ctx.arc(n.x, n.y, n.glowAlpha > 0.1 ? n.radius * 1.5 : n.radius, 0, Math.PI * 2);
         ctx.fillStyle = n.glowAlpha > 0.1
           ? `rgba(52, 211, 153, ${Math.max(n.alpha, n.glowAlpha)})`
-          : `rgba(255, 255, 255, ${n.alpha})`;
+          : n.lum ? `rgba(167, 243, 208, ${Math.min(0.9, n.alpha * 3)})` : `rgba(204, 251, 241, ${n.alpha})`;
         ctx.fill();
       }
 

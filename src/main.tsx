@@ -13,4 +13,5 @@ import { initAnalytics } from "./lib/privacy/analytics";
 // Analytics start only once the visitor has opted in (see CookieConsent); a stored "yes" starts them now.
 initAnalytics();
 
+
 createRoot(document.getElementById("root")!).render(<App />);

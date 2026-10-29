@@ -279,12 +279,13 @@ const Index = () => {
       {/* ===== HERO SECTION ===== */}
       <section className="min-h-[100svh] flex flex-col items-center justify-center px-4 sm:px-8 pt-20 pb-16 relative overflow-hidden">
         {/* Background */}
+        <div className="lg-aurora" aria-hidden="true" />
         <EvidenceFlow className="absolute inset-0" />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="max-w-3xl w-full text-center space-y-8"
+          className="relative z-10 max-w-3xl w-full text-center space-y-8"
         >
           <div className="space-y-4">
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter leading-[1.02] text-balance">

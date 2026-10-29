@@ -328,7 +328,8 @@ const Playground = () => {
       description="Try LastSearch live. Search any topic and get answers with source citations, checked claims, and estimated confidence scores."
       canonical="/playground"
     />
-    <div className="min-h-screen">
+    <div className="min-h-screen relative isolate overflow-x-clip">
+      <div className="lg-aurora lg-aurora-sm -z-10" aria-hidden="true" />
       <nav className="lg-bar mx-3 mt-3 rounded-full flex items-center justify-between px-3 sm:px-5 py-2 relative">
         <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none" />
         <div className="relative z-10 flex items-center gap-4">
@@ -427,7 +428,7 @@ const Playground = () => {
                 <VerifyDocumentTab />
               ) : (
               <>
-              <div className="flex gap-2 mt-4">
+              <div className="flex flex-wrap sm:flex-nowrap gap-2 mt-4">
                 {tab === "answer" && isDepthBlocked(depth, !!user, quota) ? (
                   <>
                     <div
@@ -466,7 +467,7 @@ const Playground = () => {
                         onChange={setInput}
                         onSubmit={(q) => run(q)}
                         placeholder={PLACEHOLDERS[tab]}
-                        className="flex-1"
+                        className="flex-1 basis-full sm:basis-0 min-w-0"
                       />
                     ) : (
                       <input
@@ -475,7 +476,7 @@ const Playground = () => {
                         onKeyDown={(e) => e.key === "Enter" && run()}
                         placeholder={PLACEHOLDERS[tab]}
                         aria-label="Research query"
-                        className="liquid-glass-strong flex-1 h-12 px-4 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 text-sm font-mono"
+                        className="liquid-glass-strong flex-1 basis-full sm:basis-0 min-w-0 h-12 px-4 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 text-sm font-mono"
                       />
                     )}
                     {tab === "answer" && (
