@@ -1,6 +1,8 @@
 name: Update Supabase Auth URLs
 on: workflow_dispatch
 
+permissions: {}
+
 jobs:
   update-auth-config:
     runs-on: ubuntu-latest
