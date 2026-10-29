@@ -275,7 +275,7 @@ const Developers = () => {
                           {medalLabels[i]}
                         </Badge>
                         <img
-                          src={contributor.avatar_url}
+                          src={contributor.avatar_url || undefined}
                           alt={contributor.login}
                           className={`w-16 h-16 rounded-full border-2 ${medals[i].split(" ")[1]} group-hover:border-accent/30 transition-colors`}
                         />
@@ -323,7 +323,7 @@ const Developers = () => {
                             #{i + 4}
                           </span>
                           <img
-                            src={contributor.avatar_url}
+                            src={contributor.avatar_url || undefined}
                             alt={contributor.login}
                             className="w-8 h-8 rounded-full border border-border group-hover:border-accent/30 transition-colors"
                           />
