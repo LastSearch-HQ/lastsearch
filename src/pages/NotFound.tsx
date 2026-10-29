@@ -11,7 +11,7 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-muted">
-      <nav className="flex items-center gap-4 px-4 sm:px-8 py-5 border-b border-border">
+      <nav className="lg-bar mx-3 mt-3 rounded-full flex items-center gap-4 px-3 sm:px-5 py-2">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
           <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
           <span className="font-semibold text-sm">LastSearch</span>

@@ -168,7 +168,7 @@ const Developers = () => {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-5 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
+        className="lg-bar fixed top-3 left-3 right-3 mx-auto max-w-6xl rounded-full flex items-center justify-between px-3 sm:px-5 py-2 z-50"
       >
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
           <img src="/logo.svg" alt="LastSearch" className="w-5 h-5" />
@@ -837,7 +837,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
               ].map((item) => (
                 <div key={item.step} className="flex items-start gap-3">
                   <Badge variant="outline" className="shrink-0 mt-1 text-[10px] px-1.5">{item.step}</Badge>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <span className="text-sm font-medium block mb-1">{item.label}</span>
                     <div className="px-4 py-2.5 rounded-lg bg-secondary overflow-x-auto">
                       <code className="text-xs font-mono text-muted-foreground whitespace-nowrap">{item.cmd}</code>

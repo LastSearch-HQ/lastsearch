@@ -33,7 +33,7 @@ export function CookieConsent() {
 
   return (
     <div role="dialog" aria-live="polite" aria-label="Privacy choices" className="fixed inset-x-0 bottom-0 z-50 p-3 sm:p-4">
-      <div className="mx-auto max-w-3xl rounded-xl border border-border bg-card/95 backdrop-blur shadow-lg p-4 sm:p-5 space-y-4">
+      <div className="mx-auto max-w-3xl rounded-2xl liquid-glass-strong p-4 sm:p-5 space-y-4">
         <div className="space-y-1">
           <p className="text-sm font-medium">Your privacy choices</p>
           <p className="text-xs text-muted-foreground leading-relaxed">

@@ -174,7 +174,7 @@ export function SearchInput({
     <div className={`relative ${className}`}>
       <div className="relative">
         <Search
-          className={`absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground ${
+          className={`absolute left-3 top-1/2 -translate-y-1/2 z-10 pointer-events-none text-muted-foreground ${
             isLarge ? "w-5 h-5 left-4" : "w-4 h-4"
           }`}
         />
@@ -191,7 +191,7 @@ export function SearchInput({
           aria-label="Research query"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
-          className={`w-full bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 font-mono transition-all ${
+          className={`liquid-glass-strong w-full text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 font-mono transition-all ${
             isLarge
               ? "h-14 pl-12 pr-4 rounded-xl text-base"
               : "h-12 pl-10 pr-4 rounded-lg text-sm"
@@ -207,7 +207,7 @@ export function SearchInput({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="absolute z-50 w-full bg-secondary border border-border border-t-0 rounded-b-lg shadow-lg overflow-hidden"
+            className="liquid-glass-strong absolute z-50 w-full border-t-0 rounded-b-lg overflow-hidden"
           >
             {suggestions.map((item, i) => (
               <button

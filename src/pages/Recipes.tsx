@@ -128,7 +128,7 @@ const Recipes = () => {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-5 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
+        className="lg-bar fixed top-3 left-3 right-3 mx-auto max-w-6xl rounded-full flex items-center justify-between px-3 sm:px-5 py-2 z-50"
       >
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
           <img src="/logo.svg" alt="LastSearch" className="w-5 h-5" />

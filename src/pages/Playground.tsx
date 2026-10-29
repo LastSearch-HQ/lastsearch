@@ -328,8 +328,9 @@ const Playground = () => {
       description="Try LastSearch live. Search any topic and get answers with source citations, checked claims, and estimated confidence scores."
       canonical="/playground"
     />
-    <div className="min-h-screen">
-      <nav className="flex items-center justify-between px-4 sm:px-8 py-5 border-b border-border relative">
+    <div className="min-h-screen relative isolate overflow-x-clip">
+      <div className="lg-aurora lg-aurora-sm -z-10" aria-hidden="true" />
+      <nav className="lg-bar mx-3 mt-3 rounded-full flex items-center justify-between px-3 sm:px-5 py-2 relative">
         <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none" />
         <div className="relative z-10 flex items-center gap-4">
           <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
@@ -365,7 +366,7 @@ const Playground = () => {
             onClick={() => setShowScenarios(!showScenarios)}
             aria-haspopup="listbox"
             aria-expanded={showScenarios}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 text-sm"
+            className="liquid-glass flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors text-sm"
           >
             <Beaker className="w-3.5 h-3.5 text-accent bg-accent/10 rounded" />
             <span className="text-muted-foreground">Try an example</span>
@@ -413,7 +414,7 @@ const Playground = () => {
 
         {/* Tabs + Input */}
         <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); setResponse(null); setShowRawJson(false); setFeedbackSent(null); resetStreamState(); }}>
-          <TabsList className="bg-secondary flex-wrap h-auto gap-1 p-1">
+          <TabsList className="liquid-glass flex-wrap h-auto gap-1 p-1 rounded-xl">
             {TABS.map((tab) => (
               <TabsTrigger key={tab} value={tab} className="font-mono text-xs">
                 browse.{tab}
@@ -427,7 +428,7 @@ const Playground = () => {
                 <VerifyDocumentTab />
               ) : (
               <>
-              <div className="flex gap-2 mt-4">
+              <div className="flex flex-wrap sm:flex-nowrap gap-2 mt-4">
                 {tab === "answer" && isDepthBlocked(depth, !!user, quota) ? (
                   <>
                     <div
@@ -466,7 +467,7 @@ const Playground = () => {
                         onChange={setInput}
                         onSubmit={(q) => run(q)}
                         placeholder={PLACEHOLDERS[tab]}
-                        className="flex-1"
+                        className="flex-1 basis-full sm:basis-0 min-w-0"
                       />
                     ) : (
                       <input
@@ -475,7 +476,7 @@ const Playground = () => {
                         onKeyDown={(e) => e.key === "Enter" && run()}
                         placeholder={PLACEHOLDERS[tab]}
                         aria-label="Research query"
-                        className="flex-1 h-12 px-4 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 text-sm font-mono"
+                        className="liquid-glass-strong flex-1 basis-full sm:basis-0 min-w-0 h-12 px-4 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 text-sm font-mono"
                       />
                     )}
                     {tab === "answer" && (
@@ -484,7 +485,7 @@ const Playground = () => {
                         <DepthToggle depth={depth} setDepth={setDepth} quota={quota} />
                       </>
                     )}
-                    <Button onClick={() => run()} disabled={loading || !input.trim()} className="bg-accent text-accent-foreground h-12 px-5" aria-label="Run query">
+                    <Button onClick={() => run()} disabled={loading || !input.trim()} className="liquid-glass-accent h-12 px-5" aria-label="Run query">
                       {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
                     </Button>
                   </>
@@ -499,7 +500,7 @@ const Playground = () => {
                     <button
                       key={ex}
                       onClick={() => handleExample(ex)}
-                      className="px-3 py-1 rounded-full border border-border text-xs text-muted-foreground hover:text-foreground hover:border-accent/20 transition-all duration-300 hover:shadow-md hover:shadow-accent/5 truncate max-w-[180px] sm:max-w-[280px]"
+                      className="liquid-glass px-3 py-1 rounded-full text-xs text-muted-foreground hover:text-foreground transition-colors truncate max-w-[180px] sm:max-w-[280px]"
                     >
                       {ex}
                     </button>
