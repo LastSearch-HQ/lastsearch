@@ -12,6 +12,7 @@ mkdir -p .vercel/output/functions/api/mcp.func
 
 # 2. Build Vite frontend directly into .vercel/output/static
 echo "Step 1: Building frontend..."
+node scripts/fetch-contributors.mjs
 pnpm exec vite build --outDir .vercel/output/static
 
 # 3. Bundle MCP function (HTTP-only, calls engine API)
@@ -48,7 +49,9 @@ cat > .vercel/output/config.json << CONF
         "X-Frame-Options": "DENY",
         "X-Content-Type-Options": "nosniff",
         "Referrer-Policy": "strict-origin-when-cross-origin",
-        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+        "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://mobaurkcqvfxhakwpnfw.supabase.co wss://mobaurkcqvfxhakwpnfw.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
       },
       "continue": true
     },

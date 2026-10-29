@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { CookieSettingsLink } from "@/components/CookieConsent";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import {
@@ -15,7 +14,7 @@ const GITHUB_EXAMPLES = "https://github.com/lastsearch-hq/lastsearch/blob/main/e
 const RECIPES = [
   {
     title: "Research Agent",
-    desc: "Ask any question and get evidence-backed answers with citations, confidence scores, and source quotes.",
+    desc: "Ask a question and get answers with citations, estimated confidence scores, and source quotes.",
     file: "research-agent.py",
     cmd: 'python examples/research-agent.py "What are the latest breakthroughs in fusion energy?"',
     tags: ["Python", "Citations", "Confidence"],
@@ -24,7 +23,7 @@ const RECIPES = [
   },
   {
     title: "Code Research Agent",
-    desc: "Research libraries, frameworks, and docs before writing code. Perfect for AI coding assistants.",
+    desc: "Research libraries, frameworks, and docs before writing code. Useful for AI coding assistants.",
     file: "code-research-agent.py",
     cmd: 'python examples/code-research-agent.py "best Python async HTTP libraries"',
     tags: ["Python", "Developer Tools", "Multi-step"],
@@ -33,7 +32,7 @@ const RECIPES = [
   },
   {
     title: "Hallucination Detector",
-    desc: "Compare what a raw LLM says vs what evidence-backed research says. Spot hallucinations instantly.",
+    desc: "Compare what a raw LLM says with what source-checked research says, to help spot hallucinations.",
     file: "hallucination-detector.py",
     cmd: 'python examples/hallucination-detector.py "Did India win the 2026 T20 World Cup?"',
     tags: ["Python", "Comparison", "Verification"],
@@ -87,7 +86,7 @@ const RECIPES = [
   },
   {
     title: "Streaming Agent",
-    desc: "Real-time SSE streaming — watch trace events, source previews, and tokens arrive as the pipeline runs. Perfect for building responsive UIs.",
+    desc: "Real-time SSE streaming — watch trace events, source previews, and tokens arrive as the pipeline runs. Handy for building responsive UIs.",
     file: "streaming-agent.py",
     cmd: 'python examples/streaming-agent.py "latest developments in AI safety"',
     tags: ["Python", "Streaming", "SSE", "Real-time"],
@@ -121,7 +120,7 @@ const Recipes = () => {
     <>
     <SEO
       title="Agent Recipes — Code Examples for AI Research Agents"
-      description="Ready-to-use code recipes for building AI research agents with LastSearch. Research agents, fact-checkers, competitive analysis, and more."
+      description="Ready-to-use code recipes for building AI research agents with LastSearch. Research agents, claim checkers, competitive analysis, and more."
       canonical="/recipes"
     />
     <div className="min-h-screen">
@@ -211,7 +210,7 @@ const Recipes = () => {
             <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 shrink-0 text-accent" />
             <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-card border border-border hover:border-accent/20 transition-all duration-300 font-medium text-foreground text-xs sm:text-sm">Internet</span>
             <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 shrink-0 text-accent" />
-            <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-card border border-border hover:border-accent/20 transition-all duration-300 font-medium text-foreground text-xs sm:text-sm">Verified Answers</span>
+            <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-card border border-border hover:border-accent/20 transition-all duration-300 font-medium text-foreground text-xs sm:text-sm">Answers with sources</span>
           </motion.div>
         </div>
       </section>
@@ -368,7 +367,7 @@ const Recipes = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-6">
             <h2 className="text-2xl sm:text-3xl font-bold text-shimmer">Build your own agent recipe</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              LastSearch gives your agents reliable web research. Build something cool and share it with the community.
+              LastSearch gives your agents web research with sources. Build something cool and share it with the community.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button className="gap-2" asChild>
@@ -386,26 +385,6 @@ const Recipes = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
-            <span className="text-sm font-semibold">LastSearch</span>
-          </div>
-          <div className="flex items-center justify-center gap-4 sm:gap-6 text-xs text-muted-foreground flex-wrap">
-            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
-            <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
-            <button onClick={() => navigate("/")} className="hover:text-foreground transition-colors">Home</button>
-            <button onClick={() => navigate("/developers")} className="hover:text-foreground transition-colors">Developers</button>
-            <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>
-            <button onClick={() => navigate("/privacy")} className="hover:text-foreground transition-colors">Privacy</button>
-            <button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms</button>
-            <CookieSettingsLink className="hover:text-foreground transition-colors" />
-          </div>
-        </div>
-      </footer>
     </div>
     </>
   );

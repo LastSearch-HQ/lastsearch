@@ -20,7 +20,7 @@
     --secondary-foreground: 0 0% 80%;
 
     --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 50%;
+    --muted-foreground: 0 0% 64%;
 
     --accent: 150 60% 45%;
     --accent-foreground: 0 0% 4%;
@@ -50,6 +50,10 @@
     @apply border-border;
   }
 
+  html {
+    color-scheme: dark;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -61,13 +65,13 @@
 }
 
 @layer utilities {
+  /* Solid ink. (Formerly gradient-clipped text.) */
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(0 0% 95%), hsl(0 0% 60%));
+    color: inherit;
   }
 
   .glow-accent {
-    box-shadow: 0 0 40px -10px hsl(150 60% 45% / 0.3);
+    box-shadow: none;
   }
 
   .scrollbar-hide {
@@ -87,13 +91,21 @@
   100% { left: calc(100% + 8px); opacity: 0; }
 }
 
-/* ── Subtle glow on accent elements (no pulse — static, minimal) ── */
+/* ── Formerly a glow; surfaces are separated by tone, not light ── */
 .glow-pulse {
-  box-shadow: 0 0 15px -5px hsl(150 60% 45% / 0.08);
+  box-shadow: none;
 }
 
-/* ── Respect reduced motion ── */
+/* ── Respect reduced motion (site-wide) ── */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   .glow-pulse,
   .border-glow,
   .animate-float,
@@ -118,16 +130,14 @@
 }
 
 /* ── Grid background pattern ── */
+/* Retired: hairline grid backgrounds. Kept as no-ops so existing markup stays valid. */
 .grid-bg {
-  background-image:
-    linear-gradient(hsl(0 0% 15% / 0.3) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(0 0% 15% / 0.3) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background-image: none;
 }
 
 .grid-bg-fade {
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 /* ── Floating animation ── */
@@ -147,32 +157,13 @@
 }
 
 .text-shimmer {
-  background: linear-gradient(
-    90deg,
-    hsl(0 0% 95%) 0%,
-    hsl(150 60% 55%) 25%,
-    hsl(0 0% 95%) 50%,
-    hsl(150 60% 55%) 75%,
-    hsl(0 0% 95%) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 6s linear infinite;
+  /* Solid ink: no gradient-filled or animated text. */
+  color: inherit;
 }
 
 /* ── Radial glow behind hero ── */
 .hero-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, hsl(150 60% 45% / 0.08) 0%, transparent 70%);
-  pointer-events: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: none;
 }
 
 /* ── Scan line effect for terminal cards ── */
@@ -189,6 +180,7 @@
 }
 
 .terminal-card::after {
+  display: none;
   content: '';
   position: absolute;
   top: 0;
@@ -225,7 +217,6 @@
 .gradient-border {
   position: relative;
   background: hsl(var(--card));
-  border: 1px solid hsl(150 60% 45% / 0.15);
 }
 
 /* ── Dot (static, no pulse) ── */
@@ -242,6 +233,5 @@
 @media (hover: hover) {
   .card-lift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px -10px hsl(150 60% 45% / 0.15);
   }
 }

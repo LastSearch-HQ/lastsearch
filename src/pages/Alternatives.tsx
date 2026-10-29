@@ -231,9 +231,6 @@ const Alternatives = () => {
             className="relative text-center space-y-4 py-8 grid-bg grid-bg-fade rounded-2xl"
           >
             <div className="hero-glow" />
-            <Badge variant="outline" className="text-xs border-accent/30 text-accent">
-              Grounded Intelligence · Agent-First Research Infrastructure
-            </Badge>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-shimmer">
               LastSearch vs. the alternatives
             </h1>
@@ -244,7 +241,7 @@ const Alternatives = () => {
               or citations alone.
             </p>
             <p className="text-sm text-muted-foreground max-w-xl mx-auto font-mono terminal-card px-4 py-2 rounded-lg bg-card/50 border border-border/50 inline-block">
-              Agent → LastSearch → Internet → Evidence-backed answers + confidence scores
+              Agent → LastSearch → Internet → Answers with sources + estimated confidence
             </p>
           </motion.section>
 
@@ -258,11 +255,11 @@ const Alternatives = () => {
               <div className="flex items-start gap-3">
                 <Layers className="w-4 h-4 text-accent bg-accent/10 mt-0.5 shrink-0" />
                 <div className="text-sm text-muted-foreground leading-relaxed">
-                  <strong className="text-foreground">Full transparency:</strong> LastSearch is a Grounded Intelligence and verification layer,
+                  <strong className="text-foreground">Full transparency:</strong> LastSearch is a verification layer,
                   not a search engine replacement. We use providers like Tavily and Brave for web search,
                   then add claim extraction, cross-source verification, contradiction detection, domain authority scoring,
-                  and confidence calibration on top. These providers are excellent at search. LastSearch adds the
-                  Grounded Intelligence layer that turns raw search results into agent-ready, evidence-backed outputs.
+                  and confidence calibration on top. These providers are excellent at search. LastSearch adds a
+                  layer that turns raw search results into agent-ready outputs with sources and estimated confidence.
                 </div>
               </div>
             </div>
@@ -376,12 +373,12 @@ const Alternatives = () => {
                 {
                   icon: Shield,
                   title: "Evidence-based confidence",
-                  desc: "Multi-factor confidence score derived from verification data (source count, domain authority, consensus, claim grounding, source recency) — not LLM self-assessment. Your agent knows how much to trust each answer.",
+                  desc: "Multi-factor confidence score derived from verification data (source count, domain authority, consensus, claim grounding, source recency) — not LLM self-assessment. It gives your agent an estimate to weigh, not a guarantee.",
                 },
                 {
                   icon: Brain,
-                  title: "Grounded Intelligence verification pipeline",
-                  desc: "Claims decomposed and individually verified against sources, cross-checked for consensus, and scanned for contradictions. All built into the API — no external tooling needed.",
+                  title: "Verification pipeline",
+                  desc: "Claims decomposed and individually checked against sources, cross-checked for consensus, and scanned for contradictions. All built into the API — no external tooling needed.",
                 },
                 {
                   icon: Code2,
@@ -470,7 +467,7 @@ const Alternatives = () => {
             <div className="hero-glow" />
             <h2 className="text-2xl font-bold text-shimmer inline-block">Try it yourself</h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              Run your own queries through LastSearch and see evidence-backed answers
+              Run your own queries through LastSearch and see answers with sources
               with claim verification, confidence scores, and verified sources.
             </p>
             <div className="flex items-center justify-center gap-3">

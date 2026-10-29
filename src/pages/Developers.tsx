@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { CookieSettingsLink } from "@/components/CookieConsent";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import {
@@ -67,25 +66,25 @@ const ROADMAP_ITEMS = [
   {
     phase: "Shipped",
     title: "Live Citation Health",
-    desc: "New: every cited URL is probed server-side and tagged live, stale, or dead — so you can trust citations resolve and catch fabricated links. No other agent-search API verifies this.",
+    desc: "New: cited URLs are probed server-side and tagged live, stale, or dead, so your agent can spot links that don't resolve, including likely fabricated ones.",
     done: true,
   },
   {
     phase: "Shipped",
     title: "Research Infrastructure",
-    desc: "Search, extract, cite. Every claim backed by a URL. Every answer has a confidence score.",
+    desc: "Search, extract, cite. Claims link to the URLs they came from, and answers carry an estimated confidence score.",
     done: true,
   },
   {
     phase: "Shipped",
     title: "Verification Engine",
-    desc: "Multi-source consensus. Contradiction detection. Domain authority. Claims verified against actual source text.",
+    desc: "Multi-source consensus. Contradiction detection. Domain authority. Claims checked against the fetched source text.",
     done: true,
   },
   {
     phase: "Shipped",
     title: "Deep Mode",
-    desc: "Iterative verification that keeps digging until it's confident. Adversarial stress-testing of every claim.",
+    desc: "Iterative research that runs extra passes when confidence is low, plus counter-queries that look for evidence against claims.",
     done: true,
   },
   {
@@ -108,14 +107,14 @@ const ROADMAP_ITEMS = [
   },
   {
     phase: "Shipped",
-    title: "Enterprise Ready",
-    desc: "Plug into your internal data. Zero data retention. Your data never leaves your system.",
+    title: "Custom Search Backends",
+    desc: "Plug in your own search backend to check claims against your own documents.",
     done: true,
   },
   {
     phase: "Shipped",
     title: "Self-Learning Pipeline",
-    desc: "Confidence calibrated from real feedback. Domain authority that improves with every query.",
+    desc: "Confidence estimates calibrated from user feedback. Domain authority adjusted from query data over time.",
     done: true,
   },
   {
@@ -210,17 +209,14 @@ const Developers = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl w-full text-center space-y-6"
         >
-          <Badge variant="outline" className="text-xs font-normal">
-            Open Source
-          </Badge>
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
             Build the research infra
             <br />
-            <span className="text-gradient text-shimmer">for AI agents</span>
+            for AI agents
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            LastSearch is Grounded Intelligence — an open-source research engine that gives AI agents the ability to search the web,
-            extract evidence, and produce cited answers where every claim is checked against its sources.
+            LastSearch is an open-source research engine that lets AI agents search the web,
+            extract evidence, and produce cited answers whose claims are checked against the sources it found.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button className="gap-2" asChild>
@@ -247,7 +243,7 @@ const Developers = () => {
               <h2 className="text-2xl md:text-3xl font-bold">Top Contributors</h2>
             </div>
             <p className="text-muted-foreground text-center max-w-xl mx-auto mb-10">
-              The people making AI more honest. Every merged PR earns your place here.
+              The people building LastSearch. Every merged PR earns your place here.
             </p>
 
             {contributorsLoading ? (
@@ -279,7 +275,7 @@ const Developers = () => {
                           {medalLabels[i]}
                         </Badge>
                         <img
-                          src={contributor.avatar_url}
+                          src={contributor.avatar_url || undefined}
                           alt={contributor.login}
                           className={`w-16 h-16 rounded-full border-2 ${medals[i].split(" ")[1]} group-hover:border-accent/30 transition-colors`}
                         />
@@ -327,7 +323,7 @@ const Developers = () => {
                             #{i + 4}
                           </span>
                           <img
-                            src={contributor.avatar_url}
+                            src={contributor.avatar_url || undefined}
                             alt={contributor.login}
                             className="w-8 h-8 rounded-full border border-border group-hover:border-accent/30 transition-colors"
                           />
@@ -392,16 +388,16 @@ const Developers = () => {
                 is real or hallucinated, you end up manually verifying everything anyway. That defeats the purpose.
               </p>
               <p>
-                LastSearch takes a different approach: <span className="text-foreground font-medium">every answer goes through a verification pipeline</span>.
-                It searches the real web, fetches real pages, extracts real quotes, and links every claim back to its source.
-                If it can't find evidence, it says so. Now when I tell my AI agents to research something,
-                they can use LastSearch to actually verify their findings against real sources before writing a single line of code.
+                LastSearch takes a different approach: <span className="text-foreground font-medium">answers go through a verification pipeline</span>.
+                It searches the web, fetches pages, extracts quotes, and links claims back to where they came from.
+                If it can't find supporting evidence, it says so. Now when I tell my AI agents to research something,
+                they can use LastSearch to check their findings against sources before writing code. It isn't perfect, and sources can be wrong, so the final call still sits with you and your agent.
               </p>
               <p>
                 Our MCP server, Python SDK, and integrations are open source. The verification engine is hosted as a service.
               </p>
               <p className="text-foreground font-medium">
-                If you believe AI should be honest, you're in the right place.
+                If you want AI that shows its sources, you're in the right place.
               </p>
             </div>
           </motion.div>
@@ -487,16 +483,16 @@ print(result.answer, result.confidence)`}</pre>
               <div className="p-5 rounded-xl bg-card border border-accent/30 glow-pulse hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge variant="outline" className="text-[10px] border-accent/50 text-accent">NEW</Badge>
-                  <span className="font-semibold">Clarity — Anti-Hallucination Answer Engine</span>
+                  <span className="font-semibold">Clarity — an answer mode that aims to reduce hallucinations</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Send any prompt through <code className="text-xs bg-secondary px-1 py-0.5 rounded">clarity</code> — it auto-detects intent, identifies hallucination risks, and applies anti-hallucination grounding techniques (CoVe, citation-verify, quote extraction). Three modes: <strong>Prompt</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "prompt"</code>) returns enhanced prompts only — use when your own LLM should answer. <strong>Answer</strong> (default) gives a fast LLM-only answer with reduced hallucinations. <strong>Verified</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "verified"</code>) also runs the web pipeline and fuses the best of both into one source-backed answer. Works with any agent.
+                  Send any prompt through <code className="text-xs bg-secondary px-1 py-0.5 rounded">clarity</code> — it detects intent, flags likely hallucination risks, and applies grounding prompt techniques (CoVe, citation-verify, quote extraction). Three modes: <strong>Prompt</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "prompt"</code>) returns enhanced prompts only — use when your own LLM should answer. <strong>Answer</strong> (default) gives a fast LLM-only answer with reduced hallucinations. <strong>Verified</strong> (<code className="text-xs bg-secondary px-1 py-0.5 rounded">mode: "verified"</code>) also runs the web pipeline and combines both into one answer with sources. Works with any agent.
                 </p>
                 <pre className="text-xs font-mono text-muted-foreground bg-secondary rounded-lg p-4 overflow-x-auto">{`# MCP — prompt mode (get enhanced prompts for your own LLM)
 clarity({ prompt: "What are the side effects of metformin?", mode: "prompt" })
 # Returns: systemPrompt, userPrompt, techniques, risks (no LLM call)
 
-# MCP — answer mode (LLM answers with anti-hallucination, default)
+# MCP — answer mode (LLM answer with grounding techniques, default)
 clarity({ prompt: "What are the side effects of metformin?" })
 
 # MCP — verified mode (LLM + web sources fused)
@@ -574,8 +570,8 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
                   link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/content-agent",
                 },
                 {
-                  title: "Fact-Checker Bot",
-                  desc: "Discord bot that verifies any claim with !verify and shows evidence vs hallucination with !compare.",
+                  title: "Claim-Checker Bot",
+                  desc: "Discord bot that checks a claim with !verify and compares a raw LLM answer with a source-checked one using !compare.",
                   tags: ["Discord", "Thorough Mode", "Compare"],
                   link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/fact-checker-bot",
                 },
@@ -599,13 +595,13 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
                 },
                 {
                   title: "Podcast Prep",
-                  desc: "Research brief builder — give it a guest and topic, get verified facts, contradictions, and suggested questions.",
+                  desc: "Research brief builder — give it a guest and topic, get source-checked facts, contradictions, and suggested questions.",
                   tags: ["Sessions", "Recall", "Async"],
                   link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples/podcast-prep",
                 },
                 {
                   title: "More Coming Soon",
-                  desc: "Competitive intel agent, Wikipedia trust scorer, newsletter writer with citations, and more.",
+                  desc: "Competitive intel agent, Wikipedia source scorer, newsletter writer with citations, and more.",
                   tags: ["Contribute", "Ideas Welcome"],
                   link: "https://github.com/lastsearch-hq/lastsearch/tree/main/examples",
                 },
@@ -784,15 +780,15 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               {[
-                { name: "research", desc: "Evidence-backed answers with citations and confidence scores" },
-                { name: "fact-check", desc: "Compare raw LLM vs evidence-backed, verify claims" },
+                { name: "research", desc: "Answers with citations and estimated confidence scores" },
+                { name: "fact-check", desc: "Compare raw LLM vs source-checked answers, check claims" },
                 { name: "extract", desc: "Structured claim extraction from any URL" },
                 { name: "sessions", desc: "Multi-query research with persistent knowledge" },
                 { name: "deep-dive", desc: "Multi-step agentic research with reasoning chains and gap analysis" },
                 { name: "compare-claims", desc: "Settle factual disputes — evidence vs raw LLM side-by-side" },
                 { name: "monitor", desc: "Track evolving topics over time, diff against prior knowledge" },
                 { name: "cite", desc: "Generate formatted citations (APA/MLA) with authority scores" },
-                { name: "clarity", desc: "Clarity — anti-hallucination answer engine with optional web verification" },
+                { name: "clarity", desc: "Clarity — answer mode that aims to reduce hallucinations, with optional web sources" },
               ].map((skill) => (
                 <a
                   key={skill.name}
@@ -882,10 +878,10 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
       <section className="py-24 px-6 border-t border-border">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-6">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Let's build <span className="text-shimmer">honest AI</span> together</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Let's build AI that shows its sources</h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Every contribution — whether it's a bug fix, a new feature, or a better prompt — makes
-              AI more trustworthy for everyone.
+              Every contribution — whether it's a bug fix, a new feature, or a better prompt — helps
+              AI show its work.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button className="gap-2" asChild>
@@ -905,26 +901,6 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
-            <span className="text-sm font-semibold">LastSearch</span>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
-            <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
-            <button onClick={() => navigate("/")} className="hover:text-foreground transition-colors">Home</button>
-            <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>
-            <button onClick={() => navigate("/privacy")} className="hover:text-foreground transition-colors">Privacy</button>
-            <button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms</button>
-            <CookieSettingsLink className="hover:text-foreground transition-colors" />
-          </div>
-          <p className="text-xs text-muted-foreground w-full text-center mt-3">LastSearch is a free, non-commercial passion project by an independent developer.</p>
-        </div>
-      </footer>
     </div>
     </>
   );

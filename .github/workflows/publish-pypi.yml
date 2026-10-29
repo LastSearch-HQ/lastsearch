@@ -7,6 +7,9 @@ on:
       - 'packages/python-sdk/**'
       - '!packages/python-sdk/**/*.md'
 
+permissions:
+  contents: read
+
 jobs:
   publish:
     name: Build & Publish to PyPI

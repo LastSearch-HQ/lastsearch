@@ -162,7 +162,7 @@ const Privacy = () => {
               <li><B>Domain authority scores</B> are adjusted by how often claims from a domain are verified. Only domain-level aggregates are computed (for example "wikipedia.org: 82% verification rate across 500 queries").</li>
               <li><B>Thresholds and weights</B> in the verification pipeline adapt to aggregate outcomes, never to a single query.</li>
               <li><B>Verification model training</B> uses claim-evidence pairs (a claim's text, a passage of source text, and a support/refute/unrelated label) to train our small classifier models. No account id, email, API key or IP address is included. We do not use your queries to train large language models.</li>
-              <li><B>Feedback calibration</B> uses your ratings so that a reported 75% confidence corresponds to roughly 75% accuracy.</li>
+              <li><B>Feedback calibration</B> uses your ratings to try to make a reported 75% confidence line up more closely with how often such answers turn out to be right. It remains an estimate.</li>
               <li><B>Caching</B> keeps results for 5 minutes (news) to 30 minutes (general) so repeat questions are faster for everyone.</li>
             </UL>
             <P>

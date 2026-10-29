@@ -1,10 +1,10 @@
 # LastSearch — Full Documentation
 
-> Research infrastructure for AI agents. Real-time web search with evidence-backed citations and confidence scores.
+> Research infrastructure for AI agents. Real-time web search with citations and estimated confidence scores. A free, non-commercial passion project; results come from the public internet and are not guaranteed to be true or complete.
 
 ## What Is LastSearch?
 
-LastSearch is open-source research infrastructure that gives AI agents real-time web search with evidence-backed citations. It returns structured JSON (claims, sources, confidence, contradictions) that agents can programmatically evaluate — not a chat response.
+LastSearch is open-source research infrastructure that gives AI agents real-time web search with citations checked against the sources it finds. It returns structured JSON (claims, sources, confidence, contradictions) that agents can programmatically evaluate — not a chat response.
 
 Available as MCP server (npm: lastsearch, renamed from lastsearch — old name still works), REST API, and Python SDK (PyPI: lastsearch, renamed from lastsearch — old name still works). Apache 2.0 licensed.
 
@@ -77,15 +77,15 @@ Fetch and parse a web page into clean text.
 ```
 
 ### POST /browse/compare
-Compare raw LLM answer vs evidence-backed answer side-by-side.
+Compare raw LLM answer vs source-checked answer side-by-side.
 ```json
 {"query": "Is nuclear energy safe?"}
 ```
 
 ### POST /browse/clarity
-Clarity — anti-hallucination answer engine. Three modes:
-- **Prompt (mode="prompt")**: Analyzes prompt, selects anti-hallucination techniques, returns only the enhanced system + user prompts. No LLM call, no internet. Use when your own LLM (e.g. Claude) should answer using the enhanced prompts.
-- **Answer (mode="answer", default)**: Rewrites prompt with anti-hallucination techniques, calls LLM with grounding instructions, returns a higher-quality answer with extracted claims. Fast, no internet.
+Clarity — answer mode that aims to reduce hallucinations. Three modes:
+- **Prompt (mode="prompt")**: Analyzes prompt, selects grounding techniques, returns only the enhanced system + user prompts. No LLM call, no internet. Use when your own LLM (e.g. Claude) should answer using the enhanced prompts.
+- **Answer (mode="answer", default)**: Rewrites prompt with grounding techniques, calls LLM with grounding instructions, returns an answer with extracted claims. Fast, no internet.
 - **Verified (mode="verified")**: Does the above, then also runs the full browse pipeline (search + extract + verify), fuses the best of both — keeps source-backed claims, drops fabricated ones, returns one unified answer.
 ```json
 {"prompt": "Explain the causes of the 2008 financial crisis", "mode": "answer"}
@@ -94,7 +94,7 @@ Legacy: `verify: true` is equivalent to `mode: "verified"`.
 Response includes: `answer` (empty when mode="prompt"), `claims[]` (each with `origin`: "llm", "source", or "confirmed"), `confidence`, `mode`, `techniques`, `risks`, `verified` (boolean), `sources[]` (when mode="verified"), `systemPrompt`, `userPrompt`.
 
 ### POST /browse/feedback
-Submit feedback on a result to improve future accuracy.
+Submit feedback on a result to help tune future results.
 ```json
 {"resultId": "abc123", "rating": "good"}
 ```
@@ -206,14 +206,14 @@ Dynamic scores improve over time from real verification data.
 | open | Fetch and parse a web page |
 | extract | Extract structured claims from a URL |
 | answer | Full pipeline: search + extract + cite |
-| compare | Compare raw LLM vs evidence-backed |
+| compare | Compare raw LLM vs source-checked |
 | session_create | Create a research session |
 | session_ask | Research within a session |
 | session_recall | Query session knowledge |
 | session_share | Share a session publicly |
 | session_knowledge | Export session claims |
 | session_fork | Fork a shared session |
-| clarity | Anti-hallucination answer engine — fast LLM answer (default) or verified mode with web-source fusion |
+| clarity | answer mode that aims to reduce hallucinations — fast LLM answer (default) or verified mode with web-source fusion |
 | feedback | Submit result feedback |
 
 ## Python SDK
@@ -238,7 +238,7 @@ r1 = session.ask("What is RLHF?")
 r2 = session.ask("How does constitutional AI differ?")
 knowledge = session.knowledge()
 
-# Clarity — anti-hallucination answer engine (fast, no internet)
+# Clarity — answer mode that aims to reduce hallucinations (fast, no internet)
 clarity = client.clarity("Explain the causes of the 2008 financial crisis")
 print(clarity.answer)         # LLM answer with reduced hallucinations
 print(clarity.claims)         # Extracted claims (origin: "llm")

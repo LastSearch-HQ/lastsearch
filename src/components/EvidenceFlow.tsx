@@ -62,6 +62,10 @@ export function EvidenceFlow({ className = "" }: { className?: string }) {
     // Reduce work on mobile (fewer nodes, skip frames)
     const isMobile = window.innerWidth < 768;
     let frameSkip = 0;
+    // Honour reduced motion: settle on a still frame. Pause while the hero is off-screen.
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let onScreen = true;
+    let running = true;
 
     function resize() {
       const dpr = window.devicePixelRatio || 1;
@@ -395,13 +399,24 @@ export function EvidenceFlow({ className = "" }: { className?: string }) {
         ctx.fill();
       }
 
+      if (reducedMotion && s.frame > 120) { running = false; return; }
+      if (!onScreen) { running = false; return; }
       animRef.current = requestAnimationFrame(draw);
     }
+
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      if (onScreen && !running && !(reducedMotion && stateRef.current.frame > 120)) {
+        running = true;
+        animRef.current = requestAnimationFrame(draw);
+      }
+    });
+    io.observe(canvas);
 
     resize();
     draw();
     window.addEventListener("resize", resize);
-    return () => { window.removeEventListener("resize", resize); cancelAnimationFrame(animRef.current); };
+    return () => { io.disconnect(); window.removeEventListener("resize", resize); cancelAnimationFrame(animRef.current); };
   }, []);
 
   return (

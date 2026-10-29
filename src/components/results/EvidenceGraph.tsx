@@ -140,7 +140,7 @@ export function EvidenceGraph({
                       {src.verified && <CheckCircle2 className="w-3 h-3 text-emerald-500 shrink-0" />}
                       {src.authority !== undefined && src.authority >= 0.85 && (
                         <Badge variant="outline" className="text-[10px] px-1 py-0 h-3.5 text-blue-400 border-blue-400/30">
-                          trusted
+                          high authority
                         </Badge>
                       )}
                       <span className="text-xs text-muted-foreground truncate max-w-[150px] sm:max-w-none">— {src.title}</span>

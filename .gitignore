@@ -88,3 +88,4 @@ deck/
 # Security
 *.pem
 *.key
+public/contributors.json

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DISCLAIMER_LINES } from "@/lib/disclaimer";
 
 const Terms = () => {
   const navigate = useNavigate();
@@ -20,10 +21,20 @@ const Terms = () => {
       <div className="max-w-3xl mx-auto px-6 py-12 space-y-8">
         <div>
           <h1 className="text-2xl font-bold mb-2">Terms of Service</h1>
-          <p className="text-sm text-muted-foreground">Last updated: October 27, 2026</p>
+          <p className="text-sm text-muted-foreground">Last updated: October 28, 2026</p>
         </div>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-6">
+          <section className="space-y-3 rounded-xl bg-card p-5">
+            <h2 className="text-lg font-semibold">In plain words</h2>
+            <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground leading-relaxed">
+              {DISCLAIMER_LINES.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+            <p className="text-sm text-muted-foreground leading-relaxed">The full terms below say the same thing in more detail, and they take precedence.</p>
+          </section>
+
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">1. Acceptance of Terms</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -34,7 +45,7 @@ const Terms = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">2. What the Service Does</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              LastSearch provides AI-powered research infrastructure: web search with evidence extraction, structured citations, and confidence scoring. Results are generated from real-time web searches and LLM processing. We do not guarantee the accuracy, completeness, or timeliness of any results.
+              LastSearch provides AI-powered research infrastructure: web search with evidence extraction, structured citations, and confidence scoring. Results are generated from real-time web searches and LLM processing, and depend on what is published on the public internet, which can be wrong, outdated or biased. Words such as "verified", "checked", "supported" or "confidence" on the site and in API responses describe the outcome of automated checks against the sources found, not a statement that something is true. We do not guarantee the accuracy, completeness, or timeliness of any results, and the final judgement about how to use them is yours.
             </p>
           </section>
 

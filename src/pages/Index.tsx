@@ -1,20 +1,18 @@
 import { useState, useCallback, useRef, useEffect } from "react";
-import { CookieSettingsLink } from "@/components/CookieConsent";
 import { useNavigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, ArrowRight, GitCompare, Terminal, Globe, Quote,
-  Shield, ShieldAlert, CheckCircle2, Copy, Check, ArrowDown, Target, Github, Sparkles, Mail, Menu, Star, MessageCircle, LogIn, Brain, Cpu, Key,
+  Shield, ShieldAlert, CheckCircle2, Copy, Check, Minus, ArrowDown, Github, Sparkles, Mail, Menu, Star, MessageCircle, LogIn, Brain, Cpu, Key,
   Clock, Lock, HeartPulse, Scale, Code2, Newspaper, GraduationCap, ShieldCheck, DollarSign, Microscope, Building2,
-  FileText, Share2, GitFork, ThumbsUp, Layers, Zap, Activity, Database,
+  FileText, Share2, GitFork, ThumbsUp, Layers, Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EvidenceFlow } from "@/components/EvidenceFlow";
 import {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
 import { LoginModal } from "@/components/LoginModal";
 import { UserMenu } from "@/components/UserMenu";
 import { useAuth } from "@/contexts/AuthContext";
@@ -184,7 +182,7 @@ const Index = () => {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "LastSearch",
-        "description": "Grounded Intelligence — research infrastructure for AI agents. Real-time web search with evidence-backed citations and confidence scores.",
+        "description": "Research infrastructure for AI agents. Real-time web search with citations and estimated confidence scores.",
         "url": "https://lastsearch.ai",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
@@ -195,17 +193,17 @@ const Index = () => {
         "programmingLanguage": ["TypeScript", "Python"],
       }}
     />
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative overflow-x-clip">
       {/* Nav */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-5 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
+        className="fixed top-0 left-0 right-0 flex items-center justify-between px-4 sm:px-8 py-4 z-50 bg-background/90 backdrop-blur-sm"
       >
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); navigate("/"); }}>
-          <img src="/logo.svg" alt="LastSearch" className="w-5 h-5" />
+        <button type="button" aria-label="LastSearch home" className="flex items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); navigate("/"); }}>
+          <img src="/logo.svg" alt="LastSearch" width={20} height={20} className="w-5 h-5" />
           <span className="font-semibold text-sm tracking-tight hidden sm:inline">LastSearch</span>
-        </div>
+        </button>
         <div className="flex items-center gap-1 sm:gap-2">
           {/* Desktop nav links */}
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/playground")}>
@@ -217,23 +215,8 @@ const Index = () => {
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/developers")}>
             Developers
           </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/recipes")}>
-            Recipes
-          </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/changelog")}>
-            What's new<span className="ml-1.5 text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">new</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/scorecard")}>
-            Scorecard
-          </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" onClick={() => navigate("/alternatives")}>
-            Alternatives
-          </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" asChild>
-            <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener">
-              <MessageCircle className="w-4 h-4" />
-              <span className="ml-1">Discord</span>
-            </a>
+            Changelog
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" asChild>
             <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
@@ -241,18 +224,14 @@ const Index = () => {
               <span className="ml-1">GitHub</span>
             </a>
           </Button>
-          <button
-            onClick={handleProWaitlist}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold hover:bg-accent/20 transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            {user ? "Dashboard" : "Pro Waitlist"}
-          </button>
+          <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden md:inline-flex" onClick={handleProWaitlist}>
+            {user ? "Dashboard" : "Waitlist"}
+          </Button>
 
           {/* Mobile hamburger menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="sm:hidden">
+              <Button variant="ghost" size="icon" className="sm:hidden" aria-label="Open menu">
                 <Menu className="w-4 h-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -261,6 +240,7 @@ const Index = () => {
               <DropdownMenuItem onClick={() => navigate("/docs")}>Docs</DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/developers")}>Developers</DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/recipes")}>Recipes</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate("/changelog")}>Changelog</DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/alternatives")}>Alternatives</DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener" className="flex items-center gap-2">
@@ -273,7 +253,7 @@ const Index = () => {
                 </a>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={handleProWaitlist}>
-                <Sparkles className="w-3.5 h-3.5" /> {user ? "Dashboard" : "Pro Waitlist"}
+                {user ? "Dashboard" : "Waitlist"}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -297,11 +277,9 @@ const Index = () => {
       </motion.nav>
 
       {/* ===== HERO SECTION ===== */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 relative">
+      <section className="min-h-[100svh] flex flex-col items-center justify-center px-4 sm:px-8 pt-20 pb-16 relative overflow-hidden">
         {/* Background */}
         <EvidenceFlow className="absolute inset-0" />
-        <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none" />
-        <div className="hero-glow" />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -309,26 +287,13 @@ const Index = () => {
           className="max-w-3xl w-full text-center space-y-8"
         >
           <div className="space-y-4">
-            <Badge variant="outline" className="text-[10px] sm:text-xs font-normal gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-              Powered by E2 Evidence Engine
-            </Badge>
-            <button
-              onClick={() => navigate("/changelog")}
-              className="inline-flex items-center gap-2 mx-auto mb-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs text-foreground/90 hover:bg-primary/15 transition-colors"
-            >
-              <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">New</span>
-              <span>npx verify-anything — is this true? Any claim, URL or AI answer, judged against live sources</span>
-              <span aria-hidden="true">→</span>
-            </button>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] sm:leading-[1.05]">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter leading-[1.02] text-balance">
               Research Infra
               <br />
-              <span className="text-shimmer">for AI Agents</span>
+              for AI Agents
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto">
-              Real-time web search with evidence-backed citations and confidence scores.
-              Not an LLM guessing — a dedicated evidence engine. MCP, Python SDK &amp; REST API.
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto text-pretty">
+              Real-time web search that checks answers against the sources it finds, with citations and an estimated confidence score. MCP, Python SDK &amp; REST API.
             </p>
           </div>
 
@@ -359,7 +324,7 @@ const Index = () => {
                     className="w-full h-14 pl-12 pr-16 sm:pr-36 bg-amber-500/5 border border-amber-500/30 rounded-xl flex items-center cursor-pointer"
                     onClick={() => setLoginOpen(true)}
                   >
-                    <span className="text-amber-400 text-sm">Clarity rewrites prompts to reduce hallucinations — requires LastSearch key, sign in to unlock</span>
+                    <span className="text-amber-400 text-sm">Clarity rewrites prompts to help reduce hallucinations — requires a LastSearch key, sign in to use it</span>
                   </div>
                   <Button
                     onClick={() => setLoginOpen(true)}
@@ -460,29 +425,29 @@ const Index = () => {
               </Button>
             )}
           </div>
+          <p className="text-sm text-muted-foreground">
+            <button
+              type="button"
+              onClick={() => navigate("/changelog")}
+              className="underline underline-offset-4 decoration-muted-foreground/40 hover:text-foreground hover:decoration-foreground rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              New: npx verify-anything checks a claim, URL or AI answer against live sources
+            </button>
+          </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="absolute bottom-8"
-        >
-          <ArrowDown className="w-5 h-5 text-muted-foreground/40 animate-bounce" />
-        </motion.div>
       </section>
 
       {/* Trust bar removed — covered by Evidence Engine section below */}
 
       {/* ===== THE INTELLIGENCE LAYER — Flow Visual ===== */}
-      <section className="py-24 px-6 border-t border-border overflow-hidden">
+      <section className="py-24 md:py-28 px-4 sm:px-8 overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <Badge variant="outline" className="text-xs font-normal mb-6">Grounded Intelligence</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">
               Agents act fast.
               <br />
-              <span className="text-accent">We make them think first.</span>
+              <span className="text-muted-foreground">Help them check first.</span>
             </h2>
           </motion.div>
 
@@ -494,13 +459,13 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="relative z-10 flex flex-col items-center gap-3 p-6 rounded-2xl bg-card border border-border w-48 shrink-0"
+              className="relative z-10 flex flex-col items-center gap-3 p-6 rounded-2xl bg-card w-48 shrink-0"
             >
               <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
                 <Cpu className="w-6 h-6 text-muted-foreground" />
               </div>
               <span className="text-sm font-semibold">Your Agent</span>
-              <span className="text-[10px] text-muted-foreground text-center leading-tight">Any LLM. Any framework.<br/>Any agent.</span>
+              <span className="text-sm text-muted-foreground text-center leading-snug">Any LLM. Any framework.<br/>Any agent.</span>
             </motion.div>
 
             {/* Animated connection 1 */}
@@ -520,19 +485,19 @@ const Index = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="relative z-10 flex flex-col items-center gap-3 p-6 rounded-2xl bg-accent/5 border-2 border-accent/30 w-56 shrink-0 glow-pulse"
+              className="relative z-10 flex flex-col items-center gap-3 p-6 rounded-2xl bg-accent/10 w-56 shrink-0"
             >
-              <div className="relative w-12 h-12 flex items-center justify-center animate-float">
+              <div className="relative w-12 h-12 flex items-center justify-center">
                 <Shield className="w-12 h-12 text-accent/30 absolute" />
-                <img src="/logo.svg" alt="B" className="w-5 h-5 relative z-10" />
+                <img src="/logo.svg" alt="" width={20} height={20} className="w-5 h-5 relative z-10" />
               </div>
               <span className="text-sm font-bold text-accent">LastSearch</span>
               <div className="flex flex-wrap justify-center gap-1.5">
-                <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[10px] font-medium text-accent">Search</span>
-                <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[10px] font-medium text-accent">Verify</span>
-                <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[10px] font-medium text-accent">Score</span>
+                <span className="text-xs font-medium text-accent">Search</span>
+                <span className="text-xs font-medium text-accent">Verify</span>
+                <span className="text-xs font-medium text-accent">Score</span>
               </div>
-              <span className="text-[10px] text-muted-foreground text-center leading-tight">Research infrastructure<br/>with trust scores</span>
+              <span className="text-sm text-muted-foreground text-center leading-snug">Search, check<br/>and estimate confidence</span>
             </motion.div>
 
             {/* Animated connection 2 */}
@@ -552,13 +517,13 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="relative z-10 flex flex-col items-center gap-3 p-6 rounded-2xl bg-card border border-border w-48 shrink-0"
+              className="relative z-10 flex flex-col items-center gap-3 p-6 rounded-2xl bg-card w-48 shrink-0"
             >
               <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
                 <Globe className="w-6 h-6 text-muted-foreground" />
               </div>
               <span className="text-sm font-semibold">The Web</span>
-              <span className="text-[10px] text-muted-foreground text-center leading-tight">Real sources, verified<br/>quotes & citations</span>
+              <span className="text-sm text-muted-foreground text-center leading-snug">Public sources,<br/>quotes & citations</span>
             </motion.div>
           </div>
 
@@ -570,22 +535,22 @@ const Index = () => {
             transition={{ delay: 0.4 }}
             className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto"
           >
-            <div className="p-4 rounded-xl bg-red-500/5 border border-red-500/10">
+            <div className="p-5 rounded-xl bg-card">
               <div className="flex items-center gap-2 mb-2">
-                <ShieldAlert className="w-4 h-4 text-red-400" />
-                <span className="text-xs font-semibold text-red-400">Without LastSearch</span>
+                <ShieldAlert aria-hidden="true" className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-semibold">Without LastSearch</span>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Agent generates plausible-sounding text. No sources. No trust scores. You hope it's right.
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Agent writes plausible-sounding text from memory. No sources and no confidence signal to check it against.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-accent/5 border border-accent/20">
+            <div className="p-5 rounded-xl bg-accent/10">
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle2 className="w-4 h-4 text-accent" />
-                <span className="text-xs font-semibold text-accent">With LastSearch</span>
+                <span className="text-sm font-semibold text-accent">With LastSearch</span>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Agent checks sources, sees trust scores, spots contradictions — then decides whether to act or reconsider.
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Agent sees sources, an estimated confidence score and any contradictions found, then decides whether to act or look further.
               </p>
             </div>
           </motion.div>
@@ -608,23 +573,6 @@ const Index = () => {
                 className="relative"
               >
                 <div className="relative overflow-hidden">
-
-                  {/* E2 badge */}
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="flex justify-center mb-4"
-                  >
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-                      </span>
-                      <span className="text-xs font-semibold text-accent tracking-wide">EVIDENCE ENGINE — RETRIEVAL + REASONING</span>
-                    </div>
-                  </motion.div>
 
                   {/* Neural network visualization */}
                   <div className="relative w-full h-32 sm:h-40 md:h-48 mb-4">
@@ -862,7 +810,7 @@ const Index = () => {
                       <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                         E2 Evidence Engine
                       </h3>
-                      <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 max-w-lg mx-auto">
+                      <p className="text-base sm:text-lg text-muted-foreground mt-2 sm:mt-3 max-w-lg mx-auto">
                         Where retrieval meets reasoning.
                       </p>
                     </motion.div>
@@ -886,11 +834,11 @@ const Index = () => {
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.25 + i * 0.06 }}
-                          className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-accent/[0.04] border border-accent/10"
+                          className="p-2 sm:p-3"
                         >
-                          <div className="text-lg sm:text-xl md:text-2xl font-bold text-accent">{stat.value}</div>
-                          <div className="text-[10px] sm:text-[11px] font-semibold text-foreground mt-1">{stat.label}</div>
-                          <div className="text-[9px] sm:text-[10px] text-muted-foreground">{stat.sub}</div>
+                          <div className="text-3xl md:text-5xl font-bold tracking-tight tabular-nums">{stat.value}</div>
+                          <div className="text-sm font-semibold text-foreground mt-1">{stat.label}</div>
+                          <div className="text-xs sm:text-sm text-muted-foreground">{stat.sub}</div>
                         </motion.div>
                       ))}
                     </motion.div>
@@ -906,7 +854,7 @@ const Index = () => {
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="mt-10"
               >
-                <h4 className="text-center text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-6">DeBERTa NLI + classical retrieval, composed end-to-end.</h4>
+                <p className="text-center text-base text-muted-foreground mb-6">DeBERTa NLI and classical retrieval, composed end to end.</p>
 
                 {/* Two deployed models side by side */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -926,7 +874,6 @@ const Index = () => {
                       icon: Brain,
                     },
                   ].map((m, i) => {
-                    const Icon = m.icon;
                     return (
                       <motion.div
                         key={m.name}
@@ -934,18 +881,15 @@ const Index = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.15 + i * 0.08 }}
-                        className="p-5 rounded-xl border border-border bg-card hover:border-accent/15 transition-all duration-300"
+                        className="p-5 rounded-xl bg-card"
                       >
                         <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${m.color === "emerald" ? "bg-emerald-400/10" : "bg-blue-400/10"}`}>
-                            <Icon className={`w-5 h-5 ${m.color === "emerald" ? "text-emerald-400" : "text-blue-400"}`} />
-                          </div>
-                          <div className="flex-1">
-                            <div className={`text-[10px] font-semibold uppercase tracking-wider ${m.color === "emerald" ? "text-emerald-400" : "text-blue-400"}`}>{m.tier}</div>
-                            <div className="text-sm font-bold">{m.name}</div>
+                                                    <div className="flex-1">
+                            <div className="text-sm text-muted-foreground">{m.tier} mode</div>
+                            <div className="text-base font-semibold">{m.name}</div>
                           </div>
                           <div className="text-right">
-                            <div className="text-xs font-mono text-muted-foreground">{m.speed}</div>
+                            <div className="text-sm tabular-nums text-muted-foreground">{m.speed}</div>
                           </div>
                         </div>
                       </motion.div>
@@ -961,15 +905,14 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.18 }}
-                className="mt-8 p-5 rounded-xl border border-border bg-card"
+                className="mt-8 p-6 rounded-xl bg-card"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <Layers className="w-4 h-4 text-accent" />
-                  <h4 className="text-xs font-bold uppercase tracking-wider">Domain Specialists</h4>
-                  <span className="text-[9px] px-2 py-0.5 rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20 font-medium ml-auto">Gauging interest</span>
+                  <h3 className="text-lg font-semibold">Domain specialists</h3>
+                  <span className="text-sm text-muted-foreground ml-auto">Gauging interest</span>
                 </div>
-                <p className="text-[11px] text-muted-foreground leading-relaxed mb-4">
-                  Coming based on demand. Tell us your domain and we'll build it.
+                <p className="text-base text-muted-foreground leading-relaxed mb-4">
+                  Possible future models, depending on demand. No dates promised.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   {[
@@ -978,17 +921,13 @@ const Index = () => {
                     { name: "Medical", desc: "Clinical, pharma, research" },
                     { name: "Legal", desc: "Case law, regulations" },
                   ].map((spec) => (
-                    <div key={spec.name} className="p-2.5 rounded-lg bg-secondary/50 border border-border">
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                        <span className="text-[10px] font-bold">{spec.name}</span>
-                      </div>
-                      <p className="text-[9px] text-muted-foreground">{spec.desc}</p>
-                      <span className="text-[8px] font-mono mt-1 inline-block text-amber-400">Coming soon</span>
+                    <div key={spec.name} className="p-3 rounded-lg bg-secondary/60">
+                      <div className="text-sm font-semibold mb-1">{spec.name}</div>
+                      <p className="text-sm text-muted-foreground">{spec.desc}</p>
                     </div>
                   ))}
                 </div>
-                <p className="text-[9px] text-muted-foreground/50 mt-3 text-center">
+                <p className="text-sm text-muted-foreground mt-4">
                   Want a specialist for your domain?{" "}
                   <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener" className="text-accent hover:underline">
                     Let us know on Discord
@@ -1002,8 +941,10 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="flex flex-wrap justify-center gap-2 mt-8"
+                className="mt-12"
               >
+                <h3 className="text-lg font-semibold mb-4">What runs in the pipeline</h3>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-2 text-base text-muted-foreground">
                 {[
                   "Multi-provider search",
                   "Atomic claim decomposition",
@@ -1020,18 +961,10 @@ const Index = () => {
                   "Isotonic calibration",
                   "Multi-pass consistency",
                   "Confidence scoring (8-factor)",
-                ].map((step, i) => (
-                  <motion.span
-                    key={step}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.22 + i * 0.02 }}
-                    className="px-3 py-1.5 rounded-full bg-card border border-border text-[10px] text-muted-foreground font-medium hover:border-accent/20 hover:text-accent transition-colors"
-                  >
-                    {step}
-                  </motion.span>
+                ].map((step) => (
+                  <li key={step}>{step}</li>
                 ))}
+                </ul>
               </motion.div>
             </div>
           </motion.div>
@@ -1039,33 +972,32 @@ const Index = () => {
       </section>
 
       {/* ===== BUILT FOR EVERY AGENT — Interactive Showcase ===== */}
-      <section className="py-24 px-6 border-t border-border">
+      <section className="py-24 md:py-28 px-4 sm:px-8">
         <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <Badge variant="outline" className="text-xs font-normal mb-6">Use Cases</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Superpowers for every agent</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">Where agents use it</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
               MCP, Python SDK, REST API — plug in however you build. Your agent gets the evidence. It decides what to trust.
             </p>
           </motion.div>
 
           {(() => {
             const useCases = [
-              { icon: HeartPulse, title: "Healthcare Agent", desc: "Verify medical claims against peer-reviewed sources. Flag contradictions between studies. Confidence scores clinicians can trust.", example: "Is intermittent fasting safe for diabetics?", depth: "thorough" as const, github: "healthcare-agent", snippet: `result = client.ask(\n  "Is intermittent fasting safe for diabetics?",\n  depth="thorough"\n)\nfor claim in result.claims:\n  if not claim.verified:\n    print(f"⚠ Unverified: {claim.text}")` },
-              { icon: FileText, title: "Report Auditor", desc: "Audit AI-generated reports, competitive analyses, and research briefs. Extract every claim, verify against web sources, flag contradictions before sharing.", example: "Audit this competitive analysis report for accuracy", depth: "thorough" as const, github: "report-auditor", snippet: `report = client.verify_document(\n  text=open("market-brief.md").read(),\n  depth="thorough"\n)\nprint(f"Grade: {report['summary']['grade']}")\nfor c in report['claims']:\n  if c['status'] == 'contradicted':\n    print(f"⚠ {c['text']}")` },
-              { icon: Scale, title: "Legal Research", desc: "Cross-reference legal precedents across jurisdictions. Verify regulatory claims with authoritative sources. Cite specific rulings.", example: "GDPR requirements for AI-generated content", depth: "thorough" as const, github: "legal-agent", snippet: `result = client.ask(\n  "GDPR requirements for AI-generated content",\n  depth="thorough"\n)\nfor source in result.sources:\n  print(f"[{source.domain}] {source.title}")` },
-              { icon: Code2, title: "Coding Agent", desc: "Research libraries, APIs, and best practices before writing code. Verify documentation claims. Compare framework trade-offs.", example: "Best Python library for WebSocket servers?", depth: "fast" as const, github: "coding-agent", snippet: `result = client.ask(\n  "Best Python library for WebSocket servers?"\n)\nprint(result.answer)\nprint(f"Confidence: {result.confidence:.0%}")` },
-              { icon: Newspaper, title: "Content & Media", desc: "Fact-check articles before publishing. Detect contradictions across sources. Research briefs with inline citations.", example: "Health effects of intermittent fasting", depth: "thorough" as const, github: "content-agent", snippet: `result = client.ask(\n  "Health effects of intermittent fasting",\n  depth="thorough"\n)\nfor c in result.contradictions:\n  print(f"Conflict: {c.claim_a} vs {c.claim_b}")` },
-              { icon: GraduationCap, title: "Education Agent", desc: "Verify claims with primary sources. Cross-check multiple perspectives. Surface disagreements in the literature.", example: "What was before the Big Bang?", depth: "deep" as const, github: "education-agent", snippet: `result = client.ask(\n  "What was before the Big Bang?",\n  depth="deep"\n)\nfor claim in result.claims:\n  print(f"{'✓' if claim.verified else '?'} {claim.text}")` },
-              { icon: ShieldCheck, title: "Support Agent", desc: "Verify answers before sending to customers. Ensure responses are backed by authoritative sources. Reduce misinformation.", example: "How does GDPR affect SaaS data storage?", depth: "fast" as const, github: "support-agent", snippet: `result = client.ask(\n  "How does GDPR affect SaaS data storage?"\n)\nif result.confidence > 0.7:\n  send_to_customer(result.answer)` },
-              { icon: DollarSign, title: "Financial Agent", desc: "Verify market claims and financial data against multiple sources. Flag unverified statistics. Score source reliability.", example: "Tesla revenue and delivery numbers 2025", depth: "thorough" as const, github: "financial-agent", snippet: `result = client.ask(\n  "Tesla revenue and delivery numbers 2025",\n  depth="thorough"\n)\nfor s in result.sources:\n  print(f"{s.domain}: authority {s.authority:.0%}")` },
-              { icon: Microscope, title: "Scientific Review", desc: "Cross-check research findings across publications. Detect contradictions. Separate consensus from contested claims.", example: "Current consensus on dark matter vs modified gravity", depth: "deep" as const, github: "scientific-agent", snippet: `result = client.ask(\n  "Dark matter vs modified gravity consensus",\n  depth="deep"\n)\nprint(f"Contradictions: {len(result.contradictions)}")` },
-              { icon: Building2, title: "Enterprise Search", desc: "Plug into your internal search (Elasticsearch, Confluence). Verify claims against your own data. Zero data retention.", example: "Verify internal docs against latest regulations", depth: "fast" as const, github: "enterprise-search.py", snippet: `result = client.ask(\n  "Verify docs against regulations",\n  search_provider={\n    "type": "elasticsearch",\n    "endpoint": "https://es.internal"\n  }\n)` },
+              { icon: HeartPulse, title: "Healthcare Agent", desc: "Check medical claims against published sources it can find. Flag contradictions between studies. Not medical advice: a starting point for a qualified person to review.", example: "Is intermittent fasting safe for diabetics?", depth: "thorough" as const, github: "healthcare-agent", snippet: `result = client.ask(\n  "Is intermittent fasting safe for diabetics?",\n  depth="thorough"\n)\nfor claim in result.claims:\n  if not claim.verified:\n    print(f"Unverified: {claim.text}")` },
+              { icon: FileText, title: "Report Auditor", desc: "Review AI-generated reports, competitive analyses, and research briefs. Extract the claims, check them against web sources, flag contradictions before sharing.", example: "Check the claims in this competitive analysis", depth: "thorough" as const, github: "report-auditor", snippet: `report = client.verify_document(\n  text=open("market-brief.md").read(),\n  depth="thorough"\n)\nprint(f"Grade: {report['summary']['grade']}")\nfor c in report['claims']:\n  if c['status'] == 'contradicted':\n    print(f"Contradicted: {c['text']}")` },
+              { icon: Scale, title: "Legal Research", desc: "Gather sources on regulations and precedents, with citations to read for yourself. Not legal advice.", example: "GDPR requirements for AI-generated content", depth: "thorough" as const, github: "legal-agent", snippet: `result = client.ask(\n  "GDPR requirements for AI-generated content",\n  depth="thorough"\n)\nfor source in result.sources:\n  print(f"[{source.domain}] {source.title}")` },
+              { icon: Code2, title: "Coding Agent", desc: "Research libraries, APIs, and common practice before writing code. Check documentation claims. Compare framework trade-offs.", example: "Best Python library for WebSocket servers?", depth: "fast" as const, github: "coding-agent", snippet: `result = client.ask(\n  "Best Python library for WebSocket servers?"\n)\nprint(result.answer)\nprint(f"Confidence: {result.confidence:.0%}")` },
+              { icon: Newspaper, title: "Content & Media", desc: "Check articles against sources before publishing. Surface contradictions across sources. Research briefs with inline citations.", example: "Health effects of intermittent fasting", depth: "thorough" as const, github: "content-agent", snippet: `result = client.ask(\n  "Health effects of intermittent fasting",\n  depth="thorough"\n)\nfor c in result.contradictions:\n  print(f"Conflict: {c.claim_a} vs {c.claim_b}")` },
+              { icon: GraduationCap, title: "Education Agent", desc: "Check claims against primary sources. Compare several perspectives. Surface disagreements in the literature.", example: "What was before the Big Bang?", depth: "deep" as const, github: "education-agent", snippet: `result = client.ask(\n  "What was before the Big Bang?",\n  depth="deep"\n)\nfor claim in result.claims:\n  print(claim.verified, claim.text)` },
+              { icon: ShieldCheck, title: "Support Agent", desc: "Check answers against sources before sending them to customers. Help catch unsupported statements.", example: "How does GDPR affect SaaS data storage?", depth: "fast" as const, github: "support-agent", snippet: `result = client.ask(\n  "How does GDPR affect SaaS data storage?"\n)\nif result.confidence > 0.7:\n  send_to_customer(result.answer)` },
+              { icon: DollarSign, title: "Financial Agent", desc: "Check market claims and figures against several sources. Flag statistics it could not find support for. Not financial advice.", example: "Tesla revenue and delivery numbers 2025", depth: "thorough" as const, github: "financial-agent", snippet: `result = client.ask(\n  "Tesla revenue and delivery numbers 2025",\n  depth="thorough"\n)\nfor s in result.sources:\n  print(f"{s.domain}: authority {s.authority:.0%}")` },
+              { icon: Microscope, title: "Scientific Review", desc: "Compare research findings across publications. Surface contradictions. Show where sources agree and where they don't.", example: "Current consensus on dark matter vs modified gravity", depth: "deep" as const, github: "scientific-agent", snippet: `result = client.ask(\n  "Dark matter vs modified gravity consensus",\n  depth="deep"\n)\nprint(f"Contradictions: {len(result.contradictions)}")` },
+              { icon: Building2, title: "Enterprise Search", desc: "Plug in your own search backend (for example Elasticsearch) and check claims against your own documents.", example: "Verify internal docs against latest regulations", depth: "fast" as const, github: "enterprise-search.py", snippet: `result = client.ask(\n  "Verify docs against regulations",\n  search_provider={\n    "type": "elasticsearch",\n    "endpoint": "https://es.internal"\n  }\n)` },
             ];
             const active = useCases[activeUseCase];
             const ActiveIcon = active.icon;
             return (
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col lg:flex-row gap-0 rounded-xl border border-border overflow-hidden bg-card">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} data-ui className="flex flex-col lg:flex-row gap-0 rounded-xl border border-border overflow-hidden bg-card">
                 {/* Sidebar */}
                 <div className="lg:w-72 shrink-0 border-b lg:border-b-0 lg:border-r border-border relative">
                   {/* Mobile scroll hint */}
@@ -1127,7 +1059,7 @@ const Index = () => {
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">{active.desc}</p>
+                      <p className="text-base text-muted-foreground leading-relaxed mb-6">{active.desc}</p>
 
                       {/* Code preview — styled like a flow/terminal */}
                       <div className="flex-1 rounded-lg bg-background border border-border overflow-hidden">
@@ -1168,45 +1100,40 @@ const Index = () => {
       </section>
 
       {/* ===== FOR HUMANS TOO ===== */}
-      <section className="py-24 px-6 border-t border-border relative">
-        <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none opacity-30" />
+      <section className="py-24 md:py-28 px-4 sm:px-8 relative">
         <div className="max-w-5xl mx-auto relative">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <Badge variant="outline" className="text-xs font-normal mb-6">Not Just for Agents</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Research you can trust. <span className="text-shimmer">For everyone.</span></h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">Agents use our infrastructure. But so can you. Every search is verified, every claim is sourced, every answer has a confidence score.</p>
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">For people, too.</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto text-pretty">Agents use LastSearch, and you can too. Each answer shows the sources it found, which claims it could support, and an estimated confidence score.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 max-w-4xl mx-auto">
             {[
-              { icon: DollarSign, title: "Shopping & Products", desc: "\"Best noise-cancelling headphones under $300\" — with real reviews, not sponsored content.", query: "Best noise-cancelling headphones under $300 in 2026" },
-              { icon: HeartPulse, title: "Health & Wellness", desc: "\"Is intermittent fasting effective?\" — verified against medical sources, not influencer claims.", query: "Is intermittent fasting effective for weight loss?" },
-              { icon: Newspaper, title: "News & Current Events", desc: "\"What's really happening with AI regulation?\" — cross-referenced across multiple outlets.", query: "What are the latest AI regulations in 2026?" },
-              { icon: GraduationCap, title: "Learning & Education", desc: "\"How do mRNA vaccines work?\" — explained with cited sources, not hallucinated details.", query: "How do mRNA vaccines work?" },
-              { icon: Scale, title: "Legal & Finance", desc: "\"Can my landlord raise rent 20%?\" — backed by actual legal sources for your jurisdiction.", query: "What are tenant rights for rent increases?" },
+              { icon: DollarSign, title: "Shopping & Products", desc: "\"Best noise-cancelling headphones under $300\" — drawn from reviews it finds on the web.", query: "Best noise-cancelling headphones under $300 in 2026" },
+              { icon: HeartPulse, title: "Health & Wellness", desc: "\"Is intermittent fasting effective?\" — checked against medical sources it finds. Not medical advice.", query: "Is intermittent fasting effective for weight loss?" },
+              { icon: Newspaper, title: "News & Current Events", desc: "\"What's happening with AI regulation?\" — compared across several outlets.", query: "What are the latest AI regulations in 2026?" },
+              { icon: GraduationCap, title: "Learning & Education", desc: "\"How do mRNA vaccines work?\" — explained with cited sources you can open.", query: "How do mRNA vaccines work?" },
+              { icon: Scale, title: "Legal & Finance", desc: "\"Can my landlord raise rent 20%?\" — with sources to read. Not legal advice.", query: "What are tenant rights for rent increases?" },
               { icon: Microscope, title: "Deep Research", desc: "\"Quantum computing vs classical for drug discovery\" — multi-source analysis with contradictions surfaced.", query: "Quantum computing advantages for drug discovery" },
             ].map((item, i) => (
-              <motion.div
+              <motion.li
                 key={item.title}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                className="group p-5 rounded-xl border border-border bg-card/50 card-lift hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 cursor-pointer"
-                onClick={() => navigate(`/results?q=${encodeURIComponent(item.query)}&depth=thorough`)}
+                transition={{ delay: Math.min(i * 0.07, 0.35) }}
               >
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
-                    <item.icon className="w-4 h-4 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-sm mb-1">{item.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
+                <button
+                  type="button"
+                  className="group text-left w-full rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  onClick={() => navigate(`/results?q=${encodeURIComponent(item.query)}&depth=thorough`)}
+                >
+                  <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-2 group-hover:text-accent transition-colors">{item.title}</h3>
+                  <p className="text-base text-muted-foreground leading-relaxed">{item.desc}</p>
+                </button>
+              </motion.li>
             ))}
-          </div>
+          </ul>
 
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-10">
             <Button variant="outline" size="sm" onClick={() => navigate("/playground")} className="gap-2 hover:border-accent/30">
@@ -1217,13 +1144,11 @@ const Index = () => {
       </section>
 
       {/* ===== THE TOOLKIT — Interactive ===== */}
-      <section className="py-24 px-6 border-t border-border relative">
-        <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none opacity-50" />
+      <section className="py-24 md:py-28 px-4 sm:px-8 relative">
         <div className="max-w-5xl mx-auto relative">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <Badge variant="outline" className="text-xs font-normal mb-6">The Toolkit</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything an agent needs.</h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">Everything an agent needs.</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto text-pretty">
               13 MCP tools. 6 integrations. Click any to see its API, SDK, and code.
             </p>
           </motion.div>
@@ -1231,25 +1156,25 @@ const Index = () => {
           {(() => {
             const tools = [
               // Core tools
-              { title: "Search", desc: "Multi-provider parallel web search. Real sources ranked and fetched.", icon: Search, mcp: "search", endpoint: "POST /browse/search", sdk: "client.search(\"query\")", snippet: `result = client.search("quantum computing")\nfor r in result.results:\n  print(f"{r.title} — {r.url}")`, category: "core" },
+              { title: "Search", desc: "Multi-provider parallel web search. Sources ranked and fetched.", icon: Search, mcp: "search", endpoint: "POST /browse/search", sdk: "client.search(\"query\")", snippet: `result = client.search("quantum computing")\nfor r in result.results:\n  print(f"{r.title} — {r.url}")`, category: "core" },
               { title: "Open", desc: "Fetch and parse any web page into clean text. Strips ads, nav, boilerplate.", icon: FileText, mcp: "open", endpoint: "POST /browse/open", sdk: "client.open(url)", snippet: `page = client.open("https://arxiv.org/abs/2301.00001")\nprint(page.title)\nprint(page.text[:500])  # Clean parsed content`, category: "core" },
               { title: "Extract", desc: "Pull structured claims, quotes, and knowledge from any URL.", icon: Quote, mcp: "extract", endpoint: "POST /browse/extract", sdk: "client.extract(url)", snippet: `result = client.extract(\n  "https://arxiv.org/abs/2301.00001"\n)\nfor claim in result.claims:\n  print(f"{claim.text} [{claim.score:.0%}]")`, category: "core" },
               { title: "Answer", desc: "Full research pipeline — search, verify, cite. Three depth modes: fast, thorough, deep.", icon: Shield, mcp: "answer", endpoint: "POST /browse/answer", sdk: "client.ask(query, depth=...)", snippet: `result = client.ask(\n  "Is nuclear fusion viable by 2035?",\n  depth="thorough"\n)\nprint(f"Confidence: {result.confidence:.0%}")\nprint(f"Sources: {len(result.sources)}")`, category: "core" },
-              { title: "Compare", desc: "Raw LLM vs evidence-backed — side by side. See hallucination exposed.", icon: GitCompare, mcp: "compare", endpoint: "POST /browse/compare", sdk: "client.compare(query)", snippet: `result = client.compare(\n  "Effects of creatine on muscle growth"\n)\nprint(f"Raw LLM: {result.raw[:100]}...")\nprint(f"Verified: {result.verified[:100]}...")`, category: "core" },
-              { title: "Clarity", desc: "Anti-hallucination engine. Three modes: prompt rewriting, grounded answers, verified fusion.", icon: Sparkles, mcp: "clarity", endpoint: "POST /browse/clarity", sdk: "client.clarity(query, mode=...)", snippet: `# Mode: "prompt" | "answer" | "verified"\nresult = client.clarity(\n  "Explain CRISPR gene editing",\n  mode="verified"\n)\nprint(result.answer)  # Grounded in sources`, category: "core" },
+              { title: "Compare", desc: "Raw LLM vs source-checked answer, side by side. See where they differ.", icon: GitCompare, mcp: "compare", endpoint: "POST /browse/compare", sdk: "client.compare(query)", snippet: `result = client.compare(\n  "Effects of creatine on muscle growth"\n)\nprint(f"Raw LLM: {result.raw[:100]}...")\nprint(f"Verified: {result.verified[:100]}...")`, category: "core" },
+              { title: "Clarity", desc: "Aims to reduce hallucinations. Three modes: prompt rewriting, grounded answers, answers combined with web sources.", icon: Sparkles, mcp: "clarity", endpoint: "POST /browse/clarity", sdk: "client.clarity(query, mode=...)", snippet: `# Mode: "prompt" | "answer" | "verified"\nresult = client.clarity(\n  "Explain CRISPR gene editing",\n  mode="verified"\n)\nprint(result.answer)  # Drawn from sources`, category: "core" },
               // Sessions & Memory
               { title: "Session Create", desc: "Start a persistent research session. Knowledge accumulates across queries.", icon: Brain, mcp: "session_create", endpoint: "POST /session", sdk: "client.session(name)", snippet: `session = client.session("AI safety research")\nr1 = session.ask("What is AI alignment?")\nr2 = session.ask("Who are the key researchers?")\n# r2 has context from r1`, category: "sessions" },
               { title: "Session Recall", desc: "Query accumulated knowledge without new web searches.", icon: Layers, mcp: "session_recall", endpoint: "POST /session/:id/recall", sdk: "session.recall(query)", snippet: `# No new web search — queries memory only\nrecall = session.recall(\n  "What did we learn about alignment?"\n)\nprint(recall.answer)  # From accumulated knowledge`, category: "sessions" },
               { title: "Session Share", desc: "Share your research session publicly. Anyone can view via URL.", icon: Share2, mcp: "session_share", endpoint: "POST /session/:id/share", sdk: "session.share()", snippet: `share_url = session.share()\nprint(f"Share: {share_url}")\n# Anyone can view all findings + sources`, category: "sessions" },
               { title: "Session Fork", desc: "Fork a shared session to continue building on someone else's research.", icon: GitFork, mcp: "session_fork", endpoint: "POST /session/share/:id/fork", sdk: "client.fork_session(share_id)", snippet: `# Build on a colleague's research\nforked = client.fork_session("share_abc123")\nresult = forked.ask("What's missing from this?")`, category: "sessions" },
-              { title: "Knowledge Export", desc: "Export all verified claims and sources from a session.", icon: Layers, mcp: "session_knowledge", endpoint: "GET /session/:id/knowledge", sdk: "session.knowledge()", snippet: `entries = session.knowledge()\nfor entry in entries:\n  print(f"[{entry.confidence:.0%}] {entry.claim}")\n  for s in entry.sources:\n    print(f"  — {s.url}")`, category: "sessions" },
+              { title: "Knowledge Export", desc: "Export the claims and sources collected in a session.", icon: Layers, mcp: "session_knowledge", endpoint: "GET /session/:id/knowledge", sdk: "session.knowledge()", snippet: `entries = session.knowledge()\nfor entry in entries:\n  print(f"[{entry.confidence:.0%}] {entry.claim}")\n  for s in entry.sources:\n    print(f"  — {s.url}")`, category: "sessions" },
               // Feedback & Learning
-              { title: "Feedback", desc: "Submit feedback on results. Improves verification accuracy over time.", icon: ThumbsUp, mcp: "feedback", endpoint: "POST /browse/feedback", sdk: "client.feedback(id, rating)", snippet: `# Help improve the system\nclient.feedback(\n  result_id=result.id,\n  rating="good",  # or "bad", "wrong"\n  comment="Missed a key source"\n)`, category: "feedback" },
+              { title: "Feedback", desc: "Submit feedback on results. Used to tune confidence estimates over time.", icon: ThumbsUp, mcp: "feedback", endpoint: "POST /browse/feedback", sdk: "client.feedback(id, rating)", snippet: `# Help improve the system\nclient.feedback(\n  result_id=result.id,\n  rating="good",  # or "bad", "wrong"\n  comment="Missed a key source"\n)`, category: "feedback" },
               { title: "Stream", desc: "Real-time SSE streaming. Get search, verify, and answer progress live.", icon: Layers, mcp: "answer (stream)", endpoint: "POST /browse/answer/stream", sdk: "SSE via REST API", snippet: `# Server-Sent Events streaming\nimport httpx\nwith httpx.stream("POST", url, json=payload) as r:\n  for line in r.iter_lines():\n    event = json.loads(line)\n    print(event["stage"], event["progress"])`, category: "core" },
             ];
             const active = activeTool !== null ? tools[activeTool] : null;
             return (
-              <div className="flex flex-col lg:flex-row gap-4">
+              <div data-ui className="flex flex-col lg:flex-row gap-4">
                 {/* Tool selector — compact sidebar */}
                 <div className="lg:w-52 shrink-0 rounded-xl border border-border bg-card overflow-hidden">
                   <div className="max-h-[280px] overflow-y-auto lg:max-h-[460px]">
@@ -1394,7 +1319,7 @@ const Index = () => {
           })()}
 
           {/* Integration badges with hover tooltips */}
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-10">
+          <motion.div data-ui initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-10">
             <div className="flex items-center justify-center gap-3 md:gap-4 py-3 flex-wrap">
               {([
                 { name: "MCP Server", hint: "npx lastsearch" },
@@ -1427,43 +1352,36 @@ const Index = () => {
       </section>
 
       {/* ===== WHY BROWSE AI ===== */}
-      <section className="py-24 px-6 border-t border-border">
+      <section className="py-24 md:py-28 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <Badge variant="outline" className="text-xs font-normal mb-6">The Difference</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Raw LLM vs <span className="text-accent">E2 Evidence Engine</span></h2>
-            <p className="text-muted-foreground">LLMs guess. E2 verifies. Your agent deserves the difference.</p>
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">Raw LLM vs E2 Evidence Engine</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">An LLM answers from memory. E2 checks the answer against sources it finds, then shows you how strong the support looks.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card border border-red-500/10 hover:border-red-500/20 transition-all duration-300">
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-6 md:p-8 rounded-xl bg-card">
               <div className="flex items-center gap-2 mb-5">
-                <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
-                  <ShieldAlert className="w-4 h-4 text-red-400" />
-                </div>
-                <span className="text-sm font-semibold text-red-400 uppercase tracking-wider">Raw LLM</span>
+                <h3 className="text-xl font-semibold">Raw LLM</h3>
               </div>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                {["No real sources, hallucinated citations", "No verification — can't tell fact from fiction", "Unknown reliability, no confidence signal", "Stale training data, can't access current info", "Single pass, no depth control", "Claims mixed into unstructured text"].map((item, i) => (
+              <ul className="space-y-3 text-base text-muted-foreground">
+                {["No live sources; citations can be invented", "No check against sources", "No confidence signal", "Limited to its training data", "Single pass, no depth control", "Claims mixed into unstructured text"].map((item, i) => (
                   <motion.li key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-start gap-2.5 py-1">
-                    <span className="w-5 h-5 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mt-0.5"><span className="text-red-400 text-xs">-</span></span>
+                    <Minus aria-hidden="true" className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
                     {item}
                   </motion.li>
                 ))}
               </ul>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card border border-accent/20 hover:border-accent/30 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-6 md:p-8 rounded-xl bg-accent/10">
               <div className="flex items-center gap-2 mb-5">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <Shield className="w-4 h-4 text-accent" />
-                </div>
-                <span className="text-sm font-semibold text-accent uppercase tracking-wider">E2 Evidence Engine</span>
+                <h3 className="text-xl font-semibold">E2 Evidence Engine</h3>
               </div>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-3 text-base">
                 {[
-                  "DeBERTa-v3 NLI — battle-tested on MNLI/FEVER/ANLI",
-                  "15-step verification pipeline (the real moat)",
+                  "DeBERTa-v3 NLI models trained on MNLI/FEVER/ANLI",
+                  "Multi-step verification pipeline",
                   "Atomic claim decomposition + per-claim verification",
                   "BM25 + dense embedding retrieval with RRF fusion",
                   "Cross-source consensus + contradiction detection",
@@ -1472,7 +1390,7 @@ const Index = () => {
                   "Depth-routed: small for fast, base for thorough/deep",
                 ].map((item, i) => (
                   <motion.li key={i} initial={{ opacity: 0, x: 10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-start gap-2.5 py-1">
-                    <span className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5"><CheckCircle2 className="w-3 h-3 text-accent" /></span>
+                    <Check aria-hidden="true" className="w-4 h-4 text-accent shrink-0 mt-1" />
                     {item}
                   </motion.li>
                 ))}
@@ -1481,31 +1399,29 @@ const Index = () => {
           </div>
 
           <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-8 text-center">
-            <Button variant="outline" size="sm" className="gap-1.5 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300" onClick={() => { setQuery("What causes aurora borealis?"); handleCompare(); }}>
+            <Button variant="outline" size="sm" className="gap-1.5" onClick={() => { setQuery("What causes aurora borealis?"); handleCompare(); }}>
               <GitCompare className="w-3.5 h-3.5" />
-              Try Compare Mode — see the difference live
+              Try Compare mode
             </Button>
           </motion.div>
         </div>
       </section>
 
       {/* ===== GET STARTED ===== */}
-      <section className="py-24 px-6 border-t border-border relative">
-        <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none opacity-30" />
+      <section className="py-24 md:py-28 px-4 sm:px-8 relative">
         <div className="max-w-5xl mx-auto relative">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <Badge variant="outline" className="text-xs font-normal mb-6">Get Started</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ship in 30 seconds.</h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">Set up in a few minutes.</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto text-pretty">
               Pick your integration. Start building.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* MCP Server */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold text-accent uppercase tracking-wider">MCP Server</span>
+                <h3 className="text-lg font-semibold">MCP Server</h3>
                 <button onClick={() => copyText("npx lastsearch setup", "setup")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                   {copied === "setup" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied === "setup" ? "Copied" : "Copy"}
@@ -1515,13 +1431,13 @@ const Index = () => {
                 <Terminal className="w-4 h-4 text-accent" />
                 <code className="text-sm font-mono">npx lastsearch setup</code>
               </div>
-              <p className="text-xs text-muted-foreground">Auto-configures Claude Desktop, Cursor, Windsurf, or any MCP client.</p>
+              <p className="text-sm text-muted-foreground">Auto-configures Claude Desktop, Cursor, Windsurf, or any MCP client.</p>
             </motion.div>
 
             {/* Python SDK */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold text-accent uppercase tracking-wider">Python SDK</span>
+                <h3 className="text-lg font-semibold">Python SDK</h3>
                 <button onClick={() => copyText("pip install lastsearch", "pip")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                   {copied === "pip" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied === "pip" ? "Copied" : "Copy"}
@@ -1537,9 +1453,9 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             </motion.div>
 
             {/* REST API */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold text-accent uppercase tracking-wider">REST API</span>
+                <h3 className="text-lg font-semibold">REST API</h3>
                 <button onClick={() => copyText(`curl -X POST https://lastsearch.ai/api/browse/answer -H "Content-Type: application/json" -H "X-API-Key: ls_xxx" -d '{"query": "What causes aurora borealis?"}'`, "api")} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                   {copied === "api" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied === "api" ? "Copied" : "Copy"}
@@ -1549,12 +1465,12 @@ result = client.ask("What causes aurora borealis?")`}</pre>
   -H "Content-Type: application/json" \\
   -H "X-API-Key: ls_your_key" \\
   -d '{"query": "What causes aurora borealis?"}'`}</pre>
-              <p className="text-xs text-muted-foreground mt-2">Works with any HTTP client or agent framework. Free API keys available.</p>
+              <p className="text-sm text-muted-foreground mt-2">Works with any HTTP client or agent framework. Free API keys available.</p>
             </motion.div>
 
             {/* Framework Integrations */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-5 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wider block mb-3">Agent Frameworks</span>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card">
+              <h3 className="text-lg font-semibold mb-3">Agent frameworks</h3>
               <div className="space-y-2">
                 {[
                   { name: "LangChain", pkg: "langchain-lastsearch" },
@@ -1572,7 +1488,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground mt-3">Drop-in tools: Search, Answer, Extract, Compare, and Clarity.</p>
+              <p className="text-sm text-muted-foreground mt-3">Drop-in tools: Search, Answer, Extract, Compare, and Clarity.</p>
             </motion.div>
           </div>
 
@@ -1586,41 +1502,40 @@ result = client.ask("What causes aurora borealis?")`}</pre>
 
 
       {/* ===== FREE vs PRO ===== */}
-      <section id="waitlist" className="py-24 px-6 border-t border-border scroll-mt-20">
+      <section id="waitlist" className="py-24 md:py-28 px-4 sm:px-8 scroll-mt-20">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <Badge variant="outline" className="text-xs font-normal mb-6">Pricing</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Free to start. Scale when ready.</h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
-              No credit card. Free API keys with premium verification included.
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">Free to use.</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto text-pretty">
+              No credit card. Free API keys include a daily allowance of the fuller verification pipeline. Limits may change; this is a hobby project with real running costs.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 items-stretch">
             {/* No account */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card border border-border flex flex-col card-lift hover:border-accent/10">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Website Demo</h3>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-6 rounded-xl bg-card flex flex-col">
+              <h3 className="text-lg font-semibold mb-4">Website demo</h3>
               <ul className="space-y-2.5 text-sm flex-1">
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> 1 free query on website</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> All tools + compare mode</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Standard keyword verification</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Try instantly — no signup needed</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> 1 free query on website</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> All tools + compare mode</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> Standard keyword verification</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> Try instantly — no signup needed</li>
               </ul>
             </motion.div>
 
             {/* Free login */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-6 rounded-xl flex flex-col gradient-border glow-pulse">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-6 rounded-xl flex flex-col bg-accent/10">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-accent">Free Account</h3>
-                <Badge variant="outline" className="text-[10px] text-accent border-accent/30">Recommended</Badge>
+                <h3 className="text-lg font-semibold">Free account</h3>
+                <span className="text-sm text-accent">Recommended</span>
               </div>
               <ul className="space-y-2.5 text-sm flex-1">
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> MCP, Python SDK &amp; REST API access</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> 100 premium queries/day with LastSearch key</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Semantic verification + multi-provider search</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Thorough + deep modes</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> Falls back to unlimited basic after quota</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" /> One LastSearch key + query history</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> MCP, Python SDK &amp; REST API access</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> 100 premium queries/day with LastSearch key</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> Semantic verification + multi-provider search</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> Thorough + deep modes</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> Falls back to unlimited basic after quota</li>
+                <li className="flex items-start gap-2"><Check aria-hidden="true" className="w-3.5 h-3.5 text-accent mt-1 shrink-0" /> One LastSearch key + query history</li>
               </ul>
               <Button
                 variant="outline"
@@ -1633,26 +1548,20 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             </motion.div>
 
             {/* Pro */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="p-6 rounded-xl bg-card border border-yellow-500/20 relative overflow-hidden flex flex-col card-lift">
-              <div className="absolute top-3 right-3">
-                <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30">
-                  <Sparkles className="w-3 h-3 text-yellow-400" />
-                  <span className="text-[10px] font-semibold text-yellow-400">Coming Soon</span>
-                </div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="p-6 rounded-xl bg-card relative overflow-hidden flex flex-col">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">Pro</h3>
+                <span className="text-sm text-muted-foreground">Maybe, someday</span>
               </div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Pro</h3>
               <ul className="space-y-2.5 text-sm text-muted-foreground flex-1">
-                <li className="flex items-start gap-2"><Sparkles className="w-3.5 h-3.5 text-yellow-400 mt-0.5 shrink-0" /> Unlimited premium verification</li>
-                <li className="flex items-start gap-2"><Sparkles className="w-3.5 h-3.5 text-yellow-400 mt-0.5 shrink-0" /> No quotas, no fallback</li>
-                <li className="flex items-start gap-2"><Sparkles className="w-3.5 h-3.5 text-yellow-400 mt-0.5 shrink-0" /> Managed keys — zero configuration</li>
-                <li className="flex items-start gap-2"><Sparkles className="w-3.5 h-3.5 text-yellow-400 mt-0.5 shrink-0" /> 15+ sources per query</li>
-                <li className="flex items-start gap-2"><Sparkles className="w-3.5 h-3.5 text-yellow-400 mt-0.5 shrink-0" /> Multi-model verification</li>
-                <li className="flex items-start gap-2"><Sparkles className="w-3.5 h-3.5 text-yellow-400 mt-0.5 shrink-0" /> Priority queue &amp; webhooks</li>
-                <li className="flex items-start gap-2"><Sparkles className="w-3.5 h-3.5 text-yellow-400 mt-0.5 shrink-0" /> Team seats &amp; shared access</li>
+                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Higher or no daily limits</li>
+                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> More sources per query</li>
+                                                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Multi-model verification</li>
+                                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Team seats &amp; shared access</li>
               </ul>
               <button
                 onClick={() => document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" })}
-                className="mt-4 w-full inline-flex items-center justify-center text-xs font-medium rounded-md border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10 h-8 px-3 transition-colors"
+                className="mt-4 w-full inline-flex items-center justify-center text-sm font-medium rounded-md bg-secondary text-foreground hover:bg-muted h-9 px-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 Join waitlist
               </button>
@@ -1661,25 +1570,19 @@ result = client.ask("What causes aurora borealis?")`}</pre>
 
           {/* Enterprise — centered below */}
           <div className="max-w-lg mx-auto mb-16">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="p-6 rounded-xl bg-card border border-blue-400/20 relative overflow-hidden">
-              <div className="absolute top-3 right-3">
-                <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-400/10 border border-blue-400/20">
-                  <Sparkles className="w-3 h-3 text-blue-400" />
-                  <span className="text-[10px] font-semibold text-blue-400">Architecture Ready</span>
-                </div>
-              </div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2">Enterprise</h3>
-              <p className="text-xs text-muted-foreground mb-3">The adapter architecture is built. Gauging demand before we ship.</p>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="p-6 rounded-xl bg-card relative overflow-hidden">
+              <h3 className="text-lg font-semibold mb-2">Enterprise</h3>
+              <p className="text-sm text-muted-foreground mb-3">Ideas being explored, depending on interest. No dates or promises.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Sparkles className="w-3.5 h-3.5 text-blue-400 mt-0.5 shrink-0" /> Search adapters — Elasticsearch, Confluence, custom</div>
-                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Sparkles className="w-3.5 h-3.5 text-blue-400 mt-0.5 shrink-0" /> Zero data retention mode</div>
-                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Sparkles className="w-3.5 h-3.5 text-blue-400 mt-0.5 shrink-0" /> Full verification on your data</div>
-                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Sparkles className="w-3.5 h-3.5 text-blue-400 mt-0.5 shrink-0" /> Your data never leaves your system</div>
+                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Search adapters for your own data</div>
+                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Data-retention controls</div>
+                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Verification over your own documents</div>
+                <div className="flex items-start gap-2 text-sm text-muted-foreground"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Options for keeping data in your own systems</div>
               </div>
               <div className="text-center">
                 <button
                   onClick={() => document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" })}
-                  className="inline-flex items-center justify-center text-xs font-medium rounded-md border border-blue-400/30 text-blue-400 hover:bg-blue-400/10 h-8 px-3 transition-colors"
+                  className="inline-flex items-center justify-center text-sm font-medium rounded-md bg-secondary text-foreground hover:bg-muted h-9 px-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   Join waitlist
                 </button>
@@ -1690,14 +1593,18 @@ result = client.ask("What causes aurora borealis?")`}</pre>
           {/* Waitlist form */}
           <motion.div id="waitlist-form" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-md mx-auto text-center space-y-4 scroll-mt-20">
             <p className="text-sm text-muted-foreground">
-              Interested in Pro or Enterprise? Join the waitlist — we&apos;ll let you know when it&apos;s ready.
+              Interested if Pro or Enterprise ever happens? Join the waitlist and we&apos;ll let you know. Nothing here is promised.
             </p>
             <div className="flex items-center gap-3">
               <div className="relative flex-1">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Mail aria-hidden="true" className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="email"
-                  placeholder="you@company.com"
+                  name="email"
+                  autoComplete="email"
+                  spellCheck={false}
+                  aria-label="Email address for the waitlist"
+                  placeholder="you@example.com…"
                   value={waitlistEmail}
                   onChange={(e) => { setWaitlistEmail(e.target.value); setWaitlistStatus("idle"); }}
                   onKeyDown={(e) => e.key === "Enter" && handleWaitlist()}
@@ -1709,14 +1616,15 @@ result = client.ask("What causes aurora borealis?")`}</pre>
                 disabled={waitlistStatus === "loading" || !waitlistEmail.trim()}
                 className="bg-accent text-accent-foreground hover:bg-accent/90 h-11 px-5 text-sm font-semibold"
               >
-                {waitlistStatus === "loading" ? "Joining..." : "Join Waitlist"}
+                {waitlistStatus === "loading" ? "Joining…" : "Join Waitlist"}
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               We use this address only to tell you when Pro opens. No marketing email unless you opt in, and you can leave the list any time by
               emailing <a href="mailto:shreyassaw@gmail.com?subject=Remove%20me%20from%20the%20waitlist" className="underline hover:text-foreground">shreyassaw@gmail.com</a>.
               See the <button type="button" onClick={() => navigate("/privacy")} className="underline hover:text-foreground">Privacy Policy</button>.
             </p>
+            <div aria-live="polite">
             {waitlistStatus === "success" && (
               <p className="text-sm text-emerald-400 flex items-center justify-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" /> {waitlistMessage}
@@ -1725,18 +1633,18 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             {waitlistStatus === "error" && (
               <p className="text-sm text-destructive">{waitlistMessage}</p>
             )}
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* ===== COMMUNITY BOTTOM CTA ===== */}
-      <section className="py-20 px-6 border-t border-border relative">
-        <div className="absolute inset-0 grid-bg grid-bg-fade pointer-events-none opacity-20" />
+      <section className="py-24 md:py-28 px-4 sm:px-8 relative">
         <div className="max-w-2xl mx-auto text-center space-y-6 relative">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">Build on <span className="text-accent">LastSearch.</span></h2>
-            <p className="text-muted-foreground text-sm">
-              Open source MCP server, Python SDK, and REST API. Add verified research to any agent in minutes. Star the repo, join Discord, and help build the trust layer agents deserve.
+            <h2 className="text-[2rem] sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6 text-balance">Build on LastSearch.</h2>
+            <p className="text-lg md:text-xl text-muted-foreground text-pretty">
+              Open source MCP server, Python SDK, and REST API. Give an agent web research with sources it can check. Star the repo, join Discord, and help shape it.
             </p>
           </motion.div>
           <motion.div
@@ -1749,7 +1657,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
               href="https://github.com/lastsearch-hq/lastsearch"
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary border border-border text-sm font-semibold hover:border-accent/40 hover:text-accent transition-all w-full sm:w-auto justify-center"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors w-full sm:w-auto justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Star className="w-3.5 h-3.5" />
               Star on GitHub
@@ -1758,7 +1666,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
               href="https://discord.gg/ubAuT4YQsT"
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#5865F2]/10 border border-[#5865F2]/20 text-sm font-semibold text-[#5865F2] hover:bg-[#5865F2]/20 transition-all w-full sm:w-auto justify-center"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-sm font-semibold hover:bg-muted transition-colors w-full sm:w-auto justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <MessageCircle className="w-3.5 h-3.5" />
               Join Discord
@@ -1766,31 +1674,32 @@ result = client.ask("What causes aurora borealis?")`}</pre>
           </motion.div>
         </div>
       </section>
-
-      {/* ===== FOOTER ===== */}
-      <footer className="py-12 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
-            <span className="text-sm font-semibold">LastSearch</span>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Crafted with <span className="text-red-400">&#9829;</span> and a lot of <span className="text-amber-400">&#9889;</span> by <a href="https://www.instagram.com/shreyassaw/?hl=en" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:text-accent transition-colors">Shreyas</a>
-          </p>
-          <p className="text-xs text-muted-foreground">
-            LastSearch is a free, non-commercial passion project by an independent developer. Results are AI-generated research, not professional advice.
-          </p>
-          <div className="flex items-center justify-center gap-4 sm:gap-6 text-xs text-muted-foreground flex-wrap">
-            <a href="mailto:shreyassaw@gmail.com" className="hover:text-foreground transition-colors">shreyassaw@gmail.com</a>
-            <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
-            <a href="https://www.linkedin.com/in/shreyas-sawant" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a>
-            <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>
-            <button onClick={() => navigate("/privacy")} className="hover:text-foreground transition-colors">Privacy</button>
-            <button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms</button>
-            <CookieSettingsLink className="hover:text-foreground transition-colors" />
+      {/* ===== BEFORE YOU RELY ON IT ===== */}
+      <section aria-labelledby="before-you-rely" className="py-24 md:py-28 px-4 sm:px-8">
+        <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-[1fr_1.4fr] md:gap-16">
+          <h2 id="before-you-rely" className="text-[2rem] sm:text-5xl font-bold tracking-tight leading-[1.05] text-balance">
+            Before you rely on it
+          </h2>
+          <div className="space-y-4 text-lg leading-relaxed max-w-[60ch]">
+            <p>
+              LastSearch is a free, non-commercial passion project, built and run by one independent developer.
+            </p>
+            <p className="text-muted-foreground">
+              It searches the public internet and weighs what it finds. The internet is not always right: sources can be wrong,
+              out of date or biased, and LastSearch can misread them. Nothing it returns is guaranteed to be true or complete.
+            </p>
+            <p className="text-muted-foreground">
+              Confidence scores are automated estimates, not certainty. Treat each answer as research to check, and keep the final
+              judgement with you and your AI agent.
+            </p>
+            <p className="text-muted-foreground">
+              It is not legal, medical, financial or other professional advice. For anything that matters, open the original sources
+              or ask a qualified person. The details are in the{" "}
+              <button type="button" onClick={() => navigate("/terms")} className="underline underline-offset-4 hover:text-foreground rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Terms</button>.
+            </p>
           </div>
         </div>
-      </footer>
+      </section>
     </div>
     <LoginModal open={loginOpen} onOpenChange={setLoginOpen} redirectTo="/dashboard" />
     </>

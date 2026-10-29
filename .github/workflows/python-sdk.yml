@@ -10,6 +10,9 @@ on:
     paths:
       - 'packages/python-sdk/**'
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Test Python SDK

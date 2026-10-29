@@ -26,12 +26,12 @@ const rows: Array<{ axis: string; note: string; cells: Cell[] }> = [
   },
   {
     axis: "Live citation health",
-    note: "Every cited URL probed; fabricated / dead links flagged",
+    note: "Cited URLs probed (thorough/deep modes); dead or likely fabricated links flagged",
     cells: ["yes", "no", "no", "no", "no", "no", "no"],
   },
   {
     axis: "Cross-source consensus",
-    note: "Claims corroborated across independent domains",
+    note: "Claims compared across independent domains",
     cells: ["yes", "no", "no", "no", "no", "no", "no"],
   },
   {
@@ -78,7 +78,7 @@ export default function Scorecard() {
     <div className="min-h-screen bg-background">
       <SEO
         title="Verification Scorecard — LastSearch vs agent-search APIs"
-        description="How agent-search APIs compare on the verification axis: confidence scores, claim-level entailment, live citation health, consensus, and contradiction detection. LastSearch is the only one that verifies."
+        description="How agent-search APIs compare on the verification axis: confidence scores, claim-level entailment, live citation health, consensus, and contradiction detection. Based on public documentation; may be out of date."
         canonical="/scorecard"
       />
       <main className="max-w-4xl mx-auto px-6 py-16">
@@ -89,8 +89,8 @@ export default function Scorecard() {
         <p className="text-muted-foreground mb-4 max-w-2xl">
           Most agent-search APIs return links. The race between them is a search-index race —
           who crawls the most, who ranks best. LastSearch competes on a different axis: whether
-          the answer is <strong>verified</strong>. This scorecard compares what each provider
-          exposes on that axis, as of September 2026.
+          the answer is <strong>checked against its sources</strong>. This scorecard compares what each provider
+          exposes on that axis, as of September 2026, based on our reading of their public documentation. It may be out of date or wrong; if you spot an error, email shreyassaw@gmail.com and we will fix it.
         </p>
         <p className="text-muted-foreground mb-10 max-w-2xl text-sm">
           These are capability comparisons drawn from each provider's public documentation — not
@@ -131,12 +131,12 @@ export default function Scorecard() {
 
         <h2 className="text-xl font-semibold mt-14 mb-3">How LastSearch verifies</h2>
         <p className="text-muted-foreground mb-4 max-w-2xl">
-          A 15-step pipeline runs on every answer: BM25 + dense retrieval fused with Reciprocal
+          A multi-step pipeline runs on answers (some steps only in thorough and deep modes): BM25 + dense retrieval fused with Reciprocal
           Rank Fusion, DeBERTa NLI entailment scoring and reranking, cross-source consensus,
           counter-query adversarial checks, live citation-health probing, structural content-integrity scanning of every fetched page, and an 8-factor
-          confidence score auto-calibrated from real feedback with isotonic regression. Every
-          claim carries its verification state; every source carries its liveness; every answer
-          carries a confidence number you can act on.
+          confidence score auto-calibrated from real feedback with isotonic regression. Each
+          claim carries its verification state; sources carry their liveness where probed; each answer
+          carries an estimated confidence number to weigh.
         </p>
         <h2 className="text-xl font-semibold mt-10 mb-3">Measured, not claimed</h2>
         <ul className="text-muted-foreground max-w-2xl text-sm space-y-2 mb-8">

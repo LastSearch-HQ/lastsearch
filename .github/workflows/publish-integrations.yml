@@ -10,6 +10,9 @@ on:
       - 'packages/llamaindex-lastsearch/**'
       - '!packages/**/README.md'
 
+permissions:
+  contents: read
+
 jobs:
   publish-crewai:
     name: Publish crewai-lastsearch

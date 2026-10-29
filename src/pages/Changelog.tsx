@@ -12,7 +12,7 @@ const RELEASES: Array<{ version: string; date: string; title: string; items: str
     tag: "New",
     title: "verify-anything CLI + verification quality: your exact claim, judged against the exact span",
     items: [
-      "New: npx verify-anything \"<text | url | file>\" — a one-command fact-checker for anything (paste a ChatGPT answer via stdin). Every claim comes back verified / contradicted / unverified with confidence, the source, the reason, and the exact evidence span judged; --verbose shows every source weighed; exit code 1 if anything is contradicted. verify setup registers it as an MCP tool in Claude Desktop, Claude Code, Cursor, Windsurf, Codex and Gemini CLI. Apache-2.0, github.com/LastSearch-HQ/verify.",
+      "New: npx verify-anything \"<text | url | file>\" — a one-command claim checker (paste a ChatGPT answer via stdin). Every claim comes back verified / contradicted / unverified with confidence, the source, the reason, and the exact evidence span judged; --verbose shows every source weighed; exit code 1 if anything is contradicted. verify setup registers it as an MCP tool in Claude Desktop, Claude Code, Cursor, Windsurf, Codex and Gemini CLI. Apache-2.0, github.com/LastSearch-HQ/verify.",
       "verify-document now runs the NLI verifier directly on your claim's exact wording against every source quote — previously it scored the pipeline's paraphrase of what the pages said. Each claim returns evidence (the exact span judged, with entailment/contradiction scores) and checks (every source weighed), so a verdict can be audited rather than trusted.",
       "Premises are claim-focused and title-anchored: 'The tower is 330 metres tall' on the Eiffel Tower page now entails 'The Eiffel Tower is 330 metres tall'; dates no longer get cut off by truncation. Contradictions are asserted only when a source carries a competing value of the claim's kind (a different number, a different entity) — a sentence about construction starting in 1887 cannot contradict completion in 1889 — and a ≥2:1 majority decides with the dissent disclosed.",
       "thorough and deep now actually use the larger DeBERTa verifier (the depth parameter was not reaching the model, and the larger model had never loaded). Measured on a 5-claim planted-error probe: thorough 5/5 (two entity/location errors contradicted, two date errors contradicted, two true claims verified); fast 4/5. A probe, not a benchmark.",
@@ -44,7 +44,7 @@ const RELEASES: Array<{ version: string; date: string; title: string; items: str
     date: "2026-09-14",
     title: "Live citation health + evidence-aligned decomposition",
     items: [
-      "Every cited URL is probed server-side and classified live / stale (link rot) / dead (likely fabricated). Deep-research agents hallucinate 3–13% of citation URLs; this makes 'every citation resolves' checkable. urlHealth per source, citationHealth per result.",
+      "On thorough and deep modes, every cited URL is probed server-side and classified live / stale (link rot) / dead (likely fabricated). Deep-research agents hallucinate 3–13% of citation URLs; this makes 'every citation resolves' checkable. urlHealth per source, citationHealth per result.",
       "Atomic claim decomposition now only runs when per-claim evidence retrieval follows — splitting without aligned evidence degrades verification (SAE vs SRE).",
       "New /scorecard: how agent-search APIs compare on the verification axis.",
       "Runnable eval harness (citation-resolution track, no labels needed).",

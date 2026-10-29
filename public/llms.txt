@@ -1,6 +1,6 @@
 # LastSearch
 
-> Research infrastructure for AI agents. Real-time web search with evidence-backed citations and confidence scores.
+> Research infrastructure for AI agents. Real-time web search with citations and estimated confidence scores. A free, non-commercial passion project; results come from the public internet and are not guaranteed to be true or complete.
 
 LastSearch gives AI agents structured, verifiable web research. Unlike chat-based search engines, it returns JSON with extracted claims, cited sources, confidence scores, and contradiction detection — designed for programmatic evaluation by agents.
 
@@ -18,10 +18,10 @@ Previously known as `lastsearch` (npm) and `lastsearch` (PyPI) — renamed to `l
 - **Search**: Web search returning ranked results
 - **Answer**: Full pipeline — search, fetch, extract claims, verify, cite, score confidence
 - **Extract**: Structured claim extraction from any URL
-- **Compare**: Side-by-side raw LLM vs evidence-backed answer
-- **Clarity**: Anti-hallucination answer engine — three modes: (1) prompt mode returns enhanced prompts only for your own LLM, (2) answer mode gives fast LLM-only answer with grounding techniques (no internet), (3) verified mode runs web pipeline and fuses LLM + sources into one source-backed answer
+- **Compare**: Side-by-side raw LLM vs source-checked answer
+- **Clarity**: answer mode that aims to reduce hallucinations — three modes: (1) prompt mode returns enhanced prompts only for your own LLM, (2) answer mode gives fast LLM-only answer with grounding techniques (no internet), (3) verified mode runs web pipeline and fuses LLM + sources into one source-backed answer
 - **Research Sessions**: Persistent multi-query sessions with knowledge accumulation
-- **Feedback**: Submit result feedback to improve future accuracy
+- **Feedback**: Submit result feedback to help tune future results
 
 ## Verification Pipeline
 1. Web search (Tavily API)
