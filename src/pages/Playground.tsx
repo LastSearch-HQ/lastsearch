@@ -109,7 +109,7 @@ const TUTORIAL_SCENARIOS = [
   },
   {
     name: "Verify Docs",
-    desc: "Check if a claim in documentation is accurate",
+    desc: "Check a claim in documentation against sources",
     tab: "answer" as const,
     depth: "thorough" as const,
     query: "Python is the most popular programming language in 2026",
@@ -146,8 +146,8 @@ const PLACEHOLDERS: Record<string, string> = {
   search: "Enter a search query…",
   open: "Enter a URL to fetch and parse…",
   extract: "Enter a URL to extract claims from…",
-  compare: "Compare raw LLM vs evidence-backed…",
-  verify: "Paste a document to fact-check…",
+  compare: "Compare raw LLM vs source-checked…",
+  verify: "Paste a document to check against sources…",
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────
@@ -324,8 +324,8 @@ const Playground = () => {
   return (
     <>
     <SEO
-      title="Playground — Try Evidence-Backed AI Search"
-      description="Try LastSearch live. Search any topic and get evidence-backed answers with confidence scores, verified claims, and source citations."
+      title="Playground — Try AI Search with Sources"
+      description="Try LastSearch live. Search any topic and get answers with source citations, checked claims, and estimated confidence scores."
       canonical="/playground"
     />
     <div className="min-h-screen">
@@ -450,7 +450,7 @@ const Playground = () => {
                       onClick={() => setLoginOpen(true)}
                     >
                       <Lock className="w-4 h-4 text-amber-400 shrink-0" />
-                      <span className="text-amber-400 text-sm">Clarity generates answers with reduced hallucinations — requires LastSearch key, sign in to unlock</span>
+                      <span className="text-amber-400 text-sm">Clarity aims to reduce hallucinations — requires a LastSearch key, sign in to use it</span>
                     </div>
                     <ClarityToggle enabled={clarityEnabled} setEnabled={setClarityEnabled} quota={quota} />
                     <DepthToggle depth={depth} setDepth={setDepth} quota={quota} />
@@ -675,7 +675,7 @@ const Playground = () => {
                   </Badge>
                 </div>
                 <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  Clarity rewrote your query with anti-hallucination techniques, generated an LLM answer, then fused it with evidence from real sources. Claims confirmed by both LLM and sources are trustworthy. LLM-only claims had no source backing and were flagged.
+                  Clarity rewrote your query with grounding techniques, generated an LLM answer, then combined it with evidence from web sources. Claims found in both the LLM answer and the sources have more support. LLM-only claims had no source backing and were flagged.
                 </p>
                 {(() => {
                   const confirmed = clarityResult.claims.filter(c => c.origin === "confirmed");
@@ -711,7 +711,7 @@ const Playground = () => {
                       {/* Risks identified */}
                       {clarityResult.risks && clarityResult.risks.length > 0 && (
                         <div className="p-2.5 rounded-lg bg-red-500/5 border border-red-500/20">
-                          <p className="text-[10px] font-semibold text-red-400 uppercase mb-1">Hallucination Risks Detected</p>
+                          <p className="text-[10px] font-semibold text-red-400 uppercase mb-1">Possible hallucination risks</p>
                           {clarityResult.risks.map((r, i) => (
                             <p key={i} className="text-[11px] text-red-400/70">• {r}</p>
                           ))}
@@ -894,7 +894,7 @@ const Playground = () => {
                   </span>
                 </div>
                 <p className="text-sm leading-relaxed line-clamp-[12]">{response.raw_llm.answer}</p>
-                <p className="text-xs text-muted-foreground">No confidence score — LLM cannot self-assess accuracy</p>
+                <p className="text-xs text-muted-foreground">No confidence score — the raw LLM gives no estimate</p>
               </div>
               <div className="p-4 rounded-xl bg-card border border-accent/30 border-glow hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 space-y-3">
                 <div className="flex items-center gap-2">
@@ -958,7 +958,7 @@ const Playground = () => {
                 { tab: "search", label: "Web Search", desc: "Search the web and get ranked results" },
                 { tab: "open", label: "Page Parser", desc: "Fetch any URL and get clean parsed text" },
                 { tab: "extract", label: "Claim Extraction", desc: "Extract structured claims from any page" },
-                { tab: "compare", label: "Raw vs Evidence", desc: "Side-by-side: raw LLM vs evidence-backed answer" },
+                { tab: "compare", label: "Raw vs Evidence", desc: "Side-by-side: raw LLM vs source-checked answer" },
                 { tab: "sessions", label: "Research Sessions", desc: "Multi-query sessions with persistent memory", link: "/sessions" },
               ].map((item, idx) => (
                 <motion.button

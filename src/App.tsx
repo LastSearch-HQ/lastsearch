@@ -5,11 +5,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { MotionConfig } from "framer-motion";
 import { ConsentedAnalytics } from "@/components/ConsentedAnalytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { PendingForkRedirect } from "./components/PendingForkRedirect";
+import { SiteFooter } from "./components/SiteFooter";
 
 // Lazy-load all pages for route-based code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -41,6 +43,7 @@ const PageLoader = () => (
 );
 
 const App = () => (
+  <MotionConfig reducedMotion="user">
   <HelmetProvider>
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
@@ -73,6 +76,7 @@ const App = () => (
               <Route path="/alternatives/:slug" element={<AlternativeDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <SiteFooter />
           </Suspense>
           <CookieConsent />
         </BrowserRouter>
@@ -81,6 +85,7 @@ const App = () => (
     </AuthProvider>
   </QueryClientProvider>
   </HelmetProvider>
+  </MotionConfig>
 );
 
 export default App;

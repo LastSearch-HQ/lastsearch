@@ -10,7 +10,7 @@ interface SEOProps {
 }
 
 const SITE_NAME = "LastSearch";
-const DEFAULT_DESC = "Research infrastructure for AI agents. Evidence-backed web search with citations, confidence scores, and Clarity anti-hallucination answer engine. MCP server, REST API, and Python SDK.";
+const DEFAULT_DESC = "Free research infrastructure for AI agents. Web search with citations, estimated confidence scores, and Clarity, an answer mode that aims to reduce hallucinations. MCP server, REST API, and Python SDK.";
 const BASE_URL = "https://lastsearch.ai";
 
 export function SEO({

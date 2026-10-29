@@ -84,7 +84,7 @@ export function VerifyDocumentTab() {
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Paste a report, competitive analysis, news article, or any document you want fact-checked. Minimum 50 characters."
+            placeholder="Paste a report, competitive analysis, news article, or any document you want checked against sources. Minimum 50 characters."
             rows={10}
             className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-sm font-mono placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 resize-y"
           />

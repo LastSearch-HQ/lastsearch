@@ -434,7 +434,7 @@ const Results = () => {
                     </Badge>
                   </div>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">
-                    Clarity rewrote your query with anti-hallucination techniques, generated an LLM answer, then fused it with evidence from real sources. Claims confirmed by both LLM and sources are trustworthy. LLM-only claims had no source backing and were flagged.
+                    Clarity rewrote your query with grounding techniques, generated an LLM answer, then combined it with evidence from web sources. Claims found in both the LLM answer and the sources have more support. LLM-only claims had no source backing and were flagged.
                   </p>
                   <div className="grid grid-cols-3 gap-2">
                     <div className="p-2.5 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-center transition-all duration-300 hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/5">
@@ -464,7 +464,7 @@ const Results = () => {
                   {/* Risks identified */}
                   {clarityData.risks && clarityData.risks.length > 0 && (
                     <div className="p-2.5 rounded-lg bg-red-500/5 border border-red-500/20 transition-all duration-300 hover:border-red-500/40 hover:shadow-lg hover:shadow-red-500/5">
-                      <p className="text-[10px] font-semibold text-red-400 uppercase mb-1">Hallucination Risks Detected</p>
+                      <p className="text-[10px] font-semibold text-red-400 uppercase mb-1">Possible hallucination risks</p>
                       {clarityData.risks.map((r, i) => (
                         <p key={i} className="text-[11px] text-red-400/70">• {r}</p>
                       ))}

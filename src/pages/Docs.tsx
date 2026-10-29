@@ -7,7 +7,6 @@ import {
   BarChart3, Terminal, Code2, BookOpen, Github, Cloud, Server,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { LastSearchLogo } from "@/components/LastSearchLogo";
 
 const NAV_ITEMS = [
@@ -65,7 +64,7 @@ const Docs = () => {
     <>
     <SEO
       title="Documentation — API Reference, Verification Pipeline, Confidence Scoring"
-      description="Complete API docs for LastSearch's Grounded Intelligence. Learn about the verification pipeline, confidence scoring algorithm, thorough mode, domain authority, and how to integrate with MCP, REST API, or Python SDK."
+      description="API docs for LastSearch. Learn about the verification pipeline, confidence scoring algorithm, thorough mode, domain authority, and how to integrate with MCP, REST API, or Python SDK."
       canonical="/docs"
       structuredData={{
         "@context": "https://schema.org",
@@ -127,10 +126,9 @@ const Docs = () => {
         <div className="flex-1 min-w-0 space-y-16">
           {/* Hero */}
           <div className="relative grid-bg grid-bg-fade rounded-2xl px-6 py-10 -mx-6">
-            <Badge variant="outline" className="text-xs font-normal mb-4">Documentation</Badge>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">How LastSearch Works</h1>
             <p className="text-muted-foreground max-w-2xl leading-relaxed">
-              LastSearch's Grounded Intelligence gives AI agents reliable web research with evidence-backed citations.
+              LastSearch gives AI agents web research with citations, checked against the sources it finds. Results can still be wrong; confidence scores are estimates.
               This page explains every feature — how it works, when to use it, and how to integrate it.
             </p>
           </div>
@@ -159,7 +157,7 @@ const Docs = () => {
           <Section id="thorough-mode" title="Thorough Mode" icon={Zap}>
             <p>
               By default, LastSearch runs in <strong className="text-foreground">fast mode</strong> — a single search-fetch-extract pass.
-              For important queries where accuracy matters more than speed, use <strong className="text-foreground">thorough mode</strong>.
+              For important queries where thoroughness matters more than speed, use <strong className="text-foreground">thorough mode</strong>.
             </p>
 
             <div className="p-4 rounded-xl bg-accent/5 border border-accent/20">
@@ -238,9 +236,9 @@ Or append &depth=thorough to the results URL.`}</CodeBlock>
             <h4 className="text-sm font-semibold text-foreground pt-2">When to use it</h4>
             <ul className="list-disc list-inside space-y-1">
               <li>Multi-faceted research questions with several dimensions to cover</li>
-              <li>When you need the highest possible confidence and completeness</li>
+              <li>When you want a more thorough search</li>
               <li>Topics where a single search pass can't surface all the relevant information</li>
-              <li>Agent workflows that need to minimize hallucination risk</li>
+              <li>Agent workflows that want to lower hallucination risk</li>
             </ul>
 
             <h4 className="text-sm font-semibold text-foreground pt-2">Response extras</h4>
@@ -308,7 +306,7 @@ for step in result.reasoning_steps:
             <p>
               When you ask a short or vague question (e.g., "How does this work?", "Tell me more"),
               the system detects it's ambiguous and prepends context from the session name and top recalled claims.
-              This ensures searches are always topic-relevant, even for pronouns and references.
+              This helps keep searches on topic, even for pronouns and references.
             </p>
 
             <h4 className="text-sm font-semibold text-foreground pt-2">Usage</h4>
@@ -414,7 +412,7 @@ Another agent: "Fork the shared session abc123def456"
           <Section id="verification" title="Claim Verification" icon={Shield}>
             <p>
               After the LLM extracts claims, each one is verified against the actual source page text.
-              This catches hallucinated claims that have no basis in the cited sources.
+              This helps catch claims that have no support in the cited sources.
             </p>
 
             <h4 className="text-sm font-semibold text-foreground">Hybrid evidence matching</h4>
@@ -464,7 +462,7 @@ Another agent: "Fork the shared session abc123def456"
                 </thead>
                 <tbody className="divide-y divide-border/50">
                   <tr><td className="py-2 pr-4">Verification rate</td><td className="py-2 pr-4 text-accent font-mono">25%</td><td className="py-2">% of claims verified in actual source text</td></tr>
-                  <tr><td className="py-2 pr-4">Domain authority</td><td className="py-2 pr-4 text-accent font-mono">20%</td><td className="py-2">Avg trustworthiness of source domains</td></tr>
+                  <tr><td className="py-2 pr-4">Domain authority</td><td className="py-2 pr-4 text-accent font-mono">20%</td><td className="py-2">Avg authority tier of source domains</td></tr>
                   <tr><td className="py-2 pr-4">Source count</td><td className="py-2 pr-4 text-accent font-mono">15%</td><td className="py-2">More sources = more corroboration (log curve)</td></tr>
                   <tr><td className="py-2 pr-4">Consensus</td><td className="py-2 pr-4 text-accent font-mono">15%</td><td className="py-2">Cross-source agreement across independent domains</td></tr>
                   <tr><td className="py-2 pr-4">Domain diversity</td><td className="py-2 pr-4 text-accent font-mono">10%</td><td className="py-2">Unique domains / total sources</td></tr>
@@ -486,7 +484,7 @@ Another agent: "Fork the shared session abc123def456"
                 { range: "0.80+", label: "High", color: "text-emerald-400", desc: "Well-verified, multiple authoritative sources" },
                 { range: "0.60-0.79", label: "Moderate", color: "text-amber-400", desc: "Partially verified, decent sources" },
                 { range: "0.40-0.59", label: "Low", color: "text-orange-400", desc: "Weak verification or few sources" },
-                { range: "< 0.40", label: "Very Low", color: "text-red-400", desc: "Unverified or unreliable sources" },
+                { range: "< 0.40", label: "Very Low", color: "text-red-400", desc: "Little support found, or low-authority sources" },
               ].map((s) => (
                 <div key={s.range} className="p-3 rounded-lg bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
                   <span className={`text-xs font-mono font-bold ${s.color}`}>{s.range}</span>
@@ -500,7 +498,7 @@ Another agent: "Fork the shared session abc123def456"
           {/* Domain Authority */}
           <Section id="domain-authority" title="Domain Authority" icon={Brain}>
             <p>
-              10,000+ domains are classified into 5 tiers of trustworthiness, with dynamic authority scoring that improves from real query data. Unknown domains get a neutral score (0.50).
+              10,000+ domains are classified into 5 authority tiers, with dynamic authority scoring that improves from real query data. Unknown domains get a neutral score (0.50).
             </p>
 
             <div className="overflow-x-auto [mask-image:linear-gradient(to_right,black_calc(100%-2rem),transparent)] sm:[mask-image:none]">
@@ -528,9 +526,9 @@ Another agent: "Fork the shared session abc123def456"
               Every query feeds verification signals back into the system.
             </p>
             <p>
-              Curated tier scores are trusted initially. As evidence accumulates for a domain,
-              its real verification rate gradually takes over. The more your agents use LastSearch, the more
-              accurate future results become.
+              Curated tier scores are used at first. As evidence accumulates for a domain,
+              its observed verification rate gradually takes over, so the scores adjust as
+              LastSearch is used. They remain estimates.
             </p>
           </Section>
 
@@ -574,9 +572,9 @@ Another agent: "Fork the shared session abc123def456"
                   <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/open</td><td className="py-2">Fetch and parse a page</td></tr>
                   <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/extract</td><td className="py-2">Extract structured claims from a page</td></tr>
                   <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/answer</td><td className="py-2">Full pipeline with citations. Accepts <code className="bg-secondary px-1 rounded">depth: "fast" | "thorough" | "deep"</code></td></tr>
-                  <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/compare</td><td className="py-2">Compare raw LLM vs evidence-backed answer</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/compare</td><td className="py-2">Compare raw LLM vs source-checked answer</td></tr>
                   <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/answer/stream</td><td className="py-2">Streaming answer via SSE — real-time progress events</td></tr>
-                  <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/clarity</td><td className="py-2">Clarity — anti-hallucination answer engine. Three modes: prompt (enhanced prompts only), answer (LLM, default), verified (LLM + web fusion)</td></tr>
+                  <tr><td className="py-2 pr-4 font-mono text-accent">POST /browse/clarity</td><td className="py-2">Clarity — answer mode that aims to reduce hallucinations. Three modes: prompt (enhanced prompts only), answer (LLM, default), verified (LLM + web fusion)</td></tr>
                   <tr><td className="py-2 pr-4 font-mono text-accent">POST /session</td><td className="py-2">Create a research session</td></tr>
                   <tr><td className="py-2 pr-4 font-mono text-accent">POST /session/:id/ask</td><td className="py-2">Research with session memory (recalls + stores claims)</td></tr>
                   <tr><td className="py-2 pr-4 font-mono text-accent">POST /session/:id/recall</td><td className="py-2">Query session knowledge without new search</td></tr>
@@ -690,9 +688,9 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 <tbody className="divide-y divide-border/50">
                   <tr><td className="py-2 pr-4">Domain authority</td><td className="py-2 pr-4 text-accent">Self-improving from all users' data</td><td className="py-2">Static tiers only</td></tr>
                   <tr><td className="py-2 pr-4">Cache</td><td className="py-2 pr-4 text-accent">Shared across all users — popular queries are instant</td><td className="py-2">Your queries only</td></tr>
-                  <tr><td className="py-2 pr-4">Accuracy over time</td><td className="py-2 pr-4 text-accent">Gets smarter with every query</td><td className="py-2">Same accuracy forever</td></tr>
+                  <tr><td className="py-2 pr-4">Tuning over time</td><td className="py-2 pr-4 text-accent">Domain scores adjusted from aggregate query data</td><td className="py-2">Static unless you update it</td></tr>
                   <tr><td className="py-2 pr-4">Updates</td><td className="py-2 pr-4 text-accent">Automatic — new algorithms, domains, features</td><td className="py-2">Manual git pull</td></tr>
-                  <tr><td className="py-2 pr-4">Infrastructure</td><td className="py-2 pr-4 text-accent">Zero ops — we handle scaling, uptime, monitoring</td><td className="py-2">You manage everything</td></tr>
+                  <tr><td className="py-2 pr-4">Infrastructure</td><td className="py-2 pr-4 text-accent">Hosted for you, best effort (no uptime guarantee)</td><td className="py-2">You manage everything</td></tr>
                   <tr><td className="py-2 pr-4">API key management</td><td className="py-2 pr-4 text-accent">One LastSearch key bundles all services</td><td className="py-2">Configure search and LLM provider keys yourself</td></tr>
                   <tr><td className="py-2 pr-4">Pro features (coming)</td><td className="py-2 pr-4 text-accent">Multi-model verification, priority queue, 15+ sources</td><td className="py-2">Not available</td></tr>
                 </tbody>
@@ -704,15 +702,13 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
               <p className="text-xs">
                 The hosted service aggregates anonymized verification signals from thousands of queries across all users.
                 When a domain consistently produces verified claims, its authority score rises. When it doesn't, the score drops.
-                This creates a compounding accuracy advantage that no single self-hosted instance can match — because accuracy
-                scales with collective usage, not individual deployment.
+                The idea is that scores improve as more signals come in, which a single self-hosted instance would see less of.
               </p>
             </div>
 
             <p>
               Self-hosting is great for air-gapped environments, compliance requirements, or experimentation.
-              For production agent pipelines where accuracy matters, the hosted service delivers meaningfully better results
-              and keeps improving automatically.
+              The hosted service gets these aggregate updates automatically. Either way, treat results as research to check, not as guaranteed facts.
             </p>
           </Section>
 
@@ -754,7 +750,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
               },
               {
                 type: "Comparison",
-                desc: "Comparing two or more things. Use the /compare endpoint for side-by-side raw LLM vs evidence-backed results.",
+                desc: "Comparing two or more things. Use the /compare endpoint for side-by-side raw LLM vs source-checked results.",
                 good: [
                   "How does solar energy compare to wind energy in cost and efficiency?",
                   "What are the key differences between PostgreSQL and MySQL for modern applications?",
@@ -843,8 +839,8 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 a: "No. The LLM never sees or sets the confidence score. It's computed post-extraction from 7 real signals: verification rate, domain authority, source count, consensus, domain diversity, claim grounding, and citation depth.",
               },
               {
-                q: "What does 'self-improving accuracy' mean?",
-                a: "Domain authority scores start from curated tiers (gov/edu = high, content farms = low). Over time, real verification data from queries is blended in automatically. Domains that consistently produce verified claims get higher scores; unreliable ones get lower scores. The system gets smarter with use.",
+                q: "What does 'self-improving' mean?",
+                a: "Domain authority scores start from curated tiers (gov/edu = high, content farms = low). Over time, real verification data from queries is blended in automatically. Domains that consistently produce verified claims get higher scores; unreliable ones get lower scores. The scores adjust with use; they are still estimates.",
               },
               {
                 q: "Can I self-host LastSearch?",
@@ -875,22 +871,6 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
           </Section>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/logo.svg" alt="LastSearch" className="w-4 h-4" />
-            <span className="text-sm font-semibold">LastSearch</span>
-          </div>
-          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 text-xs text-muted-foreground">
-            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
-            <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Discord</a>
-            <button onClick={() => navigate("/playground")} className="hover:text-foreground transition-colors">Playground</button>
-            <button onClick={() => navigate("/developers")} className="hover:text-foreground transition-colors">Developers</button>
-          </div>
-        </div>
-      </footer>
     </div>
     </>
   );

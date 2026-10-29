@@ -126,7 +126,7 @@ const SharedSession = () => {
                 <span>{sessionData.session.queryCount} queries</span>
               </div>
               <p className="text-xs text-muted-foreground max-w-md mx-auto">
-                This research session was built with LastSearch — evidence-backed research with verified claims and confidence scores.
+                This research session was built with LastSearch — web research with sources, checked claims and estimated confidence scores.
               </p>
 
               {/* Fork button — always visible, triggers login if needed */}
@@ -229,7 +229,7 @@ const SharedSession = () => {
               className="flex flex-col items-center gap-4 py-8"
             >
               <p className="text-sm text-muted-foreground text-center max-w-md">
-                Build your own research sessions with evidence-backed claims and persistent knowledge.
+                Build your own research sessions with sourced claims and persistent knowledge.
               </p>
               <div className="flex items-center gap-3">
                 {user ? (

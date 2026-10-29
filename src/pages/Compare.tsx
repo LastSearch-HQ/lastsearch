@@ -83,7 +83,7 @@ const Compare = () => {
               <div className="absolute -inset-4 rounded-full bg-accent/10 blur-xl glow-pulse" />
               <Shield className="w-12 h-12 text-accent relative" />
             </div>
-            <p className="text-lg font-medium">Compare Raw LLM vs Evidence-Backed</p>
+            <p className="text-lg font-medium">Compare Raw LLM vs Source-Checked</p>
             <p className="text-sm text-muted-foreground max-w-md">
               Add a query parameter to compare. Example: <code className="text-accent bg-accent/10 px-1.5 py-0.5 rounded">/compare?q=Is caffeine bad for you</code>
             </p>

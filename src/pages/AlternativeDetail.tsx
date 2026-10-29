@@ -58,7 +58,7 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
       "LastSearch decomposes claims and verifies each individually — adding a verification layer on top of search",
       "Evidence-based confidence scores derived from verification data, not query-match relevance",
       "Contradiction detection surfaces conflicting information across sources",
-      "Cross-source consensus ensures answers are corroborated by multiple independent sources",
+      "Cross-source consensus checks whether several independent sources agree",
       "Open-core model: SDKs and integrations are Apache 2.0, verification engine is source-available",
       "Both have LangChain/CrewAI/MCP integrations — comparable distribution footprint",
     ],
@@ -174,7 +174,7 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
     lastsearchDifferentiators: [
       "Native verification pipeline built into the API vs. unverified AI summaries",
       "Evidence-based confidence scores vs. no scoring",
-      "Contradiction detection catches conflicting sources automatically",
+      "Contradiction detection flags conflicting sources automatically",
       "Both have MCP servers and LangChain — comparable distribution",
       "Open-core with source-available engine and free API keys — You.com core is proprietary",
       "LastSearch is purpose-built for agents that need to verify before acting",
@@ -196,7 +196,7 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
       "LLM Context with relevance-scored extracted content",
       "Official MCP server (brave-search-mcp-server, MIT license)",
       "LangChain integration (BraveSearch tool, BraveSearchLoader)",
-      "Strong privacy guarantees — no user tracking",
+      "Privacy-focused positioning (per Brave's own documentation)",
       "Competitive pricing ($5/1K queries)",
     ],
     limitations: [
@@ -213,12 +213,12 @@ const COMPETITOR_DETAILS: Record<string, CompetitorDetail> = {
     lastsearchDifferentiators: [
       "LastSearch uses Brave as one of its underlying search providers for source diversity",
       "Native claim verification, contradiction detection, and consensus scoring built on top of search",
-      "Evidence-backed confidence scores derived from verification data",
-      "Brave provides excellent grounded search — LastSearch adds the verification intelligence layer",
+      "Estimated confidence scores derived from verification data",
+      "Brave provides strong search — LastSearch adds a verification layer",
       "Open-core model: Apache 2.0 SDKs and integrations, source-available verification engine with free API keys",
       "Both have MCP servers and LangChain integration — comparable distribution",
     ],
-    transparencyNote: "LastSearch uses Brave Search as one of its underlying search providers for source diversity. We add a verification + intelligence layer on top — claim extraction, cross-source verification, contradiction detection, and confidence scoring. Brave is great at search; we add the trust layer.",
+    transparencyNote: "LastSearch uses Brave Search as one of its underlying search providers for source diversity. We add a verification + intelligence layer on top — claim extraction, cross-source verification, contradiction detection, and confidence scoring. Brave is great at search; we add a verification layer.",
     seoTitle: "LastSearch vs Brave Search API — Verification Layer vs Raw Search",
     seoDescription:
       "Compare LastSearch and Brave Search API. LastSearch actually uses Brave as one of its search providers and adds native claim verification, confidence scoring, and contradiction detection on top.",
@@ -394,10 +394,10 @@ const AlternativeDetail = () => {
           >
             <h3 className="font-medium text-lg flex items-center gap-2">
               <Shield className="w-5 h-5 text-accent bg-accent/10 rounded" />
-              How LastSearch's Grounded Intelligence is differentiated
+              How LastSearch differs
             </h3>
             <p className="text-xs text-muted-foreground">
-              LastSearch's Grounded Intelligence is differentiated in offering native claim-level verification, contradiction detection,
+              LastSearch aims to offer native claim-level verification, contradiction detection,
               and cross-source consensus in a single agent-focused workflow.
             </p>
             <ul className="space-y-2">
@@ -435,8 +435,8 @@ const AlternativeDetail = () => {
               ))}
             </div>
             <p className="text-sm text-muted-foreground">
-              If your AI agent needs to <em>verify what it can trust before acting</em>,
-              LastSearch's Grounded Intelligence verification pipeline is built for that.
+              If your AI agent needs to <em>check sources before acting</em>,
+              LastSearch's verification pipeline is designed for that.
             </p>
           </motion.section>
 
@@ -465,7 +465,7 @@ const AlternativeDetail = () => {
           >
             <h2 className="text-2xl font-bold">Try it yourself</h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              Run your own queries through LastSearch and see evidence-backed answers
+              Run your own queries through LastSearch and see answers with sources
               with claim verification, confidence scores, and verified sources.
             </p>
             <div className="flex items-center justify-center gap-3">
