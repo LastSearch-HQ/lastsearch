@@ -266,24 +266,15 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-amber-400" />
-                LastSearch Pro
+                Hosted version for teams: interest form
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">Coming soon — everything in Free, plus unlimited premium verification with no quotas.</p>
-              <ul className="text-sm space-y-2 text-muted-foreground mb-4">
-                <li className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> Unlimited premium verification</li>
-                <li className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> No quotas, no fallback</li>
-                <li className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> Managed keys</li>
-                <li className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> 15+ sources per query</li>
-                <li className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> Multi-model verification</li>
-                <li className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> Priority queue &amp; webhooks</li>
-                <li className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" /> Team seats &amp; shared access</li>
-              </ul>
+              <p className="text-sm text-muted-foreground mb-4">This is an interest form, not a paid plan. Interested in a hosted version for teams? Register interest and we&apos;ll let you know if it happens. There are no paid plans today; LastSearch is free.</p>
               {onWaitlist ? (
                 <div className="flex items-center justify-center gap-2 py-2 text-sm text-emerald-400">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  You're on the waitlist — we'll notify you when it's ready
+                  You've registered interest. We'll let you know if a hosted version for teams happens.
                 </div>
               ) : (
                 <Button
@@ -292,7 +283,7 @@ const Dashboard = () => {
                   className="w-full"
                   variant="outline"
                 >
-                  {joiningWaitlist ? "Joining..." : "Join the Pro Waitlist"}
+                  {joiningWaitlist ? "Registering..." : "Register interest"}
                 </Button>
               )}
             </CardContent>

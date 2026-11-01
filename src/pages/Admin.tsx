@@ -501,7 +501,7 @@ const Admin = () => {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Mail className="w-4 h-4 text-accent" />
-                Pro Waitlist
+                Interest list (hosted for teams)
                 <Badge variant="outline" className="text-xs ml-auto">{waitlistTotal} signups</Badge>
               </CardTitle>
             </CardHeader>
