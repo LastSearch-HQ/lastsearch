@@ -660,7 +660,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 </thead>
                 <tbody className="divide-y divide-border/50">
                   <tr><td className="py-2 pr-4">API Key (Free)</td><td className="py-2 pr-4"><code className="bg-secondary px-1 rounded">Authorization: Bearer ls_xxx</code></td><td className="py-2">100 queries/day + sessions</td></tr>
-                  <tr><td className="py-2 pr-4">API Key (Pro)</td><td className="py-2 pr-4"><code className="bg-secondary px-1 rounded">Authorization: Bearer ls_xxx</code></td><td className="py-2">Unlimited + priority</td></tr>
+                  <tr><td className="py-2 pr-4">Pro (not available)</td><td className="py-2 pr-4">—</td><td className="py-2">Interested in a hosted version for teams? Register interest. There are no paid plans today; LastSearch is free.</td></tr>
                   <tr><td className="py-2 pr-4">Demo</td><td className="py-2 pr-4">No auth</td><td className="py-2">1 query/hour per IP</td></tr>
                 </tbody>
               </table>
@@ -692,7 +692,6 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                   <tr><td className="py-2 pr-4">Updates</td><td className="py-2 pr-4 text-accent">Automatic — new algorithms, domains, features</td><td className="py-2">Manual git pull</td></tr>
                   <tr><td className="py-2 pr-4">Infrastructure</td><td className="py-2 pr-4 text-accent">Hosted for you, best effort (no uptime guarantee)</td><td className="py-2">You manage everything</td></tr>
                   <tr><td className="py-2 pr-4">API key management</td><td className="py-2 pr-4 text-accent">One LastSearch key bundles all services</td><td className="py-2">Configure search and LLM provider keys yourself</td></tr>
-                  <tr><td className="py-2 pr-4">Pro features (coming)</td><td className="py-2 pr-4 text-accent">Multi-model verification, priority queue, 15+ sources</td><td className="py-2">Not available</td></tr>
                 </tbody>
               </table>
             </div>
