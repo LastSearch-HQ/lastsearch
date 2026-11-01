@@ -46,7 +46,7 @@ const Privacy = () => {
       <div className="max-w-3xl mx-auto px-6 py-12 space-y-8">
         <div>
           <h1 className="text-2xl font-bold mb-2">Privacy Policy</h1>
-          <p className="text-sm text-muted-foreground">Last updated: October 27, 2026 · Policy version 2</p>
+          <p className="text-sm text-muted-foreground">Last updated: November 1, 2026 · Policy version 3</p>
         </div>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-6">
@@ -214,7 +214,7 @@ const Privacy = () => {
               <li><B>See your data</B> in the dashboard (history, usage, keys) or ask us for a copy.</li>
               <li><B>Export</B> your query history through the API.</li>
               <li><B>Correct</B> account details by updating them with your sign-in provider.</li>
-              <li><B>Delete</B> everything with <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> or with "Delete all my data" on the dashboard. This removes your results, shared result pages and keys at once and is irreversible. Research sessions can be deleted one by one on the Sessions page. Email us to close the account itself.</li>
+              <li><B>Delete</B> everything with <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> or with "Delete all my data" on the dashboard. This removes your results, shared result pages and keys at once and is irreversible. Research sessions can be deleted one by one on the Sessions page. To close the account itself, use "Delete my account" on the dashboard (or <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/account</code>): it removes your results, keys, research sessions and any interest-form entry, signs you out everywhere and deletes the login. It is irreversible.</li>
               <li><B>Object</B> to the accuracy-improvement processing described above, or <B>withdraw consent</B> to analytics at any time.</li>
               <li><B>Complain</B> to your data protection authority. In the EEA that is the authority of your country; in the UK, the ICO.</li>
             </UL>
