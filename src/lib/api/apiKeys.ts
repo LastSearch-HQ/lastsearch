@@ -199,6 +199,11 @@ export async function joinWaitlist(email: string, source = "dashboard"): Promise
   return data;
 }
 
+// Close the account: deletes every stored result, API key, research session and interest-form entry, then the login itself
+export async function deleteAccount(): Promise<{ deletedResults: number; message: string }> {
+  return authFetch("/user/account", { method: "DELETE" });
+}
+
 // Privacy: permanently delete every stored result and API key for the signed-in user
 export async function deleteAllUserData(): Promise<{ deleted: number; message: string }> {
   return authFetch("/user/data", { method: "DELETE" });
