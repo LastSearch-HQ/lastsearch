@@ -1552,19 +1552,16 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="p-6 rounded-xl bg-card relative overflow-hidden flex flex-col">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold">Pro</h3>
-                <span className="text-sm text-muted-foreground">Maybe, someday</span>
+                <span className="text-sm text-muted-foreground">Not available</span>
               </div>
-              <ul className="space-y-2.5 text-sm text-muted-foreground flex-1">
-                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Higher or no daily limits</li>
-                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> More sources per query</li>
-                                                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Multi-model verification</li>
-                                <li className="flex items-start gap-2"><Minus aria-hidden="true" className="w-3.5 h-3.5 text-muted-foreground mt-1 shrink-0" /> Team seats &amp; shared access</li>
-              </ul>
+              <p className="text-sm text-muted-foreground flex-1">
+                Interested in a hosted version for teams? Register interest. There are no paid plans today; LastSearch is free.
+              </p>
               <button
                 onClick={() => document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" })}
                 className="mt-4 w-full inline-flex items-center justify-center text-sm font-medium rounded-md bg-secondary text-foreground hover:bg-muted h-9 px-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                Join waitlist
+                Register interest
               </button>
             </motion.div>
           </div>
@@ -1594,7 +1591,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
           {/* Waitlist form */}
           <motion.div id="waitlist-form" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-md mx-auto text-center space-y-4 scroll-mt-20">
             <p className="text-sm text-muted-foreground">
-              Interested if Pro or Enterprise ever happens? Join the waitlist and we&apos;ll let you know. Nothing here is promised.
+              Interested in a hosted version for teams? Register interest. There are no paid plans today; LastSearch is free. Nothing here is promised.
             </p>
             <div className="flex items-center gap-3">
               <div className="relative flex-1">
@@ -1621,7 +1618,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
               </Button>
             </div>
             <p className="text-sm text-muted-foreground">
-              We use this address only to tell you when Pro opens. No marketing email unless you opt in, and you can leave the list any time by
+              We use this address only to tell you if a hosted version for teams becomes available. No marketing email unless you opt in, and you can leave the list any time by
               emailing <a href="mailto:shreyassaw@gmail.com?subject=Remove%20me%20from%20the%20waitlist" className="underline hover:text-foreground">shreyassaw@gmail.com</a>.
               See the <button type="button" onClick={() => navigate("/privacy")} className="underline hover:text-foreground">Privacy Policy</button>.
             </p>

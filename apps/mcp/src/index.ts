@@ -191,7 +191,7 @@ function registerTools(server: McpServer) {
         const q = result._quota;
         const status = q.premiumActive
           ? `Premium active (${q.used}/${q.limit} queries used today)`
-          : `Premium quota exceeded (${q.used}/${q.limit}). Results use standard verification. Upgrade or wait 24h for reset.`;
+          : `Premium quota exceeded (${q.used}/${q.limit}). Results use standard verification. Daily limit reached; it resets in 24 hours.`;
         content.push({ type: "text", text: `\n---\nQuota: ${status}` });
       }
       content.push({ type: "text", text: `\n---\nDisclaimer: AI-generated research for informational purposes only. Not financial, medical, or legal advice. Verify critical information from primary sources.` });
