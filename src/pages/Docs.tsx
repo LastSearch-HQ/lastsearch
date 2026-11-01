@@ -660,7 +660,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
                 </thead>
                 <tbody className="divide-y divide-border/50">
                   <tr><td className="py-2 pr-4">API Key (Free)</td><td className="py-2 pr-4"><code className="bg-secondary px-1 rounded">Authorization: Bearer ls_xxx</code></td><td className="py-2">100 queries/day + sessions</td></tr>
-                  <tr><td className="py-2 pr-4">Pro (not available)</td><td className="py-2 pr-4">—</td><td className="py-2">Interested in a hosted version for teams? Register interest. There are no paid plans today; LastSearch is free.</td></tr>
+                  <tr><td className="py-2 pr-4">Hosted for teams (interest form)</td><td className="py-2 pr-4">—</td><td className="py-2">Interested in a hosted version for teams? Register interest. There are no paid plans today; LastSearch is free.</td></tr>
                   <tr><td className="py-2 pr-4">Demo</td><td className="py-2 pr-4">No auth</td><td className="py-2">1 query/hour per IP</td></tr>
                 </tbody>
               </table>

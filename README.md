@@ -295,7 +295,7 @@ All API access requires a LastSearch API key (`ls_xxx`). Sign up for free at [la
 | Method | How | Verification | Limits |
 |--------|-----|-------------|--------|
 | **LastSearch API Key** (Free) | `Authorization: Bearer ls_xxx` | Full premium — semantic verification, multi-provider, multi-pass consistency | Generous quota with graceful fallback |
-| **Pro** (not available) | — | — | Interested in a hosted version for teams? [Register interest](https://lastsearch.ai/#waitlist). There are no paid plans today; LastSearch is free. |
+| **Hosted for teams** (interest form) | — | — | An interest form, not a paid plan: interested in a hosted version for teams? [Register interest](https://lastsearch.ai/#waitlist). There are no paid plans today; LastSearch is free. |
 | **Demo** (website) | No auth needed | Keyword verification | 1 query/hour per IP |
 
 The free tier includes 100 premium queries/day (or ~33 deep queries/day at 3x cost each). When the quota is reached, queries gracefully fall back to keyword verification (or deep falls back to thorough) — still works, just basic matching. Quota resets every 24 hours.

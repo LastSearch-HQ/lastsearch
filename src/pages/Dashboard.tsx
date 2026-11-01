@@ -266,11 +266,11 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-amber-400" />
-                LastSearch Pro (not available)
+                Hosted version for teams: interest form
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">Interested in a hosted version for teams? Register interest. There are no paid plans today; LastSearch is free.</p>
+              <p className="text-sm text-muted-foreground mb-4">This is an interest form, not a paid plan. Interested in a hosted version for teams? Register interest and we&apos;ll let you know if it happens. There are no paid plans today; LastSearch is free.</p>
               {onWaitlist ? (
                 <div className="flex items-center justify-center gap-2 py-2 text-sm text-emerald-400">
                   <CheckCircle2 className="w-3.5 h-3.5" />

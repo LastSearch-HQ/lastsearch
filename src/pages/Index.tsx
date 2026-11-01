@@ -1551,11 +1551,11 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             {/* Pro */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="p-6 rounded-xl bg-card relative overflow-hidden flex flex-col">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold">Pro</h3>
-                <span className="text-sm text-muted-foreground">Not available</span>
+                <h3 className="text-lg font-semibold">Hosted for teams</h3>
+                <span className="text-sm text-muted-foreground">Interest form</span>
               </div>
               <p className="text-sm text-muted-foreground flex-1">
-                Interested in a hosted version for teams? Register interest. There are no paid plans today; LastSearch is free.
+                This is an interest form, not a paid plan. Interested in a hosted version for teams? Register interest and we&apos;ll let you know if it happens. There are no paid plans today; LastSearch is free.
               </p>
               <button
                 onClick={() => document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" })}
