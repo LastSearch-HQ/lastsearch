@@ -12,6 +12,8 @@ vi.mock("sonner", () => ({ toast: { success: vi.fn() } }));
 
 import { DeleteMyData } from "@/components/DeleteMyData";
 
+const lastButton = (name: string) => { const all = screen.getAllByRole("button", { name }); return all[all.length - 1]; };
+
 describe("Delete my account", () => {
   beforeEach(() => { deleteAccount.mockReset(); signOut.mockClear(); navigate.mockClear(); });
 
@@ -20,7 +22,7 @@ describe("Delete my account", () => {
     render(<MemoryRouter><DeleteMyData /></MemoryRouter>);
     fireEvent.click(screen.getByRole("button", { name: "Delete my account" }));
     await screen.findByLabelText("Type DELETE to confirm");
-    const dialogConfirm = screen.getAllByRole("button", { name: "Delete my account" }).at(-1)!;
+    const dialogConfirm = lastButton("Delete my account");
     expect(dialogConfirm).toBeDisabled();
     fireEvent.change(screen.getByLabelText("Type DELETE to confirm"), { target: { value: "delete" } });
     expect(dialogConfirm).toBeDisabled();
@@ -37,7 +39,7 @@ describe("Delete my account", () => {
     render(<MemoryRouter><DeleteMyData /></MemoryRouter>);
     fireEvent.click(screen.getByRole("button", { name: "Delete my account" }));
     fireEvent.change(await screen.findByLabelText("Type DELETE to confirm"), { target: { value: "DELETE" } });
-    fireEvent.click(screen.getAllByRole("button", { name: "Delete my account" }).at(-1)!);
+    fireEvent.click(lastButton("Delete my account"));
     expect(await screen.findByText("Could not finish deleting the account.")).toBeInTheDocument();
     expect(signOut).not.toHaveBeenCalled();
   });
