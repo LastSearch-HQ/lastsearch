@@ -248,7 +248,7 @@ const Index = () => {
                 </a>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener" className="flex items-center gap-2">
+                <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener" className="flex items-center gap-2">
                   <MessageCircle className="w-3.5 h-3.5" /> Join Discord
                 </a>
               </DropdownMenuItem>
@@ -930,7 +930,7 @@ const Index = () => {
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">
                   Want a specialist for your domain?{" "}
-                  <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener" className="text-accent hover:underline">
+                  <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener" className="text-accent hover:underline">
                     Let us know on Discord
                   </a>
                 </p>
@@ -1661,7 +1661,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
               Star on GitHub
             </a>
             <a
-              href="https://discord.gg/ubAuT4YQsT"
+              href="https://discord.gg/s8wj7tBAM"
               target="_blank"
               rel="noopener"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-sm font-semibold hover:bg-muted transition-colors w-full sm:w-auto justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"

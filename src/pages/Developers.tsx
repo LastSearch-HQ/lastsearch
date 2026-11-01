@@ -226,7 +226,7 @@ const Developers = () => {
               </a>
             </Button>
             <Button variant="outline" className="gap-2" asChild>
-              <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener">
+              <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener">
                 Join Discord
               </a>
             </Button>
