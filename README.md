@@ -4,7 +4,7 @@
 [![PyPI](https://img.shields.io/pypi/v/lastsearch)](https://pypi.org/project/lastsearch/)
 [![LangChain](https://img.shields.io/pypi/v/langchain-lastsearch?label=langchain-lastsearch)](https://pypi.org/project/langchain-lastsearch/)
 [![License](https://img.shields.io/badge/License-Apache_2.0_(open--core)-blue.svg)](LICENSE)
-[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/ubAuT4YQsT)
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/s8wj7tBAM)
 
 **Research infrastructure for AI agents** — real-time web search, evidence extraction, verification against the sources it finds, and structured citations. Claims link to the URLs they came from, and answers carry an estimated confidence score.
 
@@ -14,7 +14,7 @@ Agent → LastSearch → Internet → Answers + sources + estimated confidence
 
 > LastSearch is a free, non-commercial passion project by an independent developer. It searches the public internet and weighs what it finds; sources can be wrong, out of date or biased, so nothing it returns is guaranteed to be true or complete. Confidence scores are automated estimates, not certainty, and the final judgement is yours and your agent's. Not legal, medical, financial or other professional advice. See the [Privacy Policy](https://lastsearch.ai/privacy) and [Terms](https://lastsearch.ai/terms).
 
-[Website](https://lastsearch.ai) · [Playground](https://lastsearch.ai/playground) · [API Docs](https://lastsearch.ai/developers) · [Alternatives](https://lastsearch.ai/alternatives) · [Discord](https://discord.gg/ubAuT4YQsT)
+[Website](https://lastsearch.ai) · [Playground](https://lastsearch.ai/playground) · [API Docs](https://lastsearch.ai/developers) · [Alternatives](https://lastsearch.ai/alternatives) · [Discord](https://discord.gg/s8wj7tBAM)
 
 > **Package names:** npm: [`lastsearch`](https://www.npmjs.com/package/lastsearch) · PyPI: [`lastsearch`](https://pypi.org/project/lastsearch/) · LangChain: [`langchain-lastsearch`](https://pypi.org/project/langchain-lastsearch/) — Previously `lastsearch` and `lastsearch`. Old names still work and redirect automatically.
 
@@ -576,7 +576,7 @@ npx skills add lastsearch-hq/lastsearch-skills
 
 ## Community
 
-- [Discord](https://discord.gg/ubAuT4YQsT) — questions, feedback, showcase
+- [Discord](https://discord.gg/s8wj7tBAM) — questions, feedback, showcase
 - [GitHub Issues](https://github.com/lastsearch-hq/lastsearch/issues) — bugs, feature requests
 
 ## Contributing

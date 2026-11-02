@@ -71,4 +71,4 @@ This is a standard FastAPI app. Deploy anywhere that runs Python -- Railway, Ren
 - [LastSearch Docs](https://lastsearch.ai)
 - [Python SDK on PyPI](https://pypi.org/project/lastsearch/)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)
-- [Discord](https://discord.gg/ubAuT4YQsT)
+- [Discord](https://discord.gg/s8wj7tBAM)

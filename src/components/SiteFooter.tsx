@@ -35,7 +35,7 @@ export function SiteFooter() {
               <Link key={l.to} to={l.to} className={linkClass}>{l.label}</Link>
             ))}
             <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className={linkClass}>GitHub</a>
-            <a href="https://discord.gg/ubAuT4YQsT" target="_blank" rel="noopener noreferrer" className={linkClass}>Discord</a>
+            <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener noreferrer" className={linkClass}>Discord</a>
           </nav>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
             {LEGAL_LINKS.map((l) => (

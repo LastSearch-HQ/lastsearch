@@ -208,7 +208,7 @@ Skills work with Claude Code, Codex CLI, Gemini CLI, Cursor, and more. [View ski
 
 ## Community
 
-- [Discord](https://discord.gg/ubAuT4YQsT)
+- [Discord](https://discord.gg/s8wj7tBAM)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)
 
 ## License

@@ -43,7 +43,7 @@ Unlike raw search APIs, LastSearch fact-checks results. Every answer includes pe
 
 ## Links
 
-- [Website](https://lastsearch.ai) · [GitHub](https://github.com/lastsearch-hq/lastsearch) · [Discord](https://discord.gg/ubAuT4YQsT)
+- [Website](https://lastsearch.ai) · [GitHub](https://github.com/lastsearch-hq/lastsearch) · [Discord](https://discord.gg/s8wj7tBAM)
 - [Python SDK](https://pypi.org/project/lastsearch/) · [LangChain](https://pypi.org/project/langchain-lastsearch/) · [CrewAI](https://pypi.org/project/crewai-lastsearch/) · [MCP Server](https://www.npmjs.com/package/lastsearch)
 
 ## License

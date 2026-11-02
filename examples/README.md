@@ -56,5 +56,5 @@ LastSearch is **research infrastructure for AI agents** — every answer comes w
 ## Links
 
 - [Documentation](https://lastsearch.ai/developers)
-- [Discord](https://discord.gg/ubAuT4YQsT)
+- [Discord](https://discord.gg/s8wj7tBAM)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)

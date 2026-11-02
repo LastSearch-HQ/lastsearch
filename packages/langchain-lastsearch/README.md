@@ -127,7 +127,7 @@ Your `ls_xxx` key is on the dashboard.
 - [Website](https://lastsearch.ai)
 - [Documentation](https://lastsearch.ai/docs)
 - [GitHub](https://github.com/lastsearch-hq/lastsearch)
-- [Discord](https://discord.gg/ubAuT4YQsT)
+- [Discord](https://discord.gg/s8wj7tBAM)
 - [Python SDK](https://pypi.org/project/lastsearch/)
 - [MCP Server](https://www.npmjs.com/package/lastsearch)
 

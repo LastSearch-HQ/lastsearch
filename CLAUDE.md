@@ -151,7 +151,7 @@ Every time a new feature is implemented, go through this checklist before consid
 
 - **Site:** https://lastsearch.ai
 - **GitHub:** https://github.com/lastsearch-hq/lastsearch
-- **Discord:** https://discord.gg/ubAuT4YQsT
+- **Discord:** https://discord.gg/s8wj7tBAM
 - **npm:** https://www.npmjs.com/package/lastsearch
 - **PyPI:** https://pypi.org/project/lastsearch/
 - **License:** Apache 2.0 (SDKs, MCP, frontend — this repo) + BSL 1.1 (verification engine — lastsearch-engine private repo)

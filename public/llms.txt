@@ -46,7 +46,7 @@ Not LLM self-assessed. Computed from: verification rate, domain authority, sourc
 - CrewAI: https://pypi.org/project/crewai-lastsearch/
 - LlamaIndex: https://pypi.org/project/llamaindex-lastsearch/
 - Agent Skills: https://github.com/lastsearch-hq/lastsearch-skills
-- Discord: https://discord.gg/ubAuT4YQsT
+- Discord: https://discord.gg/s8wj7tBAM
 
 ## Optional
 - [Full documentation](https://lastsearch.ai/llms-full.txt)
