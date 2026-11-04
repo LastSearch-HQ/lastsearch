@@ -183,7 +183,7 @@ if result.contradictions:
 
 ## Enterprise Search Providers
 
-Use your own data sources instead of — or alongside — public web search. Supports `elasticsearch`, `confluence`, and `custom` endpoints with optional `data_retention="none"` for compliance.
+Use your own data sources instead of — or alongside — public web search. Supports `elasticsearch`, `confluence`, and `custom` endpoints with optional `data_retention="none"` (the result isn't saved to history, the answer cache or training data).
 
 ```python
 from lastsearch.models import SearchProviderConfig
@@ -213,7 +213,7 @@ result = client.ask("PCI compliance?", search_provider={
     "spaceKey": "ENG",
 })
 
-# Zero data retention (compliance mode — nothing stored, cached, or logged)
+# data_retention="none": the result isn't saved to history, the answer cache or training data
 result = client.ask("Patient protocols", search_provider=SearchProviderConfig(
     type="elasticsearch",
     endpoint="https://es.hipaa.company.com/medical/_search",

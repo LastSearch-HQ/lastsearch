@@ -1,8 +1,8 @@
 FROM node:20-slim AS builder
 WORKDIR /app
 
-COPY package.json ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY tsconfig.json ./
 COPY src ./src
