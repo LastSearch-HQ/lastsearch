@@ -53,7 +53,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "lastsearch": {
       "command": "npx",
-      "args": ["-y", "lastsearch"],
+      "args": ["-y", "lastsearch@1.4.3"],
       "env": {
         "LASTSEARCH_API_KEY": "ls_xxx"
       }
@@ -70,7 +70,7 @@ Add to your MCP settings:
 {
   "lastsearch": {
     "command": "npx",
-    "args": ["-y", "lastsearch"],
+    "args": ["-y", "lastsearch@1.4.3"],
     "env": {
       "LASTSEARCH_API_KEY": "ls_xxx"
     }

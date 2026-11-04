@@ -35,8 +35,9 @@ jobs:
             You are reviewing a PR for LastSearch — an open-source research infrastructure
             monorepo (TypeScript/React/Fastify) with an MCP server, REST API, and Python SDK.
 
-            Structure: apps/api/ (Fastify), apps/mcp/ (MCP server), packages/shared/ (types),
-            packages/python-sdk/, src/ (React frontend with Tailwind + shadcn/ui).
+            Structure: apps/mcp/ (MCP server), api/mcp.ts (hosted MCP function), packages/shared/ (types),
+            packages/python-sdk/, src/ (React frontend with Tailwind + shadcn/ui). The API engine
+            (apps/api/* paths below) lives in a separate repository and is not part of this diff.
 
             Review checklist:
             1. **Bugs & logic errors** — off-by-one, null handling, race conditions, async/await misuse

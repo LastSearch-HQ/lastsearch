@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from "fs";
 import { join } from "path";
 import { createInterface } from "readline";
 
@@ -30,7 +30,7 @@ function getConfigPath(): string {
   }
 }
 
-export async function runSetup() {
+export async function runSetup(version?: string) {
   console.log(`
   lastsearch setup
   ================
@@ -52,7 +52,7 @@ export async function runSetup() {
 
   const mcpEntry = {
     command: "npx",
-    args: ["-y", "lastsearch"],
+    args: ["-y", version ? `lastsearch@${version}` : "lastsearch"],
     env: mcpEnv,
   };
 
@@ -74,7 +74,13 @@ export async function runSetup() {
   }
 
   config.mcpServers["lastsearch"] = mcpEntry;
-  writeFileSync(configPath, JSON.stringify(config, null, 2));
+  // The config holds the API key: keep it readable by the current user only.
+  writeFileSync(configPath, JSON.stringify(config, null, 2), { mode: 0o600 });
+  try {
+    chmodSync(configPath, 0o600);
+  } catch {
+    // Best effort (e.g. Windows)
+  }
 
   console.log(`
   Done! lastsearch has been configured.

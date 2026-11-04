@@ -26,7 +26,8 @@ def cmd_setup(args: argparse.Namespace) -> None:
 
     config: dict[str, str] = {"api_key": api_key}
 
-    with open(config_path, "w") as f:
+    fd = os.open(config_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w") as f:
         json.dump(config, f, indent=2)
     os.chmod(config_path, 0o600)
 
