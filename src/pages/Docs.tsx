@@ -851,7 +851,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
               },
               {
                 q: "How is my query data used?",
-                a: "Your queries are processed to generate answers and cached to improve response times. Anonymized, domain-level verification signals (e.g., 'wikipedia.org verified 82% of claims across 500 queries') are aggregated to improve domain authority scores for all users. Cached answers can be reused for similar queries, and some query and verification data may be used to improve the verification models. See our Privacy Policy for full details of what is stored, for how long, and how to delete it.",
+                a: "Your queries are processed to generate answers and cached to improve response times. Anonymized, domain-level verification signals (e.g., 'wikipedia.org verified 82% of claims across 500 queries') are aggregated to improve domain authority scores for all users. We do not show your queries to other users, and cached answers are kept separately for each account. Anyone you give a result's link to can open that result page. Claim-evidence pairs, with the query text they came from, are used to train our small verification classifiers (not large language models). See our Privacy Policy for full details of what is stored, for how long, and how to delete it.",
               },
               {
                 q: "What are Research Sessions?",

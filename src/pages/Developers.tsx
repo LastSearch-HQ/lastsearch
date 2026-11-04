@@ -899,6 +899,12 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
                 </a>
               </Button>
             </div>
+            <p className="text-xs text-muted-foreground">
+              Domain ranking data:{" "}
+              <a href="https://majestic.com/reports/majestic-million" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground">The Majestic Million</a>{" "}
+              by Majestic, licensed under{" "}
+              <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground">CC BY 3.0</a>.
+            </p>
           </motion.div>
         </div>
       </section>

@@ -16,6 +16,10 @@ const processors: [string, string, string][] = [
   ["Upstash", "Short-lived result cache and rate-limit counters", "United States"],
   ["OpenRouter (Google Gemini, OpenAI embeddings)", "Language-model processing of your query and fetched page text", "United States"],
   ["Tavily, Brave Search, Exa", "Web search for your query text", "United States"],
+  ["Hugging Face", "Re-ranking: claim text and source passages are scored by a hosted model (premium tiers)", "United States"],
+  ["Google", "Search suggestions: the text you type in the search box is sent to Google's suggestion service", "United States"],
+  ["Perplexity, You.com", "Compare feature only: your query is sent to the provider you choose to compare against", "United States"],
+  ["Internet Archive (Wayback Machine)", "Citation checks: cited URLs (not your query) are looked up in the archive on thorough/deep runs", "United States"],
   ["GitHub, Google", "Sign-in providers (only when you choose them)", "United States"],
 ];
 
@@ -46,7 +50,7 @@ const Privacy = () => {
       <div className="max-w-3xl mx-auto px-6 py-12 space-y-8">
         <div>
           <h1 className="text-2xl font-bold mb-2">Privacy Policy</h1>
-          <p className="text-sm text-muted-foreground">Last updated: November 1, 2026 · Policy version 3</p>
+          <p className="text-sm text-muted-foreground">Last updated: November 4, 2026 · Policy version 3</p>
         </div>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-6">
@@ -84,8 +88,18 @@ const Privacy = () => {
             <div className="space-y-2">
               <H3>API keys</H3>
               <P>
-                Keys (ls_xxx) are encrypted with AES-256-GCM before storage and are never logged or shown to us in plaintext. <B>Legal basis:</B>{" "}
-                contract. <B>Retention:</B> until you revoke them or delete your account.
+                LastSearch keys (ls_xxx) are stored only as a one-way SHA-256 hash, so we cannot read them back; we keep a short prefix so you
+                can tell keys apart in the dashboard. They are never logged. <B>Legal basis:</B> contract. <B>Retention:</B> until you revoke them
+                or delete your account.
+              </P>
+            </div>
+            <div className="space-y-2">
+              <H3>Search and AI provider keys you give us</H3>
+              <P>
+                To create a LastSearch key you provide your own Tavily and OpenRouter API keys. We use them only to run your queries with those
+                providers. They are encrypted with AES-256-GCM before storage, decrypted only in memory when a request needs them, and never logged
+                or shown in the dashboard. <B>Legal basis:</B> contract. <B>Retention:</B> until you revoke the LastSearch key they belong to, or
+                delete your data or account.
               </P>
             </div>
             <div className="space-y-2">
@@ -97,7 +111,8 @@ const Privacy = () => {
                 data about yourself or others into queries; we treat query text as content, not as a profile. <B>Legal basis:</B> contract (providing
                 the service) and our legitimate interest in improving verification accuracy, as described under "How query data improves the
                 service". <B>Retention:</B> while your account is active, or until you delete the result or your data. Queries made without an account
-                are stored without an account link.
+                are stored without an account link and are kept until we remove them; you can ask us to delete a specific result by sending its
+                link.
               </P>
             </div>
             <div className="space-y-2">
@@ -161,13 +176,18 @@ const Privacy = () => {
             <UL>
               <li><B>Domain authority scores</B> are adjusted by how often claims from a domain are verified. Only domain-level aggregates are computed (for example "wikipedia.org: 82% verification rate across 500 queries").</li>
               <li><B>Thresholds and weights</B> in the verification pipeline adapt to aggregate outcomes, never to a single query.</li>
-              <li><B>Verification model training</B> uses claim-evidence pairs (a claim's text, a passage of source text, and a support/refute/unrelated label) to train our small classifier models. No account id, email, API key or IP address is included. We do not use your queries to train large language models.</li>
+              <li><B>Verification model training</B> uses claim-evidence pairs (a claim's text, a passage of source text, and a support/refute/unrelated label) together with the query text they came from, to train our small classifier models. No account id, email, API key or IP address is stored with them. We do not use your queries to train large language models.</li>
               <li><B>Feedback calibration</B> uses your ratings to try to make a reported 75% confidence line up more closely with how often such answers turn out to be right. It remains an estimate.</li>
               <li><B>Caching</B> keeps results for 5 minutes (news) to 30 minutes (general) so repeat questions are faster for everyone.</li>
             </UL>
             <P>
-              Individual queries are never shown to other users. You may object to this processing by emailing us; if you do, we will exclude your
-              account's future queries from training data, though statistics already aggregated cannot be unwound.
+              We do not show your queries to other users. Each result has a link ID that is returned to you with the answer; anyone you give that
+              link (or who sees it, for example in an agent log) can open that result page. Result pages show the query and the result, not who
+              asked. Cached answers are kept separately for each account.
+            </P>
+            <P>
+              You may object to this processing by emailing us. We will then stop adding your account's future queries to training data and delete
+              the training pairs linked to your existing results; statistics already aggregated cannot be unwound.
             </P>
           </section>
 
@@ -201,7 +221,7 @@ const Privacy = () => {
           <section className="space-y-3">
             <H2>Security</H2>
             <P>
-              Data is stored in PostgreSQL with row-level security, API keys are encrypted at rest, and every connection uses TLS. No system is
+              Data is stored in PostgreSQL with row-level security, LastSearch keys are stored only as hashes, provider keys you give us are encrypted at rest, and every connection uses TLS. No system is
               perfectly secure; if a breach affects your personal data we will tell you and the relevant authority without undue delay, and within
               72 hours where the GDPR applies.
             </P>
@@ -212,9 +232,9 @@ const Privacy = () => {
             <P>Wherever you live, you can:</P>
             <UL>
               <li><B>See your data</B> in the dashboard (history, usage, keys) or ask us for a copy.</li>
-              <li><B>Export</B> your query history through the API.</li>
+              <li><B>Export</B> your recent query history through the API (<code className="text-xs bg-secondary px-1 py-0.5 rounded">GET /user/history</code>), or ask us by email for a full copy of your results and research sessions, which we will send as JSON.</li>
               <li><B>Correct</B> account details by updating them with your sign-in provider.</li>
-              <li><B>Delete</B> everything with <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> or with "Delete all my data" on the dashboard. This removes your results, shared result pages and keys at once and is irreversible. Research sessions can be deleted one by one on the Sessions page. To close the account itself, use "Delete my account" on the dashboard (or <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/account</code>): it removes your results, keys, research sessions and any interest-form entry, signs you out everywhere and deletes the login. It is irreversible.</li>
+              <li><B>Delete</B> everything with <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> or with "Delete all my data" on the dashboard. This removes your results, shared result pages, research sessions (and their share links) and keys at once, and is irreversible. To close the account itself, use "Delete my account" on the dashboard (or <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/account</code>): it removes your results, keys, research sessions and any interest-form entry, signs you out everywhere and deletes the login. It is irreversible.</li>
               <li><B>Object</B> to the accuracy-improvement processing described above, or <B>withdraw consent</B> to analytics at any time.</li>
               <li><B>Complain</B> to your data protection authority. In the EEA that is the authority of your country; in the UK, the ICO.</li>
             </UL>

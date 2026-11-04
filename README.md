@@ -394,7 +394,7 @@ Async support: `AsyncLastSearch` with the same API.
 
 ### Enterprise Search Providers
 
-Use LastSearch with your own data sources instead of — or alongside — public web search. Supports Elasticsearch, Confluence, and custom endpoints. With `data_retention="none"` (`dataRetention: "none"` in the REST API), the result isn't saved to history, the answer cache or training data.
+Use LastSearch with your own data sources instead of — or alongside — public web search. Supports Elasticsearch, Confluence, and custom endpoints. With `data_retention="none"` (`dataRetention: "none"` in the REST API), the result isn't saved to history, the answer cache or training data. Search-provider responses may still be cached for up to 10 minutes, and our hosting provider keeps standard request logs.
 
 ```python
 # Elasticsearch
@@ -594,4 +594,4 @@ This project uses an open-core model:
 
 See the [LICENSE](LICENSE) file for details on this repository.
 
-Domain ranking data: [Majestic Million](https://majestic.com/reports/majestic-million) ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)). The website bundles third-party open-source packages (notices at [lastsearch.ai/third-party-licenses.txt](https://lastsearch.ai/third-party-licenses.txt)) and self-hosts JetBrains Mono and Space Grotesk under the SIL Open Font License 1.1 ([`public/fonts/OFL.txt`](public/fonts/OFL.txt)).
+Domain ranking data: [The Majestic Million](https://majestic.com/reports/majestic-million) by Majestic, licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). The website bundles third-party open-source packages (notices at [lastsearch.ai/third-party-licenses.txt](https://lastsearch.ai/third-party-licenses.txt)) and self-hosts JetBrains Mono and Space Grotesk under the SIL Open Font License 1.1 ([`public/fonts/OFL.txt`](public/fonts/OFL.txt)).

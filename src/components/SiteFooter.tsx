@@ -48,8 +48,9 @@ export function SiteFooter() {
           </div>
           <p className="text-xs text-muted-foreground">
             Domain ranking data:{" "}
-            <a href="https://majestic.com/reports/majestic-million" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline underline-offset-2">Majestic Million</a>{" "}
-            (<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline underline-offset-2">CC BY 3.0</a>).
+            <a href="https://majestic.com/reports/majestic-million" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline underline-offset-2">The Majestic Million</a>{" "}
+            by Majestic, licensed under{" "}
+            <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline underline-offset-2">CC BY 3.0</a>.
           </p>
           <p className="text-sm text-muted-foreground">
             Made by{" "}
