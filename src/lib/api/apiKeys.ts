@@ -1,4 +1,5 @@
 import { getCachedAccessToken, refreshAndCacheToken } from "./auth";
+import { pathId } from "@/lib/safe";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -71,7 +72,7 @@ export async function listApiKeys(): Promise<ApiKeyRecord[]> {
 }
 
 export async function revokeApiKey(id: string): Promise<void> {
-  return authFetch(`/api-keys/${id}`, { method: "DELETE" });
+  return authFetch(`/api-keys/${pathId(id)}`, { method: "DELETE" });
 }
 
 // User stats & history

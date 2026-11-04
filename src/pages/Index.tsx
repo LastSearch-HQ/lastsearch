@@ -219,7 +219,7 @@ const Index = () => {
             Changelog
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs hidden sm:inline-flex" asChild>
-            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer">
               <Github className="w-4 h-4" />
               <span className="ml-1">GitHub</span>
             </a>
@@ -243,12 +243,12 @@ const Index = () => {
               <DropdownMenuItem onClick={() => navigate("/changelog")}>Changelog</DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/alternatives")}>Alternatives</DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener" className="flex items-center gap-2">
+                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   <Star className="w-3.5 h-3.5" /> Star on GitHub
                 </a>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener" className="flex items-center gap-2">
+                <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   <MessageCircle className="w-3.5 h-3.5" /> Join Discord
                 </a>
               </DropdownMenuItem>
@@ -930,7 +930,7 @@ const Index = () => {
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">
                   Want a specialist for your domain?{" "}
-                  <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener" className="text-accent hover:underline">
+                  <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                     Let us know on Discord
                   </a>
                 </p>
@@ -1052,7 +1052,7 @@ const Index = () => {
                         <a
                           href={`https://github.com/lastsearch-hq/lastsearch/tree/main/examples/${active.github}`}
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-secondary border border-border text-sm font-medium text-muted-foreground hover:text-foreground hover:border-accent/30 transition-colors"
                         >
                           Use template <ArrowRight className="w-3.5 h-3.5" />
@@ -1654,7 +1654,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             <a
               href="https://github.com/lastsearch-hq/lastsearch"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors w-full sm:w-auto justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Star className="w-3.5 h-3.5" />
@@ -1663,7 +1663,7 @@ result = client.ask("What causes aurora borealis?")`}</pre>
             <a
               href="https://discord.gg/s8wj7tBAM"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-sm font-semibold hover:bg-muted transition-colors w-full sm:w-auto justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <MessageCircle className="w-3.5 h-3.5" />

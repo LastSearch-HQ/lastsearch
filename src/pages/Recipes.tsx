@@ -152,7 +152,7 @@ const Recipes = () => {
             <span className="hidden sm:inline">Recipes</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
-            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer">
               <Github className="w-4 h-4 sm:hidden" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
@@ -277,7 +277,7 @@ const Recipes = () => {
                 Have an idea for a recipe? Open a PR or share it on Discord.
               </p>
               <Button variant="outline" size="sm" className="gap-1.5 mt-1" asChild>
-                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer">
                   Contribute <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </Button>
@@ -371,7 +371,7 @@ const Recipes = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button className="gap-2" asChild>
-                <a href="https://github.com/lastsearch-hq/lastsearch/tree/main/examples" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch/tree/main/examples" target="_blank" rel="noopener noreferrer">
                   <Code2 className="w-3.5 h-3.5" />
                   View on GitHub
                   <ExternalLink className="w-3 h-3" />

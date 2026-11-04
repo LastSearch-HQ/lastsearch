@@ -21,6 +21,9 @@ function start(): void {
     mask_all_text: true,
     mask_all_element_attributes: true,
     disable_surveys: true,
+    // talk only to the ingest host: no remote config, feature flags or lazily loaded extension scripts
+    advanced_disable_flags: true,
+    disable_external_dependency_loading: true,
     autocapture: false,
     capture_pageview: true,
     ip: false,

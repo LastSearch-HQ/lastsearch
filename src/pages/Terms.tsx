@@ -21,7 +21,7 @@ const Terms = () => {
       <div className="max-w-3xl mx-auto px-6 py-12 space-y-8">
         <div>
           <h1 className="text-2xl font-bold mb-2">Terms of Service</h1>
-          <p className="text-sm text-muted-foreground">Last updated: October 28, 2026</p>
+          <p className="text-sm text-muted-foreground">Last updated: November 4, 2026</p>
         </div>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-6">
@@ -60,6 +60,7 @@ const Terms = () => {
             <h2 className="text-lg font-semibold">4. API Keys & Usage</h2>
             <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
               <li>All API access requires a LastSearch API key (ls_xxx). Free keys include 100 premium queries/day.</li>
+              <li>To create a key you provide your own Tavily and OpenRouter API keys, which are used to run your queries with those providers. Your use of them is also subject to those providers' terms.</li>
               <li>LastSearch API keys (ls_xxx) are personal and should not be shared publicly.</li>
               <li>Demo access is limited to 1 query per hour per IP address.</li>
               <li>We reserve the right to revoke API keys that are abused or used in violation of these terms.</li>
@@ -84,8 +85,9 @@ const Terms = () => {
             <h2 className="text-lg font-semibold">6. Your Content and Shared Pages</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               You keep whatever rights you have in the queries and documents you submit. You give us a licence to store, process and display them to
-              operate the Service as described in these Terms and the Privacy Policy. When you create a share link for a result or session, that page
-              becomes viewable by anyone with the link until you delete your data from the dashboard or ask us to remove it. Shared pages contain short quotations from third-party web sources,
+              operate the Service as described in these Terms and the Privacy Policy. Every result has a link ID that is returned with the answer; anyone with that link can view
+              the result page until you delete the result or your data, or ask us to remove it. Research sessions are private until you share them; a
+              session share link works until you revoke it (<code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /session/:id/share</code>), delete the session, or delete your data. Shared pages contain short quotations from third-party web sources,
               each attributed and linked to its origin.
             </p>
           </section>
@@ -133,24 +135,24 @@ const Terms = () => {
               <li>Computing co-citation and source usefulness metrics from query results</li>
             </ul>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              We do not sell your data or share individual queries with third parties. All improvements are based on aggregate, statistical patterns — not individual query content. Your queries are sent to third-party search and LLM providers solely to process your request. See our <button onClick={() => navigate("/privacy")} className="text-accent hover:underline">Privacy Policy</button> for full details.
+              We do not sell your data. Your queries are shared only with the service providers listed in section 11, and only to answer them. All improvements are based on aggregate, statistical patterns — not individual query content. Your queries are sent to third-party search and LLM providers solely to process your request. See our <button onClick={() => navigate("/privacy")} className="text-accent hover:underline">Privacy Policy</button> for full details.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">If you require full data privacy, contact us about enterprise options.</strong> The SDKs and MCP server are open-source (Apache 2.0) and can be run locally — but all verification requests are processed by the hosted API.
+              If you need options for keeping data in your own systems, you can register interest through the interest form on the home page; there is no paid plan. The SDKs and MCP server are open-source (Apache 2.0) and can be run locally — but all verification requests are processed by the hosted API.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">10. Data Deletion</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              You may delete all your stored data at any time with "Delete all my data" on the dashboard or the <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> API endpoint. This permanently removes your query results and API keys. Aggregate statistical data (domain scores, verification rates) computed from your queries cannot be individually reversed. See our <button onClick={() => navigate("/privacy")} className="text-accent hover:underline">Privacy Policy</button> for details on your rights.
+              You may delete all your stored data at any time with "Delete all my data" on the dashboard or the <code className="text-xs bg-secondary px-1 py-0.5 rounded">DELETE /user/data</code> API endpoint. This permanently removes your query results, research sessions (and their share links) and API keys. Aggregate statistical data (domain scores, verification rates) computed from your queries cannot be individually reversed. See our <button onClick={() => navigate("/privacy")} className="text-accent hover:underline">Privacy Policy</button> for details on your rights.
             </p>
           </section>
 
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">11. Third-Party Services</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              The Service relies on third-party providers including Tavily, Brave Search and Exa (web search), OpenRouter (language-model processing), Supabase (accounts and storage), Upstash (caching) and Vercel (hosting). Your use of these services through LastSearch is also subject to their respective terms. We are not responsible for the availability or performance of third-party services.
+              The Service relies on third-party providers including Tavily, Brave Search and Exa (web search), OpenRouter (language-model processing), Hugging Face (re-ranking models), Google (search suggestions), Perplexity and You.com (the compare feature, when you choose them), the Internet Archive (citation checks), Supabase (accounts and storage), Upstash (caching) and Vercel (hosting). Your use of these services through LastSearch is also subject to their respective terms. We are not responsible for the availability or performance of third-party services.
             </p>
           </section>
 

@@ -161,7 +161,7 @@ const Results = () => {
 
   const handleShare = () => {
     if (!result?.shareId) return;
-    const url = `${window.location.origin}/share/${result.shareId}`;
+    const url = `${window.location.origin}/share/${encodeURIComponent(result.shareId)}`;
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -283,9 +283,9 @@ const Results = () => {
                 className="flex items-center gap-2"
               >
                 <a
-                  href={`/api/browse/evidence/${result.shareId}`}
+                  href={`/api/browse/evidence/${encodeURIComponent(result.shareId)}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="text-xs text-muted-foreground/70 hover:text-foreground underline underline-offset-2 mr-3"
                   title="Signed, replayable record of what was retrieved and verified for this answer"
                 >

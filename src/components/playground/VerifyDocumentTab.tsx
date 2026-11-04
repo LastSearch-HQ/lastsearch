@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Loader2, FileCheck2, CheckCircle2, XCircle, AlertCircle, ExternalLink } from "lucide-react";
+import { safeHref } from "@/lib/safe";
 import { Button } from "@/components/ui/button";
 import { browseVerifyDocument, type VerifyDocumentResult } from "@/lib/api/lastsearch";
 
@@ -210,7 +211,7 @@ export function VerifyDocumentTab() {
                         <div className="mt-2 p-2 rounded bg-background/50 border border-border/50">
                           <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground mb-1">
                             <span className="font-mono">{claim.topSource.domain}</span>
-                            <a href={claim.topSource.url} target="_blank" rel="noopener" className="hover:text-accent">
+                            <a href={safeHref(claim.topSource.url)} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
                               <ExternalLink className="w-3 h-3" />
                             </a>
                           </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Shield, ShieldAlert, Globe, Quote, Bot, Clock, CheckCircle2, Code, Zap } from "lucide-react";
+import { safeHref } from "@/lib/safe";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { LastSearchBadge } from "@/components/LastSearchBadge";
@@ -217,7 +218,7 @@ const Compare = () => {
                     {result.evidence_backed.citations.map((src, i) => (
                       <a
                         key={i}
-                        href={src.url}
+                        href={safeHref(src.url)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block p-3 rounded-lg bg-emerald-400/5 border border-emerald-400/10 hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 card-lift"

@@ -43,7 +43,15 @@ export function SiteFooter() {
             ))}
             <CookieSettingsLink className={linkClass} />
             <a href="mailto:shreyassaw@gmail.com" className={linkClass}>Contact</a>
+            <a href="/third-party-licenses.txt" className={linkClass}>Licences</a>
+            <a href="/fonts/OFL.txt" className={linkClass}>Font licence</a>
           </div>
+          <p className="text-xs text-muted-foreground">
+            Domain ranking data:{" "}
+            <a href="https://majestic.com/reports/majestic-million" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline underline-offset-2">The Majestic Million</a>{" "}
+            by Majestic, licensed under{" "}
+            <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline underline-offset-2">CC BY 3.0</a>.
+          </p>
           <p className="text-sm text-muted-foreground">
             Made by{" "}
             <a href="https://www.linkedin.com/in/shreyas-sawant" target="_blank" rel="noopener noreferrer" className="text-foreground hover:underline">Shreyas</a>.

@@ -11,6 +11,7 @@ import { LoginModal } from "@/components/LoginModal";
 import { UserMenu } from "@/components/UserMenu";
 import { useAuth } from "@/contexts/AuthContext";
 import type { BrowseResult } from "@/lib/api/lastsearch";
+import { isValidId } from "@/lib/safe";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -24,7 +25,12 @@ const Share = () => {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`${API_BASE}/browse/share/${id}`)
+    if (!isValidId(id)) {
+      setError("Result not found");
+      setLoading(false);
+      return;
+    }
+    fetch(`${API_BASE}/browse/share/${encodeURIComponent(id)}`)
       .then((r) => r.json())
       .then((d) => {
         if (d.success) {
