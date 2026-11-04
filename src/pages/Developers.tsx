@@ -6,6 +6,7 @@ import {
   Terminal, Globe, BookOpen, CheckCircle2, Rocket, Heart,
   ExternalLink, Shield, Brain, Layers, Trophy, GitCommitHorizontal, Github,
 } from "lucide-react";
+import { safeHref } from "@/lib/safe";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { LastSearchLogo } from "@/components/LastSearchLogo";
@@ -192,7 +193,7 @@ const Developers = () => {
             <span className="hidden sm:inline">Recipes</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
-            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer">
               <Github className="w-4 h-4 sm:hidden" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
@@ -220,13 +221,13 @@ const Developers = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button className="gap-2" asChild>
-              <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
+              <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer">
                 <GitBranch className="w-3.5 h-3.5" />
                 View on GitHub
               </a>
             </Button>
             <Button variant="outline" className="gap-2" asChild>
-              <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener">
+              <a href="https://discord.gg/s8wj7tBAM" target="_blank" rel="noopener noreferrer">
                 Join Discord
               </a>
             </Button>
@@ -263,7 +264,7 @@ const Developers = () => {
                     return (
                       <motion.a
                         key={contributor.login}
-                        href={contributor.html_url}
+                        href={safeHref(contributor.html_url)}
                         target="_blank"
                         rel="noopener noreferrer"
                         initial={{ opacity: 0, y: 20 }}
@@ -310,7 +311,7 @@ const Developers = () => {
                       return (
                         <motion.a
                           key={contributor.login}
-                          href={contributor.html_url}
+                          href={safeHref(contributor.html_url)}
                           target="_blank"
                           rel="noopener noreferrer"
                           initial={{ opacity: 0, x: -10 }}
@@ -610,7 +611,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
                   key={tutorial.title}
                   href={tutorial.link}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -794,7 +795,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
                   key={skill.name}
                   href={`https://github.com/lastsearch-hq/lastsearch-skills/tree/main/${skill.name}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="p-4 rounded-xl bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
                 >
                   <span className="text-sm font-semibold text-foreground block mb-1">{skill.name}</span>
@@ -806,7 +807,7 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
             <a
               href="https://github.com/lastsearch-hq/lastsearch-skills"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="text-sm text-accent hover:underline"
             >
               View all skills on GitHub →
@@ -885,13 +886,13 @@ curl -X POST https://lastsearch.ai/api/browse/clarity \\
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button className="gap-2" asChild>
-                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer">
                   <Github className="w-3.5 h-3.5" />
                   Start Contributing
                 </a>
               </Button>
               <Button variant="outline" className="gap-2" asChild>
-                <a href="https://github.com/lastsearch-hq/lastsearch/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">
+                <a href="https://github.com/lastsearch-hq/lastsearch/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">
                   <BookOpen className="w-3.5 h-3.5" />
                   Read the Guide
                   <ExternalLink className="w-3 h-3" />

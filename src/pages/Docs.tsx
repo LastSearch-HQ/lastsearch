@@ -97,7 +97,7 @@ const Docs = () => {
             <span className="hidden sm:inline">Developers</span>
           </Button>
           <Button variant="ghost" size="sm" className="text-muted-foreground text-xs" asChild>
-            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener">
+            <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer">
               <Github className="w-4 h-4 sm:hidden" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
@@ -851,7 +851,7 @@ result = tool.invoke({"query": "What is quantum computing?", "depth": "thorough"
               },
               {
                 q: "How is my query data used?",
-                a: "Your queries are processed to generate answers and cached to improve response times. Anonymized, domain-level verification signals (e.g., 'wikipedia.org verified 82% of claims across 500 queries') are aggregated to improve domain authority scores for all users. Your specific queries are never shared with other users or used to train models. See our Privacy Policy for full details.",
+                a: "Your queries are processed to generate answers and cached to improve response times. Anonymized, domain-level verification signals (e.g., 'wikipedia.org verified 82% of claims across 500 queries') are aggregated to improve domain authority scores for all users. Cached answers can be reused for similar queries, and some query and verification data may be used to improve the verification models. See our Privacy Policy for full details of what is stored, for how long, and how to delete it.",
               },
               {
                 q: "What are Research Sessions?",

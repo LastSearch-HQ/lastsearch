@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Globe, Quote, LinkIcon, CheckCircle2, AlertCircle, Users, AlertTriangle, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { safeHref } from "@/lib/safe";
 import type { BrowseClaim, BrowseSource, Contradiction } from "@/lib/api/lastsearch";
 
 const CONSENSUS_COLORS: Record<string, string> = {
@@ -133,7 +134,7 @@ export function EvidenceGraph({
                 const src = sourceMap.get(url);
                 if (!src) return null;
                 return (
-                  <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="block p-3 rounded-lg bg-secondary/50 border border-border/50 hover:border-accent/20 transition-colors">
+                  <a key={url} href={safeHref(url)} target="_blank" rel="noopener noreferrer" className="block p-3 rounded-lg bg-secondary/50 border border-border/50 hover:border-accent/20 transition-colors">
                     <div className="flex items-center gap-2 mb-1">
                       <Globe className="w-3 h-3 text-muted-foreground shrink-0" />
                       <span className="text-xs text-accent font-mono hover:underline">{src.domain}</span>

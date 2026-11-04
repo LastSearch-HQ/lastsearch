@@ -7,6 +7,7 @@ import {
   Globe, Copy, Check, Code2, ChevronDown, ChevronUp, ExternalLink,
   ThumbsUp, ThumbsDown, Brain, FileText, Beaker, LogIn, Lock, Shield, Zap,
 } from "lucide-react";
+import { safeHref } from "@/lib/safe";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -400,7 +401,7 @@ const Playground = () => {
                   <a
                     href={`https://github.com/lastsearch-hq/lastsearch/tree/main/examples/${scenario.tutorial}`}
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
                     className="text-xs text-muted-foreground hover:text-accent transition-colors shrink-0 mt-1"
                   >
@@ -804,7 +805,7 @@ const Playground = () => {
                   {response.sources.slice(0, 8).map((src: BrowseSource, i: number) => (
                     <a
                       key={i}
-                      href={src.url}
+                      href={safeHref(src.url)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 rounded-lg bg-card border border-border hover:border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 flex gap-3 group"
@@ -869,7 +870,7 @@ const Playground = () => {
             {response.url && (
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Globe className="w-3 h-3" />
-                <a href={response.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">{response.url}</a>
+                <a href={safeHref(response.url)} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">{response.url}</a>
               </div>
             )}
             {response.text && (

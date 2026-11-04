@@ -5,6 +5,7 @@ import {
   Search, ArrowRight, Plus, Trash2, Brain, Clock, FileText,
   ChevronLeft, CheckCircle2, Send, Loader2, Share2, Check, Link2, Copy,
 } from "lucide-react";
+import { safeHref } from "@/lib/safe";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { UserMenu } from "@/components/UserMenu";
@@ -149,7 +150,7 @@ const Sessions = () => {
     setSharing(true);
     try {
       const result = await shareSession(activeSession.id);
-      const url = `${window.location.origin}/session/share/${result.shareId}`;
+      const url = `${window.location.origin}/session/share/${encodeURIComponent(result.shareId)}`;
       setShareUrl(url);
       navigator.clipboard.writeText(url);
       setCopiedShare(true);
@@ -424,9 +425,9 @@ const Sessions = () => {
                       {lastResult.sources.map((s, i) => (
                         <a
                           key={i}
-                          href={s.url}
+                          href={safeHref(s.url)}
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                           className="flex items-start gap-2 text-xs text-muted-foreground hover:text-accent transition-colors"
                         >
                           <span className="text-accent shrink-0">[{i + 1}]</span>

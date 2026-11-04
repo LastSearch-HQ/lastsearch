@@ -275,10 +275,10 @@ const Alternatives = () => {
             <div className="space-y-2">
               <h2 className="text-xl font-semibold text-shimmer inline-block">Feature comparison</h2>
               <p className="text-sm text-muted-foreground max-w-2xl">
-                Based on publicly documented product features as of March 2026. "Not documented as native" means we did not find
+                Based on publicly documented product features. Last checked March 2026; competitor products change — check their sites for current details. "Not documented as native" means we did not find
                 the capability described as a built-in product feature in official public documentation.
                 Competitors may support similar outcomes through external tooling, prompt workflows, or custom integrations.
-                We are actively verifying these claims and will correct any inaccuracies found.
+                If you spot an inaccuracy, let us know and we will correct it.
               </p>
             </div>
             <div className="overflow-x-auto rounded-lg border border-border/50 glow-pulse">
@@ -448,8 +448,8 @@ const Alternatives = () => {
             transition={{ delay: 0.25 }}
             className="text-[11px] text-muted-foreground/50 text-center max-w-2xl mx-auto leading-relaxed"
           >
-            This comparison is based on publicly available documentation as of March 2026 and may contain inaccuracies.
-            We are actively working to verify all claims on this page. Features marked as "not documented" may exist
+            This comparison is based on publicly available documentation, last checked March 2026, and may contain inaccuracies.
+            Competitor products change — check their sites for current details. Features marked as "not documented" may exist
             but were not found in official public documentation at the time of writing. Features and pricing
             may have changed. All trademarks belong to their respective owners. If you represent a listed product and
             believe any information is inaccurate, please contact us at{" "}

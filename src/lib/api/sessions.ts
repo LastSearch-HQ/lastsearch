@@ -1,4 +1,5 @@
 import { getCachedAccessToken, refreshAndCacheToken } from "./auth";
+import { pathId } from "@/lib/safe";
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
@@ -94,11 +95,11 @@ export async function listSessions(): Promise<Session[]> {
 }
 
 export async function getSession(id: string): Promise<Session> {
-  return authFetch(`/session/${id}`);
+  return authFetch(`/session/${pathId(id)}`);
 }
 
 export async function deleteSession(id: string): Promise<void> {
-  return authFetch(`/session/${id}`, { method: "DELETE" });
+  return authFetch(`/session/${pathId(id)}`, { method: "DELETE" });
 }
 
 export async function sessionAsk(id: string, query: string, depth?: "fast" | "thorough" | "deep"): Promise<SessionAskResult> {
@@ -107,7 +108,7 @@ export async function sessionAsk(id: string, query: string, depth?: "fast" | "th
     Authorization: `Bearer ${t}`,
     "Content-Type": "application/json",
   });
-  let res = await fetch(`${API_BASE}/session/${id}/ask`, {
+  let res = await fetch(`${API_BASE}/session/${pathId(id)}/ask`, {
     method: "POST",
     headers: makeHeaders(token),
     body: JSON.stringify({ query, ...(depth && { depth }) }),
@@ -115,7 +116,7 @@ export async function sessionAsk(id: string, query: string, depth?: "fast" | "th
   if (res.status === 401) {
     try {
       token = await refreshAndCacheToken();
-      res = await fetch(`${API_BASE}/session/${id}/ask`, {
+      res = await fetch(`${API_BASE}/session/${pathId(id)}/ask`, {
         method: "POST",
         headers: makeHeaders(token),
         body: JSON.stringify({ query, ...(depth && { depth }) }),
@@ -132,11 +133,11 @@ export async function sessionAsk(id: string, query: string, depth?: "fast" | "th
 }
 
 export async function getSessionKnowledge(id: string, limit = 50): Promise<{ entries: KnowledgeEntry[]; count: number }> {
-  return authFetch(`/session/${id}/knowledge?limit=${limit}`);
+  return authFetch(`/session/${pathId(id)}/knowledge?limit=${limit}`);
 }
 
 export async function shareSession(id: string): Promise<{ shareId: string }> {
-  return authFetch(`/session/${id}/share`, { method: "POST" });
+  return authFetch(`/session/${pathId(id)}/share`, { method: "POST" });
 }
 
 // Public (no auth) — for the shared session page
@@ -145,7 +146,7 @@ export async function getSharedSession(shareId: string): Promise<{
   entries: KnowledgeEntry[];
 }> {
   const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
-  const res = await fetch(`${API_BASE_URL}/session/share/${shareId}`);
+  const res = await fetch(`${API_BASE_URL}/session/share/${pathId(shareId)}`);
   const data = await res.json();
   if (!res.ok || !data.success) {
     throw new Error(data.error || "Failed to load shared session");
@@ -154,5 +155,5 @@ export async function getSharedSession(shareId: string): Promise<{
 }
 
 export async function forkSharedSession(shareId: string): Promise<{ session: Session; claimsForked: number }> {
-  return authFetch(`/session/share/${shareId}/fork`, { method: "POST" });
+  return authFetch(`/session/share/${pathId(shareId)}/fork`, { method: "POST" });
 }

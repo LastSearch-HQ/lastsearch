@@ -13,7 +13,11 @@ mkdir -p .vercel/output/functions/api/mcp.func
 # 2. Build Vite frontend directly into .vercel/output/static
 echo "Step 1: Building frontend..."
 node scripts/fetch-contributors.mjs
-pnpm exec vite build --outDir .vercel/output/static
+pnpm exec vite build --outDir .vercel/output/static --sourcemap hidden
+
+# Third-party notices for the bundled packages (read from the source maps, which are then removed)
+node scripts/third-party-licenses.mjs .vercel/output/static/third-party-licenses.txt .vercel/output/static
+find .vercel/output/static -name '*.map' -type f -delete
 
 # 3. Bundle MCP function (HTTP-only, calls engine API)
 echo "Step 2: Bundling MCP function..."
@@ -51,7 +55,7 @@ cat > .vercel/output/config.json << CONF
         "Referrer-Policy": "strict-origin-when-cross-origin",
         "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
         "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
-        "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://mobaurkcqvfxhakwpnfw.supabase.co wss://mobaurkcqvfxhakwpnfw.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+        "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://mobaurkcqvfxhakwpnfw.supabase.co wss://mobaurkcqvfxhakwpnfw.supabase.co https://us.i.posthog.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
       },
       "continue": true
     },

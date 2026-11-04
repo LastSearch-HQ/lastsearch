@@ -44,7 +44,7 @@ const RELEASES: Array<{ version: string; date: string; title: string; items: str
     date: "2026-09-14",
     title: "Live citation health + evidence-aligned decomposition",
     items: [
-      "On thorough and deep modes, every cited URL is probed server-side and classified live / stale (link rot) / dead (likely fabricated). Deep-research agents hallucinate 3–13% of citation URLs; this makes 'every citation resolves' checkable. urlHealth per source, citationHealth per result.",
+      "On thorough and deep modes, each cited URL is probed server-side and labelled live / stale (link rot, archived copy exists) / dead (no DNS, no archive — possibly fabricated) / unchecked (probe could not run). Deep-research agents hallucinate 3–13% of citation URLs; these labels let agents check what they cite. urlHealth per source, citationHealth per result.",
       "Atomic claim decomposition now only runs when per-claim evidence retrieval follows — splitting without aligned evidence degrades verification (SAE vs SRE).",
       "New /scorecard: how agent-search APIs compare on the verification axis.",
       "Runnable eval harness (citation-resolution track, no labels needed).",

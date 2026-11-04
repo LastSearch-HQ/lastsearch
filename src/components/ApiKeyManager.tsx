@@ -152,7 +152,7 @@ export function ApiKeyManager() {
                     <strong className="text-foreground">OpenRouter</strong> — powers answer generation
                   </p>
                   <ol className="text-[11px] text-muted-foreground space-y-0.5 list-decimal list-inside">
-                    <li>Go to <a href="https://openrouter.ai/keys" target="_blank" rel="noopener" className="text-accent hover:underline">openrouter.ai/keys</a></li>
+                    <li>Go to <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">openrouter.ai/keys</a></li>
                     <li>Sign up (free) and create an API key</li>
                     <li>Add credits ($5 lasts ~1000 queries)</li>
                   </ol>
@@ -162,7 +162,7 @@ export function ApiKeyManager() {
                     <strong className="text-foreground">Tavily</strong> — powers web search
                   </p>
                   <ol className="text-[11px] text-muted-foreground space-y-0.5 list-decimal list-inside">
-                    <li>Go to <a href="https://app.tavily.com/home" target="_blank" rel="noopener" className="text-accent hover:underline">app.tavily.com</a></li>
+                    <li>Go to <a href="https://app.tavily.com/home" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">app.tavily.com</a></li>
                     <li>Sign up and get your API key</li>
                     <li>Free tier: 1000 searches/month</li>
                   </ol>

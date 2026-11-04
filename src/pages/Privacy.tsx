@@ -258,7 +258,7 @@ const Privacy = () => {
             <H2>Open source</H2>
             <P>
               The MCP server, SDKs and this website are open source. You can read exactly what the client code does in the{" "}
-              <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener" className="text-accent hover:underline">source code</a>,
+              <a href="https://github.com/lastsearch-hq/lastsearch" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">source code</a>,
               including the consent logic on this site.
             </P>
           </section>

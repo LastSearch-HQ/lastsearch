@@ -237,7 +237,7 @@ const Dashboard = () => {
                     return (
                       <button
                         key={item.id}
-                        onClick={() => navigate(`/share/${item.id}`)}
+                        onClick={() => navigate(`/share/${encodeURIComponent(item.id)}`)}
                         className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-muted/30 transition-colors w-full text-left cursor-pointer"
                       >
                         <Icon className="w-3.5 h-3.5 text-muted-foreground shrink-0" />

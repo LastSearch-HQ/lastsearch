@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { isValidId } from "@/lib/safe";
 
 /**
  * After OAuth redirect lands on "/", check if there's a pending fork in sessionStorage.
@@ -16,7 +17,11 @@ export function PendingForkRedirect() {
     if (loading) return;
     const pendingShareId = sessionStorage.getItem("pendingForkShareId");
     if (user && pendingShareId && !location.pathname.startsWith("/session/share/")) {
-      navigate(`/session/share/${pendingShareId}`, { replace: true });
+      if (!isValidId(pendingShareId)) {
+        sessionStorage.removeItem("pendingForkShareId");
+        return;
+      }
+      navigate(`/session/share/${encodeURIComponent(pendingShareId)}`, { replace: true });
     }
   }, [user, loading]);
 
