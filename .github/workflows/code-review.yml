@@ -66,6 +66,10 @@ jobs:
             Skip style nitpicks and minor formatting. Focus on things that would break production,
             compromise security, or confuse users. Post inline comments on specific lines. Be concise.
 
+            Public repo rule: never describe a vulnerability, exploit path or security weakness in any
+            comment. If you find one, post only: "One item flagged for maintainer review." and nothing else
+            about it.
+
   security-review:
     name: Claude Security Review
     if: github.event_name == 'pull_request'
@@ -130,3 +134,8 @@ jobs:
 
             Only report actual security concerns with severity (Critical/High/Medium/Low).
             No false positives. Be concise but thorough.
+
+            Public repo rule: this repository and its PR comments are public. Never post the details of a
+            security concern (what it is, where, how it could be used) in a comment, review or summary.
+            If you find one, post only a single neutral line: "One item flagged for maintainer review."
+            If you find nothing, post nothing.
