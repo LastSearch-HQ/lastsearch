@@ -6,9 +6,19 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { z } from "zod";
 import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
+import {
+  BodyTooLargeError,
+  DEFAULT_HTTP_HOST,
+  MIN_TOKEN_LENGTH,
+  checkRequest,
+  generateToken,
+  isLoopbackName,
+  parseHostArg,
+  readBody,
+} from "./httpGuard.js";
 
 // --- Constants (inlined for standalone npm package) ---
-const VERSION = "1.4.1";
+const VERSION = "1.4.2";
 
 // --- LastSearch API key (required) ---
 const LASTSEARCH_API_KEY = process.env.LASTSEARCH_API_KEY;
@@ -24,7 +34,9 @@ if (args.includes("--help") || args.includes("-h")) {
 
   Usage:
     lastsearch              Start the MCP server (stdio transport)
-    lastsearch --http       Start the MCP server (HTTP transport)
+    lastsearch --http       Start the MCP server (HTTP transport, 127.0.0.1 only)
+    lastsearch --http --host <addr>
+                            Listen on another interface (e.g. 0.0.0.0 in Docker)
     lastsearch setup        Auto-configure Claude Desktop
     lastsearch --help       Show this help
     lastsearch --version    Show version
@@ -32,6 +44,7 @@ if (args.includes("--help") || args.includes("-h")) {
   Environment Variables:
     LASTSEARCH_API_KEY         LastSearch API key (required — sign in at https://lastsearch.ai)
     MCP_HTTP_PORT          Port for HTTP transport (default: 3100)
+    LASTSEARCH_HTTP_TOKEN  Bearer token for HTTP transport (default: random, printed at start)
 
   MCP Tools:
     search          Search the web for information
@@ -383,30 +396,74 @@ function startServer() {
   const port = parseInt(process.env.MCP_HTTP_PORT || process.env.PORT || "3100", 10);
 
   if (useHttp) {
+    const hostArg = parseHostArg(args);
+    const bindHost = hostArg ?? DEFAULT_HTTP_HOST;
+    const envToken = process.env.LASTSEARCH_HTTP_TOKEN?.trim();
+    if (envToken !== undefined && envToken.length > 0 && envToken.length < MIN_TOKEN_LENGTH) {
+      console.error(`lastsearch: LASTSEARCH_HTTP_TOKEN must be at least ${MIN_TOKEN_LENGTH} characters.`);
+      process.exit(1);
+    }
+    const token = envToken || generateToken();
+
     const transports = new Map<string, StreamableHTTPServerTransport>();
 
+    const sendJson = (res: import("node:http").ServerResponse, status: number, body: unknown) => {
+      res.writeHead(status, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(body));
+    };
+
     const httpServer = createServer(async (req, res) => {
-      const url = new URL(req.url || "/", `http://localhost:${port}`);
+      const gate = checkRequest(req, { token, bindHost });
+      if (!gate.ok) {
+        if (gate.status === 401) res.setHeader("WWW-Authenticate", "Bearer");
+        sendJson(res, gate.status, { error: gate.error });
+        return;
+      }
+
+      const url = new URL(req.url || "/", "http://localhost");
 
       // Health check
       if (url.pathname === "/health") {
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ status: "ok", version: VERSION }));
+        sendJson(res, 200, { status: "ok", version: VERSION });
         return;
       }
 
       if (url.pathname === "/mcp") {
+        let parsedBody: unknown;
+        if (req.method === "POST") {
+          let raw: string;
+          try {
+            raw = await readBody(req);
+          } catch (e) {
+            if (e instanceof BodyTooLargeError) {
+              sendJson(res, 413, { error: "Request body too large" });
+            } else {
+              sendJson(res, 400, { error: "Could not read request body" });
+            }
+            return;
+          }
+          try {
+            parsedBody = JSON.parse(raw);
+          } catch {
+            sendJson(res, 400, { jsonrpc: "2.0", error: { code: -32700, message: "Parse error" }, id: null });
+            return;
+          }
+        }
+
         const sessionId = req.headers["mcp-session-id"] as string | undefined;
 
         if (sessionId && transports.has(sessionId)) {
           const transport = transports.get(sessionId)!;
-          await transport.handleRequest(req, res);
+          await transport.handleRequest(req, res, parsedBody);
           return;
         }
 
         // New session
-        const transport = new StreamableHTTPServerTransport({
+        const transport: StreamableHTTPServerTransport = new StreamableHTTPServerTransport({
           sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (id) => {
+            transports.set(id, transport);
+          },
         });
 
         transport.onclose = () => {
@@ -422,11 +479,7 @@ function startServer() {
         registerTools(server);
         await server.connect(transport);
 
-        if (transport.sessionId) {
-          transports.set(transport.sessionId, transport);
-        }
-
-        await transport.handleRequest(req, res);
+        await transport.handleRequest(req, res, parsedBody);
         return;
       }
 
@@ -434,8 +487,21 @@ function startServer() {
       res.end("Not found");
     });
 
-    httpServer.listen(port, () => {
-      console.error(`lastsearch v${VERSION} MCP server running on http://localhost:${port}/mcp`);
+    httpServer.listen(port, bindHost, () => {
+      const shown = bindHost.includes(":") ? `[${bindHost}]` : bindHost;
+      console.error(`lastsearch v${VERSION} MCP server running on http://${shown}:${port}/mcp`);
+      if (!isLoopbackName(bindHost)) {
+        console.error(
+          `lastsearch: WARNING: listening on ${bindHost}, which is reachable from other machines. ` +
+            "Every request still needs the bearer token; keep it private.",
+        );
+      }
+      if (envToken) {
+        console.error("lastsearch: requests need 'Authorization: Bearer <LASTSEARCH_HTTP_TOKEN>'.");
+      } else {
+        console.error(`lastsearch: requests need 'Authorization: Bearer ${token}'`);
+        console.error("lastsearch: this token changes every launch; set LASTSEARCH_HTTP_TOKEN to fix it.");
+      }
     });
   } else {
     const server = new McpServer({
