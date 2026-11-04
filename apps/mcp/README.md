@@ -53,7 +53,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "lastsearch": {
       "command": "npx",
-      "args": ["-y", "lastsearch"],
+      "args": ["-y", "lastsearch@1.4.3"],
       "env": {
         "LASTSEARCH_API_KEY": "ls_xxx"
       }
@@ -70,7 +70,7 @@ Add to your MCP settings:
 {
   "lastsearch": {
     "command": "npx",
-    "args": ["-y", "lastsearch"],
+    "args": ["-y", "lastsearch@1.4.3"],
     "env": {
       "LASTSEARCH_API_KEY": "ls_xxx"
     }
@@ -83,23 +83,41 @@ Add to your MCP settings:
 Run as an HTTP server for browser-based clients, Smithery, or any HTTP-capable agent:
 
 ```bash
-# Start with HTTP transport
+# Start with HTTP transport (listens on 127.0.0.1 only)
 npx lastsearch --http
 
 # Or set the port via environment variable
 MCP_HTTP_PORT=3100 npx lastsearch --http
 ```
 
+Every request needs a bearer token. By default a random token is generated at each launch and printed once to stderr; set `LASTSEARCH_HTTP_TOKEN` (16+ characters) to use your own:
+
+```bash
+export LASTSEARCH_HTTP_TOKEN="$(openssl rand -base64 32)"
+npx lastsearch --http
+
+curl -H "Authorization: Bearer $LASTSEARCH_HTTP_TOKEN" http://127.0.0.1:3100/health
+```
+
 The server exposes:
 - `POST /mcp` — MCP Streamable HTTP endpoint
 - `GET /health` — Health check
 
+By default the server only accepts requests addressed to `127.0.0.1`, `localhost` or `::1`, and refuses requests from browser pages on other origins. To listen on another interface, pass `--host <address>` explicitly (a warning is printed); the token is still required. Request bodies are limited to 1 MB.
+
 ### Docker
+
+Inside a container the server must listen on `0.0.0.0`, so pass `--host 0.0.0.0` explicitly, set a token, and publish the port on the host's loopback interface only:
 
 ```bash
 docker build -t lastsearch ./apps/mcp
-docker run -p 3100:3100 -e LASTSEARCH_API_KEY=ls_xxx lastsearch
+docker run -p 127.0.0.1:3100:3100 \
+  -e LASTSEARCH_API_KEY=ls_xxx \
+  -e LASTSEARCH_HTTP_TOKEN="$(openssl rand -base64 32)" \
+  lastsearch --host 0.0.0.0
 ```
+
+Clients send `Authorization: Bearer <LASTSEARCH_HTTP_TOKEN>` with every request.
 
 ## MCP Tools
 

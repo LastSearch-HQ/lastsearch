@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 from typing import Any
+from urllib.parse import quote, urlsplit
 
 import httpx
 
@@ -74,6 +75,20 @@ def _handle_error(response: httpx.Response) -> None:
     raise LastSearchError(message, status)
 
 
+
+def _seg(value: str) -> str:
+    """Encode one URL path segment."""
+    return quote(str(value), safe="")
+
+
+def _check_base_url(base_url: str) -> str:
+    """Require https, except for local development hosts."""
+    parts = urlsplit(base_url)
+    local = parts.hostname in ("localhost", "127.0.0.1", "::1")
+    if parts.scheme != "https" and not (parts.scheme == "http" and local):
+        raise ValueError("base_url must use https:// (http:// is allowed for localhost only)")
+    return base_url
+
 class LastSearch:
     """Synchronous LastSearch client.
 
@@ -106,7 +121,7 @@ class LastSearch:
         self._headers = _build_headers(api_key)
         self._last_quota: PremiumQuota | None = None
         self._client = httpx.Client(
-            base_url=base_url,
+            base_url=_check_base_url(base_url),
             headers=self._headers,
             timeout=timeout,
         )
@@ -231,7 +246,8 @@ class LastSearch:
             url: URL to fetch and verify (alternative to text).
             title: Optional document title for context.
             depth: "fast" for quick triage, "thorough" for high-stakes audits.
-            max_claims: Maximum claims to extract and verify (1-50).
+            max_claims: Maximum claims to extract and verify (up to 20 with an
+                API key; larger values are lowered to the limit).
 
         Returns:
             Dict with summary stats and per-claim verification details.
@@ -297,7 +313,7 @@ class LastSearch:
 
     def get_shared(self, share_id: str) -> dict[str, Any]:
         """Retrieve a shared result by ID."""
-        return self._get(f"/browse/share/{share_id}")
+        return self._get(f"/browse/share/{_seg(share_id)}")
 
     def stats(self) -> dict[str, Any]:
         """Get total query count."""
@@ -334,7 +350,7 @@ class LastSearch:
         signature. It attests what LastSearch retrieved, verified, and returned —
         not what your agent did with it.
         """
-        data = self._get(f"/browse/evidence/{result_id}")
+        data = self._get(f"/browse/evidence/{_seg(result_id)}")
         return EvidenceBundle(**data)
 
     def get_evidence_public_key(self) -> dict[str, Any]:
@@ -349,11 +365,20 @@ class LastSearch:
         parses to ``record``, and (3) the Ed25519 signature over the canonical
         bytes. Requires the optional ``cryptography`` package
         (``pip install lastsearch[verify]``).
+
+        Pin the public key out-of-band (store a copy you fetched once and trust)
+        rather than fetching it alongside each bundle; the check is only as
+        trustworthy as the key you pass in. Malformed bundles return False.
         """
         import hashlib, json
+        if not isinstance(bundle.canonical, str) or not bundle.canonical:
+            return False
         if hashlib.sha256(bundle.canonical.encode("utf-8")).hexdigest() != bundle.hash:
             return False
-        if json.loads(bundle.canonical) != bundle.record:
+        try:
+            if json.loads(bundle.canonical) != bundle.record:
+                return False
+        except (ValueError, TypeError):
             return False
         if not bundle.signed or not bundle.signature:
             return False
@@ -363,7 +388,10 @@ class LastSearch:
         except ImportError as e:  # pragma: no cover
             raise ImportError("verify_evidence needs the 'cryptography' package: pip install lastsearch[verify]") from e
         import base64
-        key = serialization.load_pem_public_key(public_key_pem.encode("utf-8"))
+        try:
+            key = serialization.load_pem_public_key(public_key_pem.encode("utf-8"))
+        except (ValueError, TypeError):
+            return False
         if not isinstance(key, Ed25519PublicKey):
             return False
         try:
@@ -374,7 +402,7 @@ class LastSearch:
 
     def get_session(self, session_id: str) -> "SessionClient":
         """Resume an existing session by ID."""
-        data = self._get(f"/session/{session_id}")
+        data = self._get(f"/session/{_seg(session_id)}")
         sess = Session(**data)
         return SessionClient(self, sess)
 
@@ -385,7 +413,7 @@ class LastSearch:
 
     def fork_session(self, share_id: str) -> "SessionClient":
         """Fork a shared session to continue building on someone else's research."""
-        data = self._post(f"/session/share/{share_id}/fork", {})
+        data = self._post(f"/session/share/{_seg(share_id)}/fork", {})
         sess = Session(**data["session"])
         return SessionClient(self, sess)
 
@@ -416,22 +444,22 @@ class SessionClient:
 
     def ask(self, query: str, *, depth: str = "fast") -> SessionAskResult:
         """Research with session context — recalls prior knowledge, stores new claims."""
-        data = self._client._post(f"/session/{self.id}/ask", {"query": query, "depth": depth})
+        data = self._client._post(f"/session/{_seg(self.id)}/ask", {"query": query, "depth": depth})
         return SessionAskResult(**data)
 
     def recall(self, query: str, *, limit: int = 10) -> RecallResult:
         """Query session knowledge without new web search."""
-        data = self._client._post(f"/session/{self.id}/recall", {"query": query, "limit": limit})
+        data = self._client._post(f"/session/{_seg(self.id)}/recall", {"query": query, "limit": limit})
         return RecallResult(**data)
 
     def knowledge(self, *, limit: int = 50) -> list[KnowledgeEntry]:
         """Export all knowledge entries from this session."""
-        data = self._client._get(f"/session/{self.id}/knowledge?limit={limit}")
+        data = self._client._get(f"/session/{_seg(self.id)}/knowledge?limit={limit}")
         return [KnowledgeEntry(**e) for e in data.get("entries", [])]
 
     def share(self) -> dict:
         """Share this session publicly. Returns shareId and URL."""
-        data = self._client._post(f"/session/{self.id}/share", {})
+        data = self._client._post(f"/session/{_seg(self.id)}/share", {})
         share_id = data.get("shareId", "")
         return {
             "share_id": share_id,
@@ -440,7 +468,7 @@ class SessionClient:
 
     def delete(self) -> None:
         """Delete this session and all its knowledge."""
-        response = self._client._client.delete(f"/session/{self.id}")
+        response = self._client._client.delete(f"/session/{_seg(self.id)}")
         _handle_error(response)
         data = response.json()
         if not data.get("success"):
@@ -483,7 +511,7 @@ class AsyncLastSearch:
         self._headers = _build_headers(api_key)
         self._last_quota: PremiumQuota | None = None
         self._client = httpx.AsyncClient(
-            base_url=base_url,
+            base_url=_check_base_url(base_url),
             headers=self._headers,
             timeout=timeout,
         )
@@ -625,7 +653,7 @@ class AsyncLastSearch:
         return ClarityResult(**data)
 
     async def get_shared(self, share_id: str) -> dict[str, Any]:
-        return await self._get(f"/browse/share/{share_id}")
+        return await self._get(f"/browse/share/{_seg(share_id)}")
 
     async def stats(self) -> dict[str, Any]:
         return await self._get("/browse/stats")
@@ -647,7 +675,7 @@ class AsyncLastSearch:
 
     async def get_evidence(self, result_id: str) -> EvidenceBundle:
         """Async: fetch the signed evidence record for a result (see LastSearch.get_evidence)."""
-        data = await self._get(f"/browse/evidence/{result_id}")
+        data = await self._get(f"/browse/evidence/{_seg(result_id)}")
         return EvidenceBundle(**data)
 
     async def get_evidence_public_key(self) -> dict[str, Any]:
@@ -657,7 +685,7 @@ class AsyncLastSearch:
 
     async def get_session(self, session_id: str) -> "AsyncSessionClient":
         """Resume an existing session by ID."""
-        data = await self._get(f"/session/{session_id}")
+        data = await self._get(f"/session/{_seg(session_id)}")
         sess = Session(**data)
         return AsyncSessionClient(self, sess)
 
@@ -668,7 +696,7 @@ class AsyncLastSearch:
 
     async def fork_session(self, share_id: str) -> "AsyncSessionClient":
         """Fork a shared session to continue building on someone else's research."""
-        data = await self._post(f"/session/share/{share_id}/fork", {})
+        data = await self._post(f"/session/share/{_seg(share_id)}/fork", {})
         sess = Session(**data["session"])
         return AsyncSessionClient(self, sess)
 
@@ -699,22 +727,22 @@ class AsyncSessionClient:
 
     async def ask(self, query: str, *, depth: str = "fast") -> SessionAskResult:
         """Research with session context."""
-        data = await self._client._post(f"/session/{self.id}/ask", {"query": query, "depth": depth})
+        data = await self._client._post(f"/session/{_seg(self.id)}/ask", {"query": query, "depth": depth})
         return SessionAskResult(**data)
 
     async def recall(self, query: str, *, limit: int = 10) -> RecallResult:
         """Query session knowledge without new web search."""
-        data = await self._client._post(f"/session/{self.id}/recall", {"query": query, "limit": limit})
+        data = await self._client._post(f"/session/{_seg(self.id)}/recall", {"query": query, "limit": limit})
         return RecallResult(**data)
 
     async def knowledge(self, *, limit: int = 50) -> list[KnowledgeEntry]:
         """Export all knowledge entries from this session."""
-        data = await self._client._get(f"/session/{self.id}/knowledge?limit={limit}")
+        data = await self._client._get(f"/session/{_seg(self.id)}/knowledge?limit={limit}")
         return [KnowledgeEntry(**e) for e in data.get("entries", [])]
 
     async def share(self) -> dict:
         """Share this session publicly. Returns shareId and URL."""
-        data = await self._client._post(f"/session/{self.id}/share", {})
+        data = await self._client._post(f"/session/{_seg(self.id)}/share", {})
         share_id = data.get("shareId", "")
         return {
             "share_id": share_id,
@@ -723,7 +751,7 @@ class AsyncSessionClient:
 
     async def delete(self) -> None:
         """Delete this session and all its knowledge."""
-        response = await self._client._client.delete(f"/session/{self.id}")
+        response = await self._client._client.delete(f"/session/{_seg(self.id)}")
         _handle_error(response)
         data = response.json()
         if not data.get("success"):

@@ -78,4 +78,5 @@ async def view_result(request: Request, result_id: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    # Local development: listens on this machine only. Set HOST=0.0.0.0 to expose it.
+    uvicorn.run("app:app", host=os.environ.get("HOST", "127.0.0.1"), port=8000, reload=True)

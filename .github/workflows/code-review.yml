@@ -8,6 +8,8 @@ on:
   pull_request_review_comment:
     types: [created]
 
+permissions: {}
+
 jobs:
   claude-code:
     name: Claude Code Review
@@ -22,6 +24,10 @@ jobs:
       issues: write
       id-token: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - uses: anthropics/claude-code-action@d70510b174a1244958df0b03166a54912811f3e6 # v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -29,8 +35,9 @@ jobs:
             You are reviewing a PR for LastSearch — an open-source research infrastructure
             monorepo (TypeScript/React/Fastify) with an MCP server, REST API, and Python SDK.
 
-            Structure: apps/api/ (Fastify), apps/mcp/ (MCP server), packages/shared/ (types),
-            packages/python-sdk/, src/ (React frontend with Tailwind + shadcn/ui).
+            Structure: apps/mcp/ (MCP server), api/mcp.ts (hosted MCP function), packages/shared/ (types),
+            packages/python-sdk/, src/ (React frontend with Tailwind + shadcn/ui). The API engine
+            (apps/api/* paths below) lives in a separate repository and is not part of this diff.
 
             Review checklist:
             1. **Bugs & logic errors** — off-by-one, null handling, race conditions, async/await misuse
@@ -60,6 +67,10 @@ jobs:
             Skip style nitpicks and minor formatting. Focus on things that would break production,
             compromise security, or confuse users. Post inline comments on specific lines. Be concise.
 
+            Public repo rule: never describe a vulnerability, exploit path or security weakness in any
+            comment. If you find one, post only: "One item flagged for maintainer review." and nothing else
+            about it.
+
   security-review:
     name: Claude Security Review
     if: github.event_name == 'pull_request'
@@ -69,6 +80,10 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - uses: anthropics/claude-code-action@d70510b174a1244958df0b03166a54912811f3e6 # v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -120,3 +135,8 @@ jobs:
 
             Only report actual security concerns with severity (Critical/High/Medium/Low).
             No false positives. Be concise but thorough.
+
+            Public repo rule: this repository and its PR comments are public. Never post the details of a
+            security concern (what it is, where, how it could be used) in a comment, review or summary.
+            If you find one, post only a single neutral line: "One item flagged for maintainer review."
+            If you find nothing, post nothing.

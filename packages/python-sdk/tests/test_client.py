@@ -52,3 +52,32 @@ def test_page_result_model():
     data = {"title": "Example", "content": "Page content", "excerpt": "Short", "siteName": "Example Site"}
     result = PageResult(**data)
     assert result.site_name == "Example Site"
+
+
+def test_path_segments_are_encoded():
+    from lastsearch.client import _seg
+
+    assert _seg("abc-123") == "abc-123"
+    assert _seg("../admin?x=1") == "..%2Fadmin%3Fx%3D1"
+
+
+def test_base_url_requires_https():
+    with pytest.raises(ValueError):
+        LastSearch(api_key="ls_test", base_url="http://api.example.com")
+    LastSearch(api_key="ls_test", base_url="http://localhost:3000").close()
+    LastSearch(api_key="ls_test", base_url="https://api.example.com").close()
+
+
+def test_verify_evidence_rejects_malformed_bundle():
+    import hashlib
+    from lastsearch.models import EvidenceBundle
+
+    canonical = "{not json"
+    bundle = EvidenceBundle.model_construct(
+        canonical=canonical,
+        hash=hashlib.sha256(canonical.encode()).hexdigest(),
+        record={},
+        signed=True,
+        signature="AAAA",
+    )
+    assert LastSearch.verify_evidence(bundle, "not a key") is False

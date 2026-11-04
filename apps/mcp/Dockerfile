@@ -1,8 +1,8 @@
 FROM node:20-slim AS builder
 WORKDIR /app
 
-COPY package.json ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY tsconfig.json ./
 COPY src ./src
@@ -21,4 +21,5 @@ USER appuser
 ENV NODE_ENV=production
 EXPOSE 3100
 
+# Run with: docker run -p 127.0.0.1:3100:3100 -e LASTSEARCH_API_KEY=... -e LASTSEARCH_HTTP_TOKEN=... <image> --host 0.0.0.0
 ENTRYPOINT ["node", "dist/index.js", "--http"]
