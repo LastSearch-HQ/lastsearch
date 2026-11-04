@@ -89,3 +89,9 @@ deck/
 *.pem
 *.key
 public/contributors.json
+
+# Local cache output and notes (not part of the repo)
+/x_*
+/aia_*
+/FOCUS-*.md
+agent-theatre-test/
