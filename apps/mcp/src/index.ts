@@ -237,7 +237,7 @@ function registerTools(server: McpServer) {
         authHeader: z.string().max(2000).optional().describe("Auth header value (e.g. 'Bearer xxx')"),
         index: z.string().max(200).optional().describe("Elasticsearch index name"),
         spaceKey: z.string().max(200).optional().describe("Confluence space key"),
-        dataRetention: z.enum(["normal", "none"]).optional().describe("'none': the result isn't saved to history, the answer cache or training data"),
+        dataRetention: z.enum(["normal", "none"]).optional().describe("'none': the result isn't stored in the database or answer cache (search-provider responses may be cached up to 10 minutes; hosting keeps standard request logs)"),
       }).optional().describe("Enterprise: configure a custom search backend instead of public web search"),
     },
     async ({ query, depth, strict, searchProvider }) => {

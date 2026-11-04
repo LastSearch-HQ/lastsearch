@@ -183,7 +183,7 @@ if result.contradictions:
 
 ## Enterprise Search Providers
 
-Use your own data sources instead of — or alongside — public web search. Supports `elasticsearch`, `confluence`, and `custom` endpoints with optional `data_retention="none"` (the result isn't saved to history, the answer cache or training data).
+Use your own data sources instead of — or alongside — public web search. Supports `elasticsearch`, `confluence`, and `custom` endpoints with optional `data_retention="none"`: results are not stored in our database or answer cache. Search-provider responses may be cached for up to 10 minutes, and our hosting provider keeps standard request logs.
 
 ```python
 from lastsearch.models import SearchProviderConfig
@@ -213,7 +213,7 @@ result = client.ask("PCI compliance?", search_provider={
     "spaceKey": "ENG",
 })
 
-# data_retention="none": the result isn't saved to history, the answer cache or training data
+# data_retention="none": not stored in the database or answer cache (provider responses may be cached up to 10 min)
 result = client.ask("Patient protocols", search_provider=SearchProviderConfig(
     type="elasticsearch",
     endpoint="https://es.hipaa.company.com/medical/_search",
