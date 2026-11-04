@@ -246,7 +246,8 @@ class LastSearch:
             url: URL to fetch and verify (alternative to text).
             title: Optional document title for context.
             depth: "fast" for quick triage, "thorough" for high-stakes audits.
-            max_claims: Maximum claims to extract and verify (1-50).
+            max_claims: Maximum claims to extract and verify (up to 20 with an
+                API key; larger values are lowered to the limit).
 
         Returns:
             Dict with summary stats and per-claim verification details.

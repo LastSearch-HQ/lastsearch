@@ -272,11 +272,11 @@ function registerTools(server: McpServer) {
     "verify_document",
     "Fact-check an entire document (AI-generated report, competitive analysis, market research, news article). Pass either raw text OR a URL — we'll extract every atomic claim and verify each against live web sources. Returns per-claim verification status with sources, NLI scores, and an overall A-F grade. Use for auditing the accuracy of long-form content from other AI agents.",
     {
-      text: z.string().min(50).max(50000).optional().describe("The document text to verify (50-50000 chars). Either text OR url required."),
+      text: z.string().min(50).max(50000).optional().describe("The document text to verify (50-50000 chars; longer documents are rejected). Either text OR url required."),
       url: URL_ARG.optional().describe("URL to fetch and verify (alternative to text). We fetch the page and verify its content."),
       title: z.string().max(500).optional().describe("Optional document title for context"),
       depth: z.enum(["fast", "thorough"]).optional().describe("'fast' (default) for quick triage, 'thorough' for high-stakes audits"),
-      maxClaims: z.number().int().min(1).max(50).optional().describe("Maximum claims to extract and verify (default 20, max 50)"),
+      maxClaims: z.number().int().min(1).max(50).optional().describe("Maximum claims to extract and verify (default and maximum 20 with an API key; larger values are lowered to the limit)"),
     },
     async ({ text, url, title, depth, maxClaims }) => {
       const body: Record<string, unknown> = {};
