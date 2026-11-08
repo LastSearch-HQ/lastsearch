@@ -51,7 +51,7 @@ jobs:
       MCP_PUBLISHER_VERSION: v1.8.4
       MCP_PUBLISHER_SHA256: 5dc2fd415369c73551259f31cd33e2aacc9e0d1021e7f08fef1492d93b781628
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: mcp-package
           path: mcp
